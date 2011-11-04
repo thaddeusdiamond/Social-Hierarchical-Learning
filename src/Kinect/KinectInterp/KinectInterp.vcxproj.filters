@@ -15,20 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Kinect.cpp">
+    <ClCompile Include="KinectInterp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Kinect.pb.cc">
+    <ClCompile Include="KinectInterp.pb.cc">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kinect.proto">
+    <None Include="KinectInterp.proto">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Kinect.pb.h">
+    <ClInclude Include="KinectInterp.pb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -64,7 +64,7 @@
       <AdditionalDependencies>libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;MSRKinectNUI.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>start bin/protobuf/protoc.exe Kinect.proto --cpp_out=.</Command>
+      <Command>start bin/protobuf/protoc.exe KinectInterp.proto --cpp_out=.</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,18 +81,18 @@
       <AdditionalDependencies>libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;MSRKinectNUI.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>start bin/protobuf/protoc.exe Kinect.proto --cpp_out=.</Command>
+      <Command>start bin/protobuf/protoc.exe KinectInterp.proto --cpp_out=.</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Kinect.cpp" />
-    <ClCompile Include="Kinect.pb.cc" />
+    <ClCompile Include="KinectInterp.cpp" />
+    <ClCompile Include="KinectInterp.pb.cc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kinect.proto" />
+    <None Include="KinectInterp.proto" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Kinect.pb.h" />
+    <ClInclude Include="KinectInterp.pb.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
