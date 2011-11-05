@@ -5,5 +5,5 @@
 // (i.e. Python, C++ on Linux, Java, etc.)
 
 message KinectInterpProto {
-  required int64 id = 1;
+  repeated bool active_skeletons = 1;
 }

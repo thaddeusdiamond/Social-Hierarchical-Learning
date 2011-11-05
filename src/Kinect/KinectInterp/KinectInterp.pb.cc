@@ -30,7 +30,7 @@ void protobuf_AssignDesc_KinectInterp_2eproto() {
   GOOGLE_CHECK(file != NULL);
   KinectInterpProto_descriptor_ = file->message_type(0);
   static const int KinectInterpProto_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectInterpProto, id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectInterpProto, active_skeletons_),
   };
   KinectInterpProto_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -73,8 +73,8 @@ void protobuf_AddDesc_KinectInterp_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022KinectInterp.proto\"\037\n\021KinectInterpProt"
-    "o\022\n\n\002id\030\001 \002(\003", 53);
+    "\n\022KinectInterp.proto\"-\n\021KinectInterpProt"
+    "o\022\030\n\020active_skeletons\030\001 \003(\010", 67);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "KinectInterp.proto", &protobuf_RegisterTypes);
   KinectInterpProto::default_instance_ = new KinectInterpProto();
@@ -93,7 +93,7 @@ struct StaticDescriptorInitializer_KinectInterp_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int KinectInterpProto::kIdFieldNumber;
+const int KinectInterpProto::kActiveSkeletonsFieldNumber;
 #endif  // !_MSC_VER
 
 KinectInterpProto::KinectInterpProto()
@@ -112,7 +112,6 @@ KinectInterpProto::KinectInterpProto(const KinectInterpProto& from)
 
 void KinectInterpProto::SharedCtor() {
   _cached_size_ = 0;
-  id_ = GOOGLE_LONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -146,9 +145,7 @@ KinectInterpProto* KinectInterpProto::New() const {
 }
 
 void KinectInterpProto::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    id_ = GOOGLE_LONGLONG(0);
-  }
+  active_skeletons_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -159,17 +156,24 @@ bool KinectInterpProto::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int64 id = 1;
+      // repeated bool active_skeletons = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &id_)));
-          set_has_id();
+         parse_active_skeletons:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 1, 8, input, this->mutable_active_skeletons())));
+        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
+                   == ::google::protobuf::internal::WireFormatLite::
+                      WIRETYPE_LENGTH_DELIMITED) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, this->mutable_active_skeletons())));
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(8)) goto parse_active_skeletons;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -192,9 +196,10 @@ bool KinectInterpProto::MergePartialFromCodedStream(
 
 void KinectInterpProto::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int64 id = 1;
-  if (has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
+  // repeated bool active_skeletons = 1;
+  for (int i = 0; i < this->active_skeletons_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(
+      1, this->active_skeletons(i), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -205,9 +210,10 @@ void KinectInterpProto::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* KinectInterpProto::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required int64 id = 1;
-  if (has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->id(), target);
+  // repeated bool active_skeletons = 1;
+  for (int i = 0; i < this->active_skeletons_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteBoolToArray(1, this->active_skeletons(i), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -220,15 +226,13 @@ void KinectInterpProto::SerializeWithCachedSizes(
 int KinectInterpProto::ByteSize() const {
   int total_size = 0;
   
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int64 id = 1;
-    if (has_id()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int64Size(
-          this->id());
-    }
-    
+  // repeated bool active_skeletons = 1;
+  {
+    int data_size = 0;
+    data_size = 1 * this->active_skeletons_size();
+    total_size += 1 * this->active_skeletons_size() + data_size;
   }
+  
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -254,11 +258,7 @@ void KinectInterpProto::MergeFrom(const ::google::protobuf::Message& from) {
 
 void KinectInterpProto::MergeFrom(const KinectInterpProto& from) {
   GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_id()) {
-      set_id(from.id());
-    }
-  }
+  active_skeletons_.MergeFrom(from.active_skeletons_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -275,14 +275,13 @@ void KinectInterpProto::CopyFrom(const KinectInterpProto& from) {
 }
 
 bool KinectInterpProto::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }
 
 void KinectInterpProto::Swap(KinectInterpProto* other) {
   if (other != this) {
-    std::swap(id_, other->id_);
+    active_skeletons_.Swap(&other->active_skeletons_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

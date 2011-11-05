@@ -88,21 +88,24 @@ class KinectInterpProto : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // required int64 id = 1;
-  inline bool has_id() const;
-  inline void clear_id();
-  static const int kIdFieldNumber = 1;
-  inline ::google::protobuf::int64 id() const;
-  inline void set_id(::google::protobuf::int64 value);
+  // repeated bool active_skeletons = 1;
+  inline int active_skeletons_size() const;
+  inline void clear_active_skeletons();
+  static const int kActiveSkeletonsFieldNumber = 1;
+  inline bool active_skeletons(int index) const;
+  inline void set_active_skeletons(int index, bool value);
+  inline void add_active_skeletons(bool value);
+  inline const ::google::protobuf::RepeatedField< bool >&
+      active_skeletons() const;
+  inline ::google::protobuf::RepeatedField< bool >*
+      mutable_active_skeletons();
   
   // @@protoc_insertion_point(class_scope:KinectInterpProto)
  private:
-  inline void set_has_id();
-  inline void clear_has_id();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
-  ::google::protobuf::int64 id_;
+  ::google::protobuf::RepeatedField< bool > active_skeletons_;
   
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -121,26 +124,29 @@ class KinectInterpProto : public ::google::protobuf::Message {
 
 // KinectInterpProto
 
-// required int64 id = 1;
-inline bool KinectInterpProto::has_id() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
+// repeated bool active_skeletons = 1;
+inline int KinectInterpProto::active_skeletons_size() const {
+  return active_skeletons_.size();
 }
-inline void KinectInterpProto::set_has_id() {
-  _has_bits_[0] |= 0x00000001u;
+inline void KinectInterpProto::clear_active_skeletons() {
+  active_skeletons_.Clear();
 }
-inline void KinectInterpProto::clear_has_id() {
-  _has_bits_[0] &= ~0x00000001u;
+inline bool KinectInterpProto::active_skeletons(int index) const {
+  return active_skeletons_.Get(index);
 }
-inline void KinectInterpProto::clear_id() {
-  id_ = GOOGLE_LONGLONG(0);
-  clear_has_id();
+inline void KinectInterpProto::set_active_skeletons(int index, bool value) {
+  active_skeletons_.Set(index, value);
 }
-inline ::google::protobuf::int64 KinectInterpProto::id() const {
-  return id_;
+inline void KinectInterpProto::add_active_skeletons(bool value) {
+  active_skeletons_.Add(value);
 }
-inline void KinectInterpProto::set_id(::google::protobuf::int64 value) {
-  set_has_id();
-  id_ = value;
+inline const ::google::protobuf::RepeatedField< bool >&
+KinectInterpProto::active_skeletons() const {
+  return active_skeletons_;
+}
+inline ::google::protobuf::RepeatedField< bool >*
+KinectInterpProto::mutable_active_skeletons() {
+  return &active_skeletons_;
 }
 
 
