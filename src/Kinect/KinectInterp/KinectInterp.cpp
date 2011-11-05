@@ -181,22 +181,22 @@ void GetSkeleton(KinectInterpProto* storage, pair<int, bool>* active_skeletons) 
   if (FAILED(hr))
     DIE(hr, "Could not get skeleton frame from Kinect\n");
 
-  bool found_skeleton = false,
-       new_skeleton   = false;
   for (int i = 0; i < NUI_SKELETON_COUNT; i++) {
     // This skeleton is active, let's track it
     if (skeleton_frame.SkeletonData[i].eTrackingState == NUI_SKELETON_TRACKED) {
-      found_skeleton = true;
       active_skeletons[i].first = timeGetTime();
+
+      // Alert the user that we found a new skeleton
       if (!active_skeletons[i].second) {
         active_skeletons[i].second = true;
-        // Alert the user that we found a new skeleton
         fprintf(stdout, "Welcome, newbie! I'm gonna call you #%d!\n", i);
       }
 
     // Consider a skeleton out of frame if we haven't seen them for 0.5sec
-    } else if (active_skeletons[i].first + 500 < timeGetTime()) {
-      fprintf(stdout, "Bye #%d, it was good to have you around!", i);
+    } else if (active_skeletons[i].first &&
+               active_skeletons[i].first + 500 < timeGetTime()) {
+      fprintf(stdout, "Bye #%d, it was good to have you around!\n", i);
+      active_skeletons[i].first = 0;
       active_skeletons[i].second = false;
     }
   }
