@@ -12,6 +12,12 @@
 #ifndef _SHL_PRIMITIVESLEARNING_LEARNER_LEARNER_H_
 #define _SHL_PRIMITIVESLEARNING_LEARNER_LEARNER_H_
 
+#include <string>
+#include <cstdlib>
+
+// TODO(Thad): Move this to a better spot... i.e. something to do w/db or types
+#define Key std::string
+
 class Object;
 class Primitive;
 class Motor;
