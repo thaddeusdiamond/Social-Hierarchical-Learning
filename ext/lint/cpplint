@@ -1033,7 +1033,7 @@ def CheckForHeaderGuard(filename, lines, error):
     error: The function to call with any errors found.
   """
 
-  cppvar = "_P2PMIP_" + GetHeaderGuardCPPVariable(filename)
+  cppvar = "_SHL_" + GetHeaderGuardCPPVariable(filename)
 
   ifndef = None
   ifndef_linenum = 0
