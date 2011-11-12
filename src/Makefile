@@ -42,11 +42,6 @@ LDLIBPATH := LD_LIBRARY_PATH=$(GTEST)/lib/.libs
 # Lists that the */Makefile.inc makefile fragments will add to
 TESTS :=
 
-#If they specify the use of doxy, then we make doxy first
-with-doxy:
-	@echo +doc $(DOXY_EXE) $(DOCDIR)/$(DOXY_CONF) \> $(DOCOUT)
-	@cd $(DOCDIR); $(DOXY_EXE) $(DOXY_CONF)
-	
 # Make sure that 'all' is the first target
 all:
 
@@ -65,6 +60,12 @@ Test: $(TESTS)
 
 clean:
 	rm -rf $(OBJDIR) $(LOGDIR) $(BINDIR) $(DOCOUT)
+
+#If they specify the use of doxy, then we make doxy first
+with-doxy:
+	@echo +doc $(DOXY_EXE) $(DOCDIR)/$(DOXY_CONF) \> $(DOCOUT)
+	@cd $(DOCDIR); $(DOXY_EXE) $(DOXY_CONF)
+	
 	
 # This magic automatically generates makefile dependencies
 # for header files included from C source files we compile,
@@ -88,4 +89,4 @@ always:
            $(foreach dir, $(OBJDIRS), $(OBJDIR)/$(dir)/%.pb.cc) \
            $(foreach dir, $(OBJDIRS), $(OBJDIR)/$(dir)/%.pb.h)
 
-.PHONY: all always clean test
+.PHONY: all always clean test with-doxy
