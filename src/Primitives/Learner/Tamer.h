@@ -26,7 +26,6 @@ class Tamer : public Learner {
    */
   virtual ~Tamer() {}
 
-  // Inherited from virtual parent class
   virtual bool Setup(Object* objects, size_t objects_len);
   virtual bool LoadComparators(Key* tables, size_t tables_len);
   virtual bool Begin(Primitive* prim, Motor* motors, size_t motors_len);
