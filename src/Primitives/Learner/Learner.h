@@ -9,13 +9,16 @@
  * operating in the primitives learning phase of SHL
  */
 
-#ifndef _SHL_PRIMITIVESLEARNING_LEARNER_LEARNER_H_
-#define _SHL_PRIMITIVESLEARNING_LEARNER_LEARNER_H_
+#ifndef _SHL_PRIMITIVES_LEARNER_LEARNER_H_
+#define _SHL_PRIMITIVES_LEARNER_LEARNER_H_
 
 #include <string>
 #include <cstdlib>
 
-// TODO(Thad): Move this to a better spot... i.e. something to do w/db or types
+/**
+ * @todo Move the definition of Key out of Learner.h and into somewhere common
+ *       or relating to the database layer
+ */
 #define Key std::string
 
 class Object;
@@ -78,4 +81,4 @@ class Learner {
   virtual bool UnloadData(PostProcessor* post_proc) = 0;
 };
 
-#endif  // _SHL_PRIMITIVESLEARNING_LEARNER_LEARNER_H_
+#endif  // _SHL_PRIMITIVES_LEARNER_LEARNER_H_

@@ -17,7 +17,7 @@ DOCOUT    := ../doc/html ../doc/latex
 GTEST     := ../ext/googletest
 DOCDIR    := ../doc
 DOXY_EXE  := doxygen
-DOXY_CONF := SHL.doxy
+DOXY_CONF := SHL.doxygen
 
 # Directives for where the source files should look to include headers from
 TOP       := .

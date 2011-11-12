@@ -8,8 +8,8 @@
  * This is an interface for the TAMER framework for reinforcement learning
  */
 
-#ifndef _SHL_PRIMITIVESLEARNING_LEARNER_TAMER_H_
-#define _SHL_PRIMITIVESLEARNING_LEARNER_TAMER_H_
+#ifndef _SHL_PRIMITIVES_LEARNER_TAMER_H_
+#define _SHL_PRIMITIVES_LEARNER_TAMER_H_
 
 #include "Learner/Learner.h"
 
@@ -33,4 +33,4 @@ class Tamer : public Learner {
   virtual bool UnloadData(PostProcessor* post_proc);
 };
 
-#endif  // _SHL_PRIMITIVESLEARNING_LEARNER_TAMER_H_
+#endif  // _SHL_PRIMITIVES_LEARNER_TAMER_H_
