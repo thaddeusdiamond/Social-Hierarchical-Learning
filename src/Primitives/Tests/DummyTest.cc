@@ -1,5 +1,6 @@
 /**
  * @file
+ * @author Brad Hayes <hayesbh@gmail.com>
  * @author Thaddeus Diamond <diamond@cs.yale.edu>
  * @version 0.1
  *
@@ -9,18 +10,18 @@
  */
 
 #include <gtest/gtest.h>
-#include "Learner/Tamer.h"
+#include "Learner/Dummy.h"
 
-class TamerTest : public ::testing::Test {
+class DummyTest : public ::testing::Test {
  protected:
   // Create a TAMER object before each test
-  TamerTest() {
-    tamer_ = new Tamer();
+  DummyTest() {
+    dummy_ = new Dummy();
   }
 
   // Destroy TAMER memory
-  virtual ~TamerTest() {
-    delete tamer_;
+  virtual ~DummyTest() {
+    delete dummy_;
   }
 
   // Unused virtual methods
@@ -28,14 +29,14 @@ class TamerTest : public ::testing::Test {
   virtual void TearDown() {}
 
   // Create a member variable for the TAMER learner
-  Tamer* tamer_;
+  Dummy* dummy_;
 };
 
 /**
  * @test    TAMER setup unit test
  */
-TEST_F(TamerTest, Setup) {
-  EXPECT_TRUE(tamer_->Setup(NULL, 0));
+TEST_F(DummyTest, Setup) {
+  EXPECT_TRUE(dummy_->Setup(NULL, 0));
 }
 
 int main(int argc, char* argv[]) {
