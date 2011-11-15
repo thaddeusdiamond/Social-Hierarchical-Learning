@@ -6,7 +6,7 @@
  *
  * @section DESCRIPTION
  *
- * Testing for the TAMER framework
+ * Testing for the dummy student class we set up
  */
 
 #include <gtest/gtest.h>
@@ -37,7 +37,6 @@ class DummyTest : public ::testing::Test {
  */
 TEST_F(DummyTest, Setup) {
   EXPECT_TRUE(dummy_->Setup(NULL, 0));
-  Utils::Log(DEBUG, "This is written as a debug to the logs");
 }
 
 int main(int argc, char* argv[]) {

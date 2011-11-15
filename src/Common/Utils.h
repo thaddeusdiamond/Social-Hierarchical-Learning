@@ -13,17 +13,10 @@
 #ifndef _SHL_COMMON_UTILS_H_
 #define _SHL_COMMON_UTILS_H_
 
-#define LOGDIR        string("logs/")
-#define LOGFILE       string("log")
-#define SUCCESS_FILE  string("log.success")
-#define DEBUG_FILE    string("log.debug")
-#define WARNING_FILE  string("log.warning")
-#define ERROR_FILE    string("log.error")
-#define FATAL_FILE    string("log.fatal")
-
 #include <cstdarg>
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 #include <string>
 
 using std::string;
@@ -32,14 +25,59 @@ using std::string;
  * We represent the various levels of the log as global integers so that
  * we can perform a fast switch when writing out
  */
+#define NUMBER_OF_LEVELS 5
 enum Level {
-  SUCCESS,
-  DEBUG,
-  WARNING,
-  ERROR,
-  FATAL
+  SUCCESS = 0,
+  DEBUG = 1,
+  WARNING = 2,
+  ERROR = 3,
+  FATAL = 4
 };
 
+/**
+ * We represent the files of the output as an array for fast switching
+ */
+#define LOGDIR        string("logs/")
+#define LOGFILE       string("log")
+static string level_files[] = {
+  "log.success",
+  "log.debug",
+  "log.warning",
+  "log.error",
+  "log.fatal"
+};
+
+/**
+ * We represent the colors of the output as an array for fast switching
+ */
+#define COLOR_OUT
+#define CLEAR_COLOR   "\033[0m"
+static string level_colors[] = {
+  "\033[1;32m",
+  "\033[1;34m",
+  "\033[1;33m",
+  "\033[1;31m",
+  "\033[1;39m"
+};
+
+/**
+ * We may want to prepend the log level to the actual print out message
+ */
+#define PREPENDED
+static string level_descriptors[] = {
+  "SUCCESS",
+  "DEBUG",
+  "WARNING",
+  "ERROR",
+  "FATAL"
+};
+
+/**
+ * The Utils namespace defines several utility functions that ease application
+ * writing including logging and automatic exit.
+ *
+ * @addtogroup  Utilities
+ */
 namespace Utils {
   /**
    * The Utils class has a generic die mechanism by which a program at any
@@ -59,34 +97,29 @@ namespace Utils {
     exit(EXIT_FAILURE);
   }
 
-  /**
-   * We can keep the log files open as static variables to prevent having to
-   * slow down from opening and closing them on every log write
-   */
-  static FILE* log_file;
-  static FILE* success_file;
-  static FILE* debug_file;
-  static FILE* warning_file;
-  static FILE* error_file;
-  static FILE* fatal_file;
+  /** @cond PRIVATE_NAMESPACE_MEMBERS **/
+    /**
+     * We can keep the log files open as static variables to prevent having to
+     * slow down from opening and closing them on every log write
+     */
+    static FILE* log_file = NULL;
+    static FILE* level_file_handles[] = { NULL, NULL, NULL, NULL, NULL };
 
-  /**
-   * If all of the logfiles are closed we will make a call to the OpenLogFiles
-   * function internally to open all the logfiles and assign static handles to
-   * them.
-   */
-  static void OpenLogFiles() {
-    log_file     = fopen((LOGDIR + LOGFILE).c_str(),       "w");
-    success_file = fopen((LOGDIR + SUCCESS_FILE).c_str(),  "w");
-    debug_file   = fopen((LOGDIR + DEBUG_FILE).c_str(),    "w");
-    warning_file = fopen((LOGDIR + WARNING_FILE).c_str(),  "w");
-    error_file   = fopen((LOGDIR + ERROR_FILE).c_str(),    "w");
-    fatal_file   = fopen((LOGDIR + FATAL_FILE).c_str(),    "w");
+    /**
+     * If all of the logfiles are closed we will make a call to the OpenLogFiles
+     * function internally to open all the logfiles and assign static handles to
+     * them.
+     */
+    static void OpenLogFiles() {
+      log_file = fopen((LOGDIR + LOGFILE).c_str(), "w");
 
-    if (!log_file || !success_file || !debug_file || !warning_file ||
-        !error_file || !fatal_file)
-      Die("There was an error opening the log files for writing");
-  }
+      for (int i = 0; i < NUMBER_OF_LEVELS; i++) {
+        level_file_handles[i] = fopen((LOGDIR + level_files[i]).c_str(), "w");
+        if (!level_file_handles[i])
+          Die("There was an error opening the log files for writing");
+      }
+    }
+  /** @endcond **/
 
   /**
    * The generic Log function takes a specific level and, based on what it
@@ -104,25 +137,26 @@ namespace Utils {
     if (log_file == NULL)
       OpenLogFiles();
 
-    fprintf(log_file, format, arguments);
-    switch (level) {
-      case SUCCESS:
-        fprintf(success_file, format, arguments);
-        break;
-      case DEBUG:
-        fprintf(debug_file, format, arguments);
-        break;
-      case WARNING:
-        fprintf(warning_file, format, arguments);
-        break;
-      case ERROR:
-        fprintf(error_file, format, arguments);
-        break;
-      case FATAL:
-        fprintf(fatal_file, format, arguments);
-        break;
-    }
+    // Prepend level statement and add color to the output if macros defined
+    char log_format[4096];
+    memset(log_format, 0, sizeof(log_format));
+#ifdef PREPENDED
+  #ifdef COLOR_OUT
+    snprintf(log_format, sizeof(log_format), "%s[%s]%s ",
+             level_colors[level].c_str(), level_descriptors[level].c_str(),
+             CLEAR_COLOR);
+  #else
+    snprintf(log_format, sizeof(log_format), "[%s] ",
+             level_descriptors[level].c_str());
+  #endif
+#endif
+    strncat(log_format, format, strlen(format));
 
+    // Make sure it's appended with a newline
+    fprintf(log_file, log_format, arguments);
+    fprintf(log_file, "\n");
+    fprintf(level_file_handles[level], log_format, arguments);
+    fprintf(level_file_handles[level], "\n");
     va_end(arguments);
   }
 
@@ -153,5 +187,6 @@ namespace Utils {
     return true;
   }
 };
+
 
 #endif  // _SHL_COMMON_UTILS_H_

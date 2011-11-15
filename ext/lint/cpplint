@@ -2584,7 +2584,7 @@ def CheckLanguage(filename, clean_lines, linenum, file_extension, include_state,
   # This is dangerous because the C++ language does not guarantee that
   # globals with constructors are initialized before the first access.
   match = Match(
-      r'((?:|static +)(?:|const +))string +([a-zA-Z0-9_:]+)\b(.*)',
+      r'((?:|static +)(?:|const +))string +([a-zA-Z0-9_:]+)\b([^\[]*) ',
       line)
   # Make sure it's not a function.
   # Function template specialization looks like: "string foo<Type>(...".

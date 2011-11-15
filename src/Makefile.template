@@ -6,8 +6,8 @@ else
   $(UPPERC_DIR)_DEPLOY := 
 endif
 
-$(UPPERC_DIR)_TEST_SRCS := $(wildcard $(LOWERC_ROOT)/Tests/*Test.cc)
-$(UPPERC_DIR)_TEST_OBJS := $(patsubst %.cc, $(OBJDIR)/%Test.o, $($(UPPERC_DIR)_SRCS))
+$(UPPERC_DIR)_TEST_SRCS := $(wildcard $(LOWERC_DIR)/*UnitTest.cc)
+$(UPPERC_DIR)_TEST_OBJS := $(patsubst %.cc, $(OBJDIR)/%.o, $($(UPPERC_DIR)_TEST_SRCS))
 $(UPPERC_DIR)_TESTS     := $(patsubst %.cc, $(BINDIR)/%, $($(UPPERC_DIR)_TEST_SRCS))
 
 # Makeable directives (i.e. "make all")
@@ -23,12 +23,13 @@ $(OBJDIR)/$(LOWERC_DIR)/%.o: $(LOWERC_DIR)/%.cc
 	@mkdir -p $(@D)
 	$(V)$(CXX) $(CXXFLAGS) $(MDFLAGS) -o $@ -c $<
 
-$(OBJDIR)/$(LOWERC_DIR)/%Test.o: $(LOWERC_ROOT)/Tests/%Test.cc
+$(OBJDIR)/$(LOWERC_DIR)/%UnitTest.o: $(LOWERC_DIR)/%UnitTest.cc
 	@echo + cxx $<
+	@mkdir -p $(@D)
 	$(V)$(CXX) $(CXXFLAGS) $(MDFLAGS) -o $@ -c $<
 
-$(BINDIR)/$(LOWERC_ROOT)/Tests/%Test: $($(UPPERC_DIR)_TEST_OBJS) \
-                                      $($(UPPERC_DIR)_OBJS) $(EXTRA_TEST_OBJS)
+$(BINDIR)/$(LOWERC_DIR)/%UnitTest: $($(UPPERC_DIR)_TEST_OBJS) \
+                                   $($(UPPERC_DIR)_OBJS) $(EXTRA_TEST_OBJS)
 	@echo + ld $@
 	@mkdir -p $(@D)
 	@mkdir -p $(patsubst $(BINDIR)%, $(LOGDIR)%, $(@D))

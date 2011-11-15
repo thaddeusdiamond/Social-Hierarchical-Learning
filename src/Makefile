@@ -50,6 +50,7 @@ all:
 MAKEFILE_TEMPLATE := Makefile.template
 
 # Makefile fragments for library code
+include Common/Makefile.inc
 include Backend/Makefile.inc
 include Voice/Makefile.inc
 include Primitives/Makefile.inc
@@ -85,7 +86,7 @@ always:
 
 # make it so that no intermediate .o files are ever deleted
 .PRECIOUS: $(foreach dir, $(OBJDIRS), $(OBJDIR)/$(dir)/%.o) \
-           $(foreach dir, $(OBJDIRS), $(OBJDIR)/$(dir)/%Test.o) \
+           $(foreach dir, $(OBJDIRS), $(OBJDIR)/$(dir)/%UnitTest.o) \
            $(foreach dir, $(OBJDIRS), $(OBJDIR)/$(dir)/%.pb.cc) \
            $(foreach dir, $(OBJDIRS), $(OBJDIR)/$(dir)/%.pb.h)
 
