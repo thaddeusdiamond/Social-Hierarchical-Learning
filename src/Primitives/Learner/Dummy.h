@@ -13,7 +13,14 @@
 #ifndef _SHL_PRIMITIVES_LEARNER_DUMMY_H_
 #define _SHL_PRIMITIVES_LEARNER_DUMMY_H_
 
+#include <string>
+#include <vector>
+#include "Common/Utils.h"
+#include "Learner/QLearner.h"
 #include "Learner/Student.h"
+
+using std::string;
+using std::vector;
 
 class Dummy : public Student {
  public:
@@ -29,13 +36,10 @@ class Dummy : public Student {
   virtual ~Dummy() {}
 
   virtual bool Setup(Object* objects, size_t objects_len);
-  virtual bool SetLearningMethod(QLearner &learner);
-  virtual bool LoadComparators(Primitive *prim, Key* tables, size_t tables_len);
+  virtual bool SetLearningMethod(const QLearner& learner);
+  virtual bool LoadComparators(Primitive* prim, Key* tables, size_t tables_len);
   virtual bool Learn(Primitive* prim, Motor* motors, size_t motors_len);
   virtual bool StopLearning(void);
-  virtual bool ClearLog(void);
-  virtual bool DumpLog(string &filename);
-  virtual bool Log(string &str);
   virtual vector<Sensor*>* GetSensors();
 };
 

@@ -37,6 +37,7 @@ class DummyTest : public ::testing::Test {
  */
 TEST_F(DummyTest, Setup) {
   EXPECT_TRUE(dummy_->Setup(NULL, 0));
+  Utils::Log(DEBUG, "This is written as a debug to the logs");
 }
 
 int main(int argc, char* argv[]) {

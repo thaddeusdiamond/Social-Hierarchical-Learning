@@ -16,7 +16,6 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
-#include "Learner/QLearner.h"
 
 using std::string;
 using std::vector;
@@ -30,9 +29,10 @@ using std::vector;
 class Object;
 class Primitive;
 class Motor;
+class QLearner;
 
 class Student {
- public: 
+ public:
   /**
    * Destructor for a Student must free all memory it received from I/O and
    * had buffered, also release the STUDENT it controls
@@ -50,7 +50,7 @@ class Student {
    */
   virtual bool Setup(Object* objects, size_t objects_len) = 0;
 
-  
+
   /**
    * Sets the learning method to use
    *
@@ -58,14 +58,14 @@ class Student {
    *
    * @return True if compatible learner provided, false if not
    */
-  virtual bool SetLearningMethod(QLearner &learner) = 0;
-  
+  virtual bool SetLearningMethod(const QLearner& learner) = 0;
+
   /**
    * Sometimes we will try to perform AB testing with the student, but in order
    * to do so we will need to explicitly go to the datastore and get that
    * learned Q-Table.
    *
-   * @param     primitive     The primitive whose alternate tables are to be 
+   * @param     primitive     The primitive whose alternate tables are to be
    *                          compared
    * @param     tables        A set of IDs for the Q-Tables we want to load from
    *                          within the provided primitive
@@ -73,7 +73,7 @@ class Student {
    *
    * @return    True unless an error occurred during load time
    */
-  virtual bool LoadComparators(Primitive *primitive, Key* tables,
+  virtual bool LoadComparators(Primitive* primitive, Key* tables,
                                size_t tables_len) = 0;
 
   /**
@@ -96,37 +96,11 @@ class Student {
    */
   virtual bool StopLearning(void) = 0;
 
-  
-  /**
-   * Clears the entire history log of this Student
-   *
-   * @return True if successfully cleared, false on error
-   */
-  virtual bool ClearLog(void) = 0;
-
-  /**
-   * Saves the entire history log of this Student's actions
-   *
-   * @param filename File to save the log to
-   *
-   * @return True if successfully saved, false on error
-   */
-  virtual bool DumpLog(string &filename) = 0;
-
-  /**
-   * Appends an action onto this student's history
-   *
-   * @param str The action to be recorded
-   *
-   * @return True if successfully appended, false on error
-   */
-  virtual bool Log(string &str) = 0;
 
   /**
    * Accessor for non-motor sensors associated with this student
    */
   virtual vector<Sensor*>* GetSensors() = 0;
-  
 };
 
 #endif  // _SHL_PRIMITIVES_LEARNER_STUDENT_H_
