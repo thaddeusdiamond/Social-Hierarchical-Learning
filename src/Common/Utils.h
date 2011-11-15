@@ -181,7 +181,16 @@ namespace Utils {
     va_list arguments;
     va_start(arguments, format);
 
+#ifdef PREPENDED
+  #ifdef COLOR_OUT
+    fprintf(log, "%s[%s]%s ", level_colors[level].c_str(),
+            level_descriptors[level].c_str(), CLEAR_COLOR);
+  #else
+    fprintf(log, "[%s] ", level_descriptors[level].c_str());
+  #endif
+#endif
     fprintf(log, format, arguments);
+    fprintf(log, "\n");
 
     va_end(arguments);
     return true;
