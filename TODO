@@ -1,5 +1,5 @@
 Thad's List:
 ------------
-  - Create Makefile template and Makefile structure (if not Makefile itself)
-  - Create interfaces in each folder for class-based structure
-  - Use SQL/SQLite?  I think for now we can assume main-memory could be fine but we'll see
+  - Implement the file format for a Primitive
+  - How are we going to store Q-Tables?
+    * Use SQL/SQLite?  I think for now we can assume main-memory could be fine but we'll see
