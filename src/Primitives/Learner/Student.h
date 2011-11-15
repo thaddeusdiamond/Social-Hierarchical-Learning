@@ -18,8 +18,11 @@
 #include <cstdlib>
 #include "Learner/QLearner.h"
 
+using std::string;
+using std::vector;
+
 /**
- * @todo Move the definition of Key out of STUDENT.h and into somewhere common
+ * @todo Move the definition of Key out of Student.h and into somewhere common
  *       or relating to the database layer
  */
 #define Key std::string
@@ -55,20 +58,23 @@ class Student {
    *
    * @return True if compatible learner provided, false if not
    */
-  virtual bool SetLearningMethod(QLearner &learner);
+  virtual bool SetLearningMethod(QLearner &learner) = 0;
   
   /**
    * Sometimes we will try to perform AB testing with the student, but in order
    * to do so we will need to explicitly go to the datastore and get that
    * learned Q-Table.
    *
-   * @param     primitive     The primitive whose alternate tables are to be compared
-   * @param     tables        A set of IDs for the Q-Tables we want to load from within the provided primitive
+   * @param     primitive     The primitive whose alternate tables are to be 
+   *                          compared
+   * @param     tables        A set of IDs for the Q-Tables we want to load from
+   *                          within the provided primitive
    * @param     tables_len    How many tables we are performing a comparison w/
    *
    * @return    True unless an error occurred during load time
    */
-  virtual bool LoadComparators(Primitive *primitive, Key* tables, size_t tables_len) = 0;
+  virtual bool LoadComparators(Primitive *primitive, Key* tables,
+                               size_t tables_len) = 0;
 
   /**
    * We explicitly alert the student, which can be used on a one-off basis or
@@ -88,7 +94,7 @@ class Student {
    *
    * @return True if successfully stopped, false on error
    */
-  virtual bool StopLearning(void);
+  virtual bool StopLearning(void) = 0;
 
   
   /**
@@ -96,7 +102,7 @@ class Student {
    *
    * @return True if successfully cleared, false on error
    */
-  virtual bool ClearLog(void);
+  virtual bool ClearLog(void) = 0;
 
   /**
    * Saves the entire history log of this Student's actions
@@ -105,7 +111,7 @@ class Student {
    *
    * @return True if successfully saved, false on error
    */
-  virtual bool DumpLog(std::string &filename);
+  virtual bool DumpLog(string &filename) = 0;
 
   /**
    * Appends an action onto this student's history
@@ -114,12 +120,12 @@ class Student {
    *
    * @return True if successfully appended, false on error
    */
-  virtual bool Log(std::string &str);
+  virtual bool Log(string &str) = 0;
 
   /**
    * Accessor for non-motor sensors associated with this student
    */
-  virtual std::vector<Sensor*> *get_sensors();
+  virtual vector<Sensor*>* GetSensors() = 0;
   
 };
 

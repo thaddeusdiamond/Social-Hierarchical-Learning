@@ -1,8 +1,11 @@
 In order to generate complete documentation for this project, please run:
-  doxygen SHL.doxy
+  doxygen SHL.doxygen
+
+Or (from inside the /src directory):
+  make with-doxy
 
 From this directory.  Navigate in your web browser to:
   file:///$(ROOT_PATH)/doc/html/index.html
 
-Or view the output generatd in the latex/ subdirectory. Updated documentation 
+Or view the output generated in the latex/ subdirectory. Updated documentation 
 from the master branch can be found on the project website.

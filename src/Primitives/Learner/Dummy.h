@@ -6,7 +6,8 @@
  *
  * @section DESCRIPTION
  *
- * This is an interface for a dummy student while we finish enumerating functions/features.
+ * This is an interface for a dummy student while we finish enumerating
+ * functions/features.
  */
 
 #ifndef _SHL_PRIMITIVES_LEARNER_DUMMY_H_
@@ -22,20 +23,20 @@ class Dummy : public Student {
   explicit Dummy() {}
 
   /**
-   * Destructor for TAMER must free all memory it received from I/O and
+   * Destructor for dummy student must free all memory it received from I/O and
    * had buffered
    */
   virtual ~Dummy() {}
 
   virtual bool Setup(Object* objects, size_t objects_len);
   virtual bool SetLearningMethod(QLearner &learner);
-  virtual bool LoadComparators(Primitive *primitive, Key* tables, size_t tables_len);
+  virtual bool LoadComparators(Primitive *prim, Key* tables, size_t tables_len);
   virtual bool Learn(Primitive* prim, Motor* motors, size_t motors_len);
   virtual bool StopLearning(void);
   virtual bool ClearLog(void);
-  virtual bool DumpLog(std::string &filename);
-  virtual bool Log(std::string &str);
-  virtual std::vector<Sensor*> *get_sensors();
+  virtual bool DumpLog(string &filename);
+  virtual bool Log(string &str);
+  virtual vector<Sensor*>* GetSensors();
 };
 
 #endif  // _SHL_PRIMITIVES_LEARNER_DUMMY_H_

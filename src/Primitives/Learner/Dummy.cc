@@ -6,7 +6,7 @@
  *
  * @section DESCRIPTION
  *
- * This is the implementation for the TAMER framework for reinforcement learning
+ * This is an implementation of a dummy student that can learn
  */
 
 #include <vector>
@@ -22,7 +22,7 @@ bool Dummy::SetLearningMethod(QLearner &learner) {
   return true;
 }
 
-bool Dummy::LoadComparators(Primitive *primitive, Key* tables, size_t tables_len) {
+bool Dummy::LoadComparators(Primitive *prim, Key* tables, size_t tables_len) {
   return true;
 }
 
@@ -38,15 +38,15 @@ bool Dummy::ClearLog(void) {
   return true;
 }
 
-bool Dummy::DumpLog(std::string &filename) {
+bool Dummy::DumpLog(string &filename) {
   return true;
 }
 
-bool Dummy::Log(std::string &str) {
+bool Dummy::Log(string &str) {
   return true;
 }
 
-std::vector<Sensor*> *get_sensors() {
+vector<Sensor*>* Dummy::GetSensors() {
   return NULL;
 }
 
