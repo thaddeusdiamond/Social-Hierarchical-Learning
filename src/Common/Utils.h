@@ -10,8 +10,8 @@
  * simultaneously written to individual logs and one main stream.
  */
 
-#ifndef _SHL_COMMON_UTILS_H_
-#define _SHL_COMMON_UTILS_H_
+#ifndef _SHL_SRC_COMMON_UTILS_H_
+#define _SHL_SRC_COMMON_UTILS_H_
 
 #include <cstdarg>
 #include <cstdio>
@@ -198,4 +198,4 @@ namespace Utils {
 };
 
 
-#endif  // _SHL_COMMON_UTILS_H_
+#endif  // _SHL_SRC_COMMON_UTILS_H_

@@ -10,8 +10,8 @@
  * operating in the primitives learning phase of SHL
  */
 
-#ifndef _SHL_PRIMITIVES_LEARNER_STUDENT_H_
-#define _SHL_PRIMITIVES_LEARNER_STUDENT_H_
+#ifndef _SHL_SRC_PRIMITIVES_LEARNER_STUDENT_H_
+#define _SHL_SRC_PRIMITIVES_LEARNER_STUDENT_H_
 
 #include <string>
 #include <vector>
@@ -103,4 +103,4 @@ class Student {
   virtual vector<Sensor*>* GetSensors() = 0;
 };
 
-#endif  // _SHL_PRIMITIVES_LEARNER_STUDENT_H_
+#endif  // _SHL_SRC_PRIMITIVES_LEARNER_STUDENT_H_

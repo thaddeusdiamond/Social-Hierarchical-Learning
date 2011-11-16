@@ -8,16 +8,16 @@
  * This is an interface for a Q-Learning Implementation
  */
 
-#ifndef _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
-#define _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
+#ifndef _SHL_SRC_PRIMITIVES_LEARNER_QLEARNER_H_
+#define _SHL_SRC_PRIMITIVES_LEARNER_QLEARNER_H_
 
 #include <string>
 #include <vector>
+#include "./State.h"
 
 using std::string;
 using std::vector;
 
-class Object;
 class CreditAssignmentType;
 class ExplorationType;
 class Sensor;
@@ -30,7 +30,7 @@ class QLearner {
    * functions
 
   explicit QLearner() {}
-*/
+  */
 
   /**
    * Destructor for QLearner must free all memory it received from I/O and
@@ -45,7 +45,7 @@ class QLearner {
    *
    * @return    True on success, false on failure.
    */
-  virtual bool Load(const string& filename) = 0;
+  virtual bool Load(string const& filename) = 0;
 
   /**
    * Saves the entire contents of the QTable to the target file
@@ -55,7 +55,7 @@ class QLearner {
    *
    * @return    True on success, false on failure
    */
-  virtual bool Save(const string& filename) = 0;
+  virtual bool Save(string const& filename) = 0;
 
   /**
    * Clears table, initializes everything in the object to pristine and
@@ -66,75 +66,70 @@ class QLearner {
   virtual bool Init() = 0;
 
   /**
-   * Takes a vector of inputs and applies the given reward to the state.
+   * Copies the state data provided to it and records it in the QTable
    *
-   * @param     state           Vector of pointers to state descriptors
-   * @param     reward          Value to use with set credit assignment function
+   * @param     state           State description with reward
    *
    * @return    True on successful modification of QTable, false on failure.
    */
-  virtual bool Learn(const vector<Object*>& state, double reward) = 0;
+  virtual bool Learn(State const& state) = 0;
 
   /**
-   * Populates given variables with a list of nearby state descriptors
-   * and reward values currently associated with them.
+   * Populates nearby_states with a list of neighboring state descriptors
+   * and the reward values currently associated with them.
    *
-   * @param     cur_state       Vector of state descriptors from the state to be
-   *                            searched near.
+   * @param     cur_state       Vector of state descriptors 
    * @param     nearby_states   Empty vector of state descriptors to be
-   *                            populated by the time the function returns
-   * @param     nearby_rewards  Empty vector of state rewards, indices matching
-   *                            the corresponding states in nearby_states
+   *                            populated with const pointers from within this
+   *                            object by the time the function returns
+   *                            
    *
    * @return True on success, false on lookup error.
    */
-  virtual bool GetNearbyStates(const vector<Object*>& cur_state,
-                               const vector<Object*>& nearby_states,
-                               const vector<double>& nearby_rewards) = 0;
+  virtual bool GetNearbyStates(State const& cur_state,
+                               vector<State const* const>& nearby_states) = 0;
 
 
   /**
    * Returns the chosen next step by the QLearner.
    *
-   * @param     cur_state       Vector of state descriptors
-   * @param     next_state      Empty vector to be populated with state
-   *                            descriptors
-   * @param     next_reward     Double to be overwritten with reward value for
-   *                            next_state
+   * @param     cur_state       State descriptor
+   * @param     next_state      Overwritten with pointer to next State object
+   * 
+   * @return True on success, false on lookup error
    */
-  virtual bool GetNextState(const vector<Object*>& cur_state,
-                            const vector<Object*>& next_state,
-                            const double& next_reward) = 0;
+  virtual bool GetNextState(State const& cur_state,
+                            State const* const next_state) = 0;
 
   /**
    * Sets the credit assignment type used by this QLearner. Provided object
    * will get a pointer back to this object to allow it to use all
-   * possible information available for its decisions
+   * available information for its decisions
    *
    * @param     credit_assigner Instantiated credit assignment implementation
    *
    * @return    True if initialized properly, false if error.
    */
   virtual bool SetCreditFunction(
-    const CreditAssignmentType& credit_assigner) = 0;
+    CreditAssignmentType* const credit_assigner) = 0;
 
   /**
    * Sets the exploration function used by this QLearner. Provided object
    * will get a pointer back to this object to allow it to use all
    * possible information available for its decisions
    *
-   * @param     explorer        Instantiated exploration function implementation
+   * @param     explorer Instantiated exploration function implementation
    *
    * @return    True if initialized properly, false if error.
    */
-  virtual bool SetExplorationFunction(const ExplorationType& explorer) = 0;
+  virtual bool SetExplorationFunction(ExplorationType* const explorer) = 0;
 
   /**
    * Copies Sensor pointers from provided list to be polled
    * (in order given) when appending environmental data to
    * the state information given to the Learn function.
    */
-  virtual bool SetEnvironment(const vector<Sensor*>& sensor_list) = 0;
+  virtual bool SetEnvironment(vector<Sensor* const> const& sensor_list) = 0;
 };
 
-#endif  // _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
+#endif  // _SHL_SRC_PRIMITIVES_LEARNER_QLEARNER_H_
