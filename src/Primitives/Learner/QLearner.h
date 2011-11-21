@@ -8,8 +8,8 @@
  * This is an interface for a Q-Learning Implementation
  */
 
-#ifndef _SHL_SRC_PRIMITIVES_LEARNER_QLEARNER_H_
-#define _SHL_SRC_PRIMITIVES_LEARNER_QLEARNER_H_
+#ifndef _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
+#define _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
 
 #include <string>
 #include <vector>
@@ -132,4 +132,4 @@ class QLearner {
   virtual bool SetEnvironment(vector<Sensor* const> const& sensor_list) = 0;
 };
 
-#endif  // _SHL_SRC_PRIMITIVES_LEARNER_QLEARNER_H_
+#endif  // _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
