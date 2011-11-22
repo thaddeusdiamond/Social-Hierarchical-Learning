@@ -6,7 +6,7 @@
  * @section DESCRIPTION
  *
  * This is an interface for a Q-Learning Implementation
- */
+ **/
 
 #ifndef _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
 #define _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
@@ -27,17 +27,9 @@ class Sensor;
 class QLearner {
  public:
   /**
-   * The QLearner constructor initializes a blank QLearner with
-   * default initializations for exploration and credit assignment
-   * functions
-
-  explicit QLearner() {}
-  */
-
-  /**
    * Destructor for QLearner must free all memory it received from I/O and
    * had buffered
-   */
+   **/
   virtual ~QLearner() {}
 
   /**
@@ -46,7 +38,7 @@ class QLearner {
    * @param     filename        Path to file containing saved QTable
    *
    * @return    True on success, false on failure.
-   */
+   **/
   virtual bool Load(string const& filename) = 0;
 
   /**
@@ -56,7 +48,7 @@ class QLearner {
    *                            overwritten if it does.
    *
    * @return    True on success, false on failure
-   */
+   **/
   virtual bool Save(string const& filename) = 0;
 
   /**
@@ -64,7 +56,7 @@ class QLearner {
    * usable state.
    *
    * @return    True on success, false on failure
-   */
+   **/
   virtual bool Init() = 0;
 
   /**
@@ -73,7 +65,7 @@ class QLearner {
    * @param     state           State description with reward
    *
    * @return    True on successful modification of QTable, false on failure.
-   */
+   **/
   virtual bool Learn(State const& state) = 0;
 
   /**
@@ -87,7 +79,7 @@ class QLearner {
    *                            
    *
    * @return True on success, false on lookup error.
-   */
+   **/
   virtual bool GetNearbyStates(State const& cur_state,
                                vector<State const* const>& nearby_states) = 0;
 
@@ -99,7 +91,7 @@ class QLearner {
    * @param     next_state      Overwritten with pointer to next State object
    * 
    * @return True on success, false on lookup error
-   */
+   **/
   virtual bool GetNextState(State const& cur_state,
                             State const* const next_state) = 0;
 
@@ -111,7 +103,7 @@ class QLearner {
    * @param     credit_assigner Instantiated credit assignment implementation
    *
    * @return    True if initialized properly, false if error.
-   */
+   **/
   virtual bool SetCreditFunction(
     CreditAssignmentType* const credit_assigner) = 0;
 
@@ -123,14 +115,14 @@ class QLearner {
    * @param     explorer Instantiated exploration function implementation
    *
    * @return    True if initialized properly, false if error.
-   */
+   **/
   virtual bool SetExplorationFunction(ExplorationType* const explorer) = 0;
 
   /**
    * Copies Sensor pointers from provided list to be polled
    * (in order given) when appending environmental data to
    * the state information given to the Learn function.
-   */
+   **/
   virtual bool SetEnvironment(vector<Sensor* const> const& sensor_list) = 0;
 };
 

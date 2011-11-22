@@ -11,13 +11,21 @@
 OBJDIR    := ../obj
 BINDIR    := ../bin
 LOGDIR    := ../logs
-DOCOUT    := ../doc/html ../doc/latex
+EXTDIR    := ../ext
+DOCDIR    := ../doc
+STORAGE   := ../db
 
 # External programs that are linked and used automatically in the process
-GTEST     := ../ext/googletest
-DOCDIR    := ../doc
+GTEST     := $(EXTDIR)/googletest
+PROTOB    := $(EXTDIR)/protobuf
+
+# Doxygen specific directives
+DOCOUT    := ../doc/html ../doc/latex
 DOXY_EXE  := doxygen
 DOXY_CONF := SHL.doxygen
+
+# Executable for protocol buffers
+PROTOCEXE := $(PROTOB)/src/.libs/protoc
 
 # Directives for where the source files should look to include headers from
 TOP       := .
@@ -33,17 +41,19 @@ V = @
 
 # Set std compiler options (linking for google test and pthread), LD_LIB
 CXX       := g++
-CXXFLAGS  := -g -I$(TOP) -I$(OBJDIR) -I$(GTEST)/include -Wall -Werror
-CXXFLAGS  += -I$(PRIMDIR)
+CXXFLAGS  := -g -I$(PROTOB)/src -I$(GTEST)/include -Wall -Werror
+CXXFLAGS  += -I$(TOP) -I$(OBJDIR) -I$(PRIMDIR)
 MDFLAGS   := -MD
-LDFLAGS   := -lpthread -lgtest -L$(GTEST)/lib/.libs
-LDLIBPATH := LD_LIBRARY_PATH=$(GTEST)/lib/.libs
+LDFLAGS   := -lpthread -lgtest -L$(GTEST)/lib/.libs -lprotobuf -L$(PROTOB)/src/.libs
+LDLIBPATH := LD_LIBRARY_PATH=$(GTEST)/lib/.libs:$(PROTOB)/src/.libs
 
 # Lists that the */Makefile.inc makefile fragments will add to
 TESTS :=
 
 # Make sure that 'all' is the first target
 all:
+	@echo + Ensuring Database Storage Layer Exists...
+	@mkdir -p $(STORAGE)
 
 # We define a common "Makefrag"-style template so that we can just set dir
 # specific variables and include that template

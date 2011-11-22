@@ -1,9 +1,15 @@
 # Build files only if they exist.
+$(UPPERC_DIR)_SRCS := $(wildcard $($(UPPERC_DIR)_SRCS))
 $(UPPERC_DIR)_OBJS := $(patsubst %.cc, $(OBJDIR)/%.o, $($(UPPERC_DIR)_SRCS))
 ifneq ($(EXECUTABLE),)
   $(UPPERC_DIR)_DEPLOY := $(BINDIR)/$(EXECUTABLE)
 else
   $(UPPERC_DIR)_DEPLOY := 
+endif
+
+# Protobuf specific instructions
+ifeq ($(LOWERC_DIR),Common)
+  $(UPPERC_DIR)_OBJS := $(patsubst %.proto, $(OBJDIR)/%.pb.o, $($(UPPERC_DIR)_OBJS))
 endif
 
 $(UPPERC_DIR)_TEST_SRCS := $(wildcard $(LOWERC_DIR)/*UnitTest.cc)
@@ -17,8 +23,14 @@ $(LOWERC_DIR): $($(UPPERC_DIR)_DEPLOY)
 $(LOWERC_DIR)-obj: $($(UPPERC_DIR)_OBJS)
 $(LOWERC_DIR)-tests: $($(UPPERC_DIR)_TESTS)
 
+ifeq ($(LOWERC_DIR),Common)
+  SRC_CC_FILES :=
+else
+  SRC_CC_FILES := $(LOWERC_DIR)/%.cc
+endif
+
 # Standard object files and test scripts that each directory must have
-$(OBJDIR)/$(LOWERC_DIR)/%.o: $(LOWERC_DIR)/%.cc
+$(OBJDIR)/$(LOWERC_DIR)/%.o: $(SRC_CC_FILES) $(SRC_LINKED_OBJECTS)
 	@echo + cxx $<
 	@mkdir -p $(@D)
 	$(V)$(CXX) $(CXXFLAGS) $(MDFLAGS) -o $@ -c $<
