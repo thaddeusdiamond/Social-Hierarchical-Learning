@@ -13,7 +13,7 @@
 
 #include <string>
 #include <vector>
-#include "./State.h"
+#include "Learner/State.h"
 
 using std::string;
 using std::vector;
@@ -24,14 +24,6 @@ class Sensor;
 
 class QLearner {
  public:
-  /**
-   * The QLearner constructor initializes a blank QLearner with
-   * default initializations for exploration and credit assignment
-   * functions
-
-  explicit QLearner() {}
-  */
-
   /**
    * Destructor for QLearner must free all memory it received from I/O and
    * had buffered

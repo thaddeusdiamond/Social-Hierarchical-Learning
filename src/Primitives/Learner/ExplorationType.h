@@ -26,10 +26,10 @@ class ExplorationType {
    * Initialize back-pointer to parent QLearner object
    * 
    * @param learner QLearner object associated with this ExplorationType
-   */
+   
   virtual ExplorationType(QLearner * const learner) {
     learner_ = learner;
-  }
+  } */
 
   /**
    * Destructor for ExplorationType must free all memory it allocated
@@ -45,19 +45,19 @@ class ExplorationType {
    *
    * @return    True on success, false on failure.
    */
-  virtual bool getNextSteps(State const& current_state,
+  virtual bool GetNextSteps(State const& current_state,
                             std::vector<State const* const> &next_states) = 0;
 
  private:
   /*
    * Disable default constructor
-   */
+   
   ExplorationType() {}
 
   /**
    * Reference back to the parent QLearner object
-   */
-  QLearner *learner_;
+   
+  QLearner *learner_; */
 }
 
 

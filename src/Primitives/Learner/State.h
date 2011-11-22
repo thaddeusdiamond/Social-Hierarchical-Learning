@@ -34,13 +34,13 @@ class State {
    *
    * @return    Const reference to state descriptor
    */
-  virtual const std::vector<double>& get_state_vector() {
+  virtual const std::vector<double>& GetStateVector() {
     return state_vector_;
   };
 
-  virtual void set_reward(const double reward) { reward_ = reward; }
+  virtual void SetReward(const double reward) { reward_ = reward; }
 
-  virtual double get_reward() { return reward_; }
+  virtual double GetReward() { return reward_; }
 
  private:
   std::vector<double> state_vector_;
