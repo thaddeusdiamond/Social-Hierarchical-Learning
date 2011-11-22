@@ -4,6 +4,7 @@ TESTS += PrimitivesLearnerTest
 
 # relative to $(TOP), i.e. $(LOWERC_DIR)/*.cc
 $(UPPERC_ROOT)_LEARNER_SRCS := $(LOWERC_ROOT)/Learner/Dummy.cc
+$(UPPERC_ROOT)_LEARNER_SRCS += $(LOWERC_ROOT)/Learner/StandardQLearner.cc
 
 # Set makefile template specific vars
 UPPERC_DIR = $(UPPERC_ROOT)_LEARNER

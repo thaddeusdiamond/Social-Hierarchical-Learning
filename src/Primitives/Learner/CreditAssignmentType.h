@@ -5,11 +5,12 @@
  *
  * @section DESCRIPTION
  *
- * This is an interface for a Q-Learning Exploration Function Implementation
+ * This is an interface for a Q-Learning Credit Assignment Function 
+ * Implementation
  */
 
-#ifndef _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
-#define _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
+#ifndef _SHL_PRIMITIVES_LEARNER_CREDITASSIGNMENTTYPE_H_
+#define _SHL_PRIMITIVES_LEARNER_CREDITASSIGNMENTTYPE_H_
 
 #include <string>
 #include <vector>
@@ -20,25 +21,26 @@ using std::vector;
 class QLearner;
 class Sensor;
 
-class ExplorationType {
+class CreditAssignmentType {
  public:
   /**
    * Initialize back-pointer to parent QLearner object
    * 
-   * @param learner QLearner object associated with this ExplorationType
+   * @param learner QLearner object associated with this CreditAssignmentType
    */
-  explicit ExplorationType(QLearner * const learner) {
+  explicit CreditAssignmentType(QLearner * const learner) {
     learner_ = learner;
   }
 
   /**
-   * Destructor for ExplorationType must free all memory it allocated
+   * Destructor for CreditAssignmentType must free all memory it allocated
    * interally, but is not responsible for freeing anything passed into it.
    */
-  virtual ~ExplorationType() {}
+  virtual ~CreditAssignmentType() {}
 
   /**
-   * Given the current state, return a list of possible next states
+   * Given the current state and feedback received, apply the reward across
+   * a set of relevant states as determined by this object
    *
    * @param     current_state   System state to explore around
    * @param     next_states     Plausible next states for the system
@@ -52,7 +54,7 @@ class ExplorationType {
   /*
    * Disable default constructor
    */
-  ExplorationType() {}
+  CreditAssignmentType() {}
 
   /**
    * Reference back to the parent QLearner object
@@ -61,4 +63,4 @@ class ExplorationType {
 };
 
 
-#endif  // _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
+#endif  // _SHL_PRIMITIVES_LEARNER_CREDITASSIGNMENTTYPE_H_

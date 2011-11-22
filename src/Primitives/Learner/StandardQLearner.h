@@ -8,46 +8,26 @@
  * This is an interface for a Q-Learning Implementation
  */
 
-#ifndef _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
-#define _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
+#ifndef _SHL_PRIMITIVES_LEARNER_STANDARDQLEARNER_H_
+#define _SHL_PRIMITIVES_LEARNER_STANDARDQLEARNER_H_
 
 #include <string>
 #include <vector>
-#include "Learner/State.h"
-#include "Learner/ExplorationType.h"
-#include "Learner/CreditAssignmentType.h"
+#include "Learner/QLearner.h"
 
-using std::string;
-using std::vector;
 
-class CreditAssignmentType;
-class ExplorationType;
-class Sensor;
-
-class QLearner {
+class StandardQLearner : public QLearner {
  public:
-  /**
-   * The QLearner constructor initializes a blank QLearner with
-   * default initializations for exploration and credit assignment
-   * functions
+  explicit StandardQLearner() {}
 
-  explicit QLearner() {}
-  */
-
-  /**
-   * Destructor for QLearner must free all memory it received from I/O and
-   * had buffered
-   */
-  virtual ~QLearner() {}
-
-  /**
+/**
    * Populates this object with the QTable contained in the target file
    *
    * @param     filename        Path to file containing saved QTable
    *
    * @return    True on success, false on failure.
    */
-  virtual bool Load(string const& filename) = 0;
+  bool Load(string const& filename);
 
   /**
    * Saves the entire contents of the QTable to the target file
@@ -57,7 +37,7 @@ class QLearner {
    *
    * @return    True on success, false on failure
    */
-  virtual bool Save(string const& filename) = 0;
+  bool Save(string const& filename);
 
   /**
    * Clears table, initializes everything in the object to pristine and
@@ -65,7 +45,7 @@ class QLearner {
    *
    * @return    True on success, false on failure
    */
-  virtual bool Init() = 0;
+  bool Init();
 
   /**
    * Copies the state data provided to it and records it in the QTable
@@ -74,7 +54,7 @@ class QLearner {
    *
    * @return    True on successful modification of QTable, false on failure.
    */
-  virtual bool Learn(State const& state) = 0;
+  bool Learn(State const& state);
 
   /**
    * Populates nearby_states with a list of neighboring state descriptors
@@ -88,8 +68,8 @@ class QLearner {
    *
    * @return True on success, false on lookup error.
    */
-  virtual bool GetNearbyStates(State const& cur_state,
-                               vector<State const* const>& nearby_states) = 0;
+  bool GetNearbyStates(State const& cur_state,
+                               vector<State const* const>& nearby_states);
 
 
   /**
@@ -100,8 +80,8 @@ class QLearner {
    * 
    * @return True on success, false on lookup error
    */
-  virtual bool GetNextState(State const& cur_state,
-                            State const* const next_state) = 0;
+  bool GetNextState(State const& cur_state,
+                            State const* const next_state);
 
   /**
    * Sets the credit assignment type used by this QLearner. Provided object
@@ -112,8 +92,8 @@ class QLearner {
    *
    * @return    True if initialized properly, false if error.
    */
-  virtual bool SetCreditFunction(
-    CreditAssignmentType* const credit_assigner) = 0;
+  bool SetCreditFunction(
+    CreditAssignmentType* const credit_assigner);
 
   /**
    * Sets the exploration function used by this QLearner. Provided object
@@ -124,14 +104,14 @@ class QLearner {
    *
    * @return    True if initialized properly, false if error.
    */
-  virtual bool SetExplorationFunction(ExplorationType* const explorer) = 0;
+  bool SetExplorationFunction(ExplorationType* const explorer);
 
   /**
    * Copies Sensor pointers from provided list to be polled
    * (in order given) when appending environmental data to
    * the state information given to the Learn function.
    */
-  virtual bool SetEnvironment(vector<Sensor* const> const& sensor_list) = 0;
+  bool SetEnvironment(vector<Sensor* const> const& sensor_list);
 };
 
-#endif  // _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
+#endif  // _SHL_PRIMITIVES_LEARNER_STANDARDQLEARNER_H_

@@ -24,6 +24,9 @@ class State {
   State(const std::vector<double> &state_descriptor, const double reward = 0.)
     : state_vector_(state_descriptor), reward_(reward) {}
 
+  explicit State(State &s) : state_vector_(s.get_state_vector()),
+    reward_(s.get_reward()) {}
+
   /**
    * Shouldn't have to free anything here
    */
@@ -34,7 +37,7 @@ class State {
    *
    * @return    Const reference to state descriptor
    */
-  virtual const std::vector<double>& get_state_vector() {
+  virtual std::vector<double> const &get_state_vector() {
     return state_vector_;
   };
 
