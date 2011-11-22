@@ -37,7 +37,9 @@ enum Level {
 /**
  * We represent the files of the output as an array for fast switching
  */
-#define LOGDIR        string("logs/")
+#ifndef LOGDIR
+  #define LOGDIR      string("logs/")
+#endif
 #define LOGFILE       string("log")
 static string level_files[] = {
   "log.success",
@@ -92,8 +94,16 @@ namespace Utils {
     va_list arguments;
     va_start(arguments, format);
 
-    fprintf(stderr, format, arguments);
+    // There are issues with printing using va_args so we use vsprintf
+    char buffer[4096];
+    memset(buffer, 0, sizeof(buffer));
+    vsprintf(buffer, format, arguments);
+
+    // Print to the stderr
+    fprintf(stderr, buffer);
+    perror(" ");
     va_end(arguments);
+
     exit(EXIT_FAILURE);
   }
 
@@ -112,6 +122,8 @@ namespace Utils {
      */
     static void OpenLogFiles() {
       log_file = fopen((LOGDIR + LOGFILE).c_str(), "w");
+      if (!log_file)
+        Die("There was an error opening the root log file for writing");
 
       for (int i = 0; i < NUMBER_OF_LEVELS; i++) {
         level_file_handles[i] = fopen((LOGDIR + level_files[i]).c_str(), "w");
@@ -129,7 +141,7 @@ namespace Utils {
    * @param       level     The level of the debug information
    * @param       format    The format of the message to print
    * @param       ...       The contents of the format used with args lib
-   */
+   **/
   static inline void Log(Level level, const char* format, ...) {
     va_list arguments;
     va_start(arguments, format);
@@ -150,14 +162,55 @@ namespace Utils {
              level_descriptors[level].c_str());
   #endif
 #endif
-    strncat(log_format, format, strlen(format));
+
+    // There are issues with printing using va_args so we use vsprintf
+    char buffer[4096];
+    memset(buffer, 0, sizeof(buffer));
+    vsprintf(buffer, format, arguments);
+    strncat(log_format, buffer, strlen(buffer));
 
     // Make sure it's appended with a newline
-    fprintf(log_file, log_format, arguments);
+    fprintf(log_file, log_format);
     fprintf(log_file, "\n");
-    fprintf(level_file_handles[level], log_format, arguments);
+    fprintf(level_file_handles[level], log_format);
     fprintf(level_file_handles[level], "\n");
     va_end(arguments);
+  }
+
+  /**
+   * We overload the log function to take a file descriptor so that we can do
+   * what we do normally, but to a specific file (used with stderr logging).
+   *
+   * @param       filedes   File descriptor to have log dumped to
+   * @param       level     The level of the debug information
+   * @param       format    The format of the message to print
+   * @param       ...       The contents of the format used with args lib
+   *
+   * @return      True on successful finish, false if error
+   **/
+  static inline bool Log(FILE* filedes, Level level,
+                         const char* format, ...) {
+#ifdef PREPENDED
+  #ifdef COLOR_OUT
+    fprintf(filedes, "%s[%s]%s ", level_colors[level].c_str(),
+            level_descriptors[level].c_str(), CLEAR_COLOR);
+  #else
+    fprintf(filedes, "[%s] ", level_descriptors[level].c_str());
+  #endif
+#endif
+
+    va_list arguments;
+    va_start(arguments, format);
+
+    char buffer[4096];
+    memset(buffer, 0, sizeof(buffer));
+    vsprintf(buffer, format, arguments);
+
+    fprintf(filedes, buffer);
+    fprintf(filedes, "\n");
+    va_end(arguments);
+
+    return true;
   }
 
   /**
@@ -170,7 +223,7 @@ namespace Utils {
    * @param       ...       The contents of the format used with args lib
    *
    * @return      True on successful finish, false if error
-   */
+   **/
   static inline bool Log(const string& filename, Level level,
                          const char* format, ...) {
     FILE* log;
@@ -181,19 +234,11 @@ namespace Utils {
     va_list arguments;
     va_start(arguments, format);
 
-#ifdef PREPENDED
-  #ifdef COLOR_OUT
-    fprintf(log, "%s[%s]%s ", level_colors[level].c_str(),
-            level_descriptors[level].c_str(), CLEAR_COLOR);
-  #else
-    fprintf(log, "[%s] ", level_descriptors[level].c_str());
-  #endif
-#endif
-    fprintf(log, format, arguments);
-    fprintf(log, "\n");
+    char buffer[4096];
+    memset(buffer, 0, sizeof(buffer));
+    vsprintf(buffer, format, arguments);
 
-    va_end(arguments);
-    return true;
+    return Log(log, level, buffer);
   }
 };
 

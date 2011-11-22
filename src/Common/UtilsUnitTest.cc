@@ -8,6 +8,9 @@
  * Testing for the Utils class
  */
 
+// Hack for making logs work from "make Test"
+#define LOGDIR        string("../logs/")
+
 #include <gtest/gtest.h>
 #include "Common/Utils.h"
 
@@ -21,11 +24,12 @@ class UtilsTest : public ::testing::Test {
  * @test    Simple unit test for logging to standard logfiles
  */
 TEST_F(UtilsTest, Logging) {
-  Utils::Log(SUCCESS, "This is written as a success to the logs");
-  Utils::Log(DEBUG,   "This is written as a debug to the logs");
-  Utils::Log(WARNING, "This is written as a warning to the logs");
-  Utils::Log(ERROR,   "This is written as an error to the logs");
-  Utils::Log(FATAL,   "This is written as a fatal to the logs");
+  char buffer[4096] = "MESSAGE";
+  Utils::Log(SUCCESS, "This is written as a success to the logs: %s", buffer);
+  Utils::Log(DEBUG,   "This is written as a debug to the logs: %s", buffer);
+  Utils::Log(WARNING, "This is written as a warning to the logs: %s", buffer);
+  Utils::Log(ERROR,   "This is written as an error to the logs: %s", buffer);
+  Utils::Log(FATAL,   "This is written as a fatal to the logs: %s", buffer);
 }
 
 /**
@@ -34,8 +38,10 @@ TEST_F(UtilsTest, Logging) {
 TEST_F(UtilsTest, FileLogging) {
   ASSERT_FALSE(Utils::Log("this/path/does/not/exist", DEBUG,
                           "This won't print out"));
-  ASSERT_TRUE(Utils::Log("logs/miscellaneous.log", DEBUG,
-                          "This will print out"));
+
+  char buffer[4096] = "MESSAGE";
+  ASSERT_TRUE(Utils::Log((LOGDIR + "miscellaneous.log").c_str(), DEBUG,
+                          "This will print out: %s", buffer));
 }
 
 int main(int argc, char* argv[]) {
