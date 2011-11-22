@@ -56,10 +56,10 @@ TEST_F(UtilsTest, FileSerialization) {
   Primitive* primitive = new Primitive();
   primitive->set_id(2);
   primitive->add_relevant_motors(9);
-  
+
   EXPECT_FALSE(SerializeToFile("this/file/does/not/exist", primitive));
   EXPECT_TRUE(SerializeToFile("../db/1.primitive", primitive));
-  
+
   Message* message;
   ASSERT_TRUE((message = ParseFromFile("../db/1.primitive")));
   EXPECT_EQ(primitive->id(), reinterpret_cast<Primitive*>(message)->id());

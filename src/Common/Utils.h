@@ -306,22 +306,21 @@ namespace Utils {
     if (filedes == NULL)
       return NULL;
 
-    char buffer[4096];
-    memset(buffer, 0, sizeof(buffer));
-
     // Read in the message type into a buffer
-    fread(buffer, sizeof(char), 2, filedes);
-    int name_length = (static_cast<int>(buffer[0]) << 8) +
-      static_cast<int>(buffer[1]);
-    fread(buffer, sizeof(char), name_length, filedes);
     char message_type[4096];
-    strcpy(message_type, buffer);
+    memset(message_type, 0, sizeof(message_type));
+    fread(message_type, sizeof(message_type[0]), 2, filedes);
+    int name_length = (static_cast<int>(message_type[0]) << 8) +
+      static_cast<int>(message_type[1]);
+    fread(message_type, sizeof(message_type[0]), name_length, filedes);
 
     // Read in the serialized form for future use
-    fread(buffer, sizeof(char), 2, filedes);
+    char buffer[4096];
+    memset(buffer, 0, sizeof(buffer));
+    fread(buffer, sizeof(buffer[0]), 2, filedes);
     int serialized_length = (static_cast<int>(buffer[0]) << 8) +
       static_cast<int>(buffer[1]);
-    fread(buffer, sizeof(char), serialized_length, filedes);
+    fread(buffer, sizeof(buffer[0]), serialized_length, filedes);
 
     // Switch how we parse based on message type
     Message* message;
