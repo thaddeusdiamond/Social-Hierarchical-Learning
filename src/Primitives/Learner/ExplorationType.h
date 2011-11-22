@@ -6,7 +6,7 @@
  * @section DESCRIPTION
  *
  * This is an interface for a Q-Learning Exploration Function Implementation
- */
+ **/
 
 #ifndef _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
 #define _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
@@ -29,12 +29,12 @@ class ExplorationType {
    
   virtual ExplorationType(QLearner * const learner) {
     learner_ = learner;
-  } */
+  } **/
 
   /**
    * Destructor for ExplorationType must free all memory it allocated
    * interally, but is not responsible for freeing anything passed into it.
-   */
+   **/
   virtual ~ExplorationType() {}
 
   /**
@@ -44,7 +44,7 @@ class ExplorationType {
    * @param     next_states     Plausible next states for the system
    *
    * @return    True on success, false on failure.
-   */
+   **/
   virtual bool GetNextSteps(State const& current_state,
                             std::vector<State const* const> &next_states) = 0;
 
@@ -57,7 +57,7 @@ class ExplorationType {
   /**
    * Reference back to the parent QLearner object
    
-  QLearner *learner_; */
+  QLearner *learner_; **/
 }
 
 

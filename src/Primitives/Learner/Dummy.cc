@@ -7,7 +7,7 @@
  * @section DESCRIPTION
  *
  * This is an implementation of a dummy student that can learn
- */
+ **/
 
 #include "Learner/Dummy.h"
 
@@ -31,7 +31,7 @@ bool Dummy::StopLearning(void) {
   return true;
 }
 
-vector<Sensor*>* Dummy::GetSensors() {
+vector<Sensor*>* Dummy::sensors() {
   return NULL;
 }
 

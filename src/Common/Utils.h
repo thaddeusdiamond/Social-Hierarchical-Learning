@@ -8,7 +8,7 @@
  * This is a library for using logging in our application.  We create various
  * levels of protection (success, debug, warning, error, fatal) that are
  * simultaneously written to individual logs and one main stream.
- */
+ **/
 
 #ifndef _SHL_COMMON_UTILS_H_
 #define _SHL_COMMON_UTILS_H_
@@ -24,7 +24,7 @@ using std::string;
 /**
  * We represent the various levels of the log as global integers so that
  * we can perform a fast switch when writing out
- */
+ **/
 #define NUMBER_OF_LEVELS 5
 enum Level {
   SUCCESS = 0,
@@ -36,7 +36,7 @@ enum Level {
 
 /**
  * We represent the files of the output as an array for fast switching
- */
+ **/
 #ifndef LOGDIR
   #define LOGDIR      string("logs/")
 #endif
@@ -51,7 +51,7 @@ static string level_files[] = {
 
 /**
  * We represent the colors of the output as an array for fast switching
- */
+ **/
 #define COLOR_OUT
 #define CLEAR_COLOR   "\033[0m"
 static string level_colors[] = {
@@ -64,7 +64,7 @@ static string level_colors[] = {
 
 /**
  * We may want to prepend the log level to the actual print out message
- */
+ **/
 #define PREPENDED
 static string level_descriptors[] = {
   "SUCCESS",
@@ -79,7 +79,7 @@ static string level_descriptors[] = {
  * writing including logging and automatic exit.
  *
  * @addtogroup  Utilities
- */
+ **/
 namespace Utils {
   /**
    * The Utils class has a generic die mechanism by which a program at any
@@ -89,7 +89,7 @@ namespace Utils {
    *
    * @param       format      The message to print out upon exiting
    * @param       ...         The arguments to the message format being printed
-   */
+   **/
   static inline void Die(const char* format, ...) {
     va_list arguments;
     va_start(arguments, format);
@@ -111,7 +111,7 @@ namespace Utils {
     /**
      * We can keep the log files open as static variables to prevent having to
      * slow down from opening and closing them on every log write
-     */
+     **/
     static FILE* log_file = NULL;
     static FILE* level_file_handles[] = { NULL, NULL, NULL, NULL, NULL };
 
@@ -119,7 +119,7 @@ namespace Utils {
      * If all of the logfiles are closed we will make a call to the OpenLogFiles
      * function internally to open all the logfiles and assign static handles to
      * them.
-     */
+     **/
     static void OpenLogFiles() {
       log_file = fopen((LOGDIR + LOGFILE).c_str(), "w");
       if (!log_file)

@@ -6,7 +6,7 @@
  * @section DESCRIPTION
  *
  * Testing for the Utils class
- */
+ **/
 
 // Hack for making logs work from "make Test"
 #define LOGDIR        string("../logs/")
@@ -22,7 +22,7 @@ class UtilsTest : public ::testing::Test {
 
 /**
  * @test    Simple unit test for logging to standard logfiles
- */
+ **/
 TEST_F(UtilsTest, Logging) {
   char buffer[4096] = "MESSAGE";
   Utils::Log(SUCCESS, "This is written as a success to the logs: %s", buffer);
@@ -34,7 +34,7 @@ TEST_F(UtilsTest, Logging) {
 
 /**
  * @test    Unit test for loggin out to specific files
- */
+ **/
 TEST_F(UtilsTest, FileLogging) {
   ASSERT_FALSE(Utils::Log("this/path/does/not/exist", DEBUG,
                           "This won't print out"));
