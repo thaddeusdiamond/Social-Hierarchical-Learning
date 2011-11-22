@@ -19,7 +19,10 @@
 #include <cstring>
 #include <string>
 
+#include "Common/Primitive.pb.h"
+
 using std::string;
+using ::google::protobuf::Message;
 
 /**
  * We represent the various levels of the log as global integers so that
@@ -224,7 +227,7 @@ namespace Utils {
    *
    * @return      True on successful finish, false if error
    **/
-  static inline bool Log(const string& filename, Level level,
+  static inline bool Log(string const& filename, Level level,
                          const char* format, ...) {
     FILE* log;
     log = fopen(filename.c_str(), "w");
@@ -239,6 +242,111 @@ namespace Utils {
     vsprintf(buffer, format, arguments);
 
     return Log(log, level, buffer);
+  }
+
+  /**
+   * We overload the SerializeToFile() function to accept direct file pointers
+   *
+   * @param       filedes       The file handle to write the protobuf to
+   * @param       message       The protocol buffer to be serialized to a file
+   * @param       should_close  True if the file handle should be closed on exit
+   *
+   * @returns     True if the protobuf was successfully serialized and written,
+   *              false otherwise
+   **/
+  static inline bool SerializeToFile(FILE* filedes, Message* message,
+                                     bool should_close = false) {
+    if (filedes == NULL)
+      return false;
+
+    string serialization;
+    if (!message->SerializeToString(&serialization))
+      return false;
+    string name = message->GetTypeName();
+
+    // The format used in printing to a file is this:
+    //   [Size of name - 2 bytes][Protobuf type name - Var Len]
+    //   [Size of serialization - 2 bytes][Serialization - Var Len]
+    fprintf(filedes, "%c%c%s%c%c%s", static_cast<char>(name.size() >> 8),
+            static_cast<char>(name.size()), name.c_str(),
+            static_cast<char>(message->ByteSize() >> 8),
+            static_cast<char>(message->ByteSize()), serialization.c_str());
+
+    if (should_close)
+      fclose(filedes);
+    return true;
+  }
+
+  /**
+   * We provide a convenient, polymorphic manner in which the user can
+   * serialize a protocol buffer to a string and then output to file
+   *
+   * @param       filename  The file name to be writing the protobuf to
+   * @param       message   The protocol buffer to be serialized to a file
+   *
+   * @returns     True if the protobuf was successfully serialized and written,
+   *              false otherwise
+   **/
+  static inline bool SerializeToFile(string const& filename, Message* message) {
+    FILE* log = fopen(filename.c_str(), "w");
+    return SerializeToFile(log, message, true);
+  }
+
+  /**
+   * We provide a convenient manner to deserialize the primitive from a disk
+   * record that we just wrote out using SerializeToFile().
+   *
+   * @param       filedes   The file handle to be read from
+   * @param       should_close  True if the file handle should be closed on exit
+   *
+   * @returns     A generic protocol buffer fully populated.
+   **/
+  static inline Message* ParseFromFile(FILE* filedes,
+                                       bool should_close = false) {
+    if (filedes == NULL)
+      return NULL;
+
+    char buffer[4096];
+    memset(buffer, 0, sizeof(buffer));
+
+    // Read in the message type into a buffer
+    fread(buffer, sizeof(char), 2, filedes);
+    int name_length = (static_cast<int>(buffer[0]) << 8) +
+      static_cast<int>(buffer[1]);
+    fread(buffer, sizeof(char), name_length, filedes);
+    char message_type[4096];
+    strcpy(message_type, buffer);
+
+    // Read in the serialized form for future use
+    fread(buffer, sizeof(char), 2, filedes);
+    int serialized_length = (static_cast<int>(buffer[0]) << 8) +
+      static_cast<int>(buffer[1]);
+    fread(buffer, sizeof(char), serialized_length, filedes);
+
+    // Switch how we parse based on message type
+    Message* message;
+    if (!strcmp(message_type, "Primitive")) {
+      message = new Primitive();
+      if (!message->ParseFromArray(buffer, serialized_length))
+        return NULL;
+    }
+
+    if (should_close)
+      fclose(filedes);
+    return message;
+  }
+
+  /**
+   * We overload the ParseFromFile() method to allow the method to take an
+   * arbitrary string filename
+   *
+   * @param       filename  The filename to be read in
+   *
+   * @returns     A generic protocol buffer fully populated.
+   **/
+  static inline Message* ParseFromFile(string const& filename) {
+    FILE* file = fopen(filename.c_str(), "r");
+    return ParseFromFile(file, true);
   }
 };
 

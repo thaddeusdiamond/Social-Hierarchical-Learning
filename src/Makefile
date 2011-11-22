@@ -13,6 +13,7 @@ BINDIR    := ../bin
 LOGDIR    := ../logs
 EXTDIR    := ../ext
 DOCDIR    := ../doc
+STORAGE   := ../db
 
 # External programs that are linked and used automatically in the process
 GTEST     := $(EXTDIR)/googletest
@@ -51,6 +52,8 @@ TESTS :=
 
 # Make sure that 'all' is the first target
 all:
+	@echo + Ensuring Database Storage Layer Exists...
+	@mkdir -p $(STORAGE)
 
 # We define a common "Makefrag"-style template so that we can just set dir
 # specific variables and include that template
