@@ -24,15 +24,6 @@ class Sensor;
 class CreditAssignmentType {
  public:
   /**
-   * Initialize back-pointer to parent QLearner object
-   * 
-   * @param learner QLearner object associated with this CreditAssignmentType
-   */
-  explicit CreditAssignmentType(QLearner * const learner) {
-    learner_ = learner;
-  }
-
-  /**
    * Destructor for CreditAssignmentType must free all memory it allocated
    * interally, but is not responsible for freeing anything passed into it.
    */
@@ -49,6 +40,16 @@ class CreditAssignmentType {
    */
   virtual bool getNextSteps(State const& current_state,
                             std::vector<State const* const> &next_states) = 0;
+
+ protected:
+  /**
+   * Initialize back-pointer to parent QLearner object
+   * 
+   * @param learner QLearner object associated with this CreditAssignmentType
+   **/
+  explicit CreditAssignmentType(QLearner * const learner) {
+    learner_ = learner;
+  }
 
  private:
   /*
