@@ -14,6 +14,8 @@
 #include <string>
 #include <vector>
 #include "Learner/QLearner.h"
+#include "Learner/QTable.h"
+#include "Learner/StateHistoryTuple.h"
 
 
 class StandardQLearner : public QLearner {
@@ -60,16 +62,17 @@ class StandardQLearner : public QLearner {
    * Populates nearby_states with a list of neighboring state descriptors
    * and the reward values currently associated with them.
    *
-   * @param     cur_state       Vector of state descriptors 
-   * @param     nearby_states   Empty vector of state descriptors to be
-   *                            populated with const pointers from within this
-   *                            object by the time the function returns
+   * @param     cur_state        Vector of state descriptors 
+   * @param     search_radius    Double indicating euclidean distance to search
+   * @param     nearby_states    Empty vector of state descriptors to be
+   *                             populated with const pointers from within this
+   *                             object by the time the function returns
    *                            
-   *
    * @return True on success, false on lookup error.
    */
   bool GetNearbyStates(State const& cur_state,
-                               vector<State const* const>& nearby_states);
+                       double search_radius,
+                       vector<State const *>& nearby_states);
 
 
   /**
@@ -81,7 +84,7 @@ class StandardQLearner : public QLearner {
    * @return True on success, false on lookup error
    */
   bool GetNextState(State const& cur_state,
-                            State const* const next_state);
+                    State const** next_state);
 
   /**
    * Sets the credit assignment type used by this QLearner. Provided object

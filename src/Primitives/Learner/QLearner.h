@@ -11,11 +11,15 @@
 #ifndef _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
 #define _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
 
+#include <sys/time.h>
 #include <string>
 #include <vector>
+#include <stack>
 #include "Learner/State.h"
+#include "Learner/StateHistoryTuple.h"
 #include "Learner/ExplorationType.h"
 #include "Learner/CreditAssignmentType.h"
+#include "Learner/QTable.h"
 
 using std::string;
 using std::vector;
@@ -72,16 +76,18 @@ class QLearner {
    * Populates nearby_states with a list of neighboring state descriptors
    * and the reward values currently associated with them.
    *
-   * @param     cur_state       Vector of state descriptors 
-   * @param     nearby_states   Empty vector of state descriptors to be
-   *                            populated with const pointers from within this
-   *                            object by the time the function returns
+   * @param     cur_state        Vector of state descriptors 
+   * @param     search_distances Vector of doubles indicating how far to search
+   * @param     nearby_states    Empty vector of state descriptors to be
+   *                             populated with const pointers from within this
+   *                             object by the time the function returns
    *                            
    *
    * @return True on success, false on lookup error.
    **/
   virtual bool GetNearbyStates(State const& cur_state,
-                               vector<State const* const>& nearby_states) = 0;
+                               double search_radius,
+                               std::vector<State const *>& nearby_states) = 0;
 
 
   /**
@@ -93,7 +99,7 @@ class QLearner {
    * @return True on success, false on lookup error
    **/
   virtual bool GetNextState(State const& cur_state,
-                            State const* const next_state) = 0;
+                            State const** next_state) = 0;
 
   /**
    * Sets the credit assignment type used by this QLearner. Provided object
@@ -124,6 +130,32 @@ class QLearner {
    * the state information given to the Learn function.
    **/
   virtual bool SetEnvironment(vector<Sensor* const> const& sensor_list) = 0;
+
+  /**
+   * Updates the state_history_ stack to reflect this system state
+   * 
+   * @param state Current state of the system
+   **/
+  virtual void SetCurrentState(State * const state) {
+    timeval now;
+    gettimeofday(&now, NULL);
+    double millis = (now.tv_sec*1000.) + (now.tv_usec/1000.);
+    StateHistoryTuple sht(state, millis);
+    state_history_.push(sht);
+  }
+
+  /**
+   * Returns a stack of recently visited states
+   * 
+   * @return Stack of StateHistoryTuple
+   **/
+  std::stack<StateHistoryTuple> &get_state_history() {
+    return state_history_;
+  }
+
+ protected:
+  std::stack<StateHistoryTuple> state_history_;
+  QTable q_table_;
 };
 
 #endif  // _SHL_PRIMITIVES_LEARNER_QLEARNER_H_

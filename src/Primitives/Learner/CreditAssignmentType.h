@@ -38,7 +38,7 @@ class CreditAssignmentType {
    *
    * @return    True on success, false on failure.
    */
-  virtual bool getNextSteps(State const& current_state,
+  virtual bool GetNextSteps(State const& current_state,
                             std::vector<State const* const> &next_states) = 0;
 
  protected:
