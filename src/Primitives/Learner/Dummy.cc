@@ -11,7 +11,11 @@
 
 #include "Learner/Dummy.h"
 
-bool Dummy::Setup(Object* objects, size_t objects_len) {
+bool Dummy::SetEnvironment(std::vector<Sensor*> const &sensors) {
+  return true;
+}
+
+bool Dummy::SetMotors(std::vector<Sensor*> const &motors) {
   return true;
 }
 
@@ -19,20 +23,20 @@ bool Dummy::SetLearningMethod(const QLearner& learner) {
   return true;
 }
 
-bool Dummy::LoadComparators(Primitive* prim, Key* tables, size_t tables_len) {
+bool Dummy::SetFeedbackHandler(Sensor const &feedback_device) {
   return true;
 }
 
-bool Dummy::Learn(Primitive* prim, Motor* motors, size_t motors_len) {
+bool Dummy::LoadComparables(Primitive* prim, Key* tables, size_t tables_len) {
+  return true;
+}
+
+
+bool Dummy::Learn(Primitive* prim, Motor* active_motors, size_t motors_len,
+          Object* objects, size_t objects_len) {
   return true;
 }
 
 bool Dummy::StopLearning(void) {
   return true;
 }
-
-vector<Sensor*>* Dummy::sensors() {
-  return NULL;
-}
-
-

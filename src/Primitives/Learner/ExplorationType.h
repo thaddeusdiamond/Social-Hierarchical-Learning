@@ -36,8 +36,8 @@ class ExplorationType {
    *
    * @return    True on success, false on failure.
    **/
-  virtual bool GetNextSteps(State const& current_state,
-                            std::vector<State const* const> &next_states) = 0;
+  virtual bool GetNextStep(State const& current_state,
+                           State const **next_state) = 0;
 
  protected:
   /**

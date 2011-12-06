@@ -111,7 +111,10 @@ class QLearner {
    * @return    True if initialized properly, false if error.
    **/
   virtual bool SetCreditFunction(
-    CreditAssignmentType* const credit_assigner) = 0;
+    CreditAssignmentType* const credit_assigner) {
+    credit_assignment_type_ = credit_assigner;
+    return (credit_assignment_type_ != NULL);
+  };
 
   /**
    * Sets the exploration function used by this QLearner. Provided object
@@ -122,7 +125,10 @@ class QLearner {
    *
    * @return    True if initialized properly, false if error.
    **/
-  virtual bool SetExplorationFunction(ExplorationType* const explorer) = 0;
+  virtual bool SetExplorationFunction(ExplorationType* const explorer) {
+    exploration_type_ = explorer;
+    return (exploration_type_ != NULL);
+  }
 
   /**
    * Copies Sensor pointers from provided list to be polled
@@ -130,6 +136,14 @@ class QLearner {
    * the state information given to the Learn function.
    **/
   virtual bool SetEnvironment(vector<Sensor* const> const& sensor_list) = 0;
+
+  /**
+   * Applies a reinforcement signal through this QLearner's CreditAssignmentType
+   * 
+   * @param signal Double describing the feedback being received
+   * @return true on successful application, false on error
+   **/
+  virtual bool AssignCredit(double signal) = 0;
 
   /**
    * Updates the state_history_ stack to reflect this system state
@@ -156,6 +170,8 @@ class QLearner {
  protected:
   std::stack<StateHistoryTuple> state_history_;
   QTable q_table_;
+  CreditAssignmentType *credit_assignment_type_;
+  ExplorationType *exploration_type_;
 };
 
 #endif  // _SHL_PRIMITIVES_LEARNER_QLEARNER_H_

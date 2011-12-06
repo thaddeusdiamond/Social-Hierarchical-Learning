@@ -35,12 +35,15 @@ class Dummy : public Student {
    **/
   virtual ~Dummy() {}
 
-  virtual bool Setup(Object* objects, size_t objects_len);
-  virtual bool SetLearningMethod(const QLearner& learner);
-  virtual bool LoadComparators(Primitive* prim, Key* tables, size_t tables_len);
-  virtual bool Learn(Primitive* prim, Motor* motors, size_t motors_len);
+  virtual bool SetEnvironment(std::vector<Sensor*> const &sensors);
+  virtual bool SetMotors(std::vector<Sensor*> const &motors);
+  virtual bool SetLearningMethod(QLearner const &learner);
+  virtual bool SetFeedbackHandler(Sensor const &feedback_device);
+  virtual bool LoadComparables(Primitive* prim, Key* tables, size_t tables_len);
+  virtual bool Learn(Primitive* prim, Motor* active_motors,
+                     size_t motors_len, Object* objects,
+                     size_t objects_len);
   virtual bool StopLearning(void);
-  virtual vector<Sensor*>* sensors();
 };
 
 #endif  // _SHL_PRIMITIVES_LEARNER_DUMMY_H_

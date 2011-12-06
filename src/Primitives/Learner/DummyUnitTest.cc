@@ -30,13 +30,17 @@ class DummyTest : public ::testing::Test {
 
   // Create a member variable for the TAMER learner
   Dummy* dummy_;
+  std::vector<Sensor*> env_;
+  std::vector<Sensor*> motors_;
 };
 
 /**
  * @test    TAMER setup unit test
  **/
-TEST_F(DummyTest, Setup) {
-  EXPECT_TRUE(dummy_->Setup(NULL, 0));
+TEST_F(DummyTest, Setup_Env_and_motors) {
+  EXPECT_TRUE(dummy_->SetEnvironment(env_));
+  EXPECT_TRUE(dummy_->SetMotors(motors_));
+  EXPECT_TRUE(dummy_->StopLearning());
 }
 
 int main(int argc, char* argv[]) {

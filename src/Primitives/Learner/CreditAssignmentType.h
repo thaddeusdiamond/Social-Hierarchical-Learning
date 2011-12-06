@@ -30,16 +30,13 @@ class CreditAssignmentType {
   virtual ~CreditAssignmentType() {}
 
   /**
-   * Given the current state and feedback received, apply the reward across
-   * a set of relevant states as determined by this object
+   * Applies the given signal to the parent QLearner object
    *
-   * @param     current_state   System state to explore around
-   * @param     next_states     Plausible next states for the system
+   * @param     signal Reinforcement signal to interpret/assign
    *
    * @return    True on success, false on failure.
    */
-  virtual bool GetNextSteps(State const& current_state,
-                            std::vector<State const* const> &next_states) = 0;
+  virtual bool ApplyCredit(double signal) = 0;
 
  protected:
   /**

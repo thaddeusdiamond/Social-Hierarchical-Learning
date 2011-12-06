@@ -86,35 +86,14 @@ class StandardQLearner : public QLearner {
   bool GetNextState(State const& cur_state,
                     State const** next_state);
 
-  /**
-   * Sets the credit assignment type used by this QLearner. Provided object
-   * will get a pointer back to this object to allow it to use all
-   * available information for its decisions
-   *
-   * @param     credit_assigner Instantiated credit assignment implementation
-   *
-   * @return    True if initialized properly, false if error.
-   */
-  bool SetCreditFunction(
-    CreditAssignmentType* const credit_assigner);
 
   /**
-   * Sets the exploration function used by this QLearner. Provided object
-   * will get a pointer back to this object to allow it to use all
-   * possible information available for its decisions
-   *
-   * @param     explorer Instantiated exploration function implementation
-   *
-   * @return    True if initialized properly, false if error.
-   */
-  bool SetExplorationFunction(ExplorationType* const explorer);
-
-  /**
-   * Copies Sensor pointers from provided list to be polled
-   * (in order given) when appending environmental data to
-   * the state information given to the Learn function.
-   */
-  bool SetEnvironment(vector<Sensor* const> const& sensor_list);
+   * Applies a reinforcement signal through this QLearner's CreditAssignmentType
+   * 
+   * @param signal Double describing the feedback being received
+   * @return true on successful application, false on error
+   **/
+  virtual bool AssignCredit(double signal) = 0;
 };
 
 #endif  // _SHL_PRIMITIVES_LEARNER_STANDARDQLEARNER_H_

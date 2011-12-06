@@ -50,42 +50,36 @@ bool StandardQLearner::GetNearbyStates(
 
 bool StandardQLearner::GetNextState(State const& cur_state,
                                     State const** next_state) {
-  std::vector<State *> all_states = this->q_table_.get_states();
+  if (exploration_type_ == NULL) {
+    std::vector<State *> all_states = this->q_table_.get_states();
 
-  std::vector<State *>::const_iterator iter;
-  double best_score = 0.;
-  State const *best_state = NULL;
-  for (iter = all_states.begin(); iter != all_states.end(); ++iter) {
-    if (best_state == NULL) {
-      best_score = (*iter)->get_reward();
-      best_state = (*iter);
+    std::vector<State *>::const_iterator iter;
+    double best_score = 0.;
+    State const *best_state = NULL;
+    for (iter = all_states.begin(); iter != all_states.end(); ++iter) {
+      if (best_state == NULL) {
+        best_score = (*iter)->get_reward();
+        best_state = (*iter);
+      }
+
+      if ((*iter)->get_reward() > best_score) {
+        best_score = (*iter)->get_reward();
+        best_state = (*iter);
+      }
     }
 
-    if ((*iter)->get_reward() > best_score) {
-      best_score = (*iter)->get_reward();
-      best_state = (*iter);
-    }
+    // Set return value
+    (*next_state) = best_state;
+
+    // Couldn't find any next state -- we failed!
+    if (best_state == NULL) return false;
+
+    return true;
+  } else {
+    return exploration_type_->GetNextStep(cur_state, next_state);
   }
-
-  // Set return value
-  (*next_state) = best_state;
-
-  // Couldn't find any next state -- we failed!
-  if (best_state == NULL) return false;
-
-  return true;
 }
 
-bool StandardQLearner::SetCreditFunction(
-  CreditAssignmentType* const credit_assigner) {
-  return true;
-}
-
-bool StandardQLearner::SetExplorationFunction(ExplorationType* const explorer) {
-  return true;
-}
-
-bool StandardQLearner::SetEnvironment(
-  std::vector<Sensor* const> const& sensor_list) {
-  return true;
+bool StandardQLearner::AssignCredit(double signal) {
+  return credit_assignment_type_->ApplyCredit(signal);
 }

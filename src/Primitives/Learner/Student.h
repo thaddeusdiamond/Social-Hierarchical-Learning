@@ -40,16 +40,34 @@ class Student {
   virtual ~Student() {}
 
   /**
-   * Before the student begins its training session, it must construct the
-   * appropriate environment (i.e. object placement, human involvement, etc.)
+   * Before the student begins its training session, it should know about its
+   * immediate environment through all available sensors.
    *
-   * @param     objects       A pointer to a set of objects
-   * @param     objects_len   How many objects have been passed to the setup
+   * @param     sensors A pointer to a set of 'environment' sensors
    *
    * @return    True unless an error occurred in setup
    **/
-  virtual bool Setup(Object* objects, size_t objects_len) = 0;
+  virtual bool SetEnvironment(std::vector<Sensor*> const &sensors) = 0;
 
+  /**
+   * Sets the internal list of motors that the student has access to. These
+   * should all be motors the student has control of, meaning can be set
+   * as well as read.
+   *
+   * @param     motors A pointer to a set of 'motor' sensors
+   *
+   * @return    True unless an error occurred in setup
+   **/
+  virtual bool SetMotors(std::vector<Sensor*> const &motors) = 0;
+
+  /**
+   * Assigns this student a sensor whose value is to be interpreted as
+   * a reinforcement signal. It will be polled along with the environment
+   * and self sensors, but its value will be passed to the CreditAssignment
+   * object of the internal QLearner.
+   * 
+   **/
+  virtual bool SetFeedbackHandler(Sensor const &feedback_device) = 0;
 
   /**
    * Sets the learning method to use
@@ -58,7 +76,7 @@ class Student {
    *
    * @return True if compatible learner provided, false if not
    **/
-  virtual bool SetLearningMethod(const QLearner& learner) = 0;
+  virtual bool SetLearningMethod(QLearner const &learner) = 0;
 
   /**
    * Sometimes we will try to perform AB testing with the student, but in order
@@ -73,7 +91,7 @@ class Student {
    *
    * @return    True unless an error occurred during load time
    **/
-  virtual bool LoadComparators(Primitive* primitive, Key* tables,
+  virtual bool LoadComparables(Primitive* primitive, Key* tables,
                                size_t tables_len) = 0;
 
   /**
@@ -82,12 +100,16 @@ class Student {
    * against.
    *
    * @param     prim          A pointer to a primitive to train against
-   * @param     motors        A pointer to a set of motors involved in trial
+   * @param     active_motors A pointer to a set of motors involved in trial
    * @param     motors_len    How many motors are expected to be used
+   * @param     objects       A pointer to a set of objects
+   * @param     objects_len   How many objects have been passed to the setup
    *
    * @return    True if the STUDENT succeeds in task, fail otherwise
    **/
-  virtual bool Learn(Primitive* prim, Motor* motors, size_t motors_len) = 0;
+  virtual bool Learn(Primitive* prim, Motor* active_motors,
+                     size_t motors_len, Object* objects,
+                     size_t objects_len) = 0;
 
   /**
    * Exits the learning state that is entered by calling the Learn function
@@ -98,9 +120,28 @@ class Student {
 
 
   /**
-   * Accessor for non-motor sensors associated with this student
+   * Accessor for sensors associated with this student
    **/
-  virtual vector<Sensor*>* sensors() = 0;
+  virtual vector<Sensor*> const * const  get_sensors() const {
+    return &sensors_;
+  };
+
+  /**
+   * Accessor for sensors this student's environment
+   **/
+  virtual vector<Sensor*> const * const  get_environment() const {
+    return &environment_;
+  };
+
+  /**
+   * Accessor for sensors this student's environment
+   **/
+  virtual vector<Sensor*> const * const  get_motors() const { return &motors_; }
+
+ protected:
+  std::vector<Sensor*> sensors_;
+  std::vector<Sensor*> environment_;
+  std::vector<Sensor*> motors_;
 };
 
 #endif  // _SHL_PRIMITIVES_LEARNER_STUDENT_H_
