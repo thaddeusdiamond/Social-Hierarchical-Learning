@@ -11,9 +11,9 @@
 #ifndef _SHL_PRIMITIVES_QLEARNER_STANDARDQLEARNER_H_
 #define _SHL_PRIMITIVES_QLEARNER_STANDARDQLEARNER_H_
 
+#include <stdlib.h>
 #include <string>
 #include <vector>
-#include <stdlib.h>
 #include "QLearner/QLearner.h"
 #include "QLearner/QTable.h"
 #include "QLearner/StateHistoryTuple.h"

@@ -12,15 +12,16 @@
 #define _SHL_PRIMITIVES_STUDENT_SENSOR_H_
 
 #include <vector>
+#include <string>
 
 namespace Primitives {
 
 class Sensor {
-public:
-  Sensor(std::string sensor_name) {
+ public:
+  explicit Sensor(std::string sensor_name) {
     name_ = sensor_name;
   }
-  
+
   /**
    * Default destructor, does nothing
    **/
@@ -54,8 +55,8 @@ public:
    * 
    * @return Size of values_ array
    **/
-  virtual int const get_min_increment() const { 
-    return min_increment_; 
+  virtual int const get_min_increment() const {
+    return min_increment_;
   }
 
   /**
