@@ -14,7 +14,11 @@
 #include <vector>
 
 class Sensor {
- public:
+public:
+  virtual Sensor(std::string sensor_name) {
+    name_ = sensor_name;
+  }
+  
   virtual ~Sensor() {}
 
   /**
@@ -45,7 +49,14 @@ class Sensor {
    * 
    * @return Const char* string with the name of this sensor
    **/
-  virtual char const * const get_name() { return name_; }
+  virtual double get_nearby_threshold() { return nearby_threshold_; }
+
+  /**
+   * Provides an english-readable name for this sensor
+   * 
+   * @return Const char* string with the name of this sensor
+   **/
+  virtual std::string const * const get_name() { return name_; }
 
  protected:
   /**
@@ -61,7 +72,7 @@ class Sensor {
   /**
    * Sensor plaintext name
    **/
-  char *name_;
+  std::string name_;
 
   /**
    * Current values

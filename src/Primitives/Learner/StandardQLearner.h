@@ -47,7 +47,7 @@ class StandardQLearner : public QLearner {
    *
    * @return    True on success, false on failure
    */
-  bool Init();
+  bool Init(std::vector<Sensor*> const &sensors);
 
   /**
    * Copies the state data provided to it and records it in the QTable
@@ -71,7 +71,6 @@ class StandardQLearner : public QLearner {
    * @return True on success, false on lookup error.
    */
   bool GetNearbyStates(State const& cur_state,
-                       double search_radius,
                        vector<State const *>& nearby_states);
 
 

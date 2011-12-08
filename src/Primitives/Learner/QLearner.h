@@ -59,9 +59,12 @@ class QLearner {
    * Clears table, initializes everything in the object to pristine and
    * usable state.
    *
+   * @param sensors The sensors that are associated with the various state
+   *                variables, consistent wiht the order the state vars 
+   *                will be passed in to the Learn function
    * @return    True on success, false on failure
    **/
-  virtual bool Init() = 0;
+  virtual bool Init(std::vector<Sensor const * const> const &sensors) = 0;
 
   /**
    * Copies the state data provided to it and records it in the QTable
@@ -86,7 +89,6 @@ class QLearner {
    * @return True on success, false on lookup error.
    **/
   virtual bool GetNearbyStates(State const& cur_state,
-                               double search_radius,
                                std::vector<State const *>& nearby_states) = 0;
 
 
@@ -172,6 +174,7 @@ class QLearner {
   QTable q_table_;
   CreditAssignmentType *credit_assignment_type_;
   ExplorationType *exploration_type_;
+  std::vector<Sensor const * const> sensors_;
 };
 
 #endif  // _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
