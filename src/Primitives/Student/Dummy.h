@@ -10,8 +10,8 @@
  * functions/features.
  **/
 
-#ifndef _SHL_PRIMITIVES_LEARNER_DUMMY_H_
-#define _SHL_PRIMITIVES_LEARNER_DUMMY_H_
+#ifndef _SHL_PRIMITIVES_STUDENT_DUMMY_H_
+#define _SHL_PRIMITIVES_STUDENT_DUMMY_H_
 
 #include <string>
 #include <vector>
@@ -46,4 +46,4 @@ class Dummy : public Student {
   virtual bool StopLearning(void);
 };
 
-#endif  // _SHL_PRIMITIVES_LEARNER_DUMMY_H_
+#endif  // _SHL_PRIMITIVES_STUDENT_DUMMY_H_

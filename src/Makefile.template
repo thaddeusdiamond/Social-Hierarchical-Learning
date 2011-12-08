@@ -1,8 +1,11 @@
 # Build files only if they exist.
 $(UPPERC_DIR)_SRCS := $(wildcard $($(UPPERC_DIR)_SRCS))
+$(UPPERC_DIR)_EXECUTABLES := $(wildcard $($(UPPERC_DIR)_EXECUTABLES))
+
 $(UPPERC_DIR)_OBJS := $(patsubst %.cc, $(OBJDIR)/%.o, $($(UPPERC_DIR)_SRCS))
-ifneq ($(EXECUTABLE),)
-  $(UPPERC_DIR)_DEPLOY := $(BINDIR)/$(EXECUTABLE)
+ifneq ($($(UPPERC_DIR)_EXECUTABLES),)
+  $(UPPERC_DIR)_DEPLOY := $(foreach EXEC, $($(UPPERC_DIR)_EXECUTABLES), $(BINDIR)/$(EXEC))
+  $(UPPERC_DIR)_DEPLOY := $(patsubst $(BINDIR)/$(LOWERC_DIR)/%.cpp, $(BINDIR)/%, $($(UPPERC_DIR)_DEPLOY))
 else
   $(UPPERC_DIR)_DEPLOY := 
 endif
@@ -24,13 +27,13 @@ $(LOWERC_DIR)-obj: $($(UPPERC_DIR)_OBJS)
 $(LOWERC_DIR)-tests: $($(UPPERC_DIR)_TESTS)
 
 ifeq ($(LOWERC_DIR),Common)
-  SRC_CC_FILES :=
+  SRC_CC_FILES := $(OBJDIR)/Common/%.cc
 else
   SRC_CC_FILES := $(LOWERC_DIR)/%.cc
 endif
 
 # Standard object files and test scripts that each directory must have
-$(OBJDIR)/$(LOWERC_DIR)/%.o: $(SRC_CC_FILES) $(SRC_LINKED_OBJECTS)
+$(OBJDIR)/$(LOWERC_DIR)/%.o: $(SRC_CC_FILES)
 	@echo + cxx $<
 	@mkdir -p $(@D)
 	$(V)$(CXX) $(CXXFLAGS) $(MDFLAGS) -o $@ -c $<
@@ -41,14 +44,14 @@ $(OBJDIR)/$(LOWERC_DIR)/%UnitTest.o: $(LOWERC_DIR)/%UnitTest.cc
 	$(V)$(CXX) $(CXXFLAGS) $(MDFLAGS) -o $@ -c $<
 
 $(BINDIR)/$(LOWERC_DIR)/%UnitTest: $($(UPPERC_DIR)_TEST_OBJS) \
-                                   $($(UPPERC_DIR)_OBJS) $(EXTRA_TEST_OBJS)
+                                   $($(UPPERC_DIR)_OBJS) $(TEST_OBJS)
 	@echo + ld $@
 	@mkdir -p $(@D)
 	@mkdir -p $(patsubst $(BINDIR)%, $(LOGDIR)%, $(@D))
 	$(V)$(CXX) -o $@ $^ $(LDFLAGS)
 
-ifneq ($(EXECUTABLE),)
-  $(BINDIR)/$(EXECUTABLE): $(EXECUTABLE_OBJS) $($(UPPERC_DIR)_OBJS)
+ifneq ($($(UPPERC_DIR)_EXECUTABLES),)
+  $(BINDIR)/%: $(LOWERC_DIR)/%.cc $(EXECUTABLE_OBJS) $($(UPPERC_DIR)_OBJS)
 	  @echo + ld $@
 	  @mkdir -p $(@D)
 	  $(V)$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)

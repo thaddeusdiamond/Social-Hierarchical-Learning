@@ -5,17 +5,14 @@ TESTS += PrimitivesQLearnerTest
 # relative to $(TOP), i.e. $(LOWERC_DIR)/*.cc
 $(UPPERC_ROOT)_QLEARNER_SRCS := $(LOWERC_ROOT)/QLearner/StandardQLearner.cc \
                                 $(LOWERC_ROOT)/QLearner/QTable.cc
+$(UPPERC_ROOT)_QLEARNER_EXECUTABLES :=
 
 # Set makefile template specific vars
 UPPERC_DIR := $(UPPERC_ROOT)_QLEARNER
 LOWERC_DIR := $(LOWERC_ROOT)/QLearner
 
-SRC_LINKED_OBJECTS := 
-
-EXECUTABLE :=
 EXECUTABLE_OBJS :=
-
-EXTRA_TEST_OBJS :=
+TEST_OBJS :=
 
 include $(MAKEFILE_TEMPLATE)
 

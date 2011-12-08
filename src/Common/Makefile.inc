@@ -4,17 +4,14 @@ TESTS += CommonTest
 
 # relative to $(TOP), i.e. $(LOWERC_DIR)/*.cc
 COMMON_SRCS := Common/*.proto
+COMMON_EXECUTABLES :=
 
 # Set makefile template specific vars
 UPPERC_DIR := COMMON
 LOWERC_DIR := Common
 
-SRC_LINKED_OBJECTS := $(OBJDIR)/Common/%.cc
-
-EXECUTABLE :=
 EXECUTABLE_OBJS :=
-
-EXTRA_TEST_OBJS :=
+TEST_OBJS :=
 
 include $(MAKEFILE_TEMPLATE)
 

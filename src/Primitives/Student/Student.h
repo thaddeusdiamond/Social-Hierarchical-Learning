@@ -10,8 +10,8 @@
  * operating in the primitives learning phase of SHL
  **/
 
-#ifndef _SHL_PRIMITIVES_LEARNER_STUDENT_H_
-#define _SHL_PRIMITIVES_LEARNER_STUDENT_H_
+#ifndef _SHL_PRIMITIVES_STUDENT_STUDENT_H_
+#define _SHL_PRIMITIVES_STUDENT_STUDENT_H_
 
 #include <string>
 #include <vector>
@@ -144,4 +144,4 @@ class Student {
   std::vector<Sensor*> motors_;
 };
 
-#endif  // _SHL_PRIMITIVES_LEARNER_STUDENT_H_
+#endif  // _SHL_PRIMITIVES_STUDENT_STUDENT_H_
