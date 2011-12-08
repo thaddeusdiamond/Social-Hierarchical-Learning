@@ -11,6 +11,8 @@
 #ifndef _SHL_PRIMITIVES_EXPLORATION_EXPLORATIONTYPE_H_
 #define _SHL_PRIMITIVES_EXPLORATION_EXPLORATIONTYPE_H_
 
+#include "Student/Sensor.h"
+#include "QLearner/QLearner.h"
 #include <string>
 #include <vector>
 

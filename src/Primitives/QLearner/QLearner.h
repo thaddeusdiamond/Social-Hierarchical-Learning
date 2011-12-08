@@ -66,7 +66,7 @@ class QLearner {
    *                will be passed in to the Learn function
    * @return    True on success, false on failure
    **/
-  virtual bool Init(std::vector<Sensor const * const> const &sensors) = 0;
+  virtual bool Init(std::vector<Sensor const *> const &sensors) = 0;
 
   /**
    * Copies the state data provided to it and records it in the QTable
@@ -176,7 +176,7 @@ class QLearner {
   QTable q_table_;
   CreditAssignmentType *credit_assignment_type_;
   ExplorationType *exploration_type_;
-  std::vector<Sensor const * const> sensors_;
+  std::vector<Sensor const *> sensors_;
 };
 
 }  // namespace Primitives

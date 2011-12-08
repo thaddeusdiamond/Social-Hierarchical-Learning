@@ -21,7 +21,7 @@ bool StandardQLearner::Save(string const& filename) {
   return true;
 }
 
-bool StandardQLearner::Init(std::vector<Sensor*> const &sensors) {
+bool StandardQLearner::Init(std::vector<Sensor const *> const &sensors) {
   this->sensors_ = sensors;
   return true;
 }
@@ -45,23 +45,24 @@ bool StandardQLearner::GetNearbyStates(
     state_distance_fail = false;
     // iterate through each value in the state and check if it's within required
     // distance from the current state (according to the internal sensor vector)
-    std::vector<Sensor const * const>::iterator sensor_iter;
-    for (int i=0,sensor_iter = sensors_.begin(); sensor_iter != sensors_.end(); 
+    std::vector<Sensor const *>::const_iterator sensor_iter;
+    int i;
+    for (i=0,sensor_iter = sensors_.begin(); sensor_iter != sensors_.end(); 
          ++sensor_iter, ++i) {
       double dist = cmp_state->get_state_vector()[i] 
-                    - cur_state->get_state_vector()[i];
+                    - cur_state.get_state_vector()[i];
       dist = (dist < 0) ? -dist : dist;
       if (dist > (*sensor_iter)->get_nearby_threshold()) {
         state_distance_fail = true;
         break;
       }
     }
-    
+  
     if (state_distance_fail) continue;
     nearby_states.push_back(*iter);
   }
 
-  return true;
+  return (nearby_states.size() > 0);
 }
 
 bool StandardQLearner::GetNextState(State const& cur_state,

@@ -17,7 +17,7 @@ namespace Primitives {
 
 class Sensor {
 public:
-  virtual Sensor(std::string sensor_name) {
+  Sensor(std::string sensor_name) {
     name_ = sensor_name;
   }
   
@@ -47,21 +47,21 @@ public:
    * 
    * @return Size of values_ array
    **/
-  virtual int const get_num_values() { return num_values_; }
+  virtual int const get_num_values() const { return num_values_; }
 
   /**
    * Provides an english-readable name for this sensor
    * 
    * @return Const char* string with the name of this sensor
    **/
-  virtual double get_nearby_threshold() { return nearby_threshold_; }
+  virtual double get_nearby_threshold() const { return nearby_threshold_; }
 
   /**
    * Provides an english-readable name for this sensor
    * 
    * @return Const char* string with the name of this sensor
    **/
-  virtual std::string const * const get_name() { return name_; }
+  virtual std::string const &get_name() const { return name_; }
 
  protected:
   /**

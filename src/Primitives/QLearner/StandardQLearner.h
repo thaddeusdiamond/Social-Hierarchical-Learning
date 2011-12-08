@@ -48,7 +48,7 @@ class StandardQLearner : public QLearner {
    *
    * @return    True on success, false on failure
    */
-  bool Init(std::vector<Sensor*> const &sensors);
+  bool Init(std::vector<Sensor const *> const &sensors);
 
   /**
    * Copies the state data provided to it and records it in the QTable

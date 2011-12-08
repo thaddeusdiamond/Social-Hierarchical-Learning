@@ -1,9 +1,8 @@
-/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/DummyUnitTest.cc:37: warning: no uniquely matching class member found for 
-  testing::TestInfo *const Observation::DummyObserverTest_StartAndStopObserver_Test::test_info_()
-
-/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/DummyUnitTest.cc:45: warning: no uniquely matching class member found for 
-  testing::TestInfo *const Observation::DummyObserverTest_AttemptMatch_Test::test_info_()
-
-/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/DummyUnitTest.cc:38: warning: no uniquely matching class member found for 
-  testing::TestInfo *const Primitives::DummyTest_Setup_Env_and_motors_Test::test_info_()
-
+/home/brad/SHL/src/Common/UtilsUnitTest.cc:31: warning: documented function `testing::TestInfo *const UtilsTest_Logging_Test::test_info_' was not declared or defined.
+/home/brad/SHL/src/Common/UtilsUnitTest.cc:43: warning: documented function `testing::TestInfo *const UtilsTest_FileLogging_Test::test_info_' was not declared or defined.
+/home/brad/SHL/src/Common/UtilsUnitTest.cc:55: warning: documented function `testing::TestInfo *const UtilsTest_FileSerialization_Test::test_info_' was not declared or defined.
+/home/brad/SHL/src/Observation/Observer/DummyUnitTest.cc:37: warning: documented function `testing::TestInfo *const Observation::DummyObserverTest_StartAndStopObserver_Test::test_info_' was not declared or defined.
+/home/brad/SHL/src/Observation/Observer/DummyUnitTest.cc:45: warning: documented function `testing::TestInfo *const Observation::DummyObserverTest_AttemptMatch_Test::test_info_' was not declared or defined.
+/home/brad/SHL/src/Primitives/Student/DummyUnitTest.cc:38: warning: documented function `testing::TestInfo *const Primitives::DummyTest_Setup_Env_and_motors_Test::test_info_' was not declared or defined.
+/home/brad/SHL/src/Primitives/QLearner/QLearner.h:80: warning: argument 'search_radius' of command @param is not found in the argument list of Primitives::QLearner::GetNearbyStates(State const &cur_state, std::vector< State const * > &nearby_states)
+/home/brad/SHL/src/Primitives/QLearner/StandardQLearner.h:62: warning: argument 'search_radius' of command @param is not found in the argument list of Primitives::StandardQLearner::GetNearbyStates(State const &cur_state, vector< State const * > &nearby_states)
