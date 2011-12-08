@@ -15,11 +15,11 @@
 #include <string>
 #include <vector>
 #include <stack>
-#include "Learner/State.h"
-#include "Learner/StateHistoryTuple.h"
-#include "Learner/ExplorationType.h"
-#include "Learner/CreditAssignmentType.h"
-#include "Learner/QTable.h"
+#include "QLearner/State.h"
+#include "QLearner/StateHistoryTuple.h"
+#include "Exploration/ExplorationType.h"
+#include "Credit/CreditAssignmentType.h"
+#include "QLearner/QTable.h"
 
 using std::string;
 using std::vector;
@@ -77,7 +77,7 @@ class QLearner {
    * and the reward values currently associated with them.
    *
    * @param     cur_state        Vector of state descriptors 
-   * @param     search_distances Vector of doubles indicating how far to search
+   * @param     search_radius    Double indicating how far to search
    * @param     nearby_states    Empty vector of state descriptors to be
    *                             populated with const pointers from within this
    *                             object by the time the function returns

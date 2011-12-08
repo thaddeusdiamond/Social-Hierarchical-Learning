@@ -9,7 +9,7 @@
  * This is an implementation of a dummy student that can learn
  **/
 
-#include "Learner/Dummy.h"
+#include "Student/Dummy.h"
 
 bool Dummy::SetEnvironment(std::vector<Sensor*> const &sensors) {
   return true;

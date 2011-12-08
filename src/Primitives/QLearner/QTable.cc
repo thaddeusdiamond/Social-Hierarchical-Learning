@@ -9,7 +9,7 @@
  * This is an implementation of the QTable Storage Class
  */
 
-#include "Learner/QTable.h"
+#include "QLearner/QTable.h"
 
 State *QTable::GetState(State const &needle) {
   // Search through the huge states_ vector for the target state
@@ -26,7 +26,7 @@ State *QTable::GetState(State const &needle) {
 }
 
 /**
- * @TODO
+ * @todo
  * Use a bloom filter to find whether or not the QTable contains the needle.
  * Returning true here doesn't actually mean we have the state, it just means
  * that we probably have it, and it's worth the cycles to search for it in the

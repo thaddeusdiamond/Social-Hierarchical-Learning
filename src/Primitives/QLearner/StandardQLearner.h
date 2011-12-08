@@ -13,9 +13,9 @@
 
 #include <string>
 #include <vector>
-#include "Learner/QLearner.h"
-#include "Learner/QTable.h"
-#include "Learner/StateHistoryTuple.h"
+#include "QLearner/QLearner.h"
+#include "QLearner/QTable.h"
+#include "QLearner/StateHistoryTuple.h"
 
 
 class StandardQLearner : public QLearner {

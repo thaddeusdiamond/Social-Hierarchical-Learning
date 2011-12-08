@@ -10,7 +10,7 @@
  **/
 
 #include <gtest/gtest.h>
-#include "Learner/Dummy.h"
+#include "Student/Dummy.h"
 
 class DummyTest : public ::testing::Test {
  protected:

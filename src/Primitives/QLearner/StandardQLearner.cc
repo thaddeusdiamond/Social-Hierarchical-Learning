@@ -9,7 +9,7 @@
  * This is an implementation of a standard Table-based QLearner
  */
 
-#include "Learner/StandardQLearner.h"
+#include "QLearner/StandardQLearner.h"
 
 bool StandardQLearner::Load(string const& filename) {
   return true;

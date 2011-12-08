@@ -13,8 +13,7 @@
 
 #include <string>
 #include <vector>
-#include "Learner/State.h"
-
+#include "QLearner/State.h"
 
 class QTable {
  public:

@@ -16,8 +16,8 @@
 #include <string>
 #include <vector>
 #include "Common/Utils.h"
-#include "Learner/QLearner.h"
-#include "Learner/Student.h"
+#include "QLearner/QLearner.h"
+#include "Student/Student.h"
 
 using std::string;
 using std::vector;

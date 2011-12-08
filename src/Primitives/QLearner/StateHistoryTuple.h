@@ -11,8 +11,7 @@
 #ifndef _SHL_PRIMITIVES_LEARNER_STATEHISTORYTUPLE_H_
 #define _SHL_PRIMITIVES_LEARNER_STATEHISTORYTUPLE_H_
 
-#include "Learner/State.h"
-
+#include "QLearner/State.h"
 
 class StateHistoryTuple {
  public:

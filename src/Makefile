@@ -20,7 +20,7 @@ GTEST     := $(EXTDIR)/googletest
 PROTOB    := $(EXTDIR)/protobuf
 
 # Doxygen specific directives
-DOCOUT    := ../doc/html ../doc/latex
+DOCOUT    := ../doc/latex ../doc/html
 DOXY_EXE  := doxygen
 DOXY_CONF := SHL.doxygen
 
@@ -54,6 +54,10 @@ TESTS :=
 all:
 	@echo + Ensuring Database Storage Layer Exists...
 	@mkdir -p $(STORAGE)
+	
+# Perform doxygen every time, no matter what is called
+$(warning + doc $(DOXY_EXE) $(DOCDIR)/$(DOXY_CONF) > $(DOCOUT))
+$(shell cd $(DOCDIR); $(DOXY_EXE) $(DOXY_CONF))
 
 # We define a common "Makefrag"-style template so that we can just set dir
 # specific variables and include that template
@@ -70,13 +74,7 @@ include Performance/Makefile.inc
 Test: $(TESTS)
 
 clean:
-	rm -rf $(OBJDIR) $(LOGDIR) $(BINDIR) $(DOCOUT)
-
-#If they specify the use of doxy, then we make doxy first
-with-doxy:
-	@echo +doc $(DOXY_EXE) $(DOCDIR)/$(DOXY_CONF) \> $(DOCOUT)
-	@cd $(DOCDIR); $(DOXY_EXE) $(DOXY_CONF)
-	
+	rm -rf $(OBJDIR) $(LOGDIR) $(BINDIR) $(DOCOUT)/*
 	
 # This magic automatically generates makefile dependencies
 # for header files included from C source files we compile,

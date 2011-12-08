@@ -37,7 +37,7 @@ class ExplorationType {
    * @return    True on success, false on failure.
    **/
   virtual bool GetNextStep(State const& current_state,
-                           State const **next_state) = 0;
+                           State const **next_states) = 0;
 
  protected:
   /**
