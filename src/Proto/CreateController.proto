@@ -1,0 +1,17 @@
+/// @file
+/// @author Thaddeus Diamond
+/// @version 0.1
+///
+/// @section DESCRIPTION
+///
+/// This is our description of what comprises a controller for the Create robot
+
+message CreateController {
+  /// Each create has a right and left motor
+  required double right_motor = 1;
+  required double left_motor = 2;
+
+  /// We define a left and right LED that can be on or off
+  required bool right_led = 10;
+  required bool left_led = 11;
+}

@@ -12,7 +12,6 @@
 #define LOGDIR        string("../logs/")
 
 #include <gtest/gtest.h>
-#include "Common/Primitive.pb.h"
 #include "Common/Utils.h"
 
 using Utils::Log;

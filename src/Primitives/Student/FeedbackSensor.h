@@ -32,6 +32,8 @@ class FeedbackSensor : public Sensor {
   /**
    * The constructor for a FeedbackSensor takes a port and spawns a thread
    * to poll on that port for UDP packets.
+   *
+   * @param   port            The port to listen for controller sensor data on
    **/
   explicit FeedbackSensor(int port);
 

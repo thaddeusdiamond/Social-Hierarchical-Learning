@@ -11,7 +11,7 @@ else
 endif
 
 # Protobuf specific instructions
-ifeq ($(LOWERC_DIR),Common)
+ifeq ($(LOWERC_DIR),Proto)
   $(UPPERC_DIR)_OBJS := $(patsubst %.proto, $(OBJDIR)/%.pb.o, $($(UPPERC_DIR)_OBJS))
 endif
 
@@ -26,8 +26,8 @@ $(LOWERC_DIR): $($(UPPERC_DIR)_DEPLOY)
 $(LOWERC_DIR)-obj: $($(UPPERC_DIR)_OBJS)
 $(LOWERC_DIR)-tests: $($(UPPERC_DIR)_TESTS)
 
-ifeq ($(LOWERC_DIR),Common)
-  SRC_CC_FILES := $(OBJDIR)/Common/%.cc
+ifeq ($(LOWERC_DIR),Proto)
+  SRC_CC_FILES := $(OBJDIR)/Proto/%.cc
 else
   SRC_CC_FILES := $(LOWERC_DIR)/%.cc
 endif

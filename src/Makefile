@@ -65,6 +65,7 @@ $(shell cd $(DOCDIR); $(DOXY_EXE) $(DOXY_CONF))
 MAKEFILE_TEMPLATE := Makefile.template
 
 # Makefile fragments for library code
+include Proto/Makefile.inc
 include Common/Makefile.inc
 include Backend/Makefile.inc
 include Voice/Makefile.inc

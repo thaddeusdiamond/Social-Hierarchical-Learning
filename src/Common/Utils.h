@@ -19,7 +19,7 @@
 #include <cstring>
 #include <string>
 
-#include "Common/Primitive.pb.h"
+#include "Proto/Primitive.pb.h"
 
 using std::string;
 using ::google::protobuf::Message;
