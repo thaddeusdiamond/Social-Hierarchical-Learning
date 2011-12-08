@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Social Hierarchical Learning: Primitives::Sensor Class Reference</title>
+<title>Social Hierarchical Learning: Primitives::CreateSensor Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-  initNavTree('classPrimitives_1_1Sensor.html','');
+  initNavTree('classPrimitives_1_1CreateSensor.html','');
 </script>
 <div id="doc-content">
 <div class="header">
@@ -85,42 +85,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a>  </div>
   <div class="headertitle">
-<h1>Primitives::Sensor Class Reference</h1>  </div>
+<h1>Primitives::CreateSensor Class Reference</h1>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="Primitives::Sensor" -->
-<p><code>#include &lt;<a class="el" href="Sensor_8h_source.html">Sensor.h</a>&gt;</code></p>
+<!-- doxytag: class="Primitives::CreateSensor" --><!-- doxytag: inherits="Primitives::Sensor" -->
+<p><code>#include &lt;<a class="el" href="CreateSensor_8h_source.html">CreateSensor.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for Primitives::Sensor:</div>
+Inheritance diagram for Primitives::CreateSensor:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classPrimitives_1_1Sensor.png" usemap="#Primitives::Sensor_map" alt=""/>
-  <map id="Primitives::Sensor_map" name="Primitives::Sensor_map">
-<area href="classPrimitives_1_1CreateSensor.html" alt="Primitives::CreateSensor" shape="rect" coords="0,56,168,80"/>
-<area href="classPrimitives_1_1FeedbackSensor.html" alt="Primitives::FeedbackSensor" shape="rect" coords="178,56,346,80"/>
+  <img src="classPrimitives_1_1CreateSensor.png" usemap="#Primitives::CreateSensor_map" alt=""/>
+  <map id="Primitives::CreateSensor_map" name="Primitives::CreateSensor_map">
+<area href="classPrimitives_1_1Sensor.html" alt="Primitives::Sensor" shape="rect" coords="0,0,150,24"/>
 </map>
  </div></div>
 
-<p><a href="classPrimitives_1_1Sensor-members.html">List of all members.</a></p>
+<p><a href="classPrimitives_1_1CreateSensor-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#ac88a8ef18f345e68d314b1121c6f2694">~Sensor</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a21c7db423726d57b3e11477a069c5624">SetValues</a> (double const *const values, int num_values)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a182b50f66348971f0f2f17bafe571932">GetValues</a> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#aa1640de9d225675c1e815e42b391badf">get_num_values</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual char const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a756438dd1981f7242ae5b93bc62d2cd7">get_name</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1CreateSensor.html#a1a6f9cf9e7c4a370d99ed10a3f806676">CreateSensor</a> (int port, int recipient_ipv4, int recipient_port)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1CreateSensor.html#acdc112cb80095f81f98580c879a807bf">~CreateSensor</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1CreateSensor.html#a66f9931c7ddc17c0b72483be11788625">SetValues</a> (double const *const values, int num_values)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1CreateSensor.html#aef0ddd3d5b33143b72f1f0d71338e195">GetValues</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1CreateSensor.html#a536c0514060e0befc66c47fc967211df">ListenOnSocket</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a0244a6fae6bc59f222ecc27268f76bde">Poll</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1CreateSensor.html#a717937fcaea1193ef3802826a2f33e00">Poll</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ac88a8ef18f345e68d314b1121c6f2694"></a><!-- doxytag: member="Primitives::Sensor::~Sensor" ref="ac88a8ef18f345e68d314b1121c6f2694" args="()" -->
+<a class="anchor" id="a1a6f9cf9e7c4a370d99ed10a3f806676"></a><!-- doxytag: member="Primitives::CreateSensor::CreateSensor" ref="a1a6f9cf9e7c4a370d99ed10a3f806676" args="(int port, int recipient_ipv4, int recipient_port)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual Primitives::Sensor::~Sensor </td>
+          <td class="memname">Primitives::CreateSensor::CreateSensor </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>recipient_ipv4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>recipient_port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The constructor is responsible for setting up a connection to the off- board controller and begin a thread for polling/sending</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>The port to listen for controller sensor data on </td></tr>
+    <tr><td class="paramname">recipient_ipv4</td><td>The IPv4 address the Create controller is located </td></tr>
+    <tr><td class="paramname">recipient_port</td><td>Port of Create controller to send msgs to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>max/min values, sig figs, and nearby thresholds need to be set </dd></dl>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="acdc112cb80095f81f98580c879a807bf"></a><!-- doxytag: member="Primitives::CreateSensor::~CreateSensor" ref="acdc112cb80095f81f98580c879a807bf" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Primitives::CreateSensor::~CreateSensor </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [inline, virtual]</code></td>
@@ -133,51 +177,15 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a756438dd1981f7242ae5b93bc62d2cd7"></a><!-- doxytag: member="Primitives::Sensor::get_name" ref="a756438dd1981f7242ae5b93bc62d2cd7" args="()" -->
+<a class="anchor" id="aef0ddd3d5b33143b72f1f0d71338e195"></a><!-- doxytag: member="Primitives::CreateSensor::GetValues" ref="aef0ddd3d5b33143b72f1f0d71338e195" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual char const* const Primitives::Sensor::get_name </td>
+          <td class="memname">double const *const Primitives::CreateSensor::GetValues </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Provides an english-readable name for this sensor</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Const char* string with the name of this sensor </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aa1640de9d225675c1e815e42b391badf"></a><!-- doxytag: member="Primitives::Sensor::get_num_values" ref="aa1640de9d225675c1e815e42b391badf" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual int const Primitives::Sensor::get_num_values </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Accessor for number of values this sensor stores</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Size of values_ array </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a182b50f66348971f0f2f17bafe571932"></a><!-- doxytag: member="Primitives::Sensor::GetValues" ref="a182b50f66348971f0f2f17bafe571932" args="()=0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual double const* const Primitives::Sensor::GetValues </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [pure virtual]</code></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -185,19 +193,36 @@ Protected Member Functions</h2></td></tr>
 <p>Returns the values held by this sensor</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>const array of doubles indicating values of this sensor </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1CreateSensor.html#aef0ddd3d5b33143b72f1f0d71338e195">Primitives::CreateSensor</a>, and <a class="el" href="classPrimitives_1_1FeedbackSensor.html#ab53b3ef22c87f0fab72bae809286d4e9">Primitives::FeedbackSensor</a>.</p>
+<p>Implements <a class="el" href="classPrimitives_1_1Sensor.html#a182b50f66348971f0f2f17bafe571932">Primitives::Sensor</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0244a6fae6bc59f222ecc27268f76bde"></a><!-- doxytag: member="Primitives::Sensor::Poll" ref="a0244a6fae6bc59f222ecc27268f76bde" args="()=0" -->
+<a class="anchor" id="a536c0514060e0befc66c47fc967211df"></a><!-- doxytag: member="Primitives::CreateSensor::ListenOnSocket" ref="a536c0514060e0befc66c47fc967211df" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool Primitives::Sensor::Poll </td>
+          <td class="memname">void Primitives::CreateSensor::ListenOnSocket </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [protected, pure virtual]</code></td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The <a class="el" href="classPrimitives_1_1CreateSensor.html#a536c0514060e0befc66c47fc967211df">ListenOnSocket()</a> method is called by the <a class="el" href="namespacePrimitives.html#a5a52b7aaf0739653a26d3adf8534f333">CommunicateWithCreate()</a> method to start the listener and UDP receiver </p>
+
+</div>
+</div>
+<a class="anchor" id="a717937fcaea1193ef3802826a2f33e00"></a><!-- doxytag: member="Primitives::CreateSensor::Poll" ref="a717937fcaea1193ef3802826a2f33e00" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Primitives::CreateSensor::Poll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [protected, virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -205,16 +230,16 @@ Protected Member Functions</h2></td></tr>
 <p>Polls the associated sensor to get its new value</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false on failure </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1CreateSensor.html#a717937fcaea1193ef3802826a2f33e00">Primitives::CreateSensor</a>, and <a class="el" href="classPrimitives_1_1FeedbackSensor.html#a5c69b11e0ebe728de63e3f480f27c554">Primitives::FeedbackSensor</a>.</p>
+<p>Implements <a class="el" href="classPrimitives_1_1Sensor.html#a0244a6fae6bc59f222ecc27268f76bde">Primitives::Sensor</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a21c7db423726d57b3e11477a069c5624"></a><!-- doxytag: member="Primitives::Sensor::SetValues" ref="a21c7db423726d57b3e11477a069c5624" args="(double const *const values, int num_values)=0" -->
+<a class="anchor" id="a66f9931c7ddc17c0b72483be11788625"></a><!-- doxytag: member="Primitives::CreateSensor::SetValues" ref="a66f9931c7ddc17c0b72483be11788625" args="(double const *const values, int num_values)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool Primitives::Sensor::SetValues </td>
+          <td class="memname">bool Primitives::CreateSensor::SetValues </td>
           <td>(</td>
           <td class="paramtype">double const *const&#160;</td>
           <td class="paramname"><em>values</em>, </td>
@@ -228,7 +253,7 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [pure virtual]</code></td>
+          <td></td><td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -243,19 +268,20 @@ Protected Member Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false if setting is not permitted </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1CreateSensor.html#a66f9931c7ddc17c0b72483be11788625">Primitives::CreateSensor</a>, and <a class="el" href="classPrimitives_1_1FeedbackSensor.html#adacd130842ce8db13a49d92b04977579">Primitives::FeedbackSensor</a>.</p>
+<p>Implements <a class="el" href="classPrimitives_1_1Sensor.html#a21c7db423726d57b3e11477a069c5624">Primitives::Sensor</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/<a class="el" href="Sensor_8h_source.html">Sensor.h</a></li>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/<a class="el" href="CreateSensor_8h_source.html">CreateSensor.h</a></li>
+<li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/<a class="el" href="CreateSensor_8cc.html">CreateSensor.cc</a></li>
 </ul>
 </div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="namespacePrimitives.html">Primitives</a>      </li>
-      <li class="navelem"><a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a>      </li>
+      <li class="navelem"><a class="el" href="classPrimitives_1_1CreateSensor.html">CreateSensor</a>      </li>
       <li class="footer">Generated by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>

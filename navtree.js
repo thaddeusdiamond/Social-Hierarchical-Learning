@@ -9,6 +9,7 @@ var NAVTREE =
       [ "Utilities", "group__Utilities.html", null ]
     ] ],
     [ "Class List", "annotated.html", [
+      [ "Primitives::CreateSensor", "classPrimitives_1_1CreateSensor.html", null ],
       [ "Primitives::CreditAssignmentType", "classPrimitives_1_1CreditAssignmentType.html", null ],
       [ "Observation::Dummy", "classObservation_1_1Dummy.html", null ],
       [ "Primitives::Dummy", "classPrimitives_1_1Dummy.html", null ],
@@ -51,6 +52,7 @@ var NAVTREE =
       ] ],
       [ "Primitives::QTable", "classPrimitives_1_1QTable.html", null ],
       [ "Primitives::Sensor", "classPrimitives_1_1Sensor.html", [
+        [ "Primitives::CreateSensor", "classPrimitives_1_1CreateSensor.html", null ],
         [ "Primitives::FeedbackSensor", "classPrimitives_1_1FeedbackSensor.html", null ]
       ] ],
       [ "Primitives::State", "classPrimitives_1_1State.html", null ],
@@ -87,6 +89,8 @@ var NAVTREE =
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/StandardQLearner.h", "StandardQLearner_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/State.h", "State_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/StateHistoryTuple.h", "StateHistoryTuple_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/CreateSensor.cc", "CreateSensor_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/CreateSensor.h", "CreateSensor_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.cc", "Primitives_2Student_2Dummy_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.h", "Primitives_2Student_2Dummy_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/DummyUnitTest.cc", "Primitives_2Student_2DummyUnitTest_8cc.html", null ],
