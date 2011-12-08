@@ -13,6 +13,8 @@
 
 #include <vector>
 
+namespace Primitives {
+
 class Sensor {
  public:
   /**
@@ -98,4 +100,7 @@ class Sensor {
    **/
   double nearby_threshold_;
 };
+
+}  // namespace Primitives
+
 #endif  // _SHL_PRIMITIVES_STUDENT_SENSOR_H_

@@ -12,6 +12,8 @@
 #include <gtest/gtest.h>
 #include "Student/Dummy.h"
 
+namespace Primitives {
+
 class DummyTest : public testing::Test {
  protected:
   // Create a TAMER object before each test
@@ -38,6 +40,8 @@ TEST_F(DummyTest, Setup_Env_and_motors) {
   EXPECT_TRUE(dummy_->SetMotors(motors_));
   EXPECT_TRUE(dummy_->StopLearning());
 }
+
+}  // namespace Primitives
 
 int main(int argc, char* argv[]) {
   ::testing::InitGoogleTest(&argc, argv);

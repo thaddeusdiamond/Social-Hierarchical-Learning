@@ -13,6 +13,8 @@
 
 #include "Student/FeedbackSensor.h"
 
+namespace Primitives {
+
 FeedbackSensor::FeedbackSensor(int port)
     : name_(string("Feedback").c_str()), num_values_(1), received_(false) {
   // Create vanilla socket
@@ -71,3 +73,5 @@ bool FeedbackSensor::Poll() {
 
   return false;
 }
+
+}  // namespace Primitives

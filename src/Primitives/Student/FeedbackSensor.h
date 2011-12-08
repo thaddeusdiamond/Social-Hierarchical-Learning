@@ -22,6 +22,8 @@
 #include "Common/Utils.h"
 #include "Student/Sensor.h"
 
+namespace Primitives {
+
 using std::string;
 using Utils::Die;
 
@@ -100,5 +102,7 @@ void* PollForFeedback(void* object) {
   feedback_sensor->ListenOnSocket();
   return NULL;
 }
+
+}  // namespace Primitives
 
 #endif  // _SHL_PRIMITIVES_STUDENT_FEEDBACKSENSOR_H_

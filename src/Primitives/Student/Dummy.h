@@ -19,6 +19,8 @@
 #include "QLearner/QLearner.h"
 #include "Student/Student.h"
 
+namespace Primitives {
+
 using std::string;
 using std::vector;
 
@@ -45,5 +47,7 @@ class Dummy : public Student {
                      size_t objects_len);
   virtual bool StopLearning(void);
 };
+
+}  // namespace Primitives
 
 #endif  // _SHL_PRIMITIVES_STUDENT_DUMMY_H_

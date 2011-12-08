@@ -13,6 +13,8 @@
 
 #include <vector>
 
+namespace Primitives {
+
 class State {
  public:
   /**
@@ -104,5 +106,6 @@ class State {
                           // store hash here to allow quick comparisons
 };
 
+}  // namespace Primitives
 
 #endif  // _SHL_PRIMITIVES_QLEARNER_STATE_H_

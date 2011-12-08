@@ -14,6 +14,8 @@
 #include <vector>
 #include "Observer/Observer.h"
 
+namespace Observation {
+
 using std::vector;
 
 class Dummy : public Observer {
@@ -36,5 +38,7 @@ class Dummy : public Observer {
                               double min_threshold,
                               double death_time);
 };
+
+}  // namespace Observation
 
 #endif  // _SHL_OBSERVATION_OBSERVER_DUMMY_H_

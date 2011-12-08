@@ -15,6 +15,8 @@
 #include <vector>
 #include "QLearner/State.h"
 
+namespace Primitives {
+
 class QTable {
  public:
   /**
@@ -75,5 +77,6 @@ class QTable {
   std::vector<State *> states_;
 };
 
+}  // namespace Primitives
 
 #endif  // _SHL_PRIMITIVES_QLEARNER_QTABLE_H_

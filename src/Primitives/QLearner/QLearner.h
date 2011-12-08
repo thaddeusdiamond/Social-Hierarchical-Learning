@@ -21,6 +21,8 @@
 #include "Credit/CreditAssignmentType.h"
 #include "QLearner/QTable.h"
 
+namespace Primitives {
+
 using std::string;
 using std::vector;
 
@@ -173,5 +175,7 @@ class QLearner {
   CreditAssignmentType *credit_assignment_type_;
   ExplorationType *exploration_type_;
 };
+
+}  // namespace Primitives
 
 #endif  // _SHL_PRIMITIVES_QLEARNER_QLEARNER_H_

@@ -11,6 +11,8 @@
 
 #include "QLearner/QTable.h"
 
+namespace Primitives {
+
 State *QTable::GetState(State const &needle) {
   // Search through the huge states_ vector for the target state
 
@@ -43,3 +45,5 @@ State *QTable::AddState(State const &state) {
   states_.push_back(s);
   return s;
 }
+
+}  // namespace Primitives

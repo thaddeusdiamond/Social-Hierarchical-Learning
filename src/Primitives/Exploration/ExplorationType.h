@@ -14,6 +14,8 @@
 #include <string>
 #include <vector>
 
+namespace Primitives {
+
 using std::string;
 using std::vector;
 
@@ -61,5 +63,6 @@ class ExplorationType {
   QLearner *learner_;
 };
 
+}  // namespace Primitives
 
 #endif  // _SHL_PRIMITIVES_EXPLORATION_EXPLORATIONTYPE_H_

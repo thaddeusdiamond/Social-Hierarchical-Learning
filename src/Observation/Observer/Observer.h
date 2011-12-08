@@ -16,9 +16,13 @@
 #include "Primitives/QLearner/QTable.h"
 #include "Primitives/Student/Sensor.h"
 
+namespace Observation {
+
 class Task;
 
 using std::vector;
+using Primitives::QTable;
+using Primitives::Sensor;
 
 class Observer {
  public:
@@ -72,5 +76,7 @@ class Observer {
    *       if they should be environment, motors, sensors, etc...
    **/
 };
+
+}  // namespace Observation
 
 #endif  // _SHL_OBSERVATION_OBSERVER_OBSERVER_H_

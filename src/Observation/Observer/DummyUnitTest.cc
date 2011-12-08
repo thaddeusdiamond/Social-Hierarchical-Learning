@@ -13,6 +13,8 @@
 #include "Observer/Dummy.h"
 #include "Common/Utils.h"
 
+namespace Observation {
+
 class DummyObserverTest : public ::testing::Test {
  public:
   // Create an Observer object before each test
@@ -43,6 +45,8 @@ TEST_F(DummyObserverTest, StartAndStopObserver) {
 TEST_F(DummyObserverTest, AttemptMatch) {
   EXPECT_EQ(dummy_->AttemptMatch(QTable(), vector<Sensor*>(), 0, 0), 0.0);
 }
+
+}  // namespace Observation
 
 int main(int argc, char* argv[]) {
   ::testing::InitGoogleTest(&argc, argv);

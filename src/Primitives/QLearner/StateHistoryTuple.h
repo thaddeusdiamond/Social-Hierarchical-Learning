@@ -13,6 +13,8 @@
 
 #include "QLearner/State.h"
 
+namespace Primitives {
+
 class StateHistoryTuple {
  public:
  /**
@@ -45,5 +47,6 @@ class StateHistoryTuple {
   double timestamp_;
 };
 
+}  // namespace Primitives
 
 #endif  // _SHL_PRIMITIVES_QLEARNER_STATEHISTORYTUPLE_H_

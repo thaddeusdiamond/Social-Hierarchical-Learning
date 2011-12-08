@@ -20,6 +20,8 @@
 using std::string;
 using std::vector;
 
+namespace Primitives {
+
 /**
  * @todo Move the definition of Key out of Student.h and into somewhere common
  *       or relating to the database layer
@@ -143,5 +145,7 @@ class Student {
   std::vector<Sensor*> environment_;
   std::vector<Sensor*> motors_;
 };
+
+}  // namespace Primitives
 
 #endif  // _SHL_PRIMITIVES_STUDENT_STUDENT_H_

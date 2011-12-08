@@ -17,6 +17,7 @@
 #include "QLearner/QTable.h"
 #include "QLearner/StateHistoryTuple.h"
 
+namespace Primitives {
 
 class StandardQLearner : public QLearner {
  public:
@@ -95,5 +96,7 @@ class StandardQLearner : public QLearner {
    **/
   virtual bool AssignCredit(double signal) = 0;
 };
+
+}  // namespace Primitives
 
 #endif  // _SHL_PRIMITIVES_QLEARNER_STANDARDQLEARNER_H_
