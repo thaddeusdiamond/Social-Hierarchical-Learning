@@ -16,7 +16,8 @@
 namespace Primitives {
 
 CreateSensor::CreateSensor(int port, int recipient_ipv4, int recipient_port)
-    : name_("Create Controller"), num_values_(4), received_(false) {
+    : Sensor(std::string("Create Controller")), num_values_(4), received_(false)
+  {
   /** @todo max/min values, sig figs, and nearby thresholds need to be set **/
 
   // Create vanilla socket

@@ -13,6 +13,7 @@
 
 #include <string>
 #include <vector>
+#include <stdlib.h>
 #include "QLearner/QLearner.h"
 #include "QLearner/QTable.h"
 #include "QLearner/StateHistoryTuple.h"
@@ -64,7 +65,6 @@ class StandardQLearner : public QLearner {
    * and the reward values currently associated with them.
    *
    * @param     cur_state        Vector of state descriptors 
-   * @param     search_radius    Double indicating euclidean distance to search
    * @param     nearby_states    Empty vector of state descriptors to be
    *                             populated with const pointers from within this
    *                             object by the time the function returns
@@ -97,7 +97,8 @@ class StandardQLearner : public QLearner {
 
   /**
    * Applies a reinforcement signal through this QLearner's CreditAssignmentType
-   * 
+   * Should be applied after setting the current state of the system.
+   *
    * @param signal Double describing the feedback being received
    * @return true on successful application, false on error
    **/

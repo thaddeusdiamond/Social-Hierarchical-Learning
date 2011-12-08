@@ -108,24 +108,26 @@ bool StandardQLearner::GetNextState(State const& cur_state,
 
     std::vector<State const *>::const_iterator iter;
     double best_score = 0.;
-    State const *best_state = NULL;
+    std::vector<State const *> best_states;
     for (iter = nearby_states.begin(); iter != nearby_states.end(); ++iter) {
-      if (best_state == NULL) {
-        best_score = (*iter)->get_reward();
-        best_state = (*iter);
-      }
-
       if ((*iter)->get_reward() > best_score) {
+        best_states.clear();
         best_score = (*iter)->get_reward();
-        best_state = (*iter);
+        best_states.push_back(*iter);
+      }
+      else if ((*iter)->get_reward() == best_score) {        
+        best_states.push_back(*iter);
       }
     }
 
+    //Randomly choose from the best available states
+    int idx = rand() % best_states.size();
+
     // Set return value
-    (*next_state) = best_state;
+    (*next_state) = best_states[idx];
 
     // Couldn't find any next state -- we failed!
-    if (best_state == NULL) return false;
+    if (best_states.size() == 0) return false;
 
     return true;
   } else {
