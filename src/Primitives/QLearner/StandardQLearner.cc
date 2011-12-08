@@ -9,7 +9,9 @@
  * This is an implementation of a standard Table-based QLearner
  */
 
-#include "Learner/StandardQLearner.h"
+#include "QLearner/StandardQLearner.h"
+
+namespace Primitives {
 
 bool StandardQLearner::Load(string const& filename) {
   return true;
@@ -98,3 +100,5 @@ bool StandardQLearner::GetNextState(State const& cur_state,
 bool StandardQLearner::AssignCredit(double signal) {
   return credit_assignment_type_->ApplyCredit(signal);
 }
+
+}  // namespace Primitives

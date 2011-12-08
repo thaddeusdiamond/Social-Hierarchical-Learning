@@ -10,14 +10,16 @@
  * functions/features.
  **/
 
-#ifndef _SHL_PRIMITIVES_LEARNER_DUMMY_H_
-#define _SHL_PRIMITIVES_LEARNER_DUMMY_H_
+#ifndef _SHL_PRIMITIVES_STUDENT_DUMMY_H_
+#define _SHL_PRIMITIVES_STUDENT_DUMMY_H_
 
 #include <string>
 #include <vector>
 #include "Common/Utils.h"
-#include "Learner/QLearner.h"
-#include "Learner/Student.h"
+#include "QLearner/QLearner.h"
+#include "Student/Student.h"
+
+namespace Primitives {
 
 using std::string;
 using std::vector;
@@ -46,4 +48,6 @@ class Dummy : public Student {
   virtual bool StopLearning(void);
 };
 
-#endif  // _SHL_PRIMITIVES_LEARNER_DUMMY_H_
+}  // namespace Primitives
+
+#endif  // _SHL_PRIMITIVES_STUDENT_DUMMY_H_

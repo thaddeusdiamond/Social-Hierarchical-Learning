@@ -5,13 +5,15 @@
  *
  * @section DESCRIPTION
  *
- * This is an interface for a Q-Learning Exploration Function Implementation
+ * This is an interface for a Sensor used by the QLearner
  */
 
-#ifndef _SHL_PRIMITIVES_LEARNER_SENSOR_H_
-#define _SHL_PRIMITIVES_LEARNER_SENSOR_H_
+#ifndef _SHL_PRIMITIVES_STUDENT_SENSOR_H_
+#define _SHL_PRIMITIVES_STUDENT_SENSOR_H_
 
 #include <vector>
+
+namespace Primitives {
 
 class Sensor {
 public:
@@ -19,6 +21,9 @@ public:
     name_ = sensor_name;
   }
   
+  /**
+   * Default destructor, does nothing
+   **/
   virtual ~Sensor() {}
 
   /**
@@ -64,10 +69,12 @@ public:
    * 
    * @return True on success, false on failure
    **/
-  virtual bool poll() = 0;
+  virtual bool Poll() = 0;
 
  private:
-  Sensor() {}
+  /** @todo I think these should really be removed since Sensor defines
+   *        an interface, though we can leave it to show some of the things
+   *        that might belong in a Sensor object **/
 
   /**
    * Sensor plaintext name
@@ -104,4 +111,7 @@ public:
    **/
   double nearby_threshold_;
 };
-#endif  // _SHL_PRIMITIVES_LEARNER_SENSOR_H_
+
+}  // namespace Primitives
+
+#endif  // _SHL_PRIMITIVES_STUDENT_SENSOR_H_

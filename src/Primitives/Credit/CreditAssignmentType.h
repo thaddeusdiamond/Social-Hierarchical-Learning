@@ -9,11 +9,14 @@
  * Implementation
  */
 
-#ifndef _SHL_PRIMITIVES_LEARNER_CREDITASSIGNMENTTYPE_H_
-#define _SHL_PRIMITIVES_LEARNER_CREDITASSIGNMENTTYPE_H_
+#ifndef _SHL_PRIMITIVES_CREDIT_CREDITASSIGNMENTTYPE_H_
+#define _SHL_PRIMITIVES_CREDIT_CREDITASSIGNMENTTYPE_H_
 
 #include <string>
 #include <vector>
+
+/** @todo Namespaces should have descriptions **/
+namespace Primitives {
 
 using std::string;
 using std::vector;
@@ -60,5 +63,6 @@ class CreditAssignmentType {
   QLearner *learner_;
 };
 
+}  // namespace Primitives
 
-#endif  // _SHL_PRIMITIVES_LEARNER_CREDITASSIGNMENTTYPE_H_
+#endif  // _SHL_PRIMITIVES_CREDIT_CREDITASSIGNMENTTYPE_H_

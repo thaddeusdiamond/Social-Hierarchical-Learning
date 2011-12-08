@@ -8,11 +8,12 @@
  * This is an interface for a Q-Learning Implementation
  */
 
-#ifndef _SHL_PRIMITIVES_LEARNER_STATEHISTORYTUPLE_H_
-#define _SHL_PRIMITIVES_LEARNER_STATEHISTORYTUPLE_H_
+#ifndef _SHL_PRIMITIVES_QLEARNER_STATEHISTORYTUPLE_H_
+#define _SHL_PRIMITIVES_QLEARNER_STATEHISTORYTUPLE_H_
 
-#include "Learner/State.h"
+#include "QLearner/State.h"
 
+namespace Primitives {
 
 class StateHistoryTuple {
  public:
@@ -46,5 +47,6 @@ class StateHistoryTuple {
   double timestamp_;
 };
 
+}  // namespace Primitives
 
-#endif  // _SHL_PRIMITIVES_LEARNER_STATEHISTORYTUPLE_H_
+#endif  // _SHL_PRIMITIVES_QLEARNER_STATEHISTORYTUPLE_H_

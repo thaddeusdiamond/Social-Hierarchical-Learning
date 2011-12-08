@@ -587,7 +587,7 @@ WARN_FORMAT            = "$file:$line: $text"
 # and error messages should be written. If left blank the output is written
 # to stderr.
 
-WARN_LOGFILE           =
+WARN_LOGFILE           = SHL.error
 
 #---------------------------------------------------------------------------
 # configuration options related to the input files
@@ -1401,7 +1401,7 @@ INCLUDE_PATH           = ../ext/googletest/include/
 # directories. If left blank, the patterns specified with FILE_PATTERNS will
 # be used.
 
-INCLUDE_FILE_PATTERNS  = *.h
+INCLUDE_FILE_PATTERNS  =
 
 # The PREDEFINED tag can be used to specify one or more macro names that
 # are defined before the preprocessor is started (similar to the -D option of
@@ -1418,7 +1418,7 @@ PREDEFINED             =
 # The macro definition that is found in the sources will be used.
 # Use the PREDEFINED tag if you want to use a different macro definition that overrules the definition found in the source code.
 
-EXPAND_AS_DEFINED      = TEST_F TEST
+EXPAND_AS_DEFINED      = TEST TEST_F GTEST_TEST GTEST_TEST_ GTEST_TEST_CLASS_NAME_
 
 # If the SKIP_FUNCTION_MACROS tag is set to YES (the default) then
 # doxygen's preprocessor will remove all references to function-like macros

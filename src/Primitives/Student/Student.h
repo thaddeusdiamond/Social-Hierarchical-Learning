@@ -10,8 +10,8 @@
  * operating in the primitives learning phase of SHL
  **/
 
-#ifndef _SHL_PRIMITIVES_LEARNER_STUDENT_H_
-#define _SHL_PRIMITIVES_LEARNER_STUDENT_H_
+#ifndef _SHL_PRIMITIVES_STUDENT_STUDENT_H_
+#define _SHL_PRIMITIVES_STUDENT_STUDENT_H_
 
 #include <string>
 #include <vector>
@@ -19,6 +19,8 @@
 
 using std::string;
 using std::vector;
+
+namespace Primitives {
 
 /**
  * @todo Move the definition of Key out of Student.h and into somewhere common
@@ -47,7 +49,7 @@ class Student {
    *
    * @return    True unless an error occurred in setup
    **/
-  virtual bool SetEnvironment(std::vector<Sensor*> const &sensors) = 0;
+  virtual bool SetEnvironment(vector<Sensor*> const &sensors) = 0;
 
   /**
    * Sets the internal list of motors that the student has access to. These
@@ -58,7 +60,7 @@ class Student {
    *
    * @return    True unless an error occurred in setup
    **/
-  virtual bool SetMotors(std::vector<Sensor*> const &motors) = 0;
+  virtual bool SetMotors(vector<Sensor*> const &motors) = 0;
 
   /**
    * Assigns this student a sensor whose value is to be interpreted as
@@ -144,4 +146,6 @@ class Student {
   std::vector<Sensor*> motors_;
 };
 
-#endif  // _SHL_PRIMITIVES_LEARNER_STUDENT_H_
+}  // namespace Primitives
+
+#endif  // _SHL_PRIMITIVES_STUDENT_STUDENT_H_

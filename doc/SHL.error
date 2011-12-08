@@ -1,0 +1,9 @@
+/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/DummyUnitTest.cc:37: warning: no uniquely matching class member found for 
+  testing::TestInfo *const Observation::DummyObserverTest_StartAndStopObserver_Test::test_info_()
+
+/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/DummyUnitTest.cc:45: warning: no uniquely matching class member found for 
+  testing::TestInfo *const Observation::DummyObserverTest_AttemptMatch_Test::test_info_()
+
+/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/DummyUnitTest.cc:38: warning: no uniquely matching class member found for 
+  testing::TestInfo *const Primitives::DummyTest_Setup_Env_and_motors_Test::test_info_()
+

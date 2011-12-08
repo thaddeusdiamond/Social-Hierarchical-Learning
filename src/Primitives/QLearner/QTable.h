@@ -8,13 +8,14 @@
  * This is an interface for a Q-Table (Database)
  */
 
-#ifndef _SHL_PRIMITIVES_LEARNER_QTABLE_H_
-#define _SHL_PRIMITIVES_LEARNER_QTABLE_H_
+#ifndef _SHL_PRIMITIVES_QLEARNER_QTABLE_H_
+#define _SHL_PRIMITIVES_QLEARNER_QTABLE_H_
 
 #include <string>
 #include <vector>
-#include "Learner/State.h"
+#include "QLearner/State.h"
 
+namespace Primitives {
 
 class QTable {
  public:
@@ -76,5 +77,6 @@ class QTable {
   std::vector<State *> states_;
 };
 
+}  // namespace Primitives
 
-#endif  // _SHL_PRIMITIVES_LEARNER_QTABLE_H_
+#endif  // _SHL_PRIMITIVES_QLEARNER_QTABLE_H_

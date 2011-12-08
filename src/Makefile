@@ -20,7 +20,7 @@ GTEST     := $(EXTDIR)/googletest
 PROTOB    := $(EXTDIR)/protobuf
 
 # Doxygen specific directives
-DOCOUT    := ../doc/html ../doc/latex
+DOCOUT    := ../doc/latex ../doc/html
 DOXY_EXE  := doxygen
 DOXY_CONF := SHL.doxygen
 
@@ -30,6 +30,7 @@ PROTOCEXE := $(PROTOB)/src/.libs/protoc
 # Directives for where the source files should look to include headers from
 TOP       := .
 PRIMDIR   := ./Primitives
+OBSVDIR   := ./Observation
 
 # '$(V)' controls whether the lab makefiles print verbose commands (the
 # actual shell commands run by Make), as well as the "overview" commands
@@ -42,7 +43,7 @@ V = @
 # Set std compiler options (linking for google test and pthread), LD_LIB
 CXX       := g++
 CXXFLAGS  := -g -I$(PROTOB)/src -I$(GTEST)/include -Wall -Werror
-CXXFLAGS  += -I$(TOP) -I$(OBJDIR) -I$(PRIMDIR)
+CXXFLAGS  += -I$(TOP) -I$(OBJDIR) -I$(PRIMDIR) -I$(OBSVDIR)
 MDFLAGS   := -MD
 LDFLAGS   := -lpthread -lgtest -L$(GTEST)/lib/.libs -lprotobuf -L$(PROTOB)/src/.libs
 LDLIBPATH := LD_LIBRARY_PATH=$(GTEST)/lib/.libs:$(PROTOB)/src/.libs
@@ -54,6 +55,10 @@ TESTS :=
 all:
 	@echo + Ensuring Database Storage Layer Exists...
 	@mkdir -p $(STORAGE)
+	
+# Perform doxygen every time, no matter what is called
+$(warning + doc $(DOXY_EXE) $(DOCDIR)/$(DOXY_CONF) > $(DOCOUT))
+$(shell cd $(DOCDIR); $(DOXY_EXE) $(DOXY_CONF))
 
 # We define a common "Makefrag"-style template so that we can just set dir
 # specific variables and include that template
@@ -70,13 +75,7 @@ include Performance/Makefile.inc
 Test: $(TESTS)
 
 clean:
-	rm -rf $(OBJDIR) $(LOGDIR) $(BINDIR) $(DOCOUT)
-
-#If they specify the use of doxy, then we make doxy first
-with-doxy:
-	@echo +doc $(DOXY_EXE) $(DOCDIR)/$(DOXY_CONF) \> $(DOCOUT)
-	@cd $(DOCDIR); $(DOXY_EXE) $(DOXY_CONF)
-	
+	rm -rf $(OBJDIR) $(LOGDIR) $(BINDIR) $(DOCOUT)/*
 	
 # This magic automatically generates makefile dependencies
 # for header files included from C source files we compile,

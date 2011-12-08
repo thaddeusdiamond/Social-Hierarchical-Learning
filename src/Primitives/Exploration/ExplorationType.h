@@ -8,11 +8,13 @@
  * This is an interface for a Q-Learning Exploration Function Implementation
  **/
 
-#ifndef _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
-#define _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
+#ifndef _SHL_PRIMITIVES_EXPLORATION_EXPLORATIONTYPE_H_
+#define _SHL_PRIMITIVES_EXPLORATION_EXPLORATIONTYPE_H_
 
 #include <string>
 #include <vector>
+
+namespace Primitives {
 
 using std::string;
 using std::vector;
@@ -37,7 +39,7 @@ class ExplorationType {
    * @return    True on success, false on failure.
    **/
   virtual bool GetNextStep(State const& current_state,
-                           State const **next_state) = 0;
+                           State const **next_states) = 0;
 
  protected:
   /**
@@ -61,5 +63,6 @@ class ExplorationType {
   QLearner *learner_;
 };
 
+}  // namespace Primitives
 
-#endif  // _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
+#endif  // _SHL_PRIMITIVES_EXPLORATION_EXPLORATIONTYPE_H_

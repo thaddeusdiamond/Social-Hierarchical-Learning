@@ -9,7 +9,9 @@
  * This is an implementation of a dummy student that can learn
  **/
 
-#include "Learner/Dummy.h"
+#include "Student/Dummy.h"
+
+namespace Primitives {
 
 bool Dummy::SetEnvironment(std::vector<Sensor*> const &sensors) {
   return true;
@@ -40,3 +42,5 @@ bool Dummy::Learn(Primitive* prim, Motor* active_motors, size_t motors_len,
 bool Dummy::StopLearning(void) {
   return true;
 }
+
+}  // namespace Primitives
