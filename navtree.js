@@ -9,23 +9,24 @@ var NAVTREE =
       [ "Utilities", "group__Utilities.html", null ]
     ] ],
     [ "Class List", "annotated.html", [
-      [ "CreditAssignmentType", "classCreditAssignmentType.html", null ],
-      [ "Dummy", "classDummy.html", null ],
-      [ "DummyObserverTest", "classDummyObserverTest.html", null ],
-      [ "DummyObserverTest_AttemptMatch_Test", "classDummyObserverTest__AttemptMatch__Test.html", null ],
-      [ "DummyObserverTest_StartAndStopObserver_Test", "classDummyObserverTest__StartAndStopObserver__Test.html", null ],
-      [ "DummyTest", "classDummyTest.html", null ],
-      [ "DummyTest_Setup_Env_and_motors_Test", "classDummyTest__Setup__Env__and__motors__Test.html", null ],
-      [ "ExplorationType", "classExplorationType.html", null ],
-      [ "FeedbackSensor", "classFeedbackSensor.html", null ],
-      [ "Observer", "classObserver.html", null ],
-      [ "QLearner", "classQLearner.html", null ],
-      [ "QTable", "classQTable.html", null ],
-      [ "Sensor", "classSensor.html", null ],
-      [ "StandardQLearner", "classStandardQLearner.html", null ],
-      [ "State", "classState.html", null ],
-      [ "StateHistoryTuple", "classStateHistoryTuple.html", null ],
-      [ "Student", "classStudent.html", null ],
+      [ "Primitives::CreditAssignmentType", "classPrimitives_1_1CreditAssignmentType.html", null ],
+      [ "Observation::Dummy", "classObservation_1_1Dummy.html", null ],
+      [ "Primitives::Dummy", "classPrimitives_1_1Dummy.html", null ],
+      [ "Observation::DummyObserverTest", "classObservation_1_1DummyObserverTest.html", null ],
+      [ "Observation::DummyObserverTest_AttemptMatch_Test", "classObservation_1_1DummyObserverTest__AttemptMatch__Test.html", null ],
+      [ "Observation::DummyObserverTest_StartAndStopObserver_Test", "classObservation_1_1DummyObserverTest__StartAndStopObserver__Test.html", null ],
+      [ "Primitives::DummyTest", "classPrimitives_1_1DummyTest.html", null ],
+      [ "Primitives::DummyTest_Setup_Env_and_motors_Test", "classPrimitives_1_1DummyTest__Setup__Env__and__motors__Test.html", null ],
+      [ "Primitives::ExplorationType", "classPrimitives_1_1ExplorationType.html", null ],
+      [ "Primitives::FeedbackSensor", "classPrimitives_1_1FeedbackSensor.html", null ],
+      [ "Observation::Observer", "classObservation_1_1Observer.html", null ],
+      [ "Primitives::QLearner", "classPrimitives_1_1QLearner.html", null ],
+      [ "Primitives::QTable", "classPrimitives_1_1QTable.html", null ],
+      [ "Primitives::Sensor", "classPrimitives_1_1Sensor.html", null ],
+      [ "Primitives::StandardQLearner", "classPrimitives_1_1StandardQLearner.html", null ],
+      [ "Primitives::State", "classPrimitives_1_1State.html", null ],
+      [ "Primitives::StateHistoryTuple", "classPrimitives_1_1StateHistoryTuple.html", null ],
+      [ "Primitives::Student", "classPrimitives_1_1Student.html", null ],
       [ "UtilsTest", "classUtilsTest.html", null ],
       [ "UtilsTest_FileLogging_Test", "classUtilsTest__FileLogging__Test.html", null ],
       [ "UtilsTest_FileSerialization_Test", "classUtilsTest__FileSerialization__Test.html", null ],
@@ -33,29 +34,29 @@ var NAVTREE =
     ] ],
     [ "Class Index", "classes.html", null ],
     [ "Class Hierarchy", "hierarchy.html", [
-      [ "CreditAssignmentType", "classCreditAssignmentType.html", null ],
-      [ "DummyObserverTest", "classDummyObserverTest.html", [
-        [ "DummyObserverTest_AttemptMatch_Test", "classDummyObserverTest__AttemptMatch__Test.html", null ],
-        [ "DummyObserverTest_StartAndStopObserver_Test", "classDummyObserverTest__StartAndStopObserver__Test.html", null ]
+      [ "Primitives::CreditAssignmentType", "classPrimitives_1_1CreditAssignmentType.html", null ],
+      [ "Observation::DummyObserverTest", "classObservation_1_1DummyObserverTest.html", [
+        [ "Observation::DummyObserverTest_AttemptMatch_Test", "classObservation_1_1DummyObserverTest__AttemptMatch__Test.html", null ],
+        [ "Observation::DummyObserverTest_StartAndStopObserver_Test", "classObservation_1_1DummyObserverTest__StartAndStopObserver__Test.html", null ]
       ] ],
-      [ "DummyTest", "classDummyTest.html", [
-        [ "DummyTest_Setup_Env_and_motors_Test", "classDummyTest__Setup__Env__and__motors__Test.html", null ]
+      [ "Primitives::DummyTest", "classPrimitives_1_1DummyTest.html", [
+        [ "Primitives::DummyTest_Setup_Env_and_motors_Test", "classPrimitives_1_1DummyTest__Setup__Env__and__motors__Test.html", null ]
       ] ],
-      [ "ExplorationType", "classExplorationType.html", null ],
-      [ "Observer", "classObserver.html", [
-        [ "Dummy", "classDummy.html", null ]
+      [ "Primitives::ExplorationType", "classPrimitives_1_1ExplorationType.html", null ],
+      [ "Observation::Observer", "classObservation_1_1Observer.html", [
+        [ "Observation::Dummy", "classObservation_1_1Dummy.html", null ]
       ] ],
-      [ "QLearner", "classQLearner.html", [
-        [ "StandardQLearner", "classStandardQLearner.html", null ]
+      [ "Primitives::QLearner", "classPrimitives_1_1QLearner.html", [
+        [ "Primitives::StandardQLearner", "classPrimitives_1_1StandardQLearner.html", null ]
       ] ],
-      [ "QTable", "classQTable.html", null ],
-      [ "Sensor", "classSensor.html", [
-        [ "FeedbackSensor", "classFeedbackSensor.html", null ]
+      [ "Primitives::QTable", "classPrimitives_1_1QTable.html", null ],
+      [ "Primitives::Sensor", "classPrimitives_1_1Sensor.html", [
+        [ "Primitives::FeedbackSensor", "classPrimitives_1_1FeedbackSensor.html", null ]
       ] ],
-      [ "State", "classState.html", null ],
-      [ "StateHistoryTuple", "classStateHistoryTuple.html", null ],
-      [ "Student", "classStudent.html", [
-        [ "Dummy", "classDummy.html", null ]
+      [ "Primitives::State", "classPrimitives_1_1State.html", null ],
+      [ "Primitives::StateHistoryTuple", "classPrimitives_1_1StateHistoryTuple.html", null ],
+      [ "Primitives::Student", "classPrimitives_1_1Student.html", [
+        [ "Primitives::Dummy", "classPrimitives_1_1Dummy.html", null ]
       ] ],
       [ "UtilsTest", "classUtilsTest.html", [
         [ "UtilsTest_FileLogging_Test", "classUtilsTest__FileLogging__Test.html", null ],
@@ -65,6 +66,8 @@ var NAVTREE =
     ] ],
     [ "Class Members", "functions.html", null ],
     [ "Namespace List", "namespaces.html", [
+      [ "Observation", "namespaceObservation.html", null ],
+      [ "Primitives", "namespacePrimitives.html", null ],
       [ "Utils", "namespaceUtils.html", null ]
     ] ],
     [ "Namespace Members", "namespacemembers.html", null ],

@@ -94,52 +94,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00020"></a>00020 <span class="keyword">using</span> std::string;
 <a name="l00021"></a>00021 <span class="keyword">using</span> std::vector;
 <a name="l00022"></a>00022 
-<a name="l00027"></a><a class="code" href="Student_8h.html#aabb43f2f1e2e0a892068798b85cf2606">00027</a> <span class="preprocessor">#define Key std::string</span>
-<a name="l00028"></a>00028 <span class="preprocessor"></span>
-<a name="l00029"></a>00029 <span class="keyword">class </span>Object;
-<a name="l00030"></a>00030 <span class="keyword">class </span>Primitive;
-<a name="l00031"></a>00031 <span class="keyword">class </span>Motor;
-<a name="l00032"></a>00032 <span class="keyword">class </span><a class="code" href="classQLearner.html">QLearner</a>;
-<a name="l00033"></a>00033 
-<a name="l00034"></a><a class="code" href="classStudent.html">00034</a> <span class="keyword">class </span><a class="code" href="classStudent.html">Student</a> {
-<a name="l00035"></a>00035  <span class="keyword">public</span>:
-<a name="l00040"></a><a class="code" href="classStudent.html#a71f6d37e021e98dff29ffe67bfac6ce1">00040</a>   <span class="keyword">virtual</span> <a class="code" href="classStudent.html#a71f6d37e021e98dff29ffe67bfac6ce1">~Student</a>() {}
-<a name="l00041"></a>00041 
-<a name="l00050"></a>00050   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classStudent.html#ac37451ed6094b1f82392613df3a1701d">SetEnvironment</a>(vector&lt;Sensor*&gt; <span class="keyword">const</span> &amp;sensors) = 0;
-<a name="l00051"></a>00051 
-<a name="l00061"></a>00061   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classStudent.html#a760485de5b5a6de685bd9db6c443cfc2">SetMotors</a>(vector&lt;Sensor*&gt; <span class="keyword">const</span> &amp;motors) = 0;
-<a name="l00062"></a>00062 
-<a name="l00070"></a>00070   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classStudent.html#a81aa83fa202a80a76c929530598829fe">SetFeedbackHandler</a>(<a class="code" href="classSensor.html">Sensor</a> <span class="keyword">const</span> &amp;feedback_device) = 0;
-<a name="l00071"></a>00071 
-<a name="l00079"></a>00079   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classStudent.html#a845a499284fe3e5139688032df333118">SetLearningMethod</a>(<a class="code" href="classQLearner.html">QLearner</a> <span class="keyword">const</span> &amp;learner) = 0;
-<a name="l00080"></a>00080 
-<a name="l00094"></a>00094   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classStudent.html#a0cbadf44af4e8321c124ff83fea069e2">LoadComparables</a>(Primitive* primitive, <a class="code" href="Student_8h.html#aabb43f2f1e2e0a892068798b85cf2606">Key</a>* tables,
-<a name="l00095"></a>00095                                <span class="keywordtype">size_t</span> tables_len) = 0;
-<a name="l00096"></a>00096 
-<a name="l00110"></a>00110   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classStudent.html#a798fb89c94016729e6afbe927df6b9fd">Learn</a>(Primitive* prim, Motor* active_motors,
-<a name="l00111"></a>00111                      <span class="keywordtype">size_t</span> motors_len, Object* objects,
-<a name="l00112"></a>00112                      <span class="keywordtype">size_t</span> objects_len) = 0;
-<a name="l00113"></a>00113 
-<a name="l00119"></a>00119   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classStudent.html#a557d4a972d99d5bba31774c608b326f3">StopLearning</a>(<span class="keywordtype">void</span>) = 0;
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121 
-<a name="l00125"></a><a class="code" href="classStudent.html#abfc082f4399638e33aaed7002d1092dd">00125</a>   <span class="keyword">virtual</span> vector&lt;Sensor*&gt; <span class="keyword">const</span> * <span class="keyword">const</span>  <a class="code" href="classStudent.html#abfc082f4399638e33aaed7002d1092dd">get_sensors</a>()<span class="keyword"> const </span>{
-<a name="l00126"></a>00126     <span class="keywordflow">return</span> &amp;<a class="code" href="classStudent.html#aa3dc30634c3615c32bc7cd562e1e2940">sensors_</a>;
-<a name="l00127"></a>00127   };
-<a name="l00128"></a>00128 
-<a name="l00132"></a><a class="code" href="classStudent.html#a4d9cfdad0e2cf450033ebc6fbb3f66fa">00132</a>   <span class="keyword">virtual</span> vector&lt;Sensor*&gt; <span class="keyword">const</span> * <span class="keyword">const</span>  <a class="code" href="classStudent.html#a4d9cfdad0e2cf450033ebc6fbb3f66fa">get_environment</a>()<span class="keyword"> const </span>{
-<a name="l00133"></a>00133     <span class="keywordflow">return</span> &amp;<a class="code" href="classStudent.html#a79ad9718e63eb697769b2d2afc8f1552">environment_</a>;
-<a name="l00134"></a>00134   };
-<a name="l00135"></a>00135 
-<a name="l00139"></a><a class="code" href="classStudent.html#a151f9a6958b6574134a0f74b7fb44f1d">00139</a>   <span class="keyword">virtual</span> vector&lt;Sensor*&gt; <span class="keyword">const</span> * <span class="keyword">const</span>  <a class="code" href="classStudent.html#a151f9a6958b6574134a0f74b7fb44f1d">get_motors</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> &amp;<a class="code" href="classStudent.html#a9dc236bd2a1d6927cc38c64a47b0b066">motors_</a>; }
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141  <span class="keyword">protected</span>:
-<a name="l00142"></a><a class="code" href="classStudent.html#aa3dc30634c3615c32bc7cd562e1e2940">00142</a>   std::vector&lt;Sensor*&gt; <a class="code" href="classStudent.html#aa3dc30634c3615c32bc7cd562e1e2940">sensors_</a>;
-<a name="l00143"></a><a class="code" href="classStudent.html#a79ad9718e63eb697769b2d2afc8f1552">00143</a>   std::vector&lt;Sensor*&gt; <a class="code" href="classStudent.html#a79ad9718e63eb697769b2d2afc8f1552">environment_</a>;
-<a name="l00144"></a><a class="code" href="classStudent.html#a9dc236bd2a1d6927cc38c64a47b0b066">00144</a>   std::vector&lt;Sensor*&gt; <a class="code" href="classStudent.html#a9dc236bd2a1d6927cc38c64a47b0b066">motors_</a>;
-<a name="l00145"></a>00145 };
-<a name="l00146"></a>00146 
-<a name="l00147"></a>00147 <span class="preprocessor">#endif  // _SHL_PRIMITIVES_STUDENT_STUDENT_H_</span>
+<a name="l00023"></a>00023 <span class="keyword">namespace </span>Primitives {
+<a name="l00024"></a>00024 
+<a name="l00029"></a><a class="code" href="Student_8h.html#aabb43f2f1e2e0a892068798b85cf2606">00029</a> <span class="preprocessor">#define Key std::string</span>
+<a name="l00030"></a>00030 <span class="preprocessor"></span>
+<a name="l00031"></a>00031 <span class="keyword">class </span>Object;
+<a name="l00032"></a>00032 <span class="keyword">class </span>Primitive;
+<a name="l00033"></a>00033 <span class="keyword">class </span>Motor;
+<a name="l00034"></a>00034 <span class="keyword">class </span>QLearner;
+<a name="l00035"></a>00035 
+<a name="l00036"></a><a class="code" href="classPrimitives_1_1Student.html">00036</a> <span class="keyword">class </span><a class="code" href="classPrimitives_1_1Student.html">Student</a> {
+<a name="l00037"></a>00037  <span class="keyword">public</span>:
+<a name="l00042"></a><a class="code" href="classPrimitives_1_1Student.html#a710cbc8bc2959acb1d01fcab97d3c27f">00042</a>   <span class="keyword">virtual</span> <a class="code" href="classPrimitives_1_1Student.html#a710cbc8bc2959acb1d01fcab97d3c27f">~Student</a>() {}
+<a name="l00043"></a>00043 
+<a name="l00052"></a>00052   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1Student.html#a1aaf839e724e693dd5288b88081019a3">SetEnvironment</a>(vector&lt;Sensor*&gt; <span class="keyword">const</span> &amp;sensors) = 0;
+<a name="l00053"></a>00053 
+<a name="l00063"></a>00063   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1Student.html#a665e87639a9e3af29b24b50678b7d3a6">SetMotors</a>(vector&lt;Sensor*&gt; <span class="keyword">const</span> &amp;motors) = 0;
+<a name="l00064"></a>00064 
+<a name="l00072"></a>00072   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1Student.html#af405e7fa77284ae9e4dd093016f1a50c">SetFeedbackHandler</a>(<a class="code" href="classPrimitives_1_1Sensor.html">Sensor</a> <span class="keyword">const</span> &amp;feedback_device) = 0;
+<a name="l00073"></a>00073 
+<a name="l00081"></a>00081   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1Student.html#a8b1445c719478ad24d5e8821afde046d">SetLearningMethod</a>(<a class="code" href="classPrimitives_1_1QLearner.html">QLearner</a> <span class="keyword">const</span> &amp;learner) = 0;
+<a name="l00082"></a>00082 
+<a name="l00096"></a>00096   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1Student.html#afa98cb5cb58c2a90cd2e7bcec3e74047">LoadComparables</a>(Primitive* primitive, <a class="code" href="Student_8h.html#aabb43f2f1e2e0a892068798b85cf2606">Key</a>* tables,
+<a name="l00097"></a>00097                                <span class="keywordtype">size_t</span> tables_len) = 0;
+<a name="l00098"></a>00098 
+<a name="l00112"></a>00112   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1Student.html#a1f3901ebd879650f9b4796d722ba7338">Learn</a>(Primitive* prim, Motor* active_motors,
+<a name="l00113"></a>00113                      <span class="keywordtype">size_t</span> motors_len, Object* objects,
+<a name="l00114"></a>00114                      <span class="keywordtype">size_t</span> objects_len) = 0;
+<a name="l00115"></a>00115 
+<a name="l00121"></a>00121   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1Student.html#a31140dfb0361a08965ebf99d9113b33a">StopLearning</a>(<span class="keywordtype">void</span>) = 0;
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123 
+<a name="l00127"></a><a class="code" href="classPrimitives_1_1Student.html#a4f565f5aa2cbaca7f396783d8e587e97">00127</a>   <span class="keyword">virtual</span> vector&lt;Sensor*&gt; <span class="keyword">const</span> * <span class="keyword">const</span>  <a class="code" href="classPrimitives_1_1Student.html#a4f565f5aa2cbaca7f396783d8e587e97">get_sensors</a>()<span class="keyword"> const </span>{
+<a name="l00128"></a>00128     <span class="keywordflow">return</span> &amp;<a class="code" href="classPrimitives_1_1Student.html#a5b04f3fb6f1a38f7cd680d71e234b300">sensors_</a>;
+<a name="l00129"></a>00129   };
+<a name="l00130"></a>00130 
+<a name="l00134"></a><a class="code" href="classPrimitives_1_1Student.html#a6697db2edd47a1fe40db96840ba5011d">00134</a>   <span class="keyword">virtual</span> vector&lt;Sensor*&gt; <span class="keyword">const</span> * <span class="keyword">const</span>  <a class="code" href="classPrimitives_1_1Student.html#a6697db2edd47a1fe40db96840ba5011d">get_environment</a>()<span class="keyword"> const </span>{
+<a name="l00135"></a>00135     <span class="keywordflow">return</span> &amp;<a class="code" href="classPrimitives_1_1Student.html#a6bf28a0f3f958ef11e9ffe4f0fa07f7e">environment_</a>;
+<a name="l00136"></a>00136   };
+<a name="l00137"></a>00137 
+<a name="l00141"></a><a class="code" href="classPrimitives_1_1Student.html#a546d2a1576b443778453534d2064c807">00141</a>   <span class="keyword">virtual</span> vector&lt;Sensor*&gt; <span class="keyword">const</span> * <span class="keyword">const</span>  <a class="code" href="classPrimitives_1_1Student.html#a546d2a1576b443778453534d2064c807">get_motors</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> &amp;<a class="code" href="classPrimitives_1_1Student.html#a2bce366b696bef93dd4d93c380b43f36">motors_</a>; }
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143  <span class="keyword">protected</span>:
+<a name="l00144"></a><a class="code" href="classPrimitives_1_1Student.html#a5b04f3fb6f1a38f7cd680d71e234b300">00144</a>   std::vector&lt;Sensor*&gt; <a class="code" href="classPrimitives_1_1Student.html#a5b04f3fb6f1a38f7cd680d71e234b300">sensors_</a>;
+<a name="l00145"></a><a class="code" href="classPrimitives_1_1Student.html#a6bf28a0f3f958ef11e9ffe4f0fa07f7e">00145</a>   std::vector&lt;Sensor*&gt; <a class="code" href="classPrimitives_1_1Student.html#a6bf28a0f3f958ef11e9ffe4f0fa07f7e">environment_</a>;
+<a name="l00146"></a><a class="code" href="classPrimitives_1_1Student.html#a2bce366b696bef93dd4d93c380b43f36">00146</a>   std::vector&lt;Sensor*&gt; <a class="code" href="classPrimitives_1_1Student.html#a2bce366b696bef93dd4d93c380b43f36">motors_</a>;
+<a name="l00147"></a>00147 };
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149 }  <span class="comment">// namespace Primitives</span>
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151 <span class="preprocessor">#endif  // _SHL_PRIMITIVES_STUDENT_STUDENT_H_</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
