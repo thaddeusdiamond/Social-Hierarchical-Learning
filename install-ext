@@ -1,8 +1,0 @@
-git submodule init
-git submodule update
-cd ext/protobuf
-./configure --prefix=$PWD
-make -j
-cd ../googletest
-./configure --prefix=$PWD
-make -j

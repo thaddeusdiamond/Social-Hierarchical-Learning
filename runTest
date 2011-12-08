@@ -1,5 +1,0 @@
-#!/bin/bash
-#For some reason, I can't use make Test to run test cases--
-# the LD_LIBRARY_PATH doesn't resolve to the right location.
-
-LD_LIBRARY_PATH=ext/googletest/lib/.libs/ $1
