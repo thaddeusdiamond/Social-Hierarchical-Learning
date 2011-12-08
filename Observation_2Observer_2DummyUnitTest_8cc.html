@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Social Hierarchical Learning: /home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.h Source File</title>
+<title>Social Hierarchical Learning: /home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/DummyUnitTest.cc File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -75,50 +75,71 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-  initNavTree('Dummy_8h.html','');
+  initNavTree('Observation_2Observer_2DummyUnitTest_8cc.html','');
 </script>
 <div id="doc-content">
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<h1>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.h</h1>  </div>
+<h1>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/DummyUnitTest.cc File Reference</h1>  </div>
 </div>
 <div class="contents">
-<a href="Dummy_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00013"></a>00013 <span class="preprocessor">#ifndef _SHL_PRIMITIVES_STUDENT_DUMMY_H_</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span><span class="preprocessor">#define _SHL_PRIMITIVES_STUDENT_DUMMY_H_</span>
-<a name="l00015"></a>00015 <span class="preprocessor"></span>
-<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;vector&gt;</span>
-<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;Common/Utils.h&quot;</span>
-<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;QLearner/QLearner.h&quot;</span>
-<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;Student/Student.h&quot;</span>
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022 <span class="keyword">using</span> std::string;
-<a name="l00023"></a>00023 <span class="keyword">using</span> std::vector;
-<a name="l00024"></a>00024 
-<a name="l00025"></a><a class="code" href="classDummy.html">00025</a> <span class="keyword">class </span><a class="code" href="classDummy.html">Dummy</a> : <span class="keyword">public</span> <a class="code" href="classStudent.html">Student</a> {
-<a name="l00026"></a>00026  <span class="keyword">public</span>:
-<a name="l00030"></a><a class="code" href="classDummy.html#afe03b8568b4af57481b092f8356ca041">00030</a>   <span class="keyword">explicit</span> <a class="code" href="classDummy.html#afe03b8568b4af57481b092f8356ca041">Dummy</a>() {}
-<a name="l00031"></a>00031 
-<a name="l00036"></a><a class="code" href="classDummy.html#a2f35db90431cd1da12b6bbf1d0aef53d">00036</a>   <span class="keyword">virtual</span> <a class="code" href="classDummy.html#a2f35db90431cd1da12b6bbf1d0aef53d">~Dummy</a>() {}
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classDummy.html#a70649390dc87931dcde12b94f9d76f00">SetEnvironment</a>(std::vector&lt;Sensor*&gt; <span class="keyword">const</span> &amp;sensors);
-<a name="l00039"></a>00039   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classDummy.html#a391a406697d968157df7d666e8866c90">SetMotors</a>(std::vector&lt;Sensor*&gt; <span class="keyword">const</span> &amp;motors);
-<a name="l00040"></a>00040   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classDummy.html#aa5548f9aef254a51845ce65e4a72647a">SetLearningMethod</a>(<a class="code" href="classQLearner.html">QLearner</a> <span class="keyword">const</span> &amp;learner);
-<a name="l00041"></a>00041   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classDummy.html#ab6529143fc040a74d26edf8c6a695651">SetFeedbackHandler</a>(<a class="code" href="classSensor.html">Sensor</a> <span class="keyword">const</span> &amp;feedback_device);
-<a name="l00042"></a>00042   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classDummy.html#a10da33fbb0a100568a1834ee74e25386">LoadComparables</a>(Primitive* prim, <a class="code" href="Student_8h.html#aabb43f2f1e2e0a892068798b85cf2606">Key</a>* tables, <span class="keywordtype">size_t</span> tables_len);
-<a name="l00043"></a>00043   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classDummy.html#a9b5e3f58d4652c9d2d8401cb22af4ad4">Learn</a>(Primitive* prim, Motor* active_motors,
-<a name="l00044"></a>00044                      <span class="keywordtype">size_t</span> motors_len, Object* objects,
-<a name="l00045"></a>00045                      <span class="keywordtype">size_t</span> objects_len);
-<a name="l00046"></a>00046   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classDummy.html#aa36bcfa62e283c646d6f0e668f51980e">StopLearning</a>(<span class="keywordtype">void</span>);
-<a name="l00047"></a>00047 };
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049 <span class="preprocessor">#endif  // _SHL_PRIMITIVES_STUDENT_DUMMY_H_</span>
-</pre></div></div>
+<div class="textblock"><code>#include &lt;gtest/gtest.h&gt;</code><br/>
+<code>#include &quot;Observer/Dummy.h&quot;</code><br/>
+<code>#include &quot;Common/Utils.h&quot;</code><br/>
+</div><table class="memberdecls">
+<tr><td colspan="2"><h2><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDummyObserverTest.html">DummyObserverTest</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDummyObserverTest__StartAndStopObserver__Test.html">DummyObserverTest_StartAndStopObserver_Test</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDummyObserverTest__AttemptMatch__Test.html">DummyObserverTest_AttemptMatch_Test</a></td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Observation_2Observer_2DummyUnitTest_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<div class="textblock"><dl class="author"><dt><b>Author:</b></dt><dd>Brad Hayes &lt;<a href="mailto:hayesbh@gmail.com">hayesbh@gmail.com</a>&gt; </dd>
+<dd>
+Thaddeus Diamond &lt;<a href="mailto:diamond@cs.yale.edu">diamond@cs.yale.edu</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.1</dd></dl>
+<h2><a class="anchor" id="DESCRIPTION"></a>
+DESCRIPTION</h2>
+<p>Testing for the dummy student class we set up </p>
+</div><hr/><h2>Function Documentation</h2>
+<a class="anchor" id="a0ddf1224851353fc92bfbff6f499fa97"></a><!-- doxytag: member="DummyUnitTest.cc::main" ref="a0ddf1224851353fc92bfbff6f499fa97" args="(int argc, char *argv[])" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>argv</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+</div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="Dummy_8h.html">Dummy.h</a>      </li>
+      <li class="navelem"><a class="el" href="Observation_2Observer_2DummyUnitTest_8cc.html">DummyUnitTest.cc</a>      </li>
       <li class="footer">Generated by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>

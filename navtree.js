@@ -11,9 +11,14 @@ var NAVTREE =
     [ "Class List", "annotated.html", [
       [ "CreditAssignmentType", "classCreditAssignmentType.html", null ],
       [ "Dummy", "classDummy.html", null ],
+      [ "DummyObserverTest", "classDummyObserverTest.html", null ],
+      [ "DummyObserverTest_AttemptMatch_Test", "classDummyObserverTest__AttemptMatch__Test.html", null ],
+      [ "DummyObserverTest_StartAndStopObserver_Test", "classDummyObserverTest__StartAndStopObserver__Test.html", null ],
       [ "DummyTest", "classDummyTest.html", null ],
+      [ "DummyTest_Setup_Env_and_motors_Test", "classDummyTest__Setup__Env__and__motors__Test.html", null ],
       [ "ExplorationType", "classExplorationType.html", null ],
       [ "FeedbackSensor", "classFeedbackSensor.html", null ],
+      [ "Observer", "classObserver.html", null ],
       [ "QLearner", "classQLearner.html", null ],
       [ "QTable", "classQTable.html", null ],
       [ "Sensor", "classSensor.html", null ],
@@ -29,8 +34,17 @@ var NAVTREE =
     [ "Class Index", "classes.html", null ],
     [ "Class Hierarchy", "hierarchy.html", [
       [ "CreditAssignmentType", "classCreditAssignmentType.html", null ],
-      [ "DummyTest", "classDummyTest.html", null ],
+      [ "DummyObserverTest", "classDummyObserverTest.html", [
+        [ "DummyObserverTest_AttemptMatch_Test", "classDummyObserverTest__AttemptMatch__Test.html", null ],
+        [ "DummyObserverTest_StartAndStopObserver_Test", "classDummyObserverTest__StartAndStopObserver__Test.html", null ]
+      ] ],
+      [ "DummyTest", "classDummyTest.html", [
+        [ "DummyTest_Setup_Env_and_motors_Test", "classDummyTest__Setup__Env__and__motors__Test.html", null ]
+      ] ],
       [ "ExplorationType", "classExplorationType.html", null ],
+      [ "Observer", "classObserver.html", [
+        [ "Dummy", "classDummy.html", null ]
+      ] ],
       [ "QLearner", "classQLearner.html", [
         [ "StandardQLearner", "classStandardQLearner.html", null ]
       ] ],
@@ -57,6 +71,10 @@ var NAVTREE =
     [ "File List", "files.html", [
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Common/Utils.h", "Utils_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Common/UtilsUnitTest.cc", "UtilsUnitTest_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/Dummy.cc", "Observation_2Observer_2Dummy_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/Dummy.h", "Observation_2Observer_2Dummy_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/DummyUnitTest.cc", "Observation_2Observer_2DummyUnitTest_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/Observer.h", "Observer_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Credit/CreditAssignmentType.h", "CreditAssignmentType_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Exploration/ExplorationType.h", "ExplorationType_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/QLearner.h", "QLearner_8h.html", null ],
@@ -66,9 +84,9 @@ var NAVTREE =
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/StandardQLearner.h", "StandardQLearner_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/State.h", "State_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/StateHistoryTuple.h", "StateHistoryTuple_8h.html", null ],
-      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.cc", "Dummy_8cc.html", null ],
-      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.h", "Dummy_8h.html", null ],
-      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/DummyUnitTest.cc", "DummyUnitTest_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.cc", "Primitives_2Student_2Dummy_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.h", "Primitives_2Student_2Dummy_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/DummyUnitTest.cc", "Primitives_2Student_2DummyUnitTest_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/FeedbackSensor.cc", "FeedbackSensor_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/FeedbackSensor.h", "FeedbackSensor_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Sensor.h", "Sensor_8h.html", null ],
