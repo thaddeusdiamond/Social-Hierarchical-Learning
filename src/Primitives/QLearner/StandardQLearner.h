@@ -74,6 +74,14 @@ class StandardQLearner : public QLearner {
   bool GetNearbyStates(State const& cur_state,
                        vector<State const *>& nearby_states);
 
+  /**
+   * Populates the QTable with states describing all neighboring states of 
+   * parameter 'state' if they don't already exist.
+   * 
+   * @param state State in the QTable to use as origin
+   * @return True on success, false on failure
+   */
+  bool AddNearbyEmptyStates(State const &state);
 
   /**
    * Returns the chosen next step by the QLearner.

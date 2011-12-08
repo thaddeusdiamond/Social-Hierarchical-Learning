@@ -50,6 +50,15 @@ public:
   virtual int const get_num_values() const { return num_values_; }
 
   /**
+   * Accessor for max # decimal places recorded by sensor
+   * 
+   * @return Size of values_ array
+   **/
+  virtual int const get_min_increment() const { 
+    return min_increment_; 
+  }
+
+  /**
    * Provides an english-readable name for this sensor
    * 
    * @return Const char* string with the name of this sensor
@@ -102,9 +111,9 @@ public:
   double min_value_;
 
   /**
-   * Describes the number of decimal places to record (truncate after # digits)
+   * Describes the minimum possible increment for this value
    **/
-  int significant_figures_;
+  double min_increment_;
 
   /**
    * Describes the max variation to search when looking for "nearby" values

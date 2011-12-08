@@ -16,6 +16,7 @@
 namespace Primitives {
 
 FeedbackSensor::FeedbackSensor(int port)
+<<<<<<< HEAD
     : Sensor(string("Feedback")), num_values_(1), received_(false) {
   // Create vanilla socket
   polling_socket_ = socket(PF_INET, SOCK_DGRAM, 0);
