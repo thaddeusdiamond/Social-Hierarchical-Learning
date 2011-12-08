@@ -8,8 +8,8 @@
  * This is a sensor that receives feedback from the human controller.
  */
 
-#ifndef _SHL_PRIMITIVES_STUDENT_FEEDBACK_SENSOR_H_
-#define _SHL_PRIMITIVES_STUDENT_FEEDBACK_SENSOR_H_
+#ifndef _SHL_PRIMITIVES_STUDENT_FEEDBACKSENSOR_H_
+#define _SHL_PRIMITIVES_STUDENT_FEEDBACKSENSOR_H_
 
 #include <pthread.h>
 #include <sys/socket.h>
@@ -101,4 +101,4 @@ void* PollForFeedback(void* object) {
   return NULL;
 }
 
-#endif  // _SHL_PRIMITIVES_STUDENT_FEEDBACK_SENSOR_H_
+#endif  // _SHL_PRIMITIVES_STUDENT_FEEDBACKSENSOR_H_

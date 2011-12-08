@@ -8,8 +8,8 @@
  * This is an interface for a Q-Learning Exploration Function Implementation
  **/
 
-#ifndef _SHL_PRIMITIVES_LEARNER_STATE_H_
-#define _SHL_PRIMITIVES_LEARNER_STATE_H_
+#ifndef _SHL_PRIMITIVES_QLEARNER_STATE_H_
+#define _SHL_PRIMITIVES_QLEARNER_STATE_H_
 
 #include <vector>
 
@@ -105,4 +105,4 @@ class State {
 };
 
 
-#endif  // _SHL_PRIMITIVES_LEARNER_STATE_H_
+#endif  // _SHL_PRIMITIVES_QLEARNER_STATE_H_

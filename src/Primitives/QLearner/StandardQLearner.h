@@ -8,8 +8,8 @@
  * This is an interface for a Q-Learning Implementation
  */
 
-#ifndef _SHL_PRIMITIVES_LEARNER_STANDARDQLEARNER_H_
-#define _SHL_PRIMITIVES_LEARNER_STANDARDQLEARNER_H_
+#ifndef _SHL_PRIMITIVES_QLEARNER_STANDARDQLEARNER_H_
+#define _SHL_PRIMITIVES_QLEARNER_STANDARDQLEARNER_H_
 
 #include <string>
 #include <vector>
@@ -96,4 +96,4 @@ class StandardQLearner : public QLearner {
   virtual bool AssignCredit(double signal) = 0;
 };
 
-#endif  // _SHL_PRIMITIVES_LEARNER_STANDARDQLEARNER_H_
+#endif  // _SHL_PRIMITIVES_QLEARNER_STANDARDQLEARNER_H_

@@ -8,8 +8,8 @@
  * This is an interface for a Q-Learning Exploration Function Implementation
  **/
 
-#ifndef _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
-#define _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
+#ifndef _SHL_PRIMITIVES_EXPLORATION_EXPLORATIONTYPE_H_
+#define _SHL_PRIMITIVES_EXPLORATION_EXPLORATIONTYPE_H_
 
 #include <string>
 #include <vector>
@@ -62,4 +62,4 @@ class ExplorationType {
 };
 
 
-#endif  // _SHL_PRIMITIVES_LEARNER_EXPLORATIONTYPE_H_
+#endif  // _SHL_PRIMITIVES_EXPLORATION_EXPLORATIONTYPE_H_

@@ -8,8 +8,8 @@
  * This is an interface for a Q-Learning Implementation
  **/
 
-#ifndef _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
-#define _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
+#ifndef _SHL_PRIMITIVES_QLEARNER_QLEARNER_H_
+#define _SHL_PRIMITIVES_QLEARNER_QLEARNER_H_
 
 #include <sys/time.h>
 #include <string>
@@ -174,4 +174,4 @@ class QLearner {
   ExplorationType *exploration_type_;
 };
 
-#endif  // _SHL_PRIMITIVES_LEARNER_QLEARNER_H_
+#endif  // _SHL_PRIMITIVES_QLEARNER_QLEARNER_H_

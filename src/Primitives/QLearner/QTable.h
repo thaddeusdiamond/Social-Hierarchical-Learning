@@ -8,8 +8,8 @@
  * This is an interface for a Q-Table (Database)
  */
 
-#ifndef _SHL_PRIMITIVES_LEARNER_QTABLE_H_
-#define _SHL_PRIMITIVES_LEARNER_QTABLE_H_
+#ifndef _SHL_PRIMITIVES_QLEARNER_QTABLE_H_
+#define _SHL_PRIMITIVES_QLEARNER_QTABLE_H_
 
 #include <string>
 #include <vector>
@@ -76,4 +76,4 @@ class QTable {
 };
 
 
-#endif  // _SHL_PRIMITIVES_LEARNER_QTABLE_H_
+#endif  // _SHL_PRIMITIVES_QLEARNER_QTABLE_H_
