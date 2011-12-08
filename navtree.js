@@ -13,6 +13,7 @@ var NAVTREE =
       [ "Dummy", "classDummy.html", null ],
       [ "DummyTest", "classDummyTest.html", null ],
       [ "ExplorationType", "classExplorationType.html", null ],
+      [ "FeedbackSensor", "classFeedbackSensor.html", null ],
       [ "QLearner", "classQLearner.html", null ],
       [ "QTable", "classQTable.html", null ],
       [ "Sensor", "classSensor.html", null ],
@@ -34,7 +35,9 @@ var NAVTREE =
         [ "StandardQLearner", "classStandardQLearner.html", null ]
       ] ],
       [ "QTable", "classQTable.html", null ],
-      [ "Sensor", "classSensor.html", null ],
+      [ "Sensor", "classSensor.html", [
+        [ "FeedbackSensor", "classFeedbackSensor.html", null ]
+      ] ],
       [ "State", "classState.html", null ],
       [ "StateHistoryTuple", "classStateHistoryTuple.html", null ],
       [ "Student", "classStudent.html", [
@@ -66,6 +69,8 @@ var NAVTREE =
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.cc", "Dummy_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.h", "Dummy_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/DummyUnitTest.cc", "DummyUnitTest_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/FeedbackSensor.cc", "FeedbackSensor_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/FeedbackSensor.h", "FeedbackSensor_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Sensor.h", "Sensor_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Student.h", "Student_8h.html", null ]
     ] ],

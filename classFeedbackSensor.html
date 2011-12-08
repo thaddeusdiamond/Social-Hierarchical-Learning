@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Social Hierarchical Learning: Sensor Class Reference</title>
+<title>Social Hierarchical Learning: FeedbackSensor Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -77,49 +77,103 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-  initNavTree('classSensor.html','');
+  initNavTree('classFeedbackSensor.html','');
 </script>
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a>  </div>
   <div class="headertitle">
-<h1>Sensor Class Reference</h1>  </div>
+<h1>FeedbackSensor Class Reference</h1>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="Sensor" -->
-<p><code>#include &lt;<a class="el" href="Sensor_8h_source.html">Sensor.h</a>&gt;</code></p>
+<!-- doxytag: class="FeedbackSensor" --><!-- doxytag: inherits="Sensor" -->
+<p><code>#include &lt;<a class="el" href="FeedbackSensor_8h_source.html">FeedbackSensor.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for Sensor:</div>
+Inheritance diagram for FeedbackSensor:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classSensor.png" usemap="#Sensor_map" alt=""/>
-  <map id="Sensor_map" name="Sensor_map">
-<area href="classFeedbackSensor.html" alt="FeedbackSensor" shape="rect" coords="0,56,108,80"/>
+  <img src="classFeedbackSensor.png" usemap="#FeedbackSensor_map" alt=""/>
+  <map id="FeedbackSensor_map" name="FeedbackSensor_map">
+<area href="classSensor.html" alt="Sensor" shape="rect" coords="0,0,108,24"/>
 </map>
  </div></div>
 
-<p><a href="classSensor-members.html">List of all members.</a></p>
+<p><a href="classFeedbackSensor-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="classFeedbackSensor.html#a0913aff55236e2624f28617d92dddfb8ab1a1ef95b70aa995e8d8c14c2e6fd2fe">GOOD</a> =  0, 
+<a class="el" href="classFeedbackSensor.html#a0913aff55236e2624f28617d92dddfb8ab99f23b6377abfb0bf00550fb6bb7bb2">BAD</a> =  1, 
+<a class="el" href="classFeedbackSensor.html#a0913aff55236e2624f28617d92dddfb8ade29e7e0782405c30feba1ddb38a88d9">PANIC</a> =  2, 
+<a class="el" href="classFeedbackSensor.html#a0913aff55236e2624f28617d92dddfb8aa8554164f5dbf0805dcb95018b008b2c">DONE</a> =  3
+ }</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensor.html#aa730e9961dd645e9df9644c52b6e72eb">~Sensor</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensor.html#a15c12c5cf1ff7088c5524190ed355f29">SetValues</a> (double const *const values, int num_values)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensor.html#af7399742268d1ecc53a2fe0dcd2fd325">GetValues</a> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensor.html#ae3a2aa886134492f9a706f73b663db3c">get_num_values</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual char const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensor.html#adc934a1432f20ecc18077f54f3f41a0d">get_name</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFeedbackSensor.html#ac6df1b0ad03fdb1709784780d44f9207">FeedbackSensor</a> (int port)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFeedbackSensor.html#a44f17379b62cd6d7ce8580ceee9df294">~FeedbackSensor</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFeedbackSensor.html#ab75e30fbdd11cbb67c9f84757b0f6504">SetValues</a> (double const *const values, int num_values)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFeedbackSensor.html#ae2ca9b734bf72a418d1143d5952b85f9">GetValues</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFeedbackSensor.html#af365f251e46136c5a04c4990b62043f4">ListenOnSocket</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSensor.html#af0d2b8b236cb252ef0ced0b037a46676">Poll</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFeedbackSensor.html#a295f60e85adda08479de45c86d6c6cd8">Poll</a> ()</td></tr>
 </table>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aa730e9961dd645e9df9644c52b6e72eb"></a><!-- doxytag: member="Sensor::~Sensor" ref="aa730e9961dd645e9df9644c52b6e72eb" args="()" -->
+<hr/><h2>Member Enumeration Documentation</h2>
+<a class="anchor" id="a0913aff55236e2624f28617d92dddfb8"></a><!-- doxytag: member="FeedbackSensor::@0" ref="a0913aff55236e2624f28617d92dddfb8" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual Sensor::~Sensor </td>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Possible values for feedback (must match the FeedbackController) </p>
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="a0913aff55236e2624f28617d92dddfb8ab1a1ef95b70aa995e8d8c14c2e6fd2fe"></a><!-- doxytag: member="GOOD" ref="a0913aff55236e2624f28617d92dddfb8ab1a1ef95b70aa995e8d8c14c2e6fd2fe" args="" -->GOOD</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a0913aff55236e2624f28617d92dddfb8ab99f23b6377abfb0bf00550fb6bb7bb2"></a><!-- doxytag: member="BAD" ref="a0913aff55236e2624f28617d92dddfb8ab99f23b6377abfb0bf00550fb6bb7bb2" args="" -->BAD</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a0913aff55236e2624f28617d92dddfb8ade29e7e0782405c30feba1ddb38a88d9"></a><!-- doxytag: member="PANIC" ref="a0913aff55236e2624f28617d92dddfb8ade29e7e0782405c30feba1ddb38a88d9" args="" -->PANIC</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a0913aff55236e2624f28617d92dddfb8aa8554164f5dbf0805dcb95018b008b2c"></a><!-- doxytag: member="DONE" ref="a0913aff55236e2624f28617d92dddfb8aa8554164f5dbf0805dcb95018b008b2c" args="" -->DONE</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+</div>
+</div>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ac6df1b0ad03fdb1709784780d44f9207"></a><!-- doxytag: member="FeedbackSensor::FeedbackSensor" ref="ac6df1b0ad03fdb1709784780d44f9207" args="(int port)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FeedbackSensor::FeedbackSensor </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em></td><td>)</td>
+          <td><code> [explicit]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The constructor for a <a class="el" href="classFeedbackSensor.html">FeedbackSensor</a> takes a port and spawns a thread to poll on that port for UDP packets.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>This should really have a unit test, but it's not super important since this is a pretty dumb sensor </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a44f17379b62cd6d7ce8580ceee9df294"></a><!-- doxytag: member="FeedbackSensor::~FeedbackSensor" ref="a44f17379b62cd6d7ce8580ceee9df294" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual FeedbackSensor::~FeedbackSensor </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [inline, virtual]</code></td>
@@ -127,56 +181,20 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Default destructor, does nothing </p>
+<p>The destructor for a <a class="el" href="classFeedbackSensor.html">FeedbackSensor</a> must free all memory aggregated </p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="adc934a1432f20ecc18077f54f3f41a0d"></a><!-- doxytag: member="Sensor::get_name" ref="adc934a1432f20ecc18077f54f3f41a0d" args="()" -->
+<a class="anchor" id="ae2ca9b734bf72a418d1143d5952b85f9"></a><!-- doxytag: member="FeedbackSensor::GetValues" ref="ae2ca9b734bf72a418d1143d5952b85f9" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual char const* const Sensor::get_name </td>
+          <td class="memname">double const *const FeedbackSensor::GetValues </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Provides an english-readable name for this sensor</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Const char* string with the name of this sensor </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ae3a2aa886134492f9a706f73b663db3c"></a><!-- doxytag: member="Sensor::get_num_values" ref="ae3a2aa886134492f9a706f73b663db3c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual int const Sensor::get_num_values </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Accessor for number of values this sensor stores</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Size of values_ array </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="af7399742268d1ecc53a2fe0dcd2fd325"></a><!-- doxytag: member="Sensor::GetValues" ref="af7399742268d1ecc53a2fe0dcd2fd325" args="()=0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual double const* const Sensor::GetValues </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [pure virtual]</code></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -184,19 +202,36 @@ Protected Member Functions</h2></td></tr>
 <p>Returns the values held by this sensor</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>const array of doubles indicating values of this sensor </dd></dl>
 
-<p>Implemented in <a class="el" href="classFeedbackSensor.html#ae2ca9b734bf72a418d1143d5952b85f9">FeedbackSensor</a>.</p>
+<p>Implements <a class="el" href="classSensor.html#af7399742268d1ecc53a2fe0dcd2fd325">Sensor</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af0d2b8b236cb252ef0ced0b037a46676"></a><!-- doxytag: member="Sensor::Poll" ref="af0d2b8b236cb252ef0ced0b037a46676" args="()=0" -->
+<a class="anchor" id="af365f251e46136c5a04c4990b62043f4"></a><!-- doxytag: member="FeedbackSensor::ListenOnSocket" ref="af365f251e46136c5a04c4990b62043f4" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool Sensor::Poll </td>
+          <td class="memname">void FeedbackSensor::ListenOnSocket </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [protected, pure virtual]</code></td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The <a class="el" href="classFeedbackSensor.html#af365f251e46136c5a04c4990b62043f4">ListenOnSocket()</a> method is called by the <a class="el" href="FeedbackSensor_8h.html#a486c2bd5d0b5461a15fdd60beb732700">PollForFeedback()</a> method to start the listener and UDP receiver </p>
+
+</div>
+</div>
+<a class="anchor" id="a295f60e85adda08479de45c86d6c6cd8"></a><!-- doxytag: member="FeedbackSensor::Poll" ref="a295f60e85adda08479de45c86d6c6cd8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FeedbackSensor::Poll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [protected, virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -204,16 +239,16 @@ Protected Member Functions</h2></td></tr>
 <p>Polls the associated sensor to get its new value</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false on failure </dd></dl>
 
-<p>Implemented in <a class="el" href="classFeedbackSensor.html#a295f60e85adda08479de45c86d6c6cd8">FeedbackSensor</a>.</p>
+<p>Implements <a class="el" href="classSensor.html#af0d2b8b236cb252ef0ced0b037a46676">Sensor</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a15c12c5cf1ff7088c5524190ed355f29"></a><!-- doxytag: member="Sensor::SetValues" ref="a15c12c5cf1ff7088c5524190ed355f29" args="(double const *const values, int num_values)=0" -->
+<a class="anchor" id="ab75e30fbdd11cbb67c9f84757b0f6504"></a><!-- doxytag: member="FeedbackSensor::SetValues" ref="ab75e30fbdd11cbb67c9f84757b0f6504" args="(double const *const values, int num_values)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool Sensor::SetValues </td>
+          <td class="memname">bool FeedbackSensor::SetValues </td>
           <td>(</td>
           <td class="paramtype">double const *const&#160;</td>
           <td class="paramname"><em>values</em>, </td>
@@ -227,7 +262,7 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [pure virtual]</code></td>
+          <td></td><td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -242,18 +277,19 @@ Protected Member Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false if setting is not permitted </dd></dl>
 
-<p>Implemented in <a class="el" href="classFeedbackSensor.html#ab75e30fbdd11cbb67c9f84757b0f6504">FeedbackSensor</a>.</p>
+<p>Implements <a class="el" href="classSensor.html#a15c12c5cf1ff7088c5524190ed355f29">Sensor</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/<a class="el" href="Sensor_8h_source.html">Sensor.h</a></li>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/<a class="el" href="FeedbackSensor_8h_source.html">FeedbackSensor.h</a></li>
+<li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/<a class="el" href="FeedbackSensor_8cc.html">FeedbackSensor.cc</a></li>
 </ul>
 </div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="classSensor.html">Sensor</a>      </li>
+      <li class="navelem"><a class="el" href="classFeedbackSensor.html">FeedbackSensor</a>      </li>
       <li class="footer">Generated by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>

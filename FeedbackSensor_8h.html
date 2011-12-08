@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Social Hierarchical Learning: File Members</title>
+<title>Social Hierarchical Learning: /home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/FeedbackSensor.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -61,17 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li class="current"><a href="globals.html"><span>File&#160;Members</span></a></li>
-    </ul>
-  </div>
-  <div id="navrow3" class="tabs2">
-    <ul class="tablist">
-      <li><a href="globals.html"><span>All</span></a></li>
-      <li class="current"><a href="globals_func.html"><span>Functions</span></a></li>
-      <li><a href="globals_vars.html"><span>Variables</span></a></li>
-      <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
-      <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
-      <li><a href="globals_defs.html"><span>Defines</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div>
@@ -85,26 +75,66 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-  initNavTree('globals.html','');
+  initNavTree('FeedbackSensor_8h.html','');
 </script>
 <div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<h1>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/FeedbackSensor.h File Reference</h1>  </div>
+</div>
 <div class="contents">
-&#160;<ul>
-<li>GTEST_TEST_()
-: <a class="el" href="DummyUnitTest_8cc.html#af70e080549c4bffafb3c4f18695d224a">DummyUnitTest.cc</a>
-</li>
-<li>main()
-: <a class="el" href="UtilsUnitTest_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">UtilsUnitTest.cc</a>
-, <a class="el" href="DummyUnitTest_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">DummyUnitTest.cc</a>
-</li>
-<li>PollForFeedback()
-: <a class="el" href="FeedbackSensor_8h.html#a486c2bd5d0b5461a15fdd60beb732700">FeedbackSensor.h</a>
-</li>
-</ul>
+<div class="textblock"><code>#include &lt;pthread.h&gt;</code><br/>
+<code>#include &lt;sys/socket.h&gt;</code><br/>
+<code>#include &lt;netinet/in.h&gt;</code><br/>
+<code>#include &lt;cstdio&gt;</code><br/>
+<code>#include &lt;cstdlib&gt;</code><br/>
+<code>#include &lt;cstring&gt;</code><br/>
+<code>#include &lt;string&gt;</code><br/>
+<code>#include &lt;vector&gt;</code><br/>
+<code>#include &quot;Common/Utils.h&quot;</code><br/>
+<code>#include &quot;Student/Sensor.h&quot;</code><br/>
+</div>
+<p><a href="FeedbackSensor_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFeedbackSensor.html">FeedbackSensor</a></td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FeedbackSensor_8h.html#a486c2bd5d0b5461a15fdd60beb732700">PollForFeedback</a> (void *object)</td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<div class="textblock"><dl class="author"><dt><b>Author:</b></dt><dd>Thaddeus Diamond &lt;<a href="mailto:diamond@cs.yale.edu">diamond@cs.yale.edu</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.1</dd></dl>
+<h2><a class="anchor" id="DESCRIPTION"></a>
+DESCRIPTION</h2>
+<p>This is a sensor that receives feedback from the human controller. </p>
+</div><hr/><h2>Function Documentation</h2>
+<a class="anchor" id="a486c2bd5d0b5461a15fdd60beb732700"></a><!-- doxytag: member="FeedbackSensor.h::PollForFeedback" ref="a486c2bd5d0b5461a15fdd60beb732700" args="(void *object)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* PollForFeedback </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>object</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 </div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
+      <li class="navelem"><a class="el" href="FeedbackSensor_8h.html">FeedbackSensor.h</a>      </li>
       <li class="footer">Generated by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </li>
