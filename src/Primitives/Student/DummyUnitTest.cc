@@ -12,7 +12,7 @@
 #include <gtest/gtest.h>
 #include "Student/Dummy.h"
 
-class DummyTest : public ::testing::Test {
+class DummyTest : public testing::Test {
  protected:
   // Create a TAMER object before each test
   DummyTest() {
@@ -23,10 +23,6 @@ class DummyTest : public ::testing::Test {
   virtual ~DummyTest() {
     delete dummy_;
   }
-
-  // Unused virtual methods
-  virtual void SetUp() {}
-  virtual void TearDown() {}
 
   // Create a member variable for the TAMER learner
   Dummy* dummy_;

@@ -30,6 +30,7 @@ PROTOCEXE := $(PROTOB)/src/.libs/protoc
 # Directives for where the source files should look to include headers from
 TOP       := .
 PRIMDIR   := ./Primitives
+OBSVDIR   := ./Observation
 
 # '$(V)' controls whether the lab makefiles print verbose commands (the
 # actual shell commands run by Make), as well as the "overview" commands
@@ -42,7 +43,7 @@ V = @
 # Set std compiler options (linking for google test and pthread), LD_LIB
 CXX       := g++
 CXXFLAGS  := -g -I$(PROTOB)/src -I$(GTEST)/include -Wall -Werror
-CXXFLAGS  += -I$(TOP) -I$(OBJDIR) -I$(PRIMDIR)
+CXXFLAGS  += -I$(TOP) -I$(OBJDIR) -I$(PRIMDIR) -I$(OBSVDIR)
 MDFLAGS   := -MD
 LDFLAGS   := -lpthread -lgtest -L$(GTEST)/lib/.libs -lprotobuf -L$(PROTOB)/src/.libs
 LDLIBPATH := LD_LIBRARY_PATH=$(GTEST)/lib/.libs:$(PROTOB)/src/.libs

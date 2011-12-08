@@ -19,7 +19,7 @@ using Utils::Log;
 using Utils::SerializeToFile;
 using Utils::ParseFromFile;
 
-class UtilsTest : public ::testing::Test {
+class UtilsTest : public testing::Test {
  protected:
   UtilsTest() {}
   virtual ~UtilsTest() {}

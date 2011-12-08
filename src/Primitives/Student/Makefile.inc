@@ -17,8 +17,8 @@ TEST_OBJS :=
 include $(MAKEFILE_TEMPLATE)
 
 # Directive to make the test case
-PrimitivesStudentTest: $($(UPPERC_ROOT)_STUDENT_TESTS)
-	@for a in $($(UPPERC_ROOT)_STUDENT_TESTS); do \
+PrimitivesStudentTest: $($(UPPERC_DIR)_TESTS)
+	@for a in $(PRIMITIVES_STUDENT_TESTS); do \
 		echo == $$a ==; \
 		$(LDLIBPATH) $$a 2>$(LOGDIR)$${a#$(BINDIR)}; \
 	done

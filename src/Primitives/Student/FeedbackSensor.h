@@ -41,7 +41,7 @@ class FeedbackSensor : public Sensor {
   }
 
   /**
-   * Possible values for feedback (must match the FeedbackController)
+   * Possible values for feedback (must match the FeedbackController.java enum)
    **/
   enum {
     GOOD = 0,

@@ -18,7 +18,7 @@ include $(MAKEFILE_TEMPLATE)
 
 # Directive to make the test case
 PrimitivesQLearnerTest: $($(UPPERC_ROOT)_QLEARNER_TESTS)
-	@for a in $($(UPPERC_ROOT)_QLEARNER_TESTS); do \
+	@for a in $(PRIMITIVES_QLEARNER_TESTS); do \
 		echo == $$a ==; \
 		$(LDLIBPATH) $$a 2>$(LOGDIR)$${a#$(BINDIR)}; \
 	done

@@ -47,7 +47,7 @@ class Student {
    *
    * @return    True unless an error occurred in setup
    **/
-  virtual bool SetEnvironment(std::vector<Sensor*> const &sensors) = 0;
+  virtual bool SetEnvironment(vector<Sensor*> const &sensors) = 0;
 
   /**
    * Sets the internal list of motors that the student has access to. These
@@ -58,7 +58,7 @@ class Student {
    *
    * @return    True unless an error occurred in setup
    **/
-  virtual bool SetMotors(std::vector<Sensor*> const &motors) = 0;
+  virtual bool SetMotors(vector<Sensor*> const &motors) = 0;
 
   /**
    * Assigns this student a sensor whose value is to be interpreted as
