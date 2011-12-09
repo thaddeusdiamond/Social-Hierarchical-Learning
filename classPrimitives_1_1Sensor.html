@@ -105,16 +105,36 @@ Inheritance diagram for Primitives::Sensor:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#adeecfe96d56732be721d0e30d6df76fb">Sensor</a> (std::string sensor_name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#ac88a8ef18f345e68d314b1121c6f2694">~Sensor</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a21c7db423726d57b3e11477a069c5624">SetValues</a> (double const *const values, int num_values)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual double const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a182b50f66348971f0f2f17bafe571932">GetValues</a> ()=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#aa1640de9d225675c1e815e42b391badf">get_num_values</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual char const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a756438dd1981f7242ae5b93bc62d2cd7">get_name</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#ade7efda83e3b76c0094254b8c8d5a2c0">get_num_values</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a2790a7af645e8608be083b05732c0ae1">get_min_increment</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a1703c2fbce0d105cd7247029523f9f6e">get_nearby_threshold</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual std::string const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a234ede334341df450e0da313ca90e50e">get_name</a> () const </td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html#a0244a6fae6bc59f222ecc27268f76bde">Poll</a> ()=0</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="adeecfe96d56732be721d0e30d6df76fb"></a><!-- doxytag: member="Primitives::Sensor::Sensor" ref="adeecfe96d56732be721d0e30d6df76fb" args="(std::string sensor_name)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Primitives::Sensor::Sensor </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>sensor_name</em></td><td>)</td>
+          <td><code> [inline, explicit]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac88a8ef18f345e68d314b1121c6f2694"></a><!-- doxytag: member="Primitives::Sensor::~Sensor" ref="ac88a8ef18f345e68d314b1121c6f2694" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -133,15 +153,33 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a756438dd1981f7242ae5b93bc62d2cd7"></a><!-- doxytag: member="Primitives::Sensor::get_name" ref="a756438dd1981f7242ae5b93bc62d2cd7" args="()" -->
+<a class="anchor" id="a2790a7af645e8608be083b05732c0ae1"></a><!-- doxytag: member="Primitives::Sensor::get_min_increment" ref="a2790a7af645e8608be083b05732c0ae1" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual char const* const Primitives::Sensor::get_name </td>
+          <td class="memname">virtual int const Primitives::Sensor::get_min_increment </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Accessor for max # decimal places recorded by sensor</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Size of values_ array </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a234ede334341df450e0da313ca90e50e"></a><!-- doxytag: member="Primitives::Sensor::get_name" ref="a234ede334341df450e0da313ca90e50e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string const&amp; Primitives::Sensor::get_name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -151,7 +189,25 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa1640de9d225675c1e815e42b391badf"></a><!-- doxytag: member="Primitives::Sensor::get_num_values" ref="aa1640de9d225675c1e815e42b391badf" args="()" -->
+<a class="anchor" id="a1703c2fbce0d105cd7247029523f9f6e"></a><!-- doxytag: member="Primitives::Sensor::get_nearby_threshold" ref="a1703c2fbce0d105cd7247029523f9f6e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double Primitives::Sensor::get_nearby_threshold </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Provides an english-readable name for this sensor</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Const char* string with the name of this sensor </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ade7efda83e3b76c0094254b8c8d5a2c0"></a><!-- doxytag: member="Primitives::Sensor::get_num_values" ref="ade7efda83e3b76c0094254b8c8d5a2c0" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -159,7 +215,7 @@ Protected Member Functions</h2></td></tr>
           <td class="memname">virtual int const Primitives::Sensor::get_num_values </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td> const<code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>

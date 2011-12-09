@@ -106,9 +106,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#aec069c1f02ab8afcb27da85d684cbe25">StandardQLearner</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#a3e30c92b703e783bfaf974c4b070556e">Load</a> (string const &amp;filename)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#afd3d900034baaf79f613deb3c3edcfd1">Save</a> (string const &amp;filename)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#ae7ad51c1b377941de9597de2be841696">Init</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#aea6749f0208f7bba3f21667de2d112a7">Init</a> (std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const * &gt; const &amp;sensors)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#ad6c97f2e9c2fb2b289e9a0fb77bd5ffe">Learn</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#a47aa640522dec344127c2f03fa13f4cf">GetNearbyStates</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;cur_state, double search_radius, vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> const * &gt; &amp;nearby_states)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#adb3d1cf222b59b5b2e917390a72b4810">GetNearbyStates</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;cur_state, vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> const * &gt; &amp;nearby_states)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#ab896dcd9e9d1c2aaca3c9a96e4fa2d6e">AddNearbyEmptyStates</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#a568667b0dce8b156bcf32432e2f69add">GetNextState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;cur_state, <a class="el" href="classPrimitives_1_1State.html">State</a> const **next_state)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1StandardQLearner.html#a7024946b539f2cd0454b22c124ddaa1c">AssignCredit</a> (double signal)=0</td></tr>
 </table>
@@ -130,6 +131,31 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ab896dcd9e9d1c2aaca3c9a96e4fa2d6e"></a><!-- doxytag: member="Primitives::StandardQLearner::AddNearbyEmptyStates" ref="ab896dcd9e9d1c2aaca3c9a96e4fa2d6e" args="(State const &amp;state)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Primitives::StandardQLearner::AddNearbyEmptyStates </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Populates the <a class="el" href="classPrimitives_1_1QTable.html">QTable</a> with states describing all neighboring states of parameter 'state' if they don't already exist.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td><a class="el" href="classPrimitives_1_1State.html">State</a> in the <a class="el" href="classPrimitives_1_1QTable.html">QTable</a> to use as origin </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false on failure </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a7024946b539f2cd0454b22c124ddaa1c"></a><!-- doxytag: member="Primitives::StandardQLearner::AssignCredit" ref="a7024946b539f2cd0454b22c124ddaa1c" args="(double signal)=0" -->
 <div class="memitem">
 <div class="memproto">
@@ -144,7 +170,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Applies a reinforcement signal through this QLearner's <a class="el" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a></p>
+<p>Applies a reinforcement signal through this QLearner's <a class="el" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a> Should be applied after setting the current state of the system.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">signal</td><td>Double describing the feedback being received </td></tr>
@@ -157,7 +183,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a47aa640522dec344127c2f03fa13f4cf"></a><!-- doxytag: member="Primitives::StandardQLearner::GetNearbyStates" ref="a47aa640522dec344127c2f03fa13f4cf" args="(State const &amp;cur_state, double search_radius, vector&lt; State const * &gt; &amp;nearby_states)" -->
+<a class="anchor" id="adb3d1cf222b59b5b2e917390a72b4810"></a><!-- doxytag: member="Primitives::StandardQLearner::GetNearbyStates" ref="adb3d1cf222b59b5b2e917390a72b4810" args="(State const &amp;cur_state, vector&lt; State const * &gt; &amp;nearby_states)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -166,12 +192,6 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
           <td class="paramname"><em>cur_state</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>search_radius</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -191,7 +211,6 @@ Public Member Functions</h2></td></tr>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">cur_state</td><td>Vector of state descriptors </td></tr>
-    <tr><td class="paramname">search_radius</td><td>Double indicating euclidean distance to search </td></tr>
     <tr><td class="paramname">nearby_states</td><td>Empty vector of state descriptors to be populated with const pointers from within this object by the time the function returns</td></tr>
   </table>
   </dd>
@@ -238,14 +257,15 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae7ad51c1b377941de9597de2be841696"></a><!-- doxytag: member="Primitives::StandardQLearner::Init" ref="ae7ad51c1b377941de9597de2be841696" args="()" -->
+<a class="anchor" id="aea6749f0208f7bba3f21667de2d112a7"></a><!-- doxytag: member="Primitives::StandardQLearner::Init" ref="aea6749f0208f7bba3f21667de2d112a7" args="(std::vector&lt; Sensor const * &gt; const &amp;sensors)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool Primitives::StandardQLearner::Init </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const * &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>sensors</em></td><td>)</td>
           <td><code> [virtual]</code></td>
         </tr>
       </table>
@@ -254,7 +274,7 @@ Public Member Functions</h2></td></tr>
 <p>Clears table, initializes everything in the object to pristine and usable state.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false on failure </dd></dl>
 
-<p>Implements <a class="el" href="classPrimitives_1_1QLearner.html#a5f3ddfd29ac2d3c9c396e3b9315834b4">Primitives::QLearner</a>.</p>
+<p>Implements <a class="el" href="classPrimitives_1_1QLearner.html#a0211a17fa943f2a8ae0bbd6434346b30">Primitives::QLearner</a>.</p>
 
 </div>
 </div>
