@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>Social Hierarchical Learning: Main Page</title>
+<title>Social Hierarchical Learning: Social Hierarchical Learning</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -74,10 +74,41 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="doc-content">
 <div class="header">
   <div class="headertitle">
-<h1>Social Hierarchical Learning Documentation</h1>  </div>
+<h1>Social Hierarchical Learning </h1>  </div>
 </div>
 <div class="contents">
-</div>
+<div class="textblock"><p>A framework for autonomous robotic learning </p>
+<h2><a class="anchor" id="About"></a>
+About This Project</h2>
+<p>This project seeks to implement a new way for real robotic systems to learn how to operate in complex environments alongside humans.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd>Detailed description here...</dd></dl>
+<h2><a class="anchor" id="License"></a>
+License</h2>
+<p>This software is licensed under the MIT License. Please see "LICENSE". (c) 2011 Professor Brian Scassellati, Bradley Hayes, Thaddeus Diamond Yale University</p>
+<h2><a class="anchor" id="Prerequisites"></a>
+Prerequisites</h2>
+<ul>
+<li>GNU/Linux distro &gt;= 2.6.37.6</li>
+<li>G++ &gt;= 4.5.1</li>
+<li>Satisfy all dependencies of the following external libraries GoogleTest - Google's Unit Testing Framework ProtocolBuffers - Google's Framework for Serializable PODS</li>
+</ul>
+<h2><a class="anchor" id="Installation"></a>
+Installation</h2>
+<h3><a class="anchor" id="External"></a>
+Libraries</h3>
+<p>In order to compile the external libraries associated with the project, please run: $ ./install-ext</p>
+<p>To compile the source, please run: $ make -C src</p>
+<p>Three directories will be created: bin/, obj/ and logs/.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd>Tell how to run each individual program once the programs are able to be executed.</dd></dl>
+<h3><a class="anchor" id="Kinect"></a>
+Kinect</h3>
+<p>This project includes an external Kinect project that captures all data from the Kinect running on a Windows 7+ device and transfers it on a wire to the core processing unit, which can utilize the extra data to improve the learning process. The only dependency for that project is the Microsoft Research Beta SDK for Kinect.</p>
+<p>The project makes the assumption that the Research SDK is installed to: C:\Program Files (x86)\Microsoft Research KinectSDK</p>
+<p>To build the executable, open "ext/Kinect/KinectInterp.sln" in Visual C++ (2010 or greater, any edition). Click "Build Project", then "Start Debugging". An executable will appear in the "Release" subdirectory of the Kinect project root.</p>
+<h2><a class="anchor" id="Documentation"></a>
+Documentation</h2>
+<p>Documentation for this project is generated using Doxygen. Please see doc/DOXYGEN for details on how to compile documentation. Documentation from the master branch is available on the project website. </p>
+</div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
