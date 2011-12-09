@@ -1,0 +1,63 @@
+/**
+
+@mainpage Social Hierarchical Learning
+@brief A framework for autonomous robotic learning
+
+@section About About This Project
+This project seeks to implement a new way for real robotic systems to learn
+how to operate in complex environments alongside humans.
+
+  @todo Detailed description here...
+
+
+@section License
+This software is licensed under the MIT License.  Please see "LICENSE".
+(c) 2011 Professor Brian Scassellati, Bradley Hayes, Thaddeus Diamond
+Yale University
+
+
+@section Prerequisites
+  - GNU/Linux distro >= 2.6.37.6
+  - G++ >= 4.5.1
+  - Satisfy all dependencies of the following external libraries
+      * GoogleTest      - Google's Unit Testing Framework
+      * ProtocolBuffers - Google's Framework for Serializable PODS
+  
+  
+@section Installation
+@subsection External Libraries
+In order to compile the external libraries associated with the project, please
+run:
+    $ ./install-ext
+
+To compile the source, please run:
+    $ make -C src
+
+Three directories will be created: bin/, obj/ and logs/.
+
+  @todo Tell how to run each individual program once the programs
+        are able to be executed.
+
+
+@subsection Kinect
+This project includes an external Kinect project that captures all data from the
+Kinect running on a Windows 7+ device and transfers it on a wire to the core
+processing unit, which can utilize the extra data to improve the learning
+process. The only dependency for that project is the Microsoft Research Beta
+SDK for Kinect.
+
+The project makes the assumption that the Research SDK is installed to:
+  C:\\Program Files (x86)\\Microsoft Research KinectSDK
+
+To build the executable, open "ext/Kinect/KinectInterp.sln" in Visual C++
+(2010 or greater, any edition).  Click "Build Project", then "Start Debugging".
+An executable will appear in the "Release" subdirectory of the Kinect project
+root.
+
+
+@section Documentation
+Documentation for this project is generated using Doxygen.  Please see
+doc/DOXYGEN for details on how to compile documentation.  Documentation from the
+master branch is available on the project website.
+
+**/
