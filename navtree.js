@@ -101,6 +101,20 @@ var NAVTREE =
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Sensor.h", "Sensor_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Student.h", "Student_8h.html", null ]
     ] ],
+    [ "Directories", "dirs.html", [
+      [ "src", "dir_c75693cbfe18ae561db82d6a20cc191a.html", [
+        [ "Common", "dir_97cc3576ec3db4e8dce7ee16ca9741b8.html", null ],
+        [ "Observation", "dir_c742db9350b49471277f9d0d09124efa.html", [
+          [ "Observer", "dir_0a6b5c7244a615c347a03f710f56280d.html", null ]
+        ] ],
+        [ "Primitives", "dir_5c9b9b70cc45876b6f52f4b52401637b.html", [
+          [ "Credit", "dir_805dbd00f5e18a05c9a92271b75bc828.html", null ],
+          [ "Exploration", "dir_7310d8e56fe6f91de67b386af3e3f230.html", null ],
+          [ "QLearner", "dir_2bb11dad506790479601dd681dc3f34b.html", null ],
+          [ "Student", "dir_79841083aebc956ca371c9a65d580413.html", null ]
+        ] ]
+      ] ]
+    ] ],
     [ "File Members", "globals.html", null ]
   ] ]
 ];

@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
+      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -62,7 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -93,12 +94,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for Primitives::Student:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classPrimitives_1_1Student.png" usemap="#Primitives::Student_map" alt=""/>
-  <map id="Primitives::Student_map" name="Primitives::Student_map">
-<area href="classPrimitives_1_1Dummy.html" alt="Primitives::Dummy" shape="rect" coords="0,56,114,80"/>
-</map>
- </div></div>
+<div class="center"><img src="classPrimitives_1_1Student__inherit__graph.png" border="0" usemap="#Primitives_1_1Student_inherit__map" alt="Inheritance graph"/></div>
+<map name="Primitives_1_1Student_inherit__map" id="Primitives_1_1Student_inherit__map">
+<area shape="rect" id="node3" href="classPrimitives_1_1Dummy.html" title="Primitives::Dummy" alt="" coords="5,83,139,112"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classPrimitives_1_1Student-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -124,7 +123,10 @@ Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a6bf28a0f3f958ef11e9ffe4f0fa07f7e">environment_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a2bce366b696bef93dd4d93c380b43f36">motors_</a></td></tr>
 </table>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00036">36</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a710cbc8bc2959acb1d01fcab97d3c27f"></a><!-- doxytag: member="Primitives::Student::~Student" ref="a710cbc8bc2959acb1d01fcab97d3c27f" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -139,6 +141,8 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Destructor for a <a class="el" href="classPrimitives_1_1Student.html">Student</a> must free all memory it received from I/O and had buffered, also release the STUDENT it controls </p>
+
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00042">42</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -158,6 +162,8 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Accessor for sensors this student's environment </p>
 
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00134">134</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a546d2a1576b443778453534d2064c807"></a><!-- doxytag: member="Primitives::Student::get_motors" ref="a546d2a1576b443778453534d2064c807" args="() const " -->
@@ -175,6 +181,8 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Accessor for sensors this student's environment </p>
 
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00141">141</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a4f565f5aa2cbaca7f396783d8e587e97"></a><!-- doxytag: member="Primitives::Student::get_sensors" ref="a4f565f5aa2cbaca7f396783d8e587e97" args="() const " -->
@@ -191,6 +199,8 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Accessor for sensors associated with this student </p>
+
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00127">127</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -428,6 +438,8 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00145">145</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a2bce366b696bef93dd4d93c380b43f36"></a><!-- doxytag: member="Primitives::Student::motors_" ref="a2bce366b696bef93dd4d93c380b43f36" args="" -->
@@ -441,6 +453,8 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00146">146</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a5b04f3fb6f1a38f7cd680d71e234b300"></a><!-- doxytag: member="Primitives::Student::sensors_" ref="a5b04f3fb6f1a38f7cd680d71e234b300" args="" -->
@@ -453,6 +467,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00144">144</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>

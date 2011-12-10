@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
+      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -62,7 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -93,12 +94,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for Primitives::QLearner:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classPrimitives_1_1QLearner.png" usemap="#Primitives::QLearner_map" alt=""/>
-  <map id="Primitives::QLearner_map" name="Primitives::QLearner_map">
-<area href="classPrimitives_1_1StandardQLearner.html" alt="Primitives::StandardQLearner" shape="rect" coords="0,56,178,80"/>
-</map>
- </div></div>
+<div class="center"><img src="classPrimitives_1_1QLearner__inherit__graph.png" border="0" usemap="#Primitives_1_1QLearner_inherit__map" alt="Inheritance graph"/></div>
+<map name="Primitives_1_1QLearner_inherit__map" id="Primitives_1_1QLearner_inherit__map">
+<area shape="rect" id="node3" href="classPrimitives_1_1StandardQLearner.html" title="Primitives::StandardQLearner" alt="" coords="5,83,197,112"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for Primitives::QLearner:</div>
+<div class="dyncontent">
+<div class="center"><img src="classPrimitives_1_1QLearner__coll__graph.png" border="0" usemap="#Primitives_1_1QLearner_coll__map" alt="Collaboration graph"/></div>
+<map name="Primitives_1_1QLearner_coll__map" id="Primitives_1_1QLearner_coll__map">
+<area shape="rect" id="node4" href="classPrimitives_1_1ExplorationType.html" title="Primitives::ExplorationType" alt="" coords="5,197,187,227"/><area shape="rect" id="node7" href="classPrimitives_1_1CreditAssignmentType.html" title="Primitives::CreditAssignmentType" alt="" coords="227,197,448,227"/><area shape="rect" id="node2" href="classPrimitives_1_1QTable.html" title="Primitives::QTable" alt="" coords="144,5,275,35"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classPrimitives_1_1QLearner-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -125,7 +131,10 @@ Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1ExplorationType.html">ExplorationType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a></td></tr>
 </table>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00033">33</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a7a12b5c09f3649d30c148215bb982d00"></a><!-- doxytag: member="Primitives::QLearner::~QLearner" ref="a7a12b5c09f3649d30c148215bb982d00" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -140,6 +149,8 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Destructor for <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> must free all memory it received from I/O and had buffered </p>
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00039">39</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -186,6 +197,8 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Returns a stack of recently visited states</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Stack of <a class="el" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00170">170</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -394,6 +407,8 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if initialized properly, false if error. </dd></dl>
 
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00116">116</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a4efce0391c10cd6dd14e12bb0646e237"></a><!-- doxytag: member="Primitives::QLearner::SetCurrentState" ref="a4efce0391c10cd6dd14e12bb0646e237" args="(State *const state)" -->
@@ -417,6 +432,8 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00157">157</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -461,6 +478,8 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if initialized properly, false if error. </dd></dl>
 
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00131">131</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
@@ -475,6 +494,8 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00177">177</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a7bc3dfe443f9b87191fffcdf8918c331"></a><!-- doxytag: member="Primitives::QLearner::exploration_type_" ref="a7bc3dfe443f9b87191fffcdf8918c331" args="" -->
@@ -487,6 +508,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00178">178</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -501,6 +524,8 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00176">176</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a5f2f5a43b40cbbdef54a0a42cd8bac52"></a><!-- doxytag: member="Primitives::QLearner::sensors_" ref="a5f2f5a43b40cbbdef54a0a42cd8bac52" args="" -->
@@ -514,6 +539,8 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00179">179</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a2487a9ae6acce1779ca8902cca562c81"></a><!-- doxytag: member="Primitives::QLearner::state_history_" ref="a2487a9ae6acce1779ca8902cca562c81" args="" -->
@@ -526,6 +553,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00175">175</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>

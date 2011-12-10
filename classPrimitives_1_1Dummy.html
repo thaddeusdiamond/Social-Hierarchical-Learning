@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
+      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -62,7 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -92,12 +93,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for Primitives::Dummy:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classPrimitives_1_1Dummy.png" usemap="#Primitives::Dummy_map" alt=""/>
-  <map id="Primitives::Dummy_map" name="Primitives::Dummy_map">
-<area href="classPrimitives_1_1Student.html" alt="Primitives::Student" shape="rect" coords="0,0,114,24"/>
-</map>
- </div></div>
+<div class="center"><img src="classPrimitives_1_1Dummy__inherit__graph.png" border="0" usemap="#Primitives_1_1Dummy_inherit__map" alt="Inheritance graph"/></div>
+<map name="Primitives_1_1Dummy_inherit__map" id="Primitives_1_1Dummy_inherit__map">
+<area shape="rect" id="node2" href="classPrimitives_1_1Student.html" title="Primitives::Student" alt="" coords="5,5,139,35"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for Primitives::Dummy:</div>
+<div class="dyncontent">
+<div class="center"><img src="classPrimitives_1_1Dummy__coll__graph.png" border="0" usemap="#Primitives_1_1Dummy_coll__map" alt="Collaboration graph"/></div>
+<map name="Primitives_1_1Dummy_coll__map" id="Primitives_1_1Dummy_coll__map">
+<area shape="rect" id="node2" href="classPrimitives_1_1Student.html" title="Primitives::Student" alt="" coords="5,5,139,35"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classPrimitives_1_1Dummy-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -113,7 +119,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#a1990a71257b949f01fd0ee984019162b">Learn</a> (Primitive *prim, Motor *active_motors, size_t motors_len, Object *objects, size_t objects_len)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#a87623b972a63c6662a50ecd607e6314e">StopLearning</a> (void)</td></tr>
 </table>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8h_source.html#l00027">27</a> of file <a class="el" href="Primitives_2Student_2Dummy_8h_source.html">Dummy.h</a>.</p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a5332ba74b9c2937fa1793362f11cf78f"></a><!-- doxytag: member="Primitives::Dummy::Dummy" ref="a5332ba74b9c2937fa1793362f11cf78f" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -128,6 +137,8 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>The default constructor initializes a null learner object </p>
+
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8h_source.html#l00032">32</a> of file <a class="el" href="Primitives_2Student_2Dummy_8h_source.html">Dummy.h</a>.</p>
 
 </div>
 </div>
@@ -145,6 +156,8 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Destructor for dummy student must free all memory it received from I/O and had buffered </p>
+
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8h_source.html#l00038">38</a> of file <a class="el" href="Primitives_2Student_2Dummy_8h_source.html">Dummy.h</a>.</p>
 
 </div>
 </div>
@@ -206,6 +219,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classPrimitives_1_1Student.html#a1f3901ebd879650f9b4796d722ba7338">Primitives::Student</a>.</p>
 
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00037">37</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="aa07f415518d5dfe78c08fa23ddbf62e8"></a><!-- doxytag: member="Primitives::Dummy::LoadComparables" ref="aa07f415518d5dfe78c08fa23ddbf62e8" args="(Primitive *prim, Key *tables, size_t tables_len)" -->
@@ -251,6 +266,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classPrimitives_1_1Student.html#afa98cb5cb58c2a90cd2e7bcec3e74047">Primitives::Student</a>.</p>
 
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00032">32</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="acb940c6df7f4c7a01ca70ce4ce7ad52c"></a><!-- doxytag: member="Primitives::Dummy::SetEnvironment" ref="acb940c6df7f4c7a01ca70ce4ce7ad52c" args="(std::vector&lt; Sensor * &gt; const &amp;sensors)" -->
@@ -267,6 +284,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00016">16</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
 
 </div>
 </div>
@@ -287,6 +306,8 @@ Public Member Functions</h2></td></tr>
 <p>Assigns this student a sensor whose value is to be interpreted as a reinforcement signal. It will be polled along with the environment and self sensors, but its value will be passed to the CreditAssignment object of the internal <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a>. </p>
 
 <p>Implements <a class="el" href="classPrimitives_1_1Student.html#af405e7fa77284ae9e4dd093016f1a50c">Primitives::Student</a>.</p>
+
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00028">28</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
 
 </div>
 </div>
@@ -315,6 +336,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classPrimitives_1_1Student.html#a8b1445c719478ad24d5e8821afde046d">Primitives::Student</a>.</p>
 
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00024">24</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a7acaa9fb693541aac4825e5718d5b3a4"></a><!-- doxytag: member="Primitives::Dummy::SetMotors" ref="a7acaa9fb693541aac4825e5718d5b3a4" args="(std::vector&lt; Sensor * &gt; const &amp;motors)" -->
@@ -331,6 +354,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00020">20</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
 
 </div>
 </div>
@@ -353,11 +378,13 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classPrimitives_1_1Student.html#a31140dfb0361a08965ebf99d9113b33a">Primitives::Student</a>.</p>
 
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00042">42</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/<a class="el" href="Primitives_2Student_2Dummy_8h_source.html">Dummy.h</a></li>
-<li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/<a class="el" href="Primitives_2Student_2Dummy_8cc.html">Dummy.cc</a></li>
+<li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/<a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a></li>
 </ul>
 </div>
 </div>

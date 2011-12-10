@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$namespacePrimitives.html#a5a52b7aaf0739653a26d3adf8534f333" title="Primitives::CommunicateWithCreate" alt="" coords="309,5,544,35"/>
+<area shape="rect" id="node7" href="$namespaceUtils.html#a28b8fa0357359dc303a925d23e73019c" title="Utils::Die" alt="" coords="388,59,465,88"/>
+<area shape="rect" id="node5" href="$classPrimitives_1_1CreateSensor.html#a536c0514060e0befc66c47fc967211df" title="Primitives::CreateSensor::ListenOnSocket" alt="" coords="592,5,861,35"/>
+</map>

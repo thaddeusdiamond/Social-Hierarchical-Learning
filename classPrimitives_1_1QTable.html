@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
+      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -62,7 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -101,7 +102,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#aec673f322384dae23266716d3abca851">HasState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;needle)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPrimitives_1_1State.html">State</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4">AddState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state)</td></tr>
 </table>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00020">20</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a6264ecae3a2580ed42026960a477b6a9"></a><!-- doxytag: member="Primitives::QTable::QTable" ref="a6264ecae3a2580ed42026960a477b6a9" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -116,6 +120,8 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Default Constructor </p>
+
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00025">25</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 </div>
 </div>
@@ -133,6 +139,8 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Destructor for <a class="el" href="classPrimitives_1_1QTable.html">QTable</a>: Deletes all states internally created/held </p>
+
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00030">30</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 </div>
 </div>
@@ -160,6 +168,8 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Pointer to internal copy of state param </dd></dl>
 
+<p>Definition at line <a class="el" href="QTable_8cc_source.html#l00043">43</a> of file <a class="el" href="QTable_8cc_source.html">QTable.cc</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="aec588c7c4f5f2b128a6a51f1732faa5c"></a><!-- doxytag: member="Primitives::QTable::get_states" ref="aec588c7c4f5f2b128a6a51f1732faa5c" args="() const " -->
@@ -176,6 +186,8 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <dl class="return"><dt><b>Returns:</b></dt><dd>direct access to states vector </dd></dl>
+
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00041">41</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 </div>
 </div>
@@ -201,6 +213,17 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>NULL if needle not found, else: state pointer to internal version </dd></dl>
+
+<p>Definition at line <a class="el" href="QTable_8cc_source.html#l00016">16</a> of file <a class="el" href="QTable_8cc_source.html">QTable.cc</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classPrimitives_1_1QTable_a3e2cc48414af3c0bcf93bfde2c0090c8_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_a3e2cc48414af3c0bcf93bfde2c0090c8_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1QTable_a3e2cc48414af3c0bcf93bfde2c0090c8_cgraph" id="classPrimitives_1_1QTable_a3e2cc48414af3c0bcf93bfde2c0090c8_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="247,5,412,35"/><area shape="rect" id="node5" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="461,5,685,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -229,11 +252,13 @@ Public Member Functions</h2></td></tr>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Use a bloom filter to find whether or not the <a class="el" href="classPrimitives_1_1QTable.html">QTable</a> contains the needle. Returning true here doesn't actually mean we have the state, it just means that we probably have it, and it's worth the cycles to search for it in the big mess that is the states_ vector.</dd></dl>
 <p>Returning a value of false means we absolutely 100% have not seen that state. </p>
 
+<p>Definition at line <a class="el" href="QTable_8cc_source.html#l00039">39</a> of file <a class="el" href="QTable_8cc_source.html">QTable.cc</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/<a class="el" href="QTable_8h_source.html">QTable.h</a></li>
-<li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/<a class="el" href="QTable_8cc.html">QTable.cc</a></li>
+<li>/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/<a class="el" href="QTable_8cc_source.html">QTable.cc</a></li>
 </ul>
 </div>
 </div>
