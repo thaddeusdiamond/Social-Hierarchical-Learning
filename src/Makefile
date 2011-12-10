@@ -20,7 +20,7 @@ GTEST     := $(EXTDIR)/googletest
 PROTOB    := $(EXTDIR)/protobuf
 
 # Doxygen specific directives
-DOCOUT    := ../doc/latex ../doc/html
+DOCOUT    := ../doc/html
 DOXY_EXE  := doxygen
 DOXY_CONF := SHL.doxygen
 
@@ -76,7 +76,7 @@ include Performance/Makefile.inc
 Test: $(TESTS)
 
 clean:
-	rm -rf $(OBJDIR) $(LOGDIR) $(BINDIR) $(DOCOUT)/*
+	rm -rf $(OBJDIR) $(LOGDIR) $(BINDIR) $(STORAGE) $(DOCOUT)
 	
 # This magic automatically generates makefile dependencies
 # for header files included from C source files we compile,
@@ -100,4 +100,4 @@ always:
            $(foreach dir, $(OBJDIRS), $(OBJDIR)/$(dir)/%.pb.cc) \
            $(foreach dir, $(OBJDIRS), $(OBJDIR)/$(dir)/%.pb.h)
 
-.PHONY: all always clean test with-doxy
+.PHONY: all always clean test
