@@ -1,0 +1,30 @@
+These papers should be able to be compiled individually by executing:
+
+  $  cd <DESIRED_CONFERENCE_FOLDER>
+  $  make
+
+Or, alternatively, all can be made at once by executing:
+
+  $  ./make_all
+
+The makefiles work by executing the proper sequence of latex commands and
+should provide the most recent version possible (i.e. all bibtex references
+updated, all figures in place, etc.).  If you are using an X login or are on
+the machine natively, running make will cause Adobe Reader to launch with
+the newly compiled paper by invoking:
+
+  $  acroread <PDF_OUTPUT_FILENAME>
+
+Note that if "acroread" is not in your path this will not work.  There may
+also be issues with getting acroread to refresh properly.  To avoid this
+behavior (but make the paper) simply type:
+
+  $  make without-display
+
+Other available options are:
+
+  $  make view-dvi      # Relies on xdvi
+  $  make print         # Relies on dvips
+  $  make clean         # Full cleanup of output directory
+
+Which may or may not work depending on your system installs (works on Zoo).
