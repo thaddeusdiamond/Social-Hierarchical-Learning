@@ -15,9 +15,15 @@
 
 namespace {
 
-const ::google::protobuf::Descriptor* KinectInterpProto_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* KinectData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  KinectInterpProto_reflection_ = NULL;
+  KinectData_reflection_ = NULL;
+const ::google::protobuf::Descriptor* KinectData_Person_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  KinectData_Person_reflection_ = NULL;
+const ::google::protobuf::Descriptor* KinectData_Person_SkeletonPosition_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  KinectData_Person_SkeletonPosition_reflection_ = NULL;
 
 }  // namespace
 
@@ -28,21 +34,55 @@ void protobuf_AssignDesc_KinectInterp_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "KinectInterp.proto");
   GOOGLE_CHECK(file != NULL);
-  KinectInterpProto_descriptor_ = file->message_type(0);
-  static const int KinectInterpProto_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectInterpProto, active_skeletons_),
+  KinectData_descriptor_ = file->message_type(0);
+  static const int KinectData_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData, people_),
   };
-  KinectInterpProto_reflection_ =
+  KinectData_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      KinectInterpProto_descriptor_,
-      KinectInterpProto::default_instance_,
-      KinectInterpProto_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectInterpProto, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectInterpProto, _unknown_fields_),
+      KinectData_descriptor_,
+      KinectData::default_instance_,
+      KinectData_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(KinectInterpProto));
+      sizeof(KinectData));
+  KinectData_Person_descriptor_ = KinectData_descriptor_->nested_type(0);
+  static const int KinectData_Person_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData_Person, id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData_Person, active_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData_Person, skeleton_positions_),
+  };
+  KinectData_Person_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      KinectData_Person_descriptor_,
+      KinectData_Person::default_instance_,
+      KinectData_Person_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData_Person, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData_Person, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(KinectData_Person));
+  KinectData_Person_SkeletonPosition_descriptor_ = KinectData_Person_descriptor_->nested_type(0);
+  static const int KinectData_Person_SkeletonPosition_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData_Person_SkeletonPosition, x_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData_Person_SkeletonPosition, y_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData_Person_SkeletonPosition, z_),
+  };
+  KinectData_Person_SkeletonPosition_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      KinectData_Person_SkeletonPosition_descriptor_,
+      KinectData_Person_SkeletonPosition::default_instance_,
+      KinectData_Person_SkeletonPosition_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData_Person_SkeletonPosition, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(KinectData_Person_SkeletonPosition, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(KinectData_Person_SkeletonPosition));
 }
 
 namespace {
@@ -56,14 +96,22 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    KinectInterpProto_descriptor_, &KinectInterpProto::default_instance());
+    KinectData_descriptor_, &KinectData::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    KinectData_Person_descriptor_, &KinectData_Person::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    KinectData_Person_SkeletonPosition_descriptor_, &KinectData_Person_SkeletonPosition::default_instance());
 }
 
 }  // namespace
 
 void protobuf_ShutdownFile_KinectInterp_2eproto() {
-  delete KinectInterpProto::default_instance_;
-  delete KinectInterpProto_reflection_;
+  delete KinectData::default_instance_;
+  delete KinectData_reflection_;
+  delete KinectData_Person::default_instance_;
+  delete KinectData_Person_reflection_;
+  delete KinectData_Person_SkeletonPosition::default_instance_;
+  delete KinectData_Person_SkeletonPosition_reflection_;
 }
 
 void protobuf_AddDesc_KinectInterp_2eproto() {
@@ -73,12 +121,20 @@ void protobuf_AddDesc_KinectInterp_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022KinectInterp.proto\"-\n\021KinectInterpProt"
-    "o\022\030\n\020active_skeletons\030\001 \003(\010", 67);
+    "\n\022KinectInterp.proto\"\315\001\n\nKinectData\022\"\n\006p"
+    "eople\030\001 \003(\0132\022.KinectData.Person\032\232\001\n\006Pers"
+    "on\022\n\n\002id\030\001 \002(\005\022\016\n\006active\030\013 \002(\010\022\?\n\022skelet"
+    "on_positions\030\025 \003(\0132#.KinectData.Person.S"
+    "keletonPosition\0323\n\020SkeletonPosition\022\t\n\001x"
+    "\030\001 \002(\001\022\t\n\001y\030\002 \002(\001\022\t\n\001z\030\003 \002(\005", 228);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "KinectInterp.proto", &protobuf_RegisterTypes);
-  KinectInterpProto::default_instance_ = new KinectInterpProto();
-  KinectInterpProto::default_instance_->InitAsDefaultInstance();
+  KinectData::default_instance_ = new KinectData();
+  KinectData_Person::default_instance_ = new KinectData_Person();
+  KinectData_Person_SkeletonPosition::default_instance_ = new KinectData_Person_SkeletonPosition();
+  KinectData::default_instance_->InitAsDefaultInstance();
+  KinectData_Person::default_instance_->InitAsDefaultInstance();
+  KinectData_Person_SkeletonPosition::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_KinectInterp_2eproto);
 }
 
@@ -93,87 +149,121 @@ struct StaticDescriptorInitializer_KinectInterp_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int KinectInterpProto::kActiveSkeletonsFieldNumber;
+const int KinectData_Person_SkeletonPosition::kXFieldNumber;
+const int KinectData_Person_SkeletonPosition::kYFieldNumber;
+const int KinectData_Person_SkeletonPosition::kZFieldNumber;
 #endif  // !_MSC_VER
 
-KinectInterpProto::KinectInterpProto()
+KinectData_Person_SkeletonPosition::KinectData_Person_SkeletonPosition()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void KinectInterpProto::InitAsDefaultInstance() {
+void KinectData_Person_SkeletonPosition::InitAsDefaultInstance() {
 }
 
-KinectInterpProto::KinectInterpProto(const KinectInterpProto& from)
+KinectData_Person_SkeletonPosition::KinectData_Person_SkeletonPosition(const KinectData_Person_SkeletonPosition& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void KinectInterpProto::SharedCtor() {
+void KinectData_Person_SkeletonPosition::SharedCtor() {
   _cached_size_ = 0;
+  x_ = 0;
+  y_ = 0;
+  z_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-KinectInterpProto::~KinectInterpProto() {
+KinectData_Person_SkeletonPosition::~KinectData_Person_SkeletonPosition() {
   SharedDtor();
 }
 
-void KinectInterpProto::SharedDtor() {
+void KinectData_Person_SkeletonPosition::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void KinectInterpProto::SetCachedSize(int size) const {
+void KinectData_Person_SkeletonPosition::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* KinectInterpProto::descriptor() {
+const ::google::protobuf::Descriptor* KinectData_Person_SkeletonPosition::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return KinectInterpProto_descriptor_;
+  return KinectData_Person_SkeletonPosition_descriptor_;
 }
 
-const KinectInterpProto& KinectInterpProto::default_instance() {
+const KinectData_Person_SkeletonPosition& KinectData_Person_SkeletonPosition::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_KinectInterp_2eproto();  return *default_instance_;
 }
 
-KinectInterpProto* KinectInterpProto::default_instance_ = NULL;
+KinectData_Person_SkeletonPosition* KinectData_Person_SkeletonPosition::default_instance_ = NULL;
 
-KinectInterpProto* KinectInterpProto::New() const {
-  return new KinectInterpProto;
+KinectData_Person_SkeletonPosition* KinectData_Person_SkeletonPosition::New() const {
+  return new KinectData_Person_SkeletonPosition;
 }
 
-void KinectInterpProto::Clear() {
-  active_skeletons_.Clear();
+void KinectData_Person_SkeletonPosition::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    x_ = 0;
+    y_ = 0;
+    z_ = 0;
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool KinectInterpProto::MergePartialFromCodedStream(
+bool KinectData_Person_SkeletonPosition::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated bool active_skeletons = 1;
+      // required double x = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_active_skeletons:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 1, 8, input, this->mutable_active_skeletons())));
-        } else if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
-                   == ::google::protobuf::internal::WireFormatLite::
-                      WIRETYPE_LENGTH_DELIMITED) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, this->mutable_active_skeletons())));
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &x_)));
+          set_has_x();
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(8)) goto parse_active_skeletons;
+        if (input->ExpectTag(17)) goto parse_y;
+        break;
+      }
+      
+      // required double y = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED64) {
+         parse_y:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &y_)));
+          set_has_y();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_z;
+        break;
+      }
+      
+      // required int32 z = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_z:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &z_)));
+          set_has_z();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -194,12 +284,21 @@ bool KinectInterpProto::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void KinectInterpProto::SerializeWithCachedSizes(
+void KinectData_Person_SkeletonPosition::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated bool active_skeletons = 1;
-  for (int i = 0; i < this->active_skeletons_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(
-      1, this->active_skeletons(i), output);
+  // required double x = 1;
+  if (has_x()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->x(), output);
+  }
+  
+  // required double y = 2;
+  if (has_y()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->y(), output);
+  }
+  
+  // required int32 z = 3;
+  if (has_z()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->z(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -208,12 +307,21 @@ void KinectInterpProto::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* KinectInterpProto::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* KinectData_Person_SkeletonPosition::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // repeated bool active_skeletons = 1;
-  for (int i = 0; i < this->active_skeletons_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteBoolToArray(1, this->active_skeletons(i), target);
+  // required double x = 1;
+  if (has_x()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->x(), target);
+  }
+  
+  // required double y = 2;
+  if (has_y()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->y(), target);
+  }
+  
+  // required int32 z = 3;
+  if (has_z()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->z(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -223,14 +331,314 @@ void KinectInterpProto::SerializeWithCachedSizes(
   return target;
 }
 
-int KinectInterpProto::ByteSize() const {
+int KinectData_Person_SkeletonPosition::ByteSize() const {
   int total_size = 0;
   
-  // repeated bool active_skeletons = 1;
-  {
-    int data_size = 0;
-    data_size = 1 * this->active_skeletons_size();
-    total_size += 1 * this->active_skeletons_size() + data_size;
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required double x = 1;
+    if (has_x()) {
+      total_size += 1 + 8;
+    }
+    
+    // required double y = 2;
+    if (has_y()) {
+      total_size += 1 + 8;
+    }
+    
+    // required int32 z = 3;
+    if (has_z()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->z());
+    }
+    
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void KinectData_Person_SkeletonPosition::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const KinectData_Person_SkeletonPosition* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const KinectData_Person_SkeletonPosition*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void KinectData_Person_SkeletonPosition::MergeFrom(const KinectData_Person_SkeletonPosition& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_x()) {
+      set_x(from.x());
+    }
+    if (from.has_y()) {
+      set_y(from.y());
+    }
+    if (from.has_z()) {
+      set_z(from.z());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void KinectData_Person_SkeletonPosition::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void KinectData_Person_SkeletonPosition::CopyFrom(const KinectData_Person_SkeletonPosition& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool KinectData_Person_SkeletonPosition::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  
+  return true;
+}
+
+void KinectData_Person_SkeletonPosition::Swap(KinectData_Person_SkeletonPosition* other) {
+  if (other != this) {
+    std::swap(x_, other->x_);
+    std::swap(y_, other->y_);
+    std::swap(z_, other->z_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata KinectData_Person_SkeletonPosition::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = KinectData_Person_SkeletonPosition_descriptor_;
+  metadata.reflection = KinectData_Person_SkeletonPosition_reflection_;
+  return metadata;
+}
+
+
+// -------------------------------------------------------------------
+
+#ifndef _MSC_VER
+const int KinectData_Person::kIdFieldNumber;
+const int KinectData_Person::kActiveFieldNumber;
+const int KinectData_Person::kSkeletonPositionsFieldNumber;
+#endif  // !_MSC_VER
+
+KinectData_Person::KinectData_Person()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void KinectData_Person::InitAsDefaultInstance() {
+}
+
+KinectData_Person::KinectData_Person(const KinectData_Person& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void KinectData_Person::SharedCtor() {
+  _cached_size_ = 0;
+  id_ = 0;
+  active_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+KinectData_Person::~KinectData_Person() {
+  SharedDtor();
+}
+
+void KinectData_Person::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void KinectData_Person::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* KinectData_Person::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return KinectData_Person_descriptor_;
+}
+
+const KinectData_Person& KinectData_Person::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_KinectInterp_2eproto();  return *default_instance_;
+}
+
+KinectData_Person* KinectData_Person::default_instance_ = NULL;
+
+KinectData_Person* KinectData_Person::New() const {
+  return new KinectData_Person;
+}
+
+void KinectData_Person::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    id_ = 0;
+    active_ = false;
+  }
+  skeleton_positions_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool KinectData_Person::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 id = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &id_)));
+          set_has_id();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(88)) goto parse_active;
+        break;
+      }
+      
+      // required bool active = 11;
+      case 11: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_active:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &active_)));
+          set_has_active();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(170)) goto parse_skeleton_positions;
+        break;
+      }
+      
+      // repeated .KinectData.Person.SkeletonPosition skeleton_positions = 21;
+      case 21: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_skeleton_positions:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_skeleton_positions()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(170)) goto parse_skeleton_positions;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+      
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void KinectData_Person::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
+  }
+  
+  // required bool active = 11;
+  if (has_active()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(11, this->active(), output);
+  }
+  
+  // repeated .KinectData.Person.SkeletonPosition skeleton_positions = 21;
+  for (int i = 0; i < this->skeleton_positions_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      21, this->skeleton_positions(i), output);
+  }
+  
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* KinectData_Person::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 id = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
+  }
+  
+  // required bool active = 11;
+  if (has_active()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(11, this->active(), target);
+  }
+  
+  // repeated .KinectData.Person.SkeletonPosition skeleton_positions = 21;
+  for (int i = 0; i < this->skeleton_positions_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        21, this->skeleton_positions(i), target);
+  }
+  
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int KinectData_Person::ByteSize() const {
+  int total_size = 0;
+  
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 id = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->id());
+    }
+    
+    // required bool active = 11;
+    if (has_active()) {
+      total_size += 1 + 1;
+    }
+    
+  }
+  // repeated .KinectData.Person.SkeletonPosition skeleton_positions = 21;
+  total_size += 2 * this->skeleton_positions_size();
+  for (int i = 0; i < this->skeleton_positions_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->skeleton_positions(i));
   }
   
   if (!unknown_fields().empty()) {
@@ -244,10 +652,10 @@ int KinectInterpProto::ByteSize() const {
   return total_size;
 }
 
-void KinectInterpProto::MergeFrom(const ::google::protobuf::Message& from) {
+void KinectData_Person::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const KinectInterpProto* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const KinectInterpProto*>(
+  const KinectData_Person* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const KinectData_Person*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -256,43 +664,262 @@ void KinectInterpProto::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void KinectInterpProto::MergeFrom(const KinectInterpProto& from) {
+void KinectData_Person::MergeFrom(const KinectData_Person& from) {
   GOOGLE_CHECK_NE(&from, this);
-  active_skeletons_.MergeFrom(from.active_skeletons_);
+  skeleton_positions_.MergeFrom(from.skeleton_positions_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      set_id(from.id());
+    }
+    if (from.has_active()) {
+      set_active(from.active());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void KinectInterpProto::CopyFrom(const ::google::protobuf::Message& from) {
+void KinectData_Person::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void KinectInterpProto::CopyFrom(const KinectInterpProto& from) {
+void KinectData_Person::CopyFrom(const KinectData_Person& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool KinectInterpProto::IsInitialized() const {
+bool KinectData_Person::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
   
+  for (int i = 0; i < skeleton_positions_size(); i++) {
+    if (!this->skeleton_positions(i).IsInitialized()) return false;
+  }
   return true;
 }
 
-void KinectInterpProto::Swap(KinectInterpProto* other) {
+void KinectData_Person::Swap(KinectData_Person* other) {
   if (other != this) {
-    active_skeletons_.Swap(&other->active_skeletons_);
+    std::swap(id_, other->id_);
+    std::swap(active_, other->active_);
+    skeleton_positions_.Swap(&other->skeleton_positions_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata KinectInterpProto::GetMetadata() const {
+::google::protobuf::Metadata KinectData_Person::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = KinectInterpProto_descriptor_;
-  metadata.reflection = KinectInterpProto_reflection_;
+  metadata.descriptor = KinectData_Person_descriptor_;
+  metadata.reflection = KinectData_Person_reflection_;
+  return metadata;
+}
+
+
+// -------------------------------------------------------------------
+
+#ifndef _MSC_VER
+const int KinectData::kPeopleFieldNumber;
+#endif  // !_MSC_VER
+
+KinectData::KinectData()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void KinectData::InitAsDefaultInstance() {
+}
+
+KinectData::KinectData(const KinectData& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void KinectData::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+KinectData::~KinectData() {
+  SharedDtor();
+}
+
+void KinectData::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void KinectData::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* KinectData::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return KinectData_descriptor_;
+}
+
+const KinectData& KinectData::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_KinectInterp_2eproto();  return *default_instance_;
+}
+
+KinectData* KinectData::default_instance_ = NULL;
+
+KinectData* KinectData::New() const {
+  return new KinectData;
+}
+
+void KinectData::Clear() {
+  people_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool KinectData::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .KinectData.Person people = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_people:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_people()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(10)) goto parse_people;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+      
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void KinectData::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // repeated .KinectData.Person people = 1;
+  for (int i = 0; i < this->people_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->people(i), output);
+  }
+  
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* KinectData::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // repeated .KinectData.Person people = 1;
+  for (int i = 0; i < this->people_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->people(i), target);
+  }
+  
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int KinectData::ByteSize() const {
+  int total_size = 0;
+  
+  // repeated .KinectData.Person people = 1;
+  total_size += 1 * this->people_size();
+  for (int i = 0; i < this->people_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->people(i));
+  }
+  
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void KinectData::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const KinectData* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const KinectData*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void KinectData::MergeFrom(const KinectData& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  people_.MergeFrom(from.people_);
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void KinectData::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void KinectData::CopyFrom(const KinectData& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool KinectData::IsInitialized() const {
+  
+  for (int i = 0; i < people_size(); i++) {
+    if (!this->people(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void KinectData::Swap(KinectData* other) {
+  if (other != this) {
+    people_.Swap(&other->people_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata KinectData::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = KinectData_descriptor_;
+  metadata.reflection = KinectData_reflection_;
   return metadata;
 }
 

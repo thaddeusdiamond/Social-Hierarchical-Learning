@@ -9,9 +9,9 @@
 #include <MMSystem.h>
 #include <csignal>
 
-void GetDepth(KinectInterpProto* storage, HANDLE depth_stream_handle);
-void GetVideo(KinectInterpProto* storage, HANDLE video_stream_handle);
-void GetSkeleton(KinectInterpProto* storage, pair<int, bool>* active_skeletons);
+void GetDepth(KinectData* storage, HANDLE depth_stream_handle);
+void GetVideo(KinectData* storage, HANDLE video_stream_handle);
+void GetSkeleton(KinectData* storage);
 
 int main(int argc, char* argv[]) {
   // Set up the handles to be used in kinect NUI tracking
@@ -54,18 +54,9 @@ int main(int argc, char* argv[]) {
       total_frames = 0;
   signal(SIGINT, &Signal::StopProgram);
 
-  // Globally modified loop variables (I know, bad comment...)
-  int next_event_id = -1;
-  pair<int, bool> active_skeletons[NUI_SKELETON_COUNT];
-  for (int i = 0; i < NUI_SKELETON_COUNT; i++) {
-    active_skeletons[i].first = 0;
-    active_skeletons[i].second = false;
-  }
-
   do {
-    // Create a proto to serialize (THIS SIDE OF WIRE)
-    KinectInterpProto* storage = new KinectInterpProto();
-    next_event_id = WaitForMultipleObjects(
+    KinectData* storage = new KinectData();
+    int next_event_id = WaitForMultipleObjects(
       sizeof(nui_events) / sizeof(nui_events[STOP_EVT]),
       nui_events,  // Array containing the events we're waiting on
       FALSE,       // We don't want to wait on all events, just one
@@ -81,7 +72,8 @@ int main(int argc, char* argv[]) {
       break;
 
     case SKEL_EVT:
-      GetSkeleton(storage, active_skeletons);
+      // Create a proto to serialize (THIS SIDE OF WIRE)
+      GetSkeleton(storage);
       break;
 
     case DEPT_EVT:
@@ -90,17 +82,9 @@ int main(int argc, char* argv[]) {
       break;
     }
 
-    // Serialize and pass along the way
-    for (int i = 0; i < NUI_SKELETON_COUNT; i++)
-      storage->add_active_skeletons(active_skeletons[i].second);
+    // Serialize and pass along the way using TCP
     string serialization;
     assert(storage->SerializeToString(&serialization));
-
-    // TODO(Thad): Pass on wire
-
-    // Create a proto to deserialize after rest (OTHER SIDE OF WIRE)
-    KinectInterpProto* decompressor = new KinectInterpProto();
-    assert(decompressor->ParseFromString(serialization));
 
     // Get the current time and calculate FPS
     int current_time = timeGetTime();
@@ -109,12 +93,8 @@ int main(int argc, char* argv[]) {
 
     // Only show output approximately once per second
     if (current_time - last_fps_time > 1000) {
-      fprintf(stdout, "The following skeleton IDs are being tracked: ");
-      for (int i = 0; i < decompressor->active_skeletons_size(); i++)
-        decompressor->active_skeletons(i) ? fprintf(stdout, "%d ", i) : NULL;
-      
-      fprintf(stdout, "\nProcessing at %5.3f FPS\n", (1000 * total_frames) /
-              static_cast<double>(current_time - last_fps_time));
+      fprintf(stdout, "Processing at %5.3f FPS\n",
+              (1000 * total_frames) / static_cast<double>(current_time - last_fps_time));
       last_fps_time = current_time;
       total_frames = 0;
     }
@@ -140,7 +120,7 @@ int main(int argc, char* argv[]) {
  *   @param video_stream_handle Handle representing the video stream of a
  *                              Kinect device
  */
-void GetVideo(KinectInterpProto* storage, HANDLE video_stream_handle) {
+void GetVideo(KinectData* storage, HANDLE video_stream_handle) {
   const NUI_IMAGE_FRAME* image_frame_ptr = NULL;
 
   HRESULT hr = NuiImageStreamGetNextFrame(video_stream_handle, 0,
@@ -158,7 +138,7 @@ void GetVideo(KinectInterpProto* storage, HANDLE video_stream_handle) {
  *   @param depth_stream_handle Handle representing the depth stream of a
  *                              Kinect device
  */
-void GetDepth(KinectInterpProto* storage, HANDLE depth_stream_handle) {
+void GetDepth(KinectData* storage, HANDLE depth_stream_handle) {
   const NUI_IMAGE_FRAME* image_frame_ptr = NULL;
 
   HRESULT hr = NuiImageStreamGetNextFrame(depth_stream_handle, 0,
@@ -174,30 +154,35 @@ void GetDepth(KinectInterpProto* storage, HANDLE depth_stream_handle) {
  *
  *   @param storage             A protocol buffer for storing the skeleton data
  */
-void GetSkeleton(KinectInterpProto* storage, pair<int, bool>* active_skeletons) {
+void GetSkeleton(KinectData* storage) {
   NUI_SKELETON_FRAME skeleton_frame;
-  
   HRESULT hr = NuiSkeletonGetNextFrame(0, &skeleton_frame);
   if (FAILED(hr))
     DIE(hr, "Could not get skeleton frame from Kinect\n");
+  
+  // Smooth out the frame
+  NuiTransformSmooth(&skeleton_frame, NULL);
 
   for (int i = 0; i < NUI_SKELETON_COUNT; i++) {
-    // This skeleton is active, let's track it
-    if (skeleton_frame.SkeletonData[i].eTrackingState == NUI_SKELETON_TRACKED) {
-      active_skeletons[i].first = timeGetTime();
+    // Create a representation of the person
+    KinectData::Person* person = storage->add_people();
+    person->set_id(i);
 
-      // Alert the user that we found a new skeleton
-      if (!active_skeletons[i].second) {
-        active_skeletons[i].second = true;
-        fprintf(stdout, "Welcome, newbie! I'm gonna call you #%d!\n", i);
+    // Skeleton is being tracked, get the <X, Y, Z> of that joint
+    if (skeleton_frame.SkeletonData[i].eTrackingState == NUI_SKELETON_TRACKED) {
+      person->set_active(true);
+      for (int j = 0; j < NUI_SKELETON_POSITION_COUNT; j++) {
+        float x_pos, y_pos; USHORT z_pos;
+        NuiTransformSkeletonToDepthImageF(skeleton_frame.SkeletonData[i].SkeletonPositions[j],
+          &x_pos, &y_pos, &z_pos);
+
+        KinectData::Person::SkeletonPosition* position = person->add_skeleton_positions();
+        position->set_x(x_pos); position->set_y(y_pos); position->set_z(z_pos);
       }
 
-    // Consider a skeleton out of frame if we haven't seen them for 0.5sec
-    } else if (active_skeletons[i].first &&
-               active_skeletons[i].first + 500 < timeGetTime()) {
-      fprintf(stdout, "Bye #%d, it was good to have you around!\n", i);
-      active_skeletons[i].first = 0;
-      active_skeletons[i].second = false;
+    // Skeleton not being tracked 
+    } else {
+      person->set_active(false);
     }
   }
 }

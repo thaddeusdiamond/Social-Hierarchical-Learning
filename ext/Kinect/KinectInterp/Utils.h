@@ -11,6 +11,10 @@
 #define DEPT_EVT 2
 #define STOP_EVT 3
 
+#define X_VALUE 0
+#define Y_VALUE 1
+#define Z_VALUE 2
+
 using std::string;
 using std::pair;
 

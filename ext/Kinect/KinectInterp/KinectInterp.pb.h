@@ -30,18 +30,20 @@ void  protobuf_AddDesc_KinectInterp_2eproto();
 void protobuf_AssignDesc_KinectInterp_2eproto();
 void protobuf_ShutdownFile_KinectInterp_2eproto();
 
-class KinectInterpProto;
+class KinectData;
+class KinectData_Person;
+class KinectData_Person_SkeletonPosition;
 
 // ===================================================================
 
-class KinectInterpProto : public ::google::protobuf::Message {
+class KinectData_Person_SkeletonPosition : public ::google::protobuf::Message {
  public:
-  KinectInterpProto();
-  virtual ~KinectInterpProto();
+  KinectData_Person_SkeletonPosition();
+  virtual ~KinectData_Person_SkeletonPosition();
   
-  KinectInterpProto(const KinectInterpProto& from);
+  KinectData_Person_SkeletonPosition(const KinectData_Person_SkeletonPosition& from);
   
-  inline KinectInterpProto& operator=(const KinectInterpProto& from) {
+  inline KinectData_Person_SkeletonPosition& operator=(const KinectData_Person_SkeletonPosition& from) {
     CopyFrom(from);
     return *this;
   }
@@ -55,17 +57,17 @@ class KinectInterpProto : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const KinectInterpProto& default_instance();
+  static const KinectData_Person_SkeletonPosition& default_instance();
   
-  void Swap(KinectInterpProto* other);
+  void Swap(KinectData_Person_SkeletonPosition* other);
   
   // implements Message ----------------------------------------------
   
-  KinectInterpProto* New() const;
+  KinectData_Person_SkeletonPosition* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const KinectInterpProto& from);
-  void MergeFrom(const KinectInterpProto& from);
+  void CopyFrom(const KinectData_Person_SkeletonPosition& from);
+  void MergeFrom(const KinectData_Person_SkeletonPosition& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -88,24 +90,235 @@ class KinectInterpProto : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // repeated bool active_skeletons = 1;
-  inline int active_skeletons_size() const;
-  inline void clear_active_skeletons();
-  static const int kActiveSkeletonsFieldNumber = 1;
-  inline bool active_skeletons(int index) const;
-  inline void set_active_skeletons(int index, bool value);
-  inline void add_active_skeletons(bool value);
-  inline const ::google::protobuf::RepeatedField< bool >&
-      active_skeletons() const;
-  inline ::google::protobuf::RepeatedField< bool >*
-      mutable_active_skeletons();
+  // required double x = 1;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline double x() const;
+  inline void set_x(double value);
   
-  // @@protoc_insertion_point(class_scope:KinectInterpProto)
+  // required double y = 2;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline double y() const;
+  inline void set_y(double value);
+  
+  // required int32 z = 3;
+  inline bool has_z() const;
+  inline void clear_z();
+  static const int kZFieldNumber = 3;
+  inline ::google::protobuf::int32 z() const;
+  inline void set_z(::google::protobuf::int32 value);
+  
+  // @@protoc_insertion_point(class_scope:KinectData.Person.SkeletonPosition)
+ private:
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+  inline void set_has_z();
+  inline void clear_has_z();
+  
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  
+  double x_;
+  double y_;
+  ::google::protobuf::int32 z_;
+  
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  
+  friend void  protobuf_AddDesc_KinectInterp_2eproto();
+  friend void protobuf_AssignDesc_KinectInterp_2eproto();
+  friend void protobuf_ShutdownFile_KinectInterp_2eproto();
+  
+  void InitAsDefaultInstance();
+  static KinectData_Person_SkeletonPosition* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class KinectData_Person : public ::google::protobuf::Message {
+ public:
+  KinectData_Person();
+  virtual ~KinectData_Person();
+  
+  KinectData_Person(const KinectData_Person& from);
+  
+  inline KinectData_Person& operator=(const KinectData_Person& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const KinectData_Person& default_instance();
+  
+  void Swap(KinectData_Person* other);
+  
+  // implements Message ----------------------------------------------
+  
+  KinectData_Person* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const KinectData_Person& from);
+  void MergeFrom(const KinectData_Person& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  typedef KinectData_Person_SkeletonPosition SkeletonPosition;
+  
+  // accessors -------------------------------------------------------
+  
+  // required int32 id = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 1;
+  inline ::google::protobuf::int32 id() const;
+  inline void set_id(::google::protobuf::int32 value);
+  
+  // required bool active = 11;
+  inline bool has_active() const;
+  inline void clear_active();
+  static const int kActiveFieldNumber = 11;
+  inline bool active() const;
+  inline void set_active(bool value);
+  
+  // repeated .KinectData.Person.SkeletonPosition skeleton_positions = 21;
+  inline int skeleton_positions_size() const;
+  inline void clear_skeleton_positions();
+  static const int kSkeletonPositionsFieldNumber = 21;
+  inline const ::KinectData_Person_SkeletonPosition& skeleton_positions(int index) const;
+  inline ::KinectData_Person_SkeletonPosition* mutable_skeleton_positions(int index);
+  inline ::KinectData_Person_SkeletonPosition* add_skeleton_positions();
+  inline const ::google::protobuf::RepeatedPtrField< ::KinectData_Person_SkeletonPosition >&
+      skeleton_positions() const;
+  inline ::google::protobuf::RepeatedPtrField< ::KinectData_Person_SkeletonPosition >*
+      mutable_skeleton_positions();
+  
+  // @@protoc_insertion_point(class_scope:KinectData.Person)
+ private:
+  inline void set_has_id();
+  inline void clear_has_id();
+  inline void set_has_active();
+  inline void clear_has_active();
+  
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  
+  ::google::protobuf::int32 id_;
+  bool active_;
+  ::google::protobuf::RepeatedPtrField< ::KinectData_Person_SkeletonPosition > skeleton_positions_;
+  
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  
+  friend void  protobuf_AddDesc_KinectInterp_2eproto();
+  friend void protobuf_AssignDesc_KinectInterp_2eproto();
+  friend void protobuf_ShutdownFile_KinectInterp_2eproto();
+  
+  void InitAsDefaultInstance();
+  static KinectData_Person* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class KinectData : public ::google::protobuf::Message {
+ public:
+  KinectData();
+  virtual ~KinectData();
+  
+  KinectData(const KinectData& from);
+  
+  inline KinectData& operator=(const KinectData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const KinectData& default_instance();
+  
+  void Swap(KinectData* other);
+  
+  // implements Message ----------------------------------------------
+  
+  KinectData* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const KinectData& from);
+  void MergeFrom(const KinectData& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  typedef KinectData_Person Person;
+  
+  // accessors -------------------------------------------------------
+  
+  // repeated .KinectData.Person people = 1;
+  inline int people_size() const;
+  inline void clear_people();
+  static const int kPeopleFieldNumber = 1;
+  inline const ::KinectData_Person& people(int index) const;
+  inline ::KinectData_Person* mutable_people(int index);
+  inline ::KinectData_Person* add_people();
+  inline const ::google::protobuf::RepeatedPtrField< ::KinectData_Person >&
+      people() const;
+  inline ::google::protobuf::RepeatedPtrField< ::KinectData_Person >*
+      mutable_people();
+  
+  // @@protoc_insertion_point(class_scope:KinectData)
  private:
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
-  ::google::protobuf::RepeatedField< bool > active_skeletons_;
+  ::google::protobuf::RepeatedPtrField< ::KinectData_Person > people_;
   
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -115,38 +328,181 @@ class KinectInterpProto : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_KinectInterp_2eproto();
   
   void InitAsDefaultInstance();
-  static KinectInterpProto* default_instance_;
+  static KinectData* default_instance_;
 };
 // ===================================================================
 
 
 // ===================================================================
 
-// KinectInterpProto
+// KinectData_Person_SkeletonPosition
 
-// repeated bool active_skeletons = 1;
-inline int KinectInterpProto::active_skeletons_size() const {
-  return active_skeletons_.size();
+// required double x = 1;
+inline bool KinectData_Person_SkeletonPosition::has_x() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void KinectInterpProto::clear_active_skeletons() {
-  active_skeletons_.Clear();
+inline void KinectData_Person_SkeletonPosition::set_has_x() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline bool KinectInterpProto::active_skeletons(int index) const {
-  return active_skeletons_.Get(index);
+inline void KinectData_Person_SkeletonPosition::clear_has_x() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline void KinectInterpProto::set_active_skeletons(int index, bool value) {
-  active_skeletons_.Set(index, value);
+inline void KinectData_Person_SkeletonPosition::clear_x() {
+  x_ = 0;
+  clear_has_x();
 }
-inline void KinectInterpProto::add_active_skeletons(bool value) {
-  active_skeletons_.Add(value);
+inline double KinectData_Person_SkeletonPosition::x() const {
+  return x_;
 }
-inline const ::google::protobuf::RepeatedField< bool >&
-KinectInterpProto::active_skeletons() const {
-  return active_skeletons_;
+inline void KinectData_Person_SkeletonPosition::set_x(double value) {
+  set_has_x();
+  x_ = value;
 }
-inline ::google::protobuf::RepeatedField< bool >*
-KinectInterpProto::mutable_active_skeletons() {
-  return &active_skeletons_;
+
+// required double y = 2;
+inline bool KinectData_Person_SkeletonPosition::has_y() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void KinectData_Person_SkeletonPosition::set_has_y() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void KinectData_Person_SkeletonPosition::clear_has_y() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void KinectData_Person_SkeletonPosition::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline double KinectData_Person_SkeletonPosition::y() const {
+  return y_;
+}
+inline void KinectData_Person_SkeletonPosition::set_y(double value) {
+  set_has_y();
+  y_ = value;
+}
+
+// required int32 z = 3;
+inline bool KinectData_Person_SkeletonPosition::has_z() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void KinectData_Person_SkeletonPosition::set_has_z() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void KinectData_Person_SkeletonPosition::clear_has_z() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void KinectData_Person_SkeletonPosition::clear_z() {
+  z_ = 0;
+  clear_has_z();
+}
+inline ::google::protobuf::int32 KinectData_Person_SkeletonPosition::z() const {
+  return z_;
+}
+inline void KinectData_Person_SkeletonPosition::set_z(::google::protobuf::int32 value) {
+  set_has_z();
+  z_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// KinectData_Person
+
+// required int32 id = 1;
+inline bool KinectData_Person::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void KinectData_Person::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void KinectData_Person::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void KinectData_Person::clear_id() {
+  id_ = 0;
+  clear_has_id();
+}
+inline ::google::protobuf::int32 KinectData_Person::id() const {
+  return id_;
+}
+inline void KinectData_Person::set_id(::google::protobuf::int32 value) {
+  set_has_id();
+  id_ = value;
+}
+
+// required bool active = 11;
+inline bool KinectData_Person::has_active() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void KinectData_Person::set_has_active() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void KinectData_Person::clear_has_active() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void KinectData_Person::clear_active() {
+  active_ = false;
+  clear_has_active();
+}
+inline bool KinectData_Person::active() const {
+  return active_;
+}
+inline void KinectData_Person::set_active(bool value) {
+  set_has_active();
+  active_ = value;
+}
+
+// repeated .KinectData.Person.SkeletonPosition skeleton_positions = 21;
+inline int KinectData_Person::skeleton_positions_size() const {
+  return skeleton_positions_.size();
+}
+inline void KinectData_Person::clear_skeleton_positions() {
+  skeleton_positions_.Clear();
+}
+inline const ::KinectData_Person_SkeletonPosition& KinectData_Person::skeleton_positions(int index) const {
+  return skeleton_positions_.Get(index);
+}
+inline ::KinectData_Person_SkeletonPosition* KinectData_Person::mutable_skeleton_positions(int index) {
+  return skeleton_positions_.Mutable(index);
+}
+inline ::KinectData_Person_SkeletonPosition* KinectData_Person::add_skeleton_positions() {
+  return skeleton_positions_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::KinectData_Person_SkeletonPosition >&
+KinectData_Person::skeleton_positions() const {
+  return skeleton_positions_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::KinectData_Person_SkeletonPosition >*
+KinectData_Person::mutable_skeleton_positions() {
+  return &skeleton_positions_;
+}
+
+// -------------------------------------------------------------------
+
+// KinectData
+
+// repeated .KinectData.Person people = 1;
+inline int KinectData::people_size() const {
+  return people_.size();
+}
+inline void KinectData::clear_people() {
+  people_.Clear();
+}
+inline const ::KinectData_Person& KinectData::people(int index) const {
+  return people_.Get(index);
+}
+inline ::KinectData_Person* KinectData::mutable_people(int index) {
+  return people_.Mutable(index);
+}
+inline ::KinectData_Person* KinectData::add_people() {
+  return people_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::KinectData_Person >&
+KinectData::people() const {
+  return people_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::KinectData_Person >*
+KinectData::mutable_people() {
+  return &people_;
 }
 
 
