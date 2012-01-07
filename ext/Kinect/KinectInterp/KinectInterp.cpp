@@ -54,6 +54,25 @@ int main(int argc, char* argv[]) {
       total_frames = 0;
   signal(SIGINT, &Signal::StopProgram);
 
+  // Finally, we're going to be sending data so we open a socket
+  SOCKET outgoing = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+  if (outgoing == INVALID_SOCKET)
+    DIE(-1, "Could not open a socket to talk on\n");
+  
+  // Initialize WinSock because it blows
+  WSADATA wsaData;
+  WORD version = MAKEWORD(1, 0);
+  if (WSAStartup(version, &wsaData))
+    DIE(-1, "Winsock blows!\n");
+
+  // Bind the TCP connection
+  SOCKADDR_IN target;
+  target.sin_family = AF_INET;
+  target.sin_port = htons(GLOB_PORT);
+  target.sin_addr.s_addr = HOST_IP;
+  if (connect(outgoing, (SOCKADDR *)&target, sizeof(target)) == SOCKET_ERROR)
+    DIE(-1, "Could not connect to the desired server\n");
+
   do {
     KinectData* storage = new KinectData();
     int next_event_id = WaitForMultipleObjects(
@@ -83,8 +102,11 @@ int main(int argc, char* argv[]) {
     }
 
     // Serialize and pass along the way using TCP
-    string serialization;
-    assert(storage->SerializeToString(&serialization));
+    if (storage->people_size() > 0) {
+      string serialization;
+      assert(storage->SerializeToString(&serialization));
+      send(outgoing, serialization.c_str(), serialization.length() + 1, 0);
+    }
 
     // Get the current time and calculate FPS
     int current_time = timeGetTime();
@@ -107,6 +129,11 @@ int main(int argc, char* argv[]) {
     if (nui_events[i] && nui_events[i] != INVALID_HANDLE_VALUE)
       CloseHandle(nui_events[i]);
   }
+
+  // Close the open sockets
+  shutdown(outgoing, 2);
+  closesocket(outgoing);
+  WSACleanup();
 
   // Let the user see the CMD and then exit
   fprintf(stderr, "Press any key to exit...\n");

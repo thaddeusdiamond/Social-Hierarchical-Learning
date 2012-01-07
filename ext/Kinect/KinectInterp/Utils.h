@@ -5,6 +5,7 @@
 #include <cstdarg>
 #include <string>
 #include <utility>
+#include <winsock.h>
 
 #define SKEL_EVT 0
 #define VIDE_EVT 1
@@ -14,6 +15,9 @@
 #define X_VALUE 0
 #define Y_VALUE 1
 #define Z_VALUE 2
+
+#define GLOB_PORT 18000
+#define HOST_IP 16777343
 
 using std::string;
 using std::pair;
