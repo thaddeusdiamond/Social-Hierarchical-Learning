@@ -52,7 +52,6 @@ int main(int argc, char* argv[]) {
   // We want to keep track of the FPS in a time var and handle SIGINT
   int last_fps_time = -1,
       total_frames = 0;
-  signal(SIGINT, &Signal::StopProgram);
 
   // Finally, we're going to be sending data so we open a socket
   SOCKET outgoing = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -73,55 +72,71 @@ int main(int argc, char* argv[]) {
   if (connect(outgoing, (SOCKADDR *)&target, sizeof(target)) == SOCKET_ERROR)
     DIE(-1, "Could not connect to the desired server\n");
 
-  do {
-    KinectData* storage = new KinectData();
-    int next_event_id = WaitForMultipleObjects(
-      sizeof(nui_events) / sizeof(nui_events[STOP_EVT]),
-      nui_events,  // Array containing the events we're waiting on
-      FALSE,       // We don't want to wait on all events, just one
-      100);        // Max wait of 100ms
+  fprintf(stdout, "Hit any key to begin sending primitive data...\n");
+  fprintf(stdout, "Type 'q' to exit\nUse ctrl-c during to stop\n");
+  while (getchar() != 'q') {
+    Signal::ResetProgram();
+    signal(SIGINT, &Signal::StopProgram);
 
-    switch (next_event_id) {
-    case STOP_EVT:
-      Signal::StopProgram(0);
-      break;
+    do {
+      KinectData* storage = new KinectData();
+      int next_event_id = WaitForMultipleObjects(
+        sizeof(nui_events) / sizeof(nui_events[STOP_EVT]),
+        nui_events,  // Array containing the events we're waiting on
+        FALSE,       // We don't want to wait on all events, just one
+        100);        // Max wait of 100ms
+
+      switch (next_event_id) {
+      case STOP_EVT:
+        Signal::StopProgram(0);
+        break;
     
-    case VIDE_EVT:
-      GetVideo(storage, video_stream_handle);
-      break;
+      case VIDE_EVT:
+        GetVideo(storage, video_stream_handle);
+        break;
 
-    case SKEL_EVT:
-      // Create a proto to serialize (THIS SIDE OF WIRE)
-      GetSkeleton(storage);
-      break;
+      case SKEL_EVT:
+        // Create a proto to serialize (THIS SIDE OF WIRE)
+        GetSkeleton(storage);
+        break;
 
-    case DEPT_EVT:
-      GetDepth(storage, depth_stream_handle);
-      total_frames++;
-      break;
-    }
+      case DEPT_EVT:
+        GetDepth(storage, depth_stream_handle);
+        total_frames++;
+        break;
+      }
 
-    // Serialize and pass along the way using TCP
-    if (storage->people_size() > 0) {
-      string serialization;
-      assert(storage->SerializeToString(&serialization));
-      send(outgoing, serialization.c_str(), serialization.length() + 1, 0);
-    }
+      // Serialize and pass along the way using TCP
+      if (storage->people_size() > 0) {
+        string serialization;
+        assert(storage->SerializeToString(&serialization));
 
-    // Get the current time and calculate FPS
-    int current_time = timeGetTime();
-    if (last_fps_time < 0)
-      last_fps_time = current_time;
+        KinectData* data = new KinectData();
+        assert(data->ParseFromString(serialization));
+        data->PrintDebugString();
 
-    // Only show output approximately once per second
-    if (current_time - last_fps_time > 1000) {
-      fprintf(stdout, "Processing at %5.3f FPS\n",
-              (1000 * total_frames) / static_cast<double>(current_time - last_fps_time));
-      last_fps_time = current_time;
-      total_frames = 0;
-    }
+        fprintf(stdout, "Sending %d bytes w/%d people\n", storage->ByteSize(), storage->people_size());
+        send(outgoing, serialization.c_str(), storage->ByteSize(), 0);
+      }
 
-  } while (Signal::ProgramIsRunning);
+      // Get the current time and calculate FPS
+      int current_time = timeGetTime();
+      if (last_fps_time < 0)
+        last_fps_time = current_time;
+
+      // Only show output approximately once per second
+      if (current_time - last_fps_time > 1000) {
+        //fprintf(stdout, "Processing at %5.3f FPS\n",
+        //        (1000 * total_frames) / static_cast<double>(current_time - last_fps_time));
+        last_fps_time = current_time;
+        total_frames = 0;
+      }
+
+    } while (Signal::ProgramIsRunning);
+
+    fprintf(stdout, "\nSession Complete. Hit any key to begin sending primitive data...\n");
+    fprintf(stdout, "Type 'q' to exit\nUse ctrl-c during to stop\n");
+  }
 
   // Shut down the Kinect gracefully
   NuiShutdown();

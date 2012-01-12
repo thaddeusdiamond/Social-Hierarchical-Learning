@@ -17,7 +17,7 @@
 #define Z_VALUE 2
 
 #define GLOB_PORT 18000
-#define HOST_IP 16777343
+#define HOST_IP 786965632
 
 using std::string;
 using std::pair;
@@ -40,5 +40,9 @@ namespace Signal {
 
   static inline void StopProgram(int status) {
     ProgramIsRunning = false;
+  }
+
+  static inline void ResetProgram() {
+    ProgramIsRunning = true;
   }
 }
