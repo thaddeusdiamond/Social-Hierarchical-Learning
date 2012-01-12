@@ -99,7 +99,7 @@ class FeedbackSensor : public Sensor {
 };
 
 // Due to pthread issues we create the poller as a non-member function
-void* PollForFeedback(void* object) {
+static inline void* PollForFeedback(void* object) {
   FeedbackSensor* feedback_sensor = reinterpret_cast<FeedbackSensor*>(object);
   feedback_sensor->ListenOnSocket();
   return NULL;

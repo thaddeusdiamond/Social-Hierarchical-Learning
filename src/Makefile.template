@@ -43,7 +43,7 @@ $(OBJDIR)/$(LOWERC_DIR)/%UnitTest.o: $(LOWERC_DIR)/%UnitTest.cc
 	@mkdir -p $(@D)
 	$(V)$(CXX) $(CXXFLAGS) $(MDFLAGS) -o $@ -c $<
 
-$(BINDIR)/$(LOWERC_DIR)/%UnitTest: $($(UPPERC_DIR)_TEST_OBJS) \
+$(BINDIR)/$(LOWERC_DIR)/%UnitTest: $(OBJDIR)/$(LOWERC_DIR)/%UnitTest.o \
                                    $($(UPPERC_DIR)_OBJS) $(TEST_OBJS)
 	@echo + ld $@
 	@mkdir -p $(@D)

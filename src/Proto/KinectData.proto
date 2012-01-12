@@ -1,0 +1,55 @@
+// Author: Thaddeus Diamond (diamond@cs.yale.edu)
+//
+// The following is a Protocol Buffer representation of the Kinect data
+// so that it can be serialized and passed to any arbitrary representation
+// (i.e. Python, C++ on Linux, Java, etc.)
+//
+// The skeleton positions are defined according to the following enum
+// (taken from the Kinect API):
+// enum _NUI_SKELETON_POSITION_INDEX {
+//     NUI_SKELETON_POSITION_HIP_CENTER = 0,
+//     NUI_SKELETON_POSITION_SPINE,
+//     NUI_SKELETON_POSITION_SHOULDER_CENTER,
+//     NUI_SKELETON_POSITION_HEAD,
+//     NUI_SKELETON_POSITION_SHOULDER_LEFT,
+//     NUI_SKELETON_POSITION_ELBOW_LEFT,
+//     NUI_SKELETON_POSITION_WRIST_LEFT,
+//     NUI_SKELETON_POSITION_HAND_LEFT,
+//     NUI_SKELETON_POSITION_SHOULDER_RIGHT,
+//     NUI_SKELETON_POSITION_ELBOW_RIGHT,
+//     NUI_SKELETON_POSITION_WRIST_RIGHT,
+//     NUI_SKELETON_POSITION_HAND_RIGHT,
+//     NUI_SKELETON_POSITION_HIP_LEFT,
+//     NUI_SKELETON_POSITION_KNEE_LEFT,
+//     NUI_SKELETON_POSITION_ANKLE_LEFT,
+//     NUI_SKELETON_POSITION_FOOT_LEFT,
+//     NUI_SKELETON_POSITION_HIP_RIGHT,
+//     NUI_SKELETON_POSITION_KNEE_RIGHT,
+//     NUI_SKELETON_POSITION_ANKLE_RIGHT,
+//     NUI_SKELETON_POSITION_FOOT_RIGHT,
+//     NUI_SKELETON_POSITION_COUNT
+// } NUI_SKELETON_POSITION_INDEX;
+
+message KinectData {
+  // We represent each person as an embedded protobuf
+  message Person {
+
+    // Unique identifier
+    required int32 id = 1;
+
+    // Is the skeleton even active?
+    required bool active = 11;
+
+    // We define a skeleton position as an <x, y, z> vector
+    message SkeletonPosition {
+      required double x = 1;
+      required double y = 2;
+      required int32 z = 3;       // Kinect gives us depth as a USHORT
+    }
+    repeated SkeletonPosition skeleton_positions = 21;
+
+  }
+
+  // All the data is is an array of people
+  repeated Person people = 1;
+}

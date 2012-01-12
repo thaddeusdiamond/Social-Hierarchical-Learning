@@ -57,8 +57,8 @@ all:
 	@mkdir -p $(STORAGE)
 	
 # Perform doxygen every time, no matter what is called
-$(warning + doc $(DOXY_EXE) $(DOCDIR)/$(DOXY_CONF) > $(DOCOUT))
-$(shell cd $(DOCDIR); $(DOXY_EXE) $(DOXY_CONF))
+#$(warning + doc $(DOXY_EXE) $(DOCDIR)/$(DOXY_CONF) > $(DOCOUT))
+#$(shell cd $(DOCDIR); $(DOXY_EXE) $(DOXY_CONF))
 
 # We define a common "Makefrag"-style template so that we can just set dir
 # specific variables and include that template
