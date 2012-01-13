@@ -22,7 +22,11 @@ namespace Primitives {
 
 class StandardQLearner : public QLearner {
  public:
-  explicit StandardQLearner() {}
+  explicit StandardQLearner(std::string name) { name_ = name; }
+  StandardQLearner(std::string name, QTable qt) {
+    name_ = name;
+    q_table_ =qt;
+  }
 
 /**
    * Populates this object with the QTable contained in the target file
@@ -103,6 +107,9 @@ class StandardQLearner : public QLearner {
    * @return true on successful application, false on error
    **/
   virtual bool AssignCredit(double signal) = 0;
+
+ private:
+  StandardQLearner() {}
 };
 
 }  // namespace Primitives

@@ -31,7 +31,7 @@ class ExplorationType;
 class Sensor;
 
 class QLearner {
- public:
+  public:
   /**
    * Destructor for QLearner must free all memory it received from I/O and
    * had buffered
@@ -62,7 +62,7 @@ class QLearner {
    * usable state.
    *
    * @param sensors The sensors that are associated with the various state
-   *                variables, consistent wiht the order the state vars 
+   *                variables, consistent wiht the order the state vars
    *                will be passed in to the Learn function
    * @return    True on success, false on failure
    **/
@@ -81,11 +81,11 @@ class QLearner {
    * Populates nearby_states with a list of neighboring state descriptors
    * and the reward values currently associated with them.
    *
-   * @param     cur_state        Vector of state descriptors 
+   * @param     cur_state        Vector of state descriptors
    * @param     nearby_states    Empty vector of state descriptors to be
    *                             populated with const pointers from within this
    *                             object by the time the function returns
-   *                            
+   *
    *
    * @return True on success, false on lookup error.
    **/
@@ -98,7 +98,7 @@ class QLearner {
    *
    * @param     cur_state       State descriptor
    * @param     next_state      Overwritten with pointer to next State object
-   * 
+   *
    * @return True on success, false on lookup error
    **/
   virtual bool GetNextState(State const& cur_state,
@@ -143,7 +143,7 @@ class QLearner {
   /**
    * Applies a reinforcement signal through this QLearner's CreditAssignmentType
    * Should be applied after setting the current state of the system.
-   * 
+   *
    * @param signal Double describing the feedback being received
    * @return true on successful application, false on error
    **/
@@ -151,7 +151,7 @@ class QLearner {
 
   /**
    * Updates the state_history_ stack to reflect this system state
-   * 
+   *
    * @param state Current state of the system
    **/
   virtual void SetCurrentState(State * const state) {
@@ -164,16 +164,22 @@ class QLearner {
 
   /**
    * Returns a stack of recently visited states
-   * 
+   *
    * @return Stack of StateHistoryTuple
    **/
   std::stack<StateHistoryTuple> &get_state_history() {
     return state_history_;
   }
 
+  QTable &get_q_table() { return q_table_; }
+
+  std::string get_name() { return name_; }
+  void set_name(std::string name) { name_ = name; }
+
  protected:
   std::stack<StateHistoryTuple> state_history_;
   QTable q_table_;
+  std::string name_;
   CreditAssignmentType *credit_assignment_type_;
   ExplorationType *exploration_type_;
   std::vector<Sensor const *> sensors_;

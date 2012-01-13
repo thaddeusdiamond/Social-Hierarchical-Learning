@@ -60,7 +60,8 @@ class Sensor {
   }
 
   /**
-   * Provides an english-readable name for this sensor
+   * Provides a constant that signifies the max distance to consider
+   * something 'nearby' for this sensor.
    * 
    * @return Const char* string with the name of this sensor
    **/

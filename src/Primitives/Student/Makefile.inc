@@ -4,6 +4,7 @@ TESTS   := $(TESTS)   $(LOWERC_ROOT)StudentTest
 
 # relative to $(TOP), i.e. $(LOWERC_DIR)/*.cc
 $(UPPERC_ROOT)_STUDENT_SRCS := $(LOWERC_ROOT)/Student/Dummy.cc \
+                               $(LOWERC_ROOT)/Student/LBDStudent.cc \
                                $(LOWERC_ROOT)/Student/FeedbackSensor.cc \
                                $(LOWERC_ROOT)/Student/KinectSensor.cc \
                                $(LOWERC_ROOT)/Student/CreateSensor.cc

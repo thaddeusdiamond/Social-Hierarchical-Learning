@@ -21,21 +21,14 @@ bool Dummy::SetMotors(std::vector<Sensor*> const &motors) {
   return true;
 }
 
-bool Dummy::SetLearningMethod(const QLearner& learner) {
-  return true;
-}
-
 bool Dummy::SetFeedbackHandler(Sensor const &feedback_device) {
   return true;
 }
 
-bool Dummy::LoadComparables(Primitive* prim, Key* tables, size_t tables_len) {
-  return true;
-}
-
-
-bool Dummy::Learn(Primitive* prim, Motor* active_motors, size_t motors_len,
-          Object* objects, size_t objects_len) {
+bool Dummy::Learn(std::string primitive_id, std::vector<Sensor*> active_motors,
+                   std::vector<Sensor*> active_sensors,
+                   std::vector<Sensor*> active_environment,
+                   std::vector<Object> objects) {
   return true;
 }
 

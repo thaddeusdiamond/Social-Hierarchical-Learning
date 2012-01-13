@@ -39,12 +39,12 @@ class Dummy : public Student {
 
   virtual bool SetEnvironment(std::vector<Sensor*> const &sensors);
   virtual bool SetMotors(std::vector<Sensor*> const &motors);
-  virtual bool SetLearningMethod(QLearner const &learner);
   virtual bool SetFeedbackHandler(Sensor const &feedback_device);
-  virtual bool LoadComparables(Primitive* prim, Key* tables, size_t tables_len);
-  virtual bool Learn(Primitive* prim, Motor* active_motors,
-                     size_t motors_len, Object* objects,
-                     size_t objects_len);
+  virtual bool Learn(std::string primitive_id,
+                     std::vector<Sensor*> active_motors,
+                     std::vector<Sensor*> active_sensors,
+                     std::vector<Sensor*> active_environment,
+                     std::vector<Object> objects);
   virtual bool StopLearning(void);
 };
 

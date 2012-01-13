@@ -23,12 +23,20 @@ bool StandardQLearner::Save(string const& filename) {
 
 bool StandardQLearner::Init(std::vector<Sensor const *> const &sensors) {
   this->sensors_ = sensors;
+  QTable qt;
+  this->q_table_ = qt;
   return true;
 }
 
 bool StandardQLearner::Learn(State const& state) {
+  State *existing_state = this->q_table_.GetState(state);
+  if (existing_state) {
+    existing_state->set_base_reward(state.get_base_reward());
+    return true;
+  } else {
     State *s = this->q_table_.AddState(state);
     return (s != NULL);
+  }
 }
 
 bool StandardQLearner::AddNearbyEmptyStates(State const &state) {
