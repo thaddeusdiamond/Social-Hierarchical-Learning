@@ -16,7 +16,8 @@
 namespace Primitives {
 
 KinectSensor::KinectSensor(int port)
-    : Sensor(string("Kinect")), values_(NULL), received_(false) {
+    : Sensor(string("Kinect")), values_(NULL), num_values_(6),
+      received_(false), file_handle_(NULL) {
   // Create vanilla socket
   polling_socket_ = socket(PF_INET, SOCK_STREAM, 0);
   if (polling_socket_ < 0)
@@ -53,10 +54,10 @@ void KinectSensor::ListenOnSocket() {
 
   // Take the first connection as the Kinect device
   int spawned_socket;
-  fprintf(stdout, "Waiting for a connection from Kinect...\n");
+  Log(stderr, DEBUG, "Waiting for a connection from Kinect...");
   if ((spawned_socket = accept(polling_socket_, NULL, 0)) < 0)
     Die("There was an error accepting the connection");
-  fprintf(stdout, "Socket connected!  Hit ctrl-c to break\n");
+  Log(stderr, SUCCESS, "Socket connected!  Hit ctrl-c to break");
 
   // Make the socket non-blocking
   int flags = fcntl(spawned_socket, F_GETFL, 0);
@@ -76,42 +77,56 @@ void KinectSensor::ListenOnSocket() {
 
     int bytes_received;
     if ((bytes_received = recv(spawned_socket, buffer, 4096, 0)) > 0) {
-      fprintf(stdout, "Received %d bytes\n", bytes_received);
-
       KinectData* data = new KinectData();
+      received_ = true;
       if (!data->ParseFromArray(buffer, bytes_received))
-        fprintf(stdout, "Failed to deserialize\n");
+        Log(stderr, ERROR, "Failed to deserialize");
 
-      /// @todo: How does the person know who is active, and how easy access?
-      double* new_val = new double[3 * NUI_SKELPOS_COUNT * data->people_size()];
-      num_values_ = 3 * NUI_SKELPOS_COUNT * data->people_size();
-
+      // Assume only one active person at a time, calculate body pose
       for (int i = 0; i < data->people_size(); i++) {
-        for (int j = 0; j < NUI_SKELPOS_COUNT; j++) {
-          // Person had tracking data
-          if (data->people(i).active()) {
-            new_val[(i * NUI_SKELPOS_COUNT) + (j * 3)] =
-              data->people(i).skeleton_positions(j).x();
-            new_val[(i * NUI_SKELPOS_COUNT) + (j * 3) + 1] =
-              data->people(i).skeleton_positions(j).y();
-            new_val[(i * NUI_SKELPOS_COUNT) + (j * 3) + 2] =
-              static_cast<double>(data->people(i).skeleton_positions(j).z());
+        if (data->people(i).active()) {
+          double new_values[6] = {
+            data->people(i).skeleton_positions(
+              NUI_SKELETON_POSITION_HAND_LEFT).x() -
+            data->people(i).skeleton_positions(
+              NUI_SKELETON_POSITION_HEAD).x(),
 
-          // Person did not have tracking data
-          } else {
-            new_val[(i * NUI_SKELPOS_COUNT) + (j * 3)] =
-            new_val[(i * NUI_SKELPOS_COUNT) + (j * 3) + 1] =
-            new_val[(i * NUI_SKELPOS_COUNT) + (j * 3) + 2] =
-              -1 * DBL_MAX;
+            data->people(i).skeleton_positions(
+              NUI_SKELETON_POSITION_HAND_LEFT).y() -
+            data->people(i).skeleton_positions(
+              NUI_SKELETON_POSITION_HEAD).y(),
+
+            static_cast<double>(
+              data->people(i).skeleton_positions(
+                NUI_SKELETON_POSITION_HAND_LEFT).z() -
+              data->people(i).skeleton_positions(
+                NUI_SKELETON_POSITION_HEAD).z()),
+
+            data->people(i).skeleton_positions(
+              NUI_SKELETON_POSITION_HAND_RIGHT).x() -
+            data->people(i).skeleton_positions(
+              NUI_SKELETON_POSITION_HEAD).x(),
+
+            data->people(i).skeleton_positions(
+              NUI_SKELETON_POSITION_HAND_RIGHT).y() -
+            data->people(i).skeleton_positions(
+              NUI_SKELETON_POSITION_HEAD).y(),
+
+            static_cast<double>(
+              data->people(i).skeleton_positions(
+                NUI_SKELETON_POSITION_HAND_RIGHT).z() -
+              data->people(i).skeleton_positions(
+                NUI_SKELETON_POSITION_HEAD).z())
+          };
+          values_ = new_values;
+
+          if (file_handle_ != NULL) {
+            fprintf(file_handle_, "%5.5f,%5.5f,%5.5f,%5.5f,%5.5f,%5.5f\n",
+              values_[0], values_[1], values_[2],
+              values_[3], values_[4], values_[5]);
           }
         }
       }
-
-      // Update the member variables (const wierdness)
-      if (values_)
-        delete[] values_;
-      values_ = new_val;
-      received_ = true;
     }
   } while (Signal::ProgramIsRunning);
 
@@ -123,6 +138,12 @@ bool KinectSensor::SetValues(double const * const values, int num_values) {
   // This sensor cannot be set
   return false;
 }
+
+void KinectSensor::set_file_handle(char const * filename) {
+  if (file_handle_ != NULL)
+    fclose(file_handle_);
+  file_handle_ = fopen(filename, "w");
+} 
 
 double const * const KinectSensor::GetValues() {
   // Return a one-element array to most recent value

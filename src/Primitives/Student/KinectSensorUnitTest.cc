@@ -13,6 +13,11 @@
 
 namespace Primitives {
 
+static int NUMBER_OF_PRIMITIVES = 8;
+static string Primitives[] = {
+  "coat", "shoes", "school", "store", "drive", "with", "in", "out"
+};
+
 class KinectSensorTest : public testing::Test {
  protected:
   // Create a TAMER object before each test
@@ -32,10 +37,25 @@ class KinectSensorTest : public testing::Test {
 /**
  * @test    Listen for incoming Kinect feedback
  **/
-TEST_F(KinectSensorTest, BeginListening) {
-  fprintf(stdout, "Beginning Kinect Test.  Press ctrl-\\ to exit\n");
-  signal(SIGQUIT, &Signal::StopProgram);
-  while (Signal::ProgramIsRunning);
+TEST_F(KinectSensorTest, CapturePrimitives) {
+  for (int i = 0; i < NUMBER_OF_PRIMITIVES; i++) {
+    // Set up the file handle
+    string primitive = Primitives[i];
+    sensor_->set_file_handle((string("learned_primitives/") + primitive +
+                              string(".csv")).c_str());
+
+    // Alert the user
+    Log(stderr, DEBUG, (string("Beginning ") + primitive +
+                        string(" primitive.  Press ctrl-\\ to end")).c_str());
+
+    // Keep going till we get the signal to stop
+    signal(SIGQUIT, &Signal::StopProgram);
+    while (Signal::ProgramIsRunning);
+
+    // Cleanup and I/O reset
+    Signal::ResetProgram();
+    fprintf(stdout, "\n");
+  }
 }
 
 }  // namespace Primitives

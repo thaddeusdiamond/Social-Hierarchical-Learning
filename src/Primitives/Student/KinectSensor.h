@@ -30,6 +30,7 @@ namespace Primitives {
 
 using std::string;
 using Utils::Die;
+using Utils::Log;
 
 class KinectSensor : public Sensor {
  public:
@@ -38,6 +39,8 @@ class KinectSensor : public Sensor {
    * to poll on that port for TCP packets.
    *
    * @param   port            The port to listen for controller sensor data on
+   * @param   file_handle     Optionally, this Kinect sensor can be passed a
+   *                          handle to a file to record the data out to
    **/
   explicit KinectSensor(int port);
 
@@ -45,6 +48,8 @@ class KinectSensor : public Sensor {
    * The destructor for a KinectSensor must free all memory aggregated
    **/
   virtual ~KinectSensor() {
+    if (file_handle_ != NULL)
+      fclose(file_handle_);
     close(polling_socket_);
     pthread_join(polling_thread_, NULL);
   }
@@ -86,6 +91,11 @@ class KinectSensor : public Sensor {
    **/
   void ListenOnSocket();
 
+  /**
+   * Mutator method for the file handle
+   **/
+  void set_file_handle(char const * filename);
+
  protected:
   virtual bool Poll();
 
@@ -96,7 +106,15 @@ class KinectSensor : public Sensor {
   char const * name_;
 
   /**
-   * Most recent value
+   * For simplicity, we assume that only one human is in front of the Kinect
+   * at a time.  The six values represented in this constant double array
+   * are:
+   *        [Left  hand dist from head (x),
+   *         Left  hand dist from head (y),
+   *         Left  hand dist from head (z),
+   *         Right hand dist from head (x),
+   *         Right hand dist from head (y),
+   *         Right hand dist from head (z)]
    **/
   double const * values_;
 
@@ -109,6 +127,12 @@ class KinectSensor : public Sensor {
    * Keep track of whether we've recently received anything
    **/
   bool received_;
+
+  /**
+   * We allow a file handle to write out the primitive to as a frame-separated
+   * CSV.
+   **/
+  FILE* file_handle_;
 
   /**
    * Maintain the socket we are polling for feedback on
