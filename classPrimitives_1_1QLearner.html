@@ -103,7 +103,7 @@ Collaboration diagram for Primitives::QLearner:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPrimitives_1_1QLearner__coll__graph.png" border="0" usemap="#Primitives_1_1QLearner_coll__map" alt="Collaboration graph"/></div>
 <map name="Primitives_1_1QLearner_coll__map" id="Primitives_1_1QLearner_coll__map">
-<area shape="rect" id="node4" href="classPrimitives_1_1ExplorationType.html" title="Primitives::ExplorationType" alt="" coords="5,197,187,227"/><area shape="rect" id="node7" href="classPrimitives_1_1CreditAssignmentType.html" title="Primitives::CreditAssignmentType" alt="" coords="227,197,448,227"/><area shape="rect" id="node2" href="classPrimitives_1_1QTable.html" title="Primitives::QTable" alt="" coords="144,5,275,35"/></map>
+<area shape="rect" id="node6" href="classPrimitives_1_1ExplorationType.html" title="Primitives::ExplorationType" alt="" coords="591,23,772,52"/><area shape="rect" id="node9" href="classPrimitives_1_1CreditAssignmentType.html" title="Primitives::CreditAssignmentType" alt="" coords="571,97,792,127"/><area shape="rect" id="node2" href="classPrimitives_1_1QTable.html" title="Primitives::QTable" alt="" coords="5,33,136,63"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classPrimitives_1_1QLearner-members.html">List of all members.</a></p>
@@ -123,10 +123,14 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#abe879e7a03b5f116ef70284e77481b02">AssignCredit</a> (double signal)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a4efce0391c10cd6dd14e12bb0646e237">SetCurrentState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> *const state)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::stack&lt; <a class="el" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a48d45b9c27a3dac167b2d06f7bd0e212">get_state_history</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1QTable.html">QTable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a057ea58224d599b593fe4e2538d10025">get_q_table</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a9eae27432facdecf260b7271837ed223">get_name</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a48f097390a019f31988a2e8ad5bc3493">set_name</a> (std::string name)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::stack&lt; <a class="el" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1QTable.html">QTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1ExplorationType.html">ExplorationType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a></td></tr>
@@ -179,6 +183,42 @@ Protected Attributes</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true on successful application, false on error </dd></dl>
 
 <p>Implemented in <a class="el" href="classPrimitives_1_1StandardQLearner.html#a7024946b539f2cd0454b22c124ddaa1c">Primitives::StandardQLearner</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9eae27432facdecf260b7271837ed223"></a><!-- doxytag: member="Primitives::QLearner::get_name" ref="a9eae27432facdecf260b7271837ed223" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Primitives::QLearner::get_name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00176">176</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a057ea58224d599b593fe4e2538d10025"></a><!-- doxytag: member="Primitives::QLearner::get_q_table" ref="a057ea58224d599b593fe4e2538d10025" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPrimitives_1_1QTable.html">QTable</a>&amp; Primitives::QLearner::get_q_table </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00174">174</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -384,6 +424,25 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a48f097390a019f31988a2e8ad5bc3493"></a><!-- doxytag: member="Primitives::QLearner::set_name" ref="a48f097390a019f31988a2e8ad5bc3493" args="(std::string name)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Primitives::QLearner::set_name </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00177">177</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a06131387110e005a3aab55b7297600ac"></a><!-- doxytag: member="Primitives::QLearner::SetCreditFunction" ref="a06131387110e005a3aab55b7297600ac" args="(CreditAssignmentType *const credit_assigner)" -->
 <div class="memitem">
 <div class="memproto">
@@ -494,7 +553,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00177">177</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00183">183</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -509,7 +568,22 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00178">178</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00184">184</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad2c8ec935db84f6d20a14125526cf061"></a><!-- doxytag: member="Primitives::QLearner::name_" ref="ad2c8ec935db84f6d20a14125526cf061" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string <a class="el" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">Primitives::QLearner::name_</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00182">182</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -524,7 +598,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00176">176</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00181">181</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -539,7 +613,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00179">179</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00185">185</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -554,7 +628,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00175">175</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00180">180</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>

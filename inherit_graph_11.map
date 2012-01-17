@@ -1,6 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classUtilsTest.html" title="UtilsTest" alt="" coords="5,59,80,88"/>
-<area shape="rect" id="node3" href="$classUtilsTest__FileLogging__Test.html" title="UtilsTest_FileLogging_Test" alt="" coords="141,5,323,35"/>
-<area shape="rect" id="node5" href="$classUtilsTest__FileSerialization__Test.html" title="UtilsTest_FileSerialization_Test" alt="" coords="129,59,335,88"/>
-<area shape="rect" id="node7" href="$classUtilsTest__Logging__Test.html" title="UtilsTest_Logging_Test" alt="" coords="152,112,312,141"/>
+<area shape="rect" id="node1" href="$classPrimitives_1_1Student.html" title="Primitives::Student" alt="" coords="5,32,139,61"/>
+<area shape="rect" id="node3" href="$classPrimitives_1_1Dummy.html" title="Primitives::Dummy" alt="" coords="200,5,333,35"/>
+<area shape="rect" id="node5" href="$classPrimitives_1_1LBDStudent.html" title="Primitives::LBDStudent" alt="" coords="188,59,345,88"/>
 </map>

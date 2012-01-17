@@ -108,7 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00031"></a>00031 <span class="keyword">class </span>Sensor;
 <a name="l00032"></a>00032 
 <a name="l00033"></a><a class="code" href="classPrimitives_1_1QLearner.html">00033</a> <span class="keyword">class </span><a class="code" href="classPrimitives_1_1QLearner.html">QLearner</a> {
-<a name="l00034"></a>00034  <span class="keyword">public</span>:
+<a name="l00034"></a>00034   <span class="keyword">public</span>:
 <a name="l00039"></a><a class="code" href="classPrimitives_1_1QLearner.html#a7a12b5c09f3649d30c148215bb982d00">00039</a>   <span class="keyword">virtual</span> <a class="code" href="classPrimitives_1_1QLearner.html#a7a12b5c09f3649d30c148215bb982d00">~QLearner</a>() {}
 <a name="l00040"></a>00040 
 <a name="l00048"></a>00048   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a933b05080139164afed1723d822f9a96">Load</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) = 0;
@@ -153,17 +153,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00171"></a>00171     <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>;
 <a name="l00172"></a>00172   }
 <a name="l00173"></a>00173 
-<a name="l00174"></a>00174  <span class="keyword">protected</span>:
-<a name="l00175"></a><a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">00175</a>   std::stack&lt;StateHistoryTuple&gt; <a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>;
-<a name="l00176"></a><a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">00176</a>   <a class="code" href="classPrimitives_1_1QTable.html">QTable</a> <a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>;
-<a name="l00177"></a><a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">00177</a>   <a class="code" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a> *<a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a>;
-<a name="l00178"></a><a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">00178</a>   <a class="code" href="classPrimitives_1_1ExplorationType.html">ExplorationType</a> *<a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a>;
-<a name="l00179"></a><a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">00179</a>   std::vector&lt;Sensor const *&gt; <a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a>;
-<a name="l00180"></a>00180 };
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182 }  <span class="comment">// namespace Primitives</span>
-<a name="l00183"></a>00183 
-<a name="l00184"></a>00184 <span class="preprocessor">#endif  // _SHL_PRIMITIVES_QLEARNER_QLEARNER_H_</span>
+<a name="l00174"></a><a class="code" href="classPrimitives_1_1QLearner.html#a057ea58224d599b593fe4e2538d10025">00174</a>   <a class="code" href="classPrimitives_1_1QTable.html">QTable</a> &amp;<a class="code" href="classPrimitives_1_1QLearner.html#a057ea58224d599b593fe4e2538d10025">get_q_table</a>() { <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>; }
+<a name="l00175"></a>00175 
+<a name="l00176"></a><a class="code" href="classPrimitives_1_1QLearner.html#a9eae27432facdecf260b7271837ed223">00176</a>   std::string <a class="code" href="classPrimitives_1_1QLearner.html#a9eae27432facdecf260b7271837ed223">get_name</a>() { <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a>; }
+<a name="l00177"></a><a class="code" href="classPrimitives_1_1QLearner.html#a48f097390a019f31988a2e8ad5bc3493">00177</a>   <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1QLearner.html#a48f097390a019f31988a2e8ad5bc3493">set_name</a>(std::string name) { <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a> = name; }
+<a name="l00178"></a>00178 
+<a name="l00179"></a>00179  <span class="keyword">protected</span>:
+<a name="l00180"></a><a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">00180</a>   std::stack&lt;StateHistoryTuple&gt; <a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>;
+<a name="l00181"></a><a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">00181</a>   <a class="code" href="classPrimitives_1_1QTable.html">QTable</a> <a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>;
+<a name="l00182"></a><a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">00182</a>   std::string <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a>;
+<a name="l00183"></a><a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">00183</a>   <a class="code" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a> *<a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a>;
+<a name="l00184"></a><a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">00184</a>   <a class="code" href="classPrimitives_1_1ExplorationType.html">ExplorationType</a> *<a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a>;
+<a name="l00185"></a><a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">00185</a>   std::vector&lt;Sensor const *&gt; <a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a>;
+<a name="l00186"></a>00186 };
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188 }  <span class="comment">// namespace Primitives</span>
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190 <span class="preprocessor">#endif  // _SHL_PRIMITIVES_QLEARNER_QLEARNER_H_</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">

@@ -83,7 +83,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
   <div class="headertitle">
 <h1>Primitives::State Class Reference</h1>  </div>
 </div>
@@ -95,21 +96,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a45f32aebd24d4b23c851eb4e8037b2d2">State</a> (const std::vector&lt; double &gt; &amp;state_descriptor, const double reward=0.)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a385966e2650a194586ede051e3820c37">State</a> (const std::vector&lt; double &gt; &amp;state_descriptor, const double unit_dist=0., const double reward=0.)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#ae56418998a2513db7755c30e621735bb">State</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;s)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a0c98f2600c5dc10f3e6c2468ca144d82">State</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a5789a8b16ac4c062b24802ad7cc39c85">~State</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e">Equals</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a2c9e99f30fce7787a981e869203a7057">GetSquaredDistance</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const *const state) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0">get_state_vector</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#aa65354bc2d3675ef3abf4feeea8123cb">set_reward</a> (double const reward)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a3d5db36fcf45a677564007806141bebc">set_reward</a> (std::string layer, double val)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#aac0151a2e4dd7c76f54074d73a160504">set_reward_layers</a> (std::map&lt; std::string, double &gt; layers)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a1ab327cd4bccf7859bb9c8afd2d7896d">get_reward</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a2a8b0624650b8a4cb9ef7b57694b6028">set_base_reward</a> (double const reward)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a2d096d41744e6b9ecba2fadd5e8ea047">get_base_reward</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual std::map&lt; std::string, <br class="typebreak"/>
+double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#a4b1a082431ff870f18b219013d71e815">get_reward_layers</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#ad0b1b340fc23ccbc11bd48ed98141d77">get_unit_distance</a> () const </td></tr>
+<tr><td colspan="2"><h2><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1State.html#aed3927ee6b307314292bff5f468c0550">NEARBY_STATE_THRESHOLD</a> = 10.</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="State_8h_source.html#l00018">18</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+<p>Definition at line <a class="el" href="State_8h_source.html#l00019">19</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a45f32aebd24d4b23c851eb4e8037b2d2"></a><!-- doxytag: member="Primitives::State::State" ref="a45f32aebd24d4b23c851eb4e8037b2d2" args="(const std::vector&lt; double &gt; &amp;state_descriptor, const double reward=0.)" -->
+<a class="anchor" id="a385966e2650a194586ede051e3820c37"></a><!-- doxytag: member="Primitives::State::State" ref="a385966e2650a194586ede051e3820c37" args="(const std::vector&lt; double &gt; &amp;state_descriptor, const double unit_dist=0., const double reward=0.)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -118,6 +128,12 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>state_descriptor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>unit_dist</em> = <code>0.</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -137,12 +153,13 @@ Public Member Functions</h2></td></tr>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">state_descriptor</td><td>Description of state being represented </td></tr>
+    <tr><td class="paramname">unit_dist</td><td>Sum of 'minimum recognized change' over each sensor that composes the state vector </td></tr>
     <tr><td class="paramname">reward</td><td>Real-valued reward value associated with state </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="State_8h_source.html#l00026">26</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+<p>Definition at line <a class="el" href="State_8h_source.html#l00029">29</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
 
 </div>
 </div>
@@ -162,7 +179,16 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <p>Copy constructor </p>
 
-<p>Definition at line <a class="el" href="State_8h_source.html#l00032">32</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+<p>Definition at line <a class="el" href="State_8h_source.html#l00038">38</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classPrimitives_1_1State_ae56418998a2513db7755c30e621735bb_cgraph.png" border="0" usemap="#classPrimitives_1_1State_ae56418998a2513db7755c30e621735bb_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1State_ae56418998a2513db7755c30e621735bb_cgraph" id="classPrimitives_1_1State_ae56418998a2513db7755c30e621735bb_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1State.html#a4b1a082431ff870f18b219013d71e815" title="Primitives::State::get_reward_layers" alt="" coords="215,5,447,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -181,7 +207,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <p>Copy constructor </p>
 
-<p>Definition at line <a class="el" href="State_8h_source.html#l00038">38</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+<p>Definition at line <a class="el" href="State_8h_source.html#l00051">51</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
 
 </div>
 </div>
@@ -200,7 +226,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <p>Shouldn't have to free anything here </p>
 
-<p>Definition at line <a class="el" href="State_8h_source.html#l00043">43</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+<p>Definition at line <a class="el" href="State_8h_source.html#l00056">56</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
 
 </div>
 </div>
@@ -228,7 +254,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true if state vectors are equal, false if not </dd></dl>
 
-<p>Definition at line <a class="el" href="State_8h_source.html#l00051">51</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+<p>Definition at line <a class="el" href="State_8h_source.html#l00064">64</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -238,6 +264,26 @@ Here is the call graph for this function:</div>
 <area shape="rect" id="node3" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="221,5,445,35"/></map>
 </div>
 </p>
+
+</div>
+</div>
+<a class="anchor" id="a2d096d41744e6b9ecba2fadd5e8ea047"></a><!-- doxytag: member="Primitives::State::get_base_reward" ref="a2d096d41744e6b9ecba2fadd5e8ea047" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double Primitives::State::get_base_reward </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Retrieves non-layered, 'unmodified' reward value for this state </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Base reward score </dd></dl>
+
+<p>Definition at line <a class="el" href="State_8h_source.html#l00164">164</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
 
 </div>
 </div>
@@ -254,8 +300,28 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
+<p>Retrieves the total reward on this state object </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Sum of base reward and all reward 'layers' </dd></dl>
 
-<p>Definition at line <a class="el" href="State_8h_source.html#l00100">100</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+<p>Definition at line <a class="el" href="State_8h_source.html#l00148">148</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4b1a082431ff870f18b219013d71e815"></a><!-- doxytag: member="Primitives::State::get_reward_layers" ref="a4b1a082431ff870f18b219013d71e815" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::map&lt;std::string, double&gt; Primitives::State::get_reward_layers </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="State_8h_source.html#l00166">166</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
 
 </div>
 </div>
@@ -275,7 +341,25 @@ Here is the call graph for this function:</div>
 <p>Returns an immutable state descriptor vector of doubles.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Const reference to state descriptor </dd></dl>
 
-<p>Definition at line <a class="el" href="State_8h_source.html#l00094">94</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+<p>Definition at line <a class="el" href="State_8h_source.html#l00112">112</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad0b1b340fc23ccbc11bd48ed98141d77"></a><!-- doxytag: member="Primitives::State::get_unit_distance" ref="ad0b1b340fc23ccbc11bd48ed98141d77" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double Primitives::State::get_unit_distance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="State_8h_source.html#l00170">170</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
 
 </div>
 </div>
@@ -293,8 +377,16 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
+<p>Finds the euclidean squared distance between two states </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td><a class="el" href="classPrimitives_1_1State.html">State</a> to measure distance to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Euclidean distance between states </dd></dl>
 
-<p>Definition at line <a class="el" href="State_8h_source.html#l00068">68</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+<p>Definition at line <a class="el" href="State_8h_source.html#l00086">86</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -307,12 +399,12 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="aa65354bc2d3675ef3abf4feeea8123cb"></a><!-- doxytag: member="Primitives::State::set_reward" ref="aa65354bc2d3675ef3abf4feeea8123cb" args="(double const reward)" -->
+<a class="anchor" id="a2a8b0624650b8a4cb9ef7b57694b6028"></a><!-- doxytag: member="Primitives::State::set_base_reward" ref="a2a8b0624650b8a4cb9ef7b57694b6028" args="(double const reward)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Primitives::State::set_reward </td>
+          <td class="memname">virtual void Primitives::State::set_base_reward </td>
           <td>(</td>
           <td class="paramtype">double const&#160;</td>
           <td class="paramname"><em>reward</em></td><td>)</td>
@@ -322,7 +414,86 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="State_8h_source.html#l00098">98</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+<p>Definition at line <a class="el" href="State_8h_source.html#l00158">158</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3d5db36fcf45a677564007806141bebc"></a><!-- doxytag: member="Primitives::State::set_reward" ref="a3d5db36fcf45a677564007806141bebc" args="(std::string layer, double val)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Primitives::State::set_reward </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>layer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets a reward with key 'layer' to value 'val' on this state</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">layer</td><td>Keyword associated with value </td></tr>
+    <tr><td class="paramname">val</td><td>Reward value to assign </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="State_8h_source.html#l00122">122</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aac0151a2e4dd7c76f54074d73a160504"></a><!-- doxytag: member="Primitives::State::set_reward_layers" ref="aac0151a2e4dd7c76f54074d73a160504" args="(std::map&lt; std::string, double &gt; layers)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Primitives::State::set_reward_layers </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; std::string, double &gt;&#160;</td>
+          <td class="paramname"><em>layers</em></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Sets all keys in reward_layers_ to values contained in layers</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">layers</td><td>Map with key=&gt;reward to overwrite local values </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="State_8h_source.html#l00137">137</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="aed3927ee6b307314292bff5f468c0550"></a><!-- doxytag: member="Primitives::State::NEARBY_STATE_THRESHOLD" ref="aed3927ee6b307314292bff5f468c0550" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double <a class="el" href="classPrimitives_1_1State.html#aed3927ee6b307314292bff5f468c0550">Primitives::State::NEARBY_STATE_THRESHOLD</a> = 10.<code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="State_8h_source.html#l00173">173</a> of file <a class="el" href="State_8h_source.html">State.h</a>.</p>
 
 </div>
 </div>

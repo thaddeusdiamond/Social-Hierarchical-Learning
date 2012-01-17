@@ -1,4 +1,5 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$classPrimitives_1_1CreateSensor.html" title="Primitives::CreateSensor" alt="" coords="5,83,173,112"/>
 <area shape="rect" id="node5" href="$classPrimitives_1_1FeedbackSensor.html" title="Primitives::FeedbackSensor" alt="" coords="197,83,384,112"/>
+<area shape="rect" id="node7" href="$classPrimitives_1_1KinectSensor.html" title="Primitives::KinectSensor" alt="" coords="408,83,573,112"/>
 </map>

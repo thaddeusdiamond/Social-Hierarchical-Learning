@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classPrimitives_1_1QLearner.html" title="Primitives::QLearner" alt="" coords="256,101,397,131"/>
-<area shape="rect" id="node6" href="$classPrimitives_1_1ExplorationType.html" title="Primitives::ExplorationType" alt="" coords="221,197,403,227"/>
-<area shape="rect" id="node9" href="$classPrimitives_1_1CreditAssignmentType.html" title="Primitives::CreditAssignmentType" alt="" coords="427,197,648,227"/>
-<area shape="rect" id="node4" href="$classPrimitives_1_1QTable.html" title="Primitives::QTable" alt="" coords="261,5,392,35"/>
+<area shape="rect" id="node2" href="$classPrimitives_1_1QLearner.html" title="Primitives::QLearner" alt="" coords="235,91,376,120"/>
+<area shape="rect" id="node8" href="$classPrimitives_1_1ExplorationType.html" title="Primitives::ExplorationType" alt="" coords="591,77,772,107"/>
+<area shape="rect" id="node11" href="$classPrimitives_1_1CreditAssignmentType.html" title="Primitives::CreditAssignmentType" alt="" coords="571,152,792,181"/>
+<area shape="rect" id="node4" href="$classPrimitives_1_1QTable.html" title="Primitives::QTable" alt="" coords="5,64,136,93"/>
 </map>

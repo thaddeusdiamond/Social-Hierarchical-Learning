@@ -102,17 +102,23 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1DummyTest.html">DummyTest</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1DummyTest__Setup__Env__and__motors__Test.html">DummyTest_Setup_Env_and_motors_Test</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1FeedbackSensor.html">FeedbackSensor</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1KinectSensor.html">KinectSensor</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1KinectSensorTest.html">KinectSensorTest</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1KinectSensorTest__CapturePrimitives__Test.html">KinectSensorTest_CapturePrimitives_Test</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1LBDStudent.html">LBDStudent</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html">Student</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacePrimitives.html#a5a52b7aaf0739653a26d3adf8534f333">CommunicateWithCreate</a> (void *object)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacePrimitives.html#aded718fbbc5be44aa7b59e42bcc3369e">PollForFeedback</a> (void *object)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacePrimitives.html#ab4f279d8e040b69b5c736824da525b13">PollForFeedback</a> (void *object)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacePrimitives.html#a83b2f389c093388dcd4022ee60b7a6b9">PollForKinect</a> (void *object)</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Namespaces should have descriptions </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>This should really have a unit test, but it's not super important since this is a pretty dumb sensor </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>This should really have a unit test, but it's not super important since this is a pretty dumb sensor </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>This should really have a unit test, but it's not super important since this is a pretty dumb sensor </dd></dl>
 </div><hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a5a52b7aaf0739653a26d3adf8534f333"></a><!-- doxytag: member="Primitives::CommunicateWithCreate" ref="a5a52b7aaf0739653a26d3adf8534f333" args="(void *object)" -->
 <div class="memitem">
@@ -142,16 +148,16 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="aded718fbbc5be44aa7b59e42bcc3369e"></a><!-- doxytag: member="Primitives::PollForFeedback" ref="aded718fbbc5be44aa7b59e42bcc3369e" args="(void *object)" -->
+<a class="anchor" id="ab4f279d8e040b69b5c736824da525b13"></a><!-- doxytag: member="Primitives::PollForFeedback" ref="ab4f279d8e040b69b5c736824da525b13" args="(void *object)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* Primitives::PollForFeedback </td>
+          <td class="memname">static void* Primitives::PollForFeedback </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>object</em></td><td>)</td>
-          <td></td>
+          <td><code> [inline, static]</code></td>
         </tr>
       </table>
 </div>
@@ -162,9 +168,37 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacePrimitives_aded718fbbc5be44aa7b59e42bcc3369e_cgraph.png" border="0" usemap="#namespacePrimitives_aded718fbbc5be44aa7b59e42bcc3369e_cgraph" alt=""/></div>
-<map name="namespacePrimitives_aded718fbbc5be44aa7b59e42bcc3369e_cgraph" id="namespacePrimitives_aded718fbbc5be44aa7b59e42bcc3369e_cgraph">
+<div class="center"><img src="namespacePrimitives_ab4f279d8e040b69b5c736824da525b13_cgraph.png" border="0" usemap="#namespacePrimitives_ab4f279d8e040b69b5c736824da525b13_cgraph" alt=""/></div>
+<map name="namespacePrimitives_ab4f279d8e040b69b5c736824da525b13_cgraph" id="namespacePrimitives_ab4f279d8e040b69b5c736824da525b13_cgraph">
 <area shape="rect" id="node3" href="classPrimitives_1_1FeedbackSensor.html#a467a44f0d72e9cc4290beba4ed33de60" title="Primitives::FeedbackSensor::ListenOnSocket" alt="" coords="241,5,527,35"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a83b2f389c093388dcd4022ee60b7a6b9"></a><!-- doxytag: member="Primitives::PollForKinect" ref="a83b2f389c093388dcd4022ee60b7a6b9" args="(void *object)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void* Primitives::PollForKinect </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>object</em></td><td>)</td>
+          <td><code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="KinectSensor_8h_source.html#l00149">149</a> of file <a class="el" href="KinectSensor_8h_source.html">KinectSensor.h</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacePrimitives_a83b2f389c093388dcd4022ee60b7a6b9_cgraph.png" border="0" usemap="#namespacePrimitives_a83b2f389c093388dcd4022ee60b7a6b9_cgraph" alt=""/></div>
+<map name="namespacePrimitives_a83b2f389c093388dcd4022ee60b7a6b9_cgraph" id="namespacePrimitives_a83b2f389c093388dcd4022ee60b7a6b9_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1KinectSensor.html#a78ccf1063f2f76fe58a5ae2b2378f1a4" title="Primitives::KinectSensor::ListenOnSocket" alt="" coords="221,85,488,115"/><area shape="rect" id="node5" href="namespaceUtils.html#a28b8fa0357359dc303a925d23e73019c" title="Utils::Die" alt="" coords="573,5,651,35"/><area shape="rect" id="node7" href="namespaceUtils.html#ac859c14784f69cfb1d933f869fb715af" title="Utils::Log" alt="" coords="573,59,651,88"/><area shape="rect" id="node9" href="namespaceSignal.html#a47c91050a2e4ff686ca8760fa201a3d9" title="Signal::ResetProgram" alt="" coords="537,112,687,141"/><area shape="rect" id="node11" href="namespaceSignal.html#a6d0ca1aaa410491b62fbe0b85afe2028" title="Signal::StopProgram" alt="" coords="541,165,683,195"/></map>
 </div>
 </p>
 

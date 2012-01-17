@@ -113,10 +113,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#a05113da640e4a4bf3a07f6e15c1d3c53">~Dummy</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#acb940c6df7f4c7a01ca70ce4ce7ad52c">SetEnvironment</a> (std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;sensors)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#a7acaa9fb693541aac4825e5718d5b3a4">SetMotors</a> (std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;motors)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#ab5ca09a5b2af424c7bffe164ff15285d">SetLearningMethod</a> (<a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> const &amp;learner)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#a6b036e6838c28215b0ec48673b14f630">SetFeedbackHandler</a> (<a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const &amp;feedback_device)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#aa07f415518d5dfe78c08fa23ddbf62e8">LoadComparables</a> (Primitive *prim, Key *tables, size_t tables_len)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#a1990a71257b949f01fd0ee984019162b">Learn</a> (Primitive *prim, Motor *active_motors, size_t motors_len, Object *objects, size_t objects_len)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#aa701cec143049787d002fdde01c345c8">Learn</a> (std::string primitive_id, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_motors, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_sensors, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_environment, std::vector&lt; Object &gt; objects)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Dummy.html#a87623b972a63c6662a50ecd607e6314e">StopLearning</a> (void)</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
@@ -162,39 +160,39 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a1990a71257b949f01fd0ee984019162b"></a><!-- doxytag: member="Primitives::Dummy::Learn" ref="a1990a71257b949f01fd0ee984019162b" args="(Primitive *prim, Motor *active_motors, size_t motors_len, Object *objects, size_t objects_len)" -->
+<a class="anchor" id="aa701cec143049787d002fdde01c345c8"></a><!-- doxytag: member="Primitives::Dummy::Learn" ref="aa701cec143049787d002fdde01c345c8" args="(std::string primitive_id, std::vector&lt; Sensor * &gt; active_motors, std::vector&lt; Sensor * &gt; active_sensors, std::vector&lt; Sensor * &gt; active_environment, std::vector&lt; Object &gt; objects)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool Primitives::Dummy::Learn </td>
           <td>(</td>
-          <td class="paramtype">Primitive *&#160;</td>
-          <td class="paramname"><em>prim</em>, </td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>primitive_id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Motor *&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td>
           <td class="paramname"><em>active_motors</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>motors_len</em>, </td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td>
+          <td class="paramname"><em>active_sensors</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Object *&#160;</td>
-          <td class="paramname"><em>objects</em>, </td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td>
+          <td class="paramname"><em>active_environment</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>objects_len</em>&#160;</td>
+          <td class="paramtype">std::vector&lt; Object &gt;&#160;</td>
+          <td class="paramname"><em>objects</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -204,69 +202,22 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>We explicitly alert the student, which can be used on a one-off basis or reused between trials, that a specific primitive is now being trained against.</p>
+<p>We explicitly alert the student, which can be used on a one-off basis or reused between trials, that a specific primitive is now being trained against. If primitive_id doesn't identify any stored primitives, a new <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> is created and stored in the primitives_ vector.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">prim</td><td>A pointer to a primitive to train against </td></tr>
-    <tr><td class="paramname">active_motors</td><td>A pointer to a set of motors involved in trial </td></tr>
-    <tr><td class="paramname">motors_len</td><td>How many motors are expected to be used </td></tr>
-    <tr><td class="paramname">objects</td><td>A pointer to a set of objects </td></tr>
-    <tr><td class="paramname">objects_len</td><td>How many objects have been passed to the setup</td></tr>
+    <tr><td class="paramname">primitive_id</td><td>A string identifying the primitive to learn </td></tr>
+    <tr><td class="paramname">active_motors</td><td>A vector of sensors (motors) involved in trial </td></tr>
+    <tr><td class="paramname">active_sensors</td><td>A vector of sensors (on agent) involved in trial </td></tr>
+    <tr><td class="paramname">active_environment</td><td>A vector of sensors (environ) involved in trial </td></tr>
+    <tr><td class="paramname">objects</td><td>A vector of objects</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if the STUDENT succeeds in task, fail otherwise </dd></dl>
 
-<p>Implements <a class="el" href="classPrimitives_1_1Student.html#a1f3901ebd879650f9b4796d722ba7338">Primitives::Student</a>.</p>
+<p>Implements <a class="el" href="classPrimitives_1_1Student.html#a5beeeffe2bb8708652ad1060ff868b48">Primitives::Student</a>.</p>
 
-<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00037">37</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aa07f415518d5dfe78c08fa23ddbf62e8"></a><!-- doxytag: member="Primitives::Dummy::LoadComparables" ref="aa07f415518d5dfe78c08fa23ddbf62e8" args="(Primitive *prim, Key *tables, size_t tables_len)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Primitives::Dummy::LoadComparables </td>
-          <td>(</td>
-          <td class="paramtype">Primitive *&#160;</td>
-          <td class="paramname"><em>primitive</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Key *&#160;</td>
-          <td class="paramname"><em>tables</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>tables_len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Sometimes we will try to perform AB testing with the student, but in order to do so we will need to explicitly go to the datastore and get that learned Q-Table.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">primitive</td><td>The primitive whose alternate tables are to be compared </td></tr>
-    <tr><td class="paramname">tables</td><td>A set of IDs for the Q-Tables we want to load from within the provided primitive </td></tr>
-    <tr><td class="paramname">tables_len</td><td>How many tables we are performing a comparison w/</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>True unless an error occurred during load time </dd></dl>
-
-<p>Implements <a class="el" href="classPrimitives_1_1Student.html#afa98cb5cb58c2a90cd2e7bcec3e74047">Primitives::Student</a>.</p>
-
-<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00032">32</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00028">28</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
 
 </div>
 </div>
@@ -306,35 +257,6 @@ Public Member Functions</h2></td></tr>
 <p>Assigns this student a sensor whose value is to be interpreted as a reinforcement signal. It will be polled along with the environment and self sensors, but its value will be passed to the CreditAssignment object of the internal <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a>. </p>
 
 <p>Implements <a class="el" href="classPrimitives_1_1Student.html#af405e7fa77284ae9e4dd093016f1a50c">Primitives::Student</a>.</p>
-
-<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00028">28</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ab5ca09a5b2af424c7bffe164ff15285d"></a><!-- doxytag: member="Primitives::Dummy::SetLearningMethod" ref="ab5ca09a5b2af424c7bffe164ff15285d" args="(QLearner const &amp;learner)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Primitives::Dummy::SetLearningMethod </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> const &amp;&#160;</td>
-          <td class="paramname"><em>learner</em></td><td>)</td>
-          <td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Sets the learning method to use</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">learner</td><td><a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> or compatible class to perform learning</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>True if compatible learner provided, false if not </dd></dl>
-
-<p>Implements <a class="el" href="classPrimitives_1_1Student.html#a8b1445c719478ad24d5e8821afde046d">Primitives::Student</a>.</p>
 
 <p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00024">24</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
 
@@ -378,7 +300,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classPrimitives_1_1Student.html#a31140dfb0361a08965ebf99d9113b33a">Primitives::Student</a>.</p>
 
-<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00042">42</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
+<p>Definition at line <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html#l00035">35</a> of file <a class="el" href="Primitives_2Student_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
 
 </div>
 </div>

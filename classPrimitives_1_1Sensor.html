@@ -96,12 +96,14 @@ Inheritance diagram for Primitives::Sensor:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPrimitives_1_1Sensor__inherit__graph.png" border="0" usemap="#Primitives_1_1Sensor_inherit__map" alt="Inheritance graph"/></div>
 <map name="Primitives_1_1Sensor_inherit__map" id="Primitives_1_1Sensor_inherit__map">
-<area shape="rect" id="node3" href="classPrimitives_1_1CreateSensor.html" title="Primitives::CreateSensor" alt="" coords="5,83,173,112"/><area shape="rect" id="node5" href="classPrimitives_1_1FeedbackSensor.html" title="Primitives::FeedbackSensor" alt="" coords="197,83,384,112"/></map>
+<area shape="rect" id="node3" href="classPrimitives_1_1CreateSensor.html" title="Primitives::CreateSensor" alt="" coords="5,83,173,112"/><area shape="rect" id="node5" href="classPrimitives_1_1FeedbackSensor.html" title="Primitives::FeedbackSensor" alt="" coords="197,83,384,112"/><area shape="rect" id="node7" href="classPrimitives_1_1KinectSensor.html" title="Primitives::KinectSensor" alt="" coords="408,83,573,112"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for Primitives::Sensor:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPrimitives_1_1Sensor__coll__graph.png" border="0" usemap="#Primitives_1_1Sensor_coll__map" alt="Collaboration graph"/></div>
+<map name="Primitives_1_1Sensor_coll__map" id="Primitives_1_1Sensor_coll__map">
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classPrimitives_1_1Sensor-members.html">List of all members.</a></p>
@@ -199,7 +201,7 @@ Protected Member Functions</h2></td></tr>
 <p>Provides an english-readable name for this sensor</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Const char* string with the name of this sensor </dd></dl>
 
-<p>Definition at line <a class="el" href="Sensor_8h_source.html#l00074">74</a> of file <a class="el" href="Sensor_8h_source.html">Sensor.h</a>.</p>
+<p>Definition at line <a class="el" href="Sensor_8h_source.html#l00075">75</a> of file <a class="el" href="Sensor_8h_source.html">Sensor.h</a>.</p>
 
 </div>
 </div>
@@ -216,10 +218,10 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Provides an english-readable name for this sensor</p>
+<p>Provides a constant that signifies the max distance to consider something 'nearby' for this sensor.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Const char* string with the name of this sensor </dd></dl>
 
-<p>Definition at line <a class="el" href="Sensor_8h_source.html#l00067">67</a> of file <a class="el" href="Sensor_8h_source.html">Sensor.h</a>.</p>
+<p>Definition at line <a class="el" href="Sensor_8h_source.html#l00068">68</a> of file <a class="el" href="Sensor_8h_source.html">Sensor.h</a>.</p>
 
 </div>
 </div>
@@ -259,7 +261,7 @@ Protected Member Functions</h2></td></tr>
 <p>Returns the values held by this sensor</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>const array of doubles indicating values of this sensor </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1CreateSensor.html#aef0ddd3d5b33143b72f1f0d71338e195">Primitives::CreateSensor</a>, and <a class="el" href="classPrimitives_1_1FeedbackSensor.html#ab53b3ef22c87f0fab72bae809286d4e9">Primitives::FeedbackSensor</a>.</p>
+<p>Implemented in <a class="el" href="classPrimitives_1_1CreateSensor.html#aef0ddd3d5b33143b72f1f0d71338e195">Primitives::CreateSensor</a>, <a class="el" href="classPrimitives_1_1FeedbackSensor.html#ab53b3ef22c87f0fab72bae809286d4e9">Primitives::FeedbackSensor</a>, and <a class="el" href="classPrimitives_1_1KinectSensor.html#aff49b6e44575159e5bfe582f6b20e091">Primitives::KinectSensor</a>.</p>
 
 </div>
 </div>
@@ -279,7 +281,7 @@ Protected Member Functions</h2></td></tr>
 <p>Polls the associated sensor to get its new value</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false on failure </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1CreateSensor.html#a717937fcaea1193ef3802826a2f33e00">Primitives::CreateSensor</a>, and <a class="el" href="classPrimitives_1_1FeedbackSensor.html#a5c69b11e0ebe728de63e3f480f27c554">Primitives::FeedbackSensor</a>.</p>
+<p>Implemented in <a class="el" href="classPrimitives_1_1CreateSensor.html#a717937fcaea1193ef3802826a2f33e00">Primitives::CreateSensor</a>, <a class="el" href="classPrimitives_1_1FeedbackSensor.html#a5c69b11e0ebe728de63e3f480f27c554">Primitives::FeedbackSensor</a>, and <a class="el" href="classPrimitives_1_1KinectSensor.html#ac9e07ccd5ef4b87b495f24681c1e4856">Primitives::KinectSensor</a>.</p>
 
 </div>
 </div>
@@ -317,7 +319,7 @@ Protected Member Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false if setting is not permitted </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1CreateSensor.html#a66f9931c7ddc17c0b72483be11788625">Primitives::CreateSensor</a>, and <a class="el" href="classPrimitives_1_1FeedbackSensor.html#adacd130842ce8db13a49d92b04977579">Primitives::FeedbackSensor</a>.</p>
+<p>Implemented in <a class="el" href="classPrimitives_1_1CreateSensor.html#a66f9931c7ddc17c0b72483be11788625">Primitives::CreateSensor</a>, <a class="el" href="classPrimitives_1_1FeedbackSensor.html#adacd130842ce8db13a49d92b04977579">Primitives::FeedbackSensor</a>, and <a class="el" href="classPrimitives_1_1KinectSensor.html#af1c008f0ba9b7ff3a7d78f95b0460ec1">Primitives::KinectSensor</a>.</p>
 
 </div>
 </div>

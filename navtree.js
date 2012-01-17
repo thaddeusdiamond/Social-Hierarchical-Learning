@@ -21,6 +21,10 @@ var NAVTREE =
       [ "Primitives::DummyTest_Setup_Env_and_motors_Test", "classPrimitives_1_1DummyTest__Setup__Env__and__motors__Test.html", null ],
       [ "Primitives::ExplorationType", "classPrimitives_1_1ExplorationType.html", null ],
       [ "Primitives::FeedbackSensor", "classPrimitives_1_1FeedbackSensor.html", null ],
+      [ "Primitives::KinectSensor", "classPrimitives_1_1KinectSensor.html", null ],
+      [ "Primitives::KinectSensorTest", "classPrimitives_1_1KinectSensorTest.html", null ],
+      [ "Primitives::KinectSensorTest_CapturePrimitives_Test", "classPrimitives_1_1KinectSensorTest__CapturePrimitives__Test.html", null ],
+      [ "Primitives::LBDStudent", "classPrimitives_1_1LBDStudent.html", null ],
       [ "Observation::Observer", "classObservation_1_1Observer.html", null ],
       [ "Primitives::QLearner", "classPrimitives_1_1QLearner.html", null ],
       [ "Primitives::QTable", "classPrimitives_1_1QTable.html", null ],
@@ -45,6 +49,9 @@ var NAVTREE =
         [ "Primitives::DummyTest_Setup_Env_and_motors_Test", "classPrimitives_1_1DummyTest__Setup__Env__and__motors__Test.html", null ]
       ] ],
       [ "Primitives::ExplorationType", "classPrimitives_1_1ExplorationType.html", null ],
+      [ "Primitives::KinectSensorTest", "classPrimitives_1_1KinectSensorTest.html", [
+        [ "Primitives::KinectSensorTest_CapturePrimitives_Test", "classPrimitives_1_1KinectSensorTest__CapturePrimitives__Test.html", null ]
+      ] ],
       [ "Observation::Observer", "classObservation_1_1Observer.html", [
         [ "Observation::Dummy", "classObservation_1_1Dummy.html", null ]
       ] ],
@@ -54,12 +61,14 @@ var NAVTREE =
       [ "Primitives::QTable", "classPrimitives_1_1QTable.html", null ],
       [ "Primitives::Sensor", "classPrimitives_1_1Sensor.html", [
         [ "Primitives::CreateSensor", "classPrimitives_1_1CreateSensor.html", null ],
-        [ "Primitives::FeedbackSensor", "classPrimitives_1_1FeedbackSensor.html", null ]
+        [ "Primitives::FeedbackSensor", "classPrimitives_1_1FeedbackSensor.html", null ],
+        [ "Primitives::KinectSensor", "classPrimitives_1_1KinectSensor.html", null ]
       ] ],
       [ "Primitives::State", "classPrimitives_1_1State.html", null ],
       [ "Primitives::StateHistoryTuple", "classPrimitives_1_1StateHistoryTuple.html", null ],
       [ "Primitives::Student", "classPrimitives_1_1Student.html", [
-        [ "Primitives::Dummy", "classPrimitives_1_1Dummy.html", null ]
+        [ "Primitives::Dummy", "classPrimitives_1_1Dummy.html", null ],
+        [ "Primitives::LBDStudent", "classPrimitives_1_1LBDStudent.html", null ]
       ] ],
       [ "UtilsTest", "classUtilsTest.html", [
         [ "UtilsTest_FileLogging_Test", "classUtilsTest__FileLogging__Test.html", null ],
@@ -71,11 +80,13 @@ var NAVTREE =
     [ "Namespace List", "namespaces.html", [
       [ "Observation", "namespaceObservation.html", null ],
       [ "Primitives", "namespacePrimitives.html", null ],
+      [ "Signal", "namespaceSignal.html", null ],
       [ "Utils", "namespaceUtils.html", null ]
     ] ],
     [ "Namespace Members", "namespacemembers.html", null ],
     [ "File List", "files.html", [
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/README.doxy", "README_8doxy.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Common/Signal.h", "Signal_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Common/Utils.h", "Utils_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Common/UtilsUnitTest.cc", "UtilsUnitTest_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/Dummy.cc", "Observation_2Observer_2Dummy_8cc.html", null ],
@@ -98,6 +109,11 @@ var NAVTREE =
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/DummyUnitTest.cc", "Primitives_2Student_2DummyUnitTest_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/FeedbackSensor.cc", "FeedbackSensor_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/FeedbackSensor.h", "FeedbackSensor_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/KinectSensor.cc", "KinectSensor_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/KinectSensor.h", "KinectSensor_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/KinectSensorUnitTest.cc", "KinectSensorUnitTest_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/LBDStudent.cc", "LBDStudent_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/LBDStudent.h", "LBDStudent_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Sensor.h", "Sensor_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Student.h", "Student_8h.html", null ]
     ] ],

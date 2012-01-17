@@ -96,7 +96,7 @@ Inheritance diagram for Primitives::Student:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPrimitives_1_1Student__inherit__graph.png" border="0" usemap="#Primitives_1_1Student_inherit__map" alt="Inheritance graph"/></div>
 <map name="Primitives_1_1Student_inherit__map" id="Primitives_1_1Student_inherit__map">
-<area shape="rect" id="node3" href="classPrimitives_1_1Dummy.html" title="Primitives::Dummy" alt="" coords="5,83,139,112"/></map>
+<area shape="rect" id="node3" href="classPrimitives_1_1Dummy.html" title="Primitives::Dummy" alt="" coords="5,83,139,112"/><area shape="rect" id="node5" href="classPrimitives_1_1LBDStudent.html" title="Primitives::LBDStudent" alt="" coords="163,83,320,112"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classPrimitives_1_1Student-members.html">List of all members.</a></p>
@@ -107,9 +107,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a1aaf839e724e693dd5288b88081019a3">SetEnvironment</a> (vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;sensors)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a665e87639a9e3af29b24b50678b7d3a6">SetMotors</a> (vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;motors)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#af405e7fa77284ae9e4dd093016f1a50c">SetFeedbackHandler</a> (<a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const &amp;feedback_device)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a8b1445c719478ad24d5e8821afde046d">SetLearningMethod</a> (<a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> const &amp;learner)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#afa98cb5cb58c2a90cd2e7bcec3e74047">LoadComparables</a> (Primitive *primitive, Key *tables, size_t tables_len)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a1f3901ebd879650f9b4796d722ba7338">Learn</a> (Primitive *prim, Motor *active_motors, size_t motors_len, Object *objects, size_t objects_len)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a5beeeffe2bb8708652ad1060ff868b48">Learn</a> (std::string primitive_id, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_motors, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_sensors, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_environment, std::vector&lt; Object &gt; objects)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a31140dfb0361a08965ebf99d9113b33a">StopLearning</a> (void)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;<br class="typebreak"/>
  const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a4f565f5aa2cbaca7f396783d8e587e97">get_sensors</a> () const </td></tr>
@@ -117,15 +115,18 @@ Public Member Functions</h2></td></tr>
  const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a6697db2edd47a1fe40db96840ba5011d">get_environment</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;<br class="typebreak"/>
  const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a546d2a1576b443778453534d2064c807">get_motors</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual vector&lt; <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> * &gt;<br class="typebreak"/>
+ const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#aa29ac726ad0aa25d4cb3e16400ad6d8e">get_primitives</a> () const </td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a5b04f3fb6f1a38f7cd680d71e234b300">sensors_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a6bf28a0f3f958ef11e9ffe4f0fa07f7e">environment_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a2bce366b696bef93dd4d93c380b43f36">motors_</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#ae81c02869bb0a594b86923ea9603a09a">primitives_</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00036">36</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00035">35</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a710cbc8bc2959acb1d01fcab97d3c27f"></a><!-- doxytag: member="Primitives::Student::~Student" ref="a710cbc8bc2959acb1d01fcab97d3c27f" args="()" -->
 <div class="memitem">
@@ -142,7 +143,7 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Destructor for a <a class="el" href="classPrimitives_1_1Student.html">Student</a> must free all memory it received from I/O and had buffered, also release the STUDENT it controls </p>
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00042">42</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00041">41</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -162,7 +163,7 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Accessor for sensors this student's environment </p>
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00134">134</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00114">114</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -181,7 +182,26 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Accessor for sensors this student's environment </p>
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00141">141</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00121">121</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa29ac726ad0aa25d4cb3e16400ad6d8e"></a><!-- doxytag: member="Primitives::Student::get_primitives" ref="aa29ac726ad0aa25d4cb3e16400ad6d8e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual vector&lt;<a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a>*&gt; const* const Primitives::Student::get_primitives </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Accessor for primitives this student knows </p>
+
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00126">126</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -200,43 +220,43 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Accessor for sensors associated with this student </p>
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00127">127</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00107">107</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1f3901ebd879650f9b4796d722ba7338"></a><!-- doxytag: member="Primitives::Student::Learn" ref="a1f3901ebd879650f9b4796d722ba7338" args="(Primitive *prim, Motor *active_motors, size_t motors_len, Object *objects, size_t objects_len)=0" -->
+<a class="anchor" id="a5beeeffe2bb8708652ad1060ff868b48"></a><!-- doxytag: member="Primitives::Student::Learn" ref="a5beeeffe2bb8708652ad1060ff868b48" args="(std::string primitive_id, std::vector&lt; Sensor * &gt; active_motors, std::vector&lt; Sensor * &gt; active_sensors, std::vector&lt; Sensor * &gt; active_environment, std::vector&lt; Object &gt; objects)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual bool Primitives::Student::Learn </td>
           <td>(</td>
-          <td class="paramtype">Primitive *&#160;</td>
-          <td class="paramname"><em>prim</em>, </td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>primitive_id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Motor *&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td>
           <td class="paramname"><em>active_motors</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>motors_len</em>, </td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td>
+          <td class="paramname"><em>active_sensors</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Object *&#160;</td>
-          <td class="paramname"><em>objects</em>, </td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td>
+          <td class="paramname"><em>active_environment</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>objects_len</em>&#160;</td>
+          <td class="paramtype">std::vector&lt; Object &gt;&#160;</td>
+          <td class="paramname"><em>objects</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -246,65 +266,20 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>We explicitly alert the student, which can be used on a one-off basis or reused between trials, that a specific primitive is now being trained against.</p>
+<p>We explicitly alert the student, which can be used on a one-off basis or reused between trials, that a specific primitive is now being trained against. If primitive_id doesn't identify any stored primitives, a new <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> is created and stored in the primitives_ vector.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">prim</td><td>A pointer to a primitive to train against </td></tr>
-    <tr><td class="paramname">active_motors</td><td>A pointer to a set of motors involved in trial </td></tr>
-    <tr><td class="paramname">motors_len</td><td>How many motors are expected to be used </td></tr>
-    <tr><td class="paramname">objects</td><td>A pointer to a set of objects </td></tr>
-    <tr><td class="paramname">objects_len</td><td>How many objects have been passed to the setup</td></tr>
+    <tr><td class="paramname">primitive_id</td><td>A string identifying the primitive to learn </td></tr>
+    <tr><td class="paramname">active_motors</td><td>A vector of sensors (motors) involved in trial </td></tr>
+    <tr><td class="paramname">active_sensors</td><td>A vector of sensors (on agent) involved in trial </td></tr>
+    <tr><td class="paramname">active_environment</td><td>A vector of sensors (environ) involved in trial </td></tr>
+    <tr><td class="paramname">objects</td><td>A vector of objects</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if the STUDENT succeeds in task, fail otherwise </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1Dummy.html#a1990a71257b949f01fd0ee984019162b">Primitives::Dummy</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="afa98cb5cb58c2a90cd2e7bcec3e74047"></a><!-- doxytag: member="Primitives::Student::LoadComparables" ref="afa98cb5cb58c2a90cd2e7bcec3e74047" args="(Primitive *primitive, Key *tables, size_t tables_len)=0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool Primitives::Student::LoadComparables </td>
-          <td>(</td>
-          <td class="paramtype">Primitive *&#160;</td>
-          <td class="paramname"><em>primitive</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Key *&#160;</td>
-          <td class="paramname"><em>tables</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>tables_len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Sometimes we will try to perform AB testing with the student, but in order to do so we will need to explicitly go to the datastore and get that learned Q-Table.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">primitive</td><td>The primitive whose alternate tables are to be compared </td></tr>
-    <tr><td class="paramname">tables</td><td>A set of IDs for the Q-Tables we want to load from within the provided primitive </td></tr>
-    <tr><td class="paramname">tables_len</td><td>How many tables we are performing a comparison w/</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>True unless an error occurred during load time </dd></dl>
-
-<p>Implemented in <a class="el" href="classPrimitives_1_1Dummy.html#aa07f415518d5dfe78c08fa23ddbf62e8">Primitives::Dummy</a>.</p>
+<p>Implemented in <a class="el" href="classPrimitives_1_1Dummy.html#aa701cec143049787d002fdde01c345c8">Primitives::Dummy</a>, and <a class="el" href="classPrimitives_1_1LBDStudent.html#a6967a16e8c4dfe59d745b5f0afe3c68c">Primitives::LBDStudent</a>.</p>
 
 </div>
 </div>
@@ -331,6 +306,8 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True unless an error occurred in setup </dd></dl>
 
+<p>Implemented in <a class="el" href="classPrimitives_1_1LBDStudent.html#ad75bc6d18d562d824d22ed87845cfaf7">Primitives::LBDStudent</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="af405e7fa77284ae9e4dd093016f1a50c"></a><!-- doxytag: member="Primitives::Student::SetFeedbackHandler" ref="af405e7fa77284ae9e4dd093016f1a50c" args="(Sensor const &amp;feedback_device)=0" -->
@@ -349,34 +326,7 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Assigns this student a sensor whose value is to be interpreted as a reinforcement signal. It will be polled along with the environment and self sensors, but its value will be passed to the CreditAssignment object of the internal <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a>. </p>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1Dummy.html#a6b036e6838c28215b0ec48673b14f630">Primitives::Dummy</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8b1445c719478ad24d5e8821afde046d"></a><!-- doxytag: member="Primitives::Student::SetLearningMethod" ref="a8b1445c719478ad24d5e8821afde046d" args="(QLearner const &amp;learner)=0" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool Primitives::Student::SetLearningMethod </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> const &amp;&#160;</td>
-          <td class="paramname"><em>learner</em></td><td>)</td>
-          <td><code> [pure virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Sets the learning method to use</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">learner</td><td><a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> or compatible class to perform learning</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>True if compatible learner provided, false if not </dd></dl>
-
-<p>Implemented in <a class="el" href="classPrimitives_1_1Dummy.html#ab5ca09a5b2af424c7bffe164ff15285d">Primitives::Dummy</a>.</p>
+<p>Implemented in <a class="el" href="classPrimitives_1_1Dummy.html#a6b036e6838c28215b0ec48673b14f630">Primitives::Dummy</a>, and <a class="el" href="classPrimitives_1_1LBDStudent.html#ab33b038cd18e4551bd679b979aec5b1d">Primitives::LBDStudent</a>.</p>
 
 </div>
 </div>
@@ -403,6 +353,8 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True unless an error occurred in setup </dd></dl>
 
+<p>Implemented in <a class="el" href="classPrimitives_1_1LBDStudent.html#af72ba9442f5f12740c8c69ad1aee95be">Primitives::LBDStudent</a>.</p>
+
 </div>
 </div>
 <a class="anchor" id="a31140dfb0361a08965ebf99d9113b33a"></a><!-- doxytag: member="Primitives::Student::StopLearning" ref="a31140dfb0361a08965ebf99d9113b33a" args="(void)=0" -->
@@ -422,7 +374,7 @@ Protected Attributes</h2></td></tr>
 <p>Exits the learning state that is entered by calling the Learn function</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if successfully stopped, false on error </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1Dummy.html#a87623b972a63c6662a50ecd607e6314e">Primitives::Dummy</a>.</p>
+<p>Implemented in <a class="el" href="classPrimitives_1_1Dummy.html#a87623b972a63c6662a50ecd607e6314e">Primitives::Dummy</a>, and <a class="el" href="classPrimitives_1_1LBDStudent.html#aa5a0cf6384b84d7e597f560f02c9e857">Primitives::LBDStudent</a>.</p>
 
 </div>
 </div>
@@ -438,7 +390,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00145">145</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00134">134</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -453,7 +405,22 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00146">146</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00135">135</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae81c02869bb0a594b86923ea9603a09a"></a><!-- doxytag: member="Primitives::Student::primitives_" ref="ae81c02869bb0a594b86923ea9603a09a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a>*&gt; <a class="el" href="classPrimitives_1_1Student.html#ae81c02869bb0a594b86923ea9603a09a">Primitives::Student::primitives_</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00136">136</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -468,7 +435,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00144">144</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00133">133</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
