@@ -1,5 +1,0 @@
-Thad's List:
-------------
-  - Implement the file format for a Primitive
-  - How are we going to store Q-Tables?
-    * Use SQL/SQLite?  I think for now we can assume main-memory could be fine but we'll see
