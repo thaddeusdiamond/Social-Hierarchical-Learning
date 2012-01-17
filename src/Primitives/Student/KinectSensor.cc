@@ -143,7 +143,7 @@ void KinectSensor::set_file_handle(char const * filename) {
   if (file_handle_ != NULL)
     fclose(file_handle_);
   file_handle_ = fopen(filename, "w");
-} 
+}
 
 double const * const KinectSensor::GetValues() {
   // Return a one-element array to most recent value
