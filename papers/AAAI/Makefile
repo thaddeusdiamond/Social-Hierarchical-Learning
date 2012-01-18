@@ -9,6 +9,7 @@ INTER   := $(OUTPUT)/intermediate
 FIGURES	:= figures
 
 # Collect the appropriate files for compilation
+STYLES  := $(wildcard *.sty)
 SRCS    := $(wildcard *.tex *.cls)
 SRCS    += $(wildcard $(FIGURES)/*.eps)
 REFS    := $(wildcard *.bib)
@@ -17,7 +18,7 @@ all: view
 
 $(REPORT).dvi: $(SRCS) $(REFS)
 	@mkdir -p $(INTER)
-	@cp $(REFS) $(SRCS) $(INTER)
+	@cp $(REFS) $(SRCS) $(STYLES) $(INTER)
 	@cd $(INTER); \
 		$(LATEX) $(REPORT); $(BIBTEX) $(REPORT); \
 		$(LATEX) $(REPORT); $(LATEX)  $(REPORT);

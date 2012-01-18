@@ -1,0 +1,73 @@
+% File: report.tex
+
+\documentclass[letterpaper]{article}
+\usepackage{aaai}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\frenchspacing
+\pdfinfo{
+/Title (Primitive Recognition using Inverse Q-Table Matching)
+/Subject (In Proceedings AAAI)
+/Author (Bradley Hayes, Brian Scassellati, and Thaddeus Diamond)
+}
+  
+\begin{document}
+\title{Scene Decomposition using Inverse Q-Table Matching}
+\author{Bradley Hayes, Brian Scassellati, and Thaddeus Diamond\\
+Yale University\\
+Arthur K. Watson Hall\\
+51 Prospect St\\
+New Haven, Connecticut 06511\\
+}
+
+\maketitle
+
+\begin{abstract}
+Several variations of Q-Learning have reliably demonstrated that reinforcement
+learning is a viable technique for creating learned skills in robots.  However,
+very little work has focused on using sensory data to generate an approximation
+of which Q-Table most reliably approximates the skill just observed.  We present
+herein a system which is able to consistently provide accurate decompositions of
+a scene into simple, learned primitives.  The system is then able to take this
+frame-by-frame decomposition to provide an approximation for a suitable 
+hierarchical structure of the task being performed.  This structure is composed
+entirely of either previously learned primitives or unknowns.  Once those
+learned actions have been successfully mapped over time, the entire scene, or
+merely portions of it, can be replicated by robotic agents in a novel
+environment.  
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+In this section we introduce the problem.
+
+\section{Background}
+\label{sec:background}
+In this section we discuss relevant background to the problem.
+
+\section{Primitive Recognition}
+\label{sec:recognition}
+In this section we discuss our work on primitive recognition.
+
+\section{Results}
+\label{sec:result}
+In this section we discuss our experimental results.
+
+\section{Related and Future Work}
+\label{sec:future}
+In this section we discuss future work (hint at SHL?)
+
+\section{Conclusions}
+\label{sec:conclusions}
+In this section we conclude.
+
+\section{Acknowledgements}
+\label{sec:acknowledgements}
+We would like to thank... grant numbers?  Brad's grad school funding?  God?
+Wayne Brady?
+
+\bibliography{report.bib}
+\bibliographystyle{aaai}
+
+\end{document}
