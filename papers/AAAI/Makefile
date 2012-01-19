@@ -10,7 +10,7 @@ FIGURES	:= figures
 STYLES  := styles
 
 # Collect the appropriate files for compilation
-STYLES  := $(wildcard $(FIGURES)/*.sty $(FIGURES)/*.bst)
+STYLES  := $(wildcard $(STYLES)/*.sty $(STYLES)/*.bst)
 SRCS    := $(wildcard *.tex *.cls)
 SRCS    += $(wildcard $(FIGURES)/*.eps)
 REFS    := $(wildcard *.bib)

@@ -77,9 +77,22 @@ complex scene data.
 \section{Background}
 \label{sec:background}
 \subsection{American Sign Language Gesture Recognition}
-In this section we discuss relevant background to the problem.
+The domain in which we test our system is American Sign Language (ASL).
+American sign language is chosen as a domain in which to test our scheme
+because each motion involves six degrees of freedom -- the x, y, and z
+coordinates of each hand relative to the agent's head -- which creates a
+state space sufficiently large enough to preclude achieving real-time
+optimality via na\"ive brute force methods.  The
+robotic system has a priori knowledge of a set of ASL gestures and the
+corresponding Q-Table.
+
+Gesture recognition is not a novel concept.  Something about gesture recognition
+here...\cite{HandGestures}\cite{HSMMRecognition}\cite{POMDPGesture}.
+Several works have already provided robust gesture recognition systems for
+ASL \cite{HoughASL}\cite{ASLRealTime}\cite{MotionASL}.
 
 \subsection{Hierarchical Task Decomposition}
+\cite{Hierarchical}
 
 \section{Primitive Recognition}
 \label{sec:recognition}
