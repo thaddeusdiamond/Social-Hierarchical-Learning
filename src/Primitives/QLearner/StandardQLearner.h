@@ -20,13 +20,15 @@
 
 namespace Primitives {
 
+class QLearner;
+class QTable;
+class State;
+
 class StandardQLearner : public QLearner {
  public:
-  explicit StandardQLearner(std::string name) { name_ = name; }
-  StandardQLearner(std::string name, QTable qt) {
-    name_ = name;
-    q_table_ =qt;
-  }
+  explicit StandardQLearner(std::string name);
+  StandardQLearner(std::string name, QTable qt);
+  ~StandardQLearner() {}
 
 /**
    * Populates this object with the QTable contained in the target file
@@ -35,7 +37,7 @@ class StandardQLearner : public QLearner {
    *
    * @return    True on success, false on failure.
    */
-  bool Load(string const& filename);
+  virtual bool Load(string const& filename);
 
   /**
    * Saves the entire contents of the QTable to the target file
@@ -45,7 +47,7 @@ class StandardQLearner : public QLearner {
    *
    * @return    True on success, false on failure
    */
-  bool Save(string const& filename);
+  virtual bool Save(string const& filename);
 
   /**
    * Clears table, initializes everything in the object to pristine and
@@ -53,7 +55,7 @@ class StandardQLearner : public QLearner {
    *
    * @return    True on success, false on failure
    */
-  bool Init(std::vector<Sensor const *> const &sensors);
+  virtual bool Init(std::vector<Sensor *> const &sensors);
 
   /**
    * Copies the state data provided to it and records it in the QTable
@@ -62,7 +64,7 @@ class StandardQLearner : public QLearner {
    *
    * @return    True on successful modification of QTable, false on failure.
    */
-  bool Learn(State const& state);
+  virtual bool Learn(State const& state);
 
   /**
    * Populates nearby_states with a list of neighboring state descriptors
@@ -75,7 +77,7 @@ class StandardQLearner : public QLearner {
    *                            
    * @return True on success, false on lookup error.
    */
-  bool GetNearbyStates(State const& cur_state,
+  virtual bool GetNearbyStates(State const& cur_state,
                        vector<State const *>& nearby_states);
 
   /**
@@ -85,7 +87,7 @@ class StandardQLearner : public QLearner {
    * @param state State in the QTable to use as origin
    * @return True on success, false on failure
    */
-  bool AddNearbyEmptyStates(State const &state);
+  virtual bool AddNearbyEmptyStates(State const &state);
 
   /**
    * Returns the chosen next step by the QLearner.
@@ -95,7 +97,7 @@ class StandardQLearner : public QLearner {
    * 
    * @return True on success, false on lookup error
    */
-  bool GetNextState(State const& cur_state,
+  virtual bool GetNextState(State const& cur_state,
                     State const** next_state);
 
 
@@ -106,7 +108,7 @@ class StandardQLearner : public QLearner {
    * @param signal Double describing the feedback being received
    * @return true on successful application, false on error
    **/
-  virtual bool AssignCredit(double signal) = 0;
+  virtual bool AssignCredit(double signal);
 
  private:
   StandardQLearner() {}

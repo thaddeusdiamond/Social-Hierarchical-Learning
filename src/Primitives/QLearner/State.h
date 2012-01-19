@@ -22,33 +22,14 @@ class State {
    * Constructs a State variable given a vector of doubles and a reward
    *
    * @param state_descriptor    Description of state being represented
-   * @param unit_dist           Sum of 'minimum recognized change' over each
-   *                            sensor that composes the state vector
-   * @param reward              Real-valued reward value associated with state
    **/
-  State(const std::vector<double> &state_descriptor,
-        const double unit_dist = 0.,
-        const double reward = 0.)
-    : state_vector_(state_descriptor), unit_distance_(unit_dist),
-      reward_(reward) {}
+  explicit State(const std::vector<double> &state_descriptor)
+    : state_vector_(state_descriptor) {}
 
   /**
-   * Copy constructor
+   * Copy constructor. Disregards all state transitions from s.
    **/
-  explicit State(State const &s) : state_vector_(s.get_state_vector()),
-    unit_distance_(s.get_unit_distance()), reward_(s.get_base_reward()) {
-    std::map<std::string, double> reward_layers = s.get_reward_layers();
-    std::map<std::string, double>::const_iterator iter;
-    for (iter = s.reward_layers_.begin(); iter != reward_layers_.end();
-         ++iter) {
-      reward_layers_[(*iter).first] = (*iter).second;
-    }
-  }
-
-  /**
-   * Copy constructor
-   **/
-  explicit State() {}
+  explicit State(State const &s) : state_vector_(s.get_state_vector()) {}
 
   /**
    * Shouldn't have to free anything here
@@ -83,11 +64,13 @@ class State {
    * @param state State to measure distance to
    * @return Euclidean distance between states
    */
-  virtual double GetSquaredDistance(State const * const state) const {
-    if (!state) return -1.;
+  virtual std::vector<double> GetSquaredDistances(State const * const state)
+    const {
+    std::vector<double> distances;
+    if (!state) return distances;
 
     if (state->get_state_vector().size() != state_vector_.size())
-      return -1.;
+      return distances;
 
     double distance = 0.;
 
@@ -98,11 +81,31 @@ class State {
          iter != state_vector_.end(),
          needle_iter != state->get_state_vector().end();
          ++iter, ++needle_iter) {
-      distance += ((*iter) - (*needle_iter)) * ((*iter) - (*needle_iter));
+      distance = ((*iter) - (*needle_iter)) * ((*iter) - (*needle_iter));
+      distances.push_back(distance);
     }
 
-    return distance;
+    return distances;
   }
+
+  /**
+   * Retrieves the reward (transition function) on this state object
+   * for a particular State
+   * @return Summed reward value
+   */
+  virtual double GetRewardValue(State *target) {
+    if (reward_.find(target) == reward_.end()) return 0.;
+    std::map<std::string, double> &reward_layers = reward_[target];
+    std::map<std::string, double>::const_iterator iter;
+    double total = 0.;
+    for (iter = reward_layers.begin(); iter != reward_layers.end();
+         ++iter) {
+      total += (*iter).second;
+    }
+
+    return total;
+  }
+
 
   /**
    * Returns an immutable state descriptor vector of doubles.
@@ -119,64 +122,38 @@ class State {
    * @param layer Keyword associated with value
    * @param val Reward value to assign
    **/
-  virtual void set_reward(std::string layer, double val) {
+  virtual void set_reward(State *target, std::string layer, double val) {
     if (val != 0) {
-      reward_layers_[layer] = val;
+      std::map<State*, std::map<std::string, double> >::iterator
+        layer_map = (reward_.find(target));
+      if (layer_map == reward_.end()) {
+        reward_[target] = std::map<std::string, double>();
+      }
+      (reward_[target])[layer] = val;
     } else {
       std::map<std::string, double>::iterator iter;
-      iter = reward_layers_.find(layer);
-      reward_layers_.erase(iter);
+      iter = (reward_[target]).find(layer);
+      (reward_[target]).erase(iter);
     }
   }
 
-  /**
-   * Sets all keys in reward_layers_ to values contained in layers
-   *
-   * @param layers Map with key=>reward to overwrite local values
-   **/
-  virtual void set_reward_layers(std::map<std::string, double> layers) {
-    std::map<std::string, double>::iterator iter;
-    for (iter = layers.begin(); iter != layers.end(); ++iter) {
-      reward_layers_[iter->first] = iter->second;
-    }
-  }
 
   /**
-   * Retrieves the total reward on this state object
-   * @return Sum of base reward and all reward 'layers'
+   * Retrieves the reward (transition function) on this state object
+   * @return Function mapping State* to reward layers
    */
-  virtual double get_reward() const {
-    double total_reward = reward_;
-    std::map<std::string, double>::const_iterator iter;
-    for (iter = reward_layers_.begin(); iter != reward_layers_.end(); ++iter) {
-      total_reward += (*iter).second;
-    }
-
-    return total_reward;
+  virtual std::map<State*, std::map<std::string, double> > get_reward() const {
+    return reward_;
   }
-
-  virtual void set_base_reward(double const reward) { reward_ = reward; }
-
-  /**
-   * Retrieves non-layered, 'unmodified' reward value for this state
-   * @return Base reward score
-   */
-  virtual double get_base_reward() const { return reward_; }
-
-  virtual std::map<std::string, double> get_reward_layers() const {
-    return reward_layers_;
-  }
-
-  virtual double get_unit_distance() const { return unit_distance_; }
-
-
-  static const double NEARBY_STATE_THRESHOLD = 10.;
 
  private:
+  /**
+   * Copy constructor
+   **/
+  explicit State() {}
+
   std::vector<double> state_vector_;
-  double unit_distance_;
-  double reward_;
-  std::map<std::string, double> reward_layers_;
+  std::map<State*, std::map<std::string, double> > reward_;
   char state_hash_[160];  // @TODO: When state_vector_ is populated,
                           // store hash here to allow quick comparisons
 };

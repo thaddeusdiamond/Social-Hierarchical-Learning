@@ -10,8 +10,23 @@
  */
 
 #include "QLearner/StandardQLearner.h"
+#include "QLearner/QTable.h"
+#include "QLearner/State.h"
 
 namespace Primitives {
+
+StandardQLearner::StandardQLearner(std::string name) {
+  name_ = name;
+  trials_ = 0;
+  anticipated_duration_ = 0;
+}
+
+StandardQLearner::StandardQLearner(std::string name, QTable qt) {
+  name_ = name;
+  q_table_ = qt;
+  trials_ = 0;
+  anticipated_duration_ = 0;
+}
 
 bool StandardQLearner::Load(string const& filename) {
   return true;
@@ -21,27 +36,30 @@ bool StandardQLearner::Save(string const& filename) {
   return true;
 }
 
-bool StandardQLearner::Init(std::vector<Sensor const *> const &sensors) {
+bool StandardQLearner::Init(std::vector<Sensor *> const &sensors) {
   this->sensors_ = sensors;
   QTable qt;
   this->q_table_ = qt;
+
+  std::vector<double> thresh;
+  std::vector<Sensor *>::const_iterator iter;
+
+  for (iter = sensors_.begin(); iter != sensors_.end(); ++iter) {
+    thresh.push_back((*iter)->get_nearby_threshold());
+  }
+
+  this->q_table_.set_nearby_thresholds(thresh);
   return true;
 }
 
 bool StandardQLearner::Learn(State const& state) {
-  State *existing_state = this->q_table_.GetState(state);
-  if (existing_state) {
-    existing_state->set_base_reward(state.get_base_reward());
-    return true;
-  } else {
-    State *s = this->q_table_.AddState(state);
-    return (s != NULL);
-  }
+  // @TODO: This should start the primitives recording process
+  return true;
 }
 
 bool StandardQLearner::AddNearbyEmptyStates(State const &state) {
   std::vector<double> base_descriptor = state.get_state_vector();
-  std::vector<Sensor const *>::const_iterator sensor_iter;
+  std::vector<Sensor *>::const_iterator sensor_iter;
   int i = 0;
   for (i = 0, sensor_iter = sensors_.begin(); sensor_iter != sensors_.end();
        ++i, ++sensor_iter) {
@@ -56,13 +74,13 @@ bool StandardQLearner::AddNearbyEmptyStates(State const &state) {
     State decrement_state(decr_descriptor);
 
     if (this->q_table_.HasState(increment_state)) {
-      if (!this->q_table_.GetState(increment_state)) {
+      if (!this->q_table_.GetState(increment_state, false)) {
         this->q_table_.AddState(increment_state);
       }
     }
 
     if (this->q_table_.HasState(decrement_state)) {
-      if (!this->q_table_.GetState(decrement_state)) {
+      if (!this->q_table_.GetState(decrement_state, false)) {
         this->q_table_.AddState(decrement_state);
       }
     }
@@ -88,7 +106,7 @@ bool StandardQLearner::GetNearbyStates(
     state_distance_fail = false;
     // iterate through each value in the state and check if it's within required
     // distance from the current state (according to the internal sensor vector)
-    std::vector<Sensor const *>::const_iterator sensor_iter;
+    std::vector<Sensor *>::const_iterator sensor_iter;
     int i;
     for (i = 0, sensor_iter = sensors_.begin(); sensor_iter != sensors_.end();
          ++sensor_iter, ++i) {
@@ -110,40 +128,12 @@ bool StandardQLearner::GetNearbyStates(
 
 bool StandardQLearner::GetNextState(State const& cur_state,
                                     State const** next_state) {
-  if (exploration_type_ == NULL) {
-    std::vector<State const *> nearby_states;
-    this->GetNearbyStates(cur_state, nearby_states);
-
-    std::vector<State const *>::const_iterator iter;
-    double best_score = 0.;
-    std::vector<State const *> best_states;
-    for (iter = nearby_states.begin(); iter != nearby_states.end(); ++iter) {
-      if ((*iter)->get_reward() > best_score) {
-        best_states.clear();
-        best_score = (*iter)->get_reward();
-        best_states.push_back(*iter);
-      } else if ((*iter)->get_reward() == best_score) {
-        best_states.push_back(*iter);
-      }
-    }
-
-    // Randomly choose from the best available states
-    int idx = rand() % best_states.size();
-
-    // Set return value
-    (*next_state) = best_states[idx];
-
-    // Couldn't find any next state -- we failed!
-    if (best_states.size() == 0) return false;
-
-    return true;
-  } else {
-    return exploration_type_->GetNextStep(cur_state, next_state);
-  }
+  if (exploration_type_ == NULL) return false;
+  return exploration_type_->GetNextStep(cur_state, next_state);
 }
 
 bool StandardQLearner::AssignCredit(double signal) {
   return credit_assignment_type_->ApplyCredit(signal);
 }
 
-}  // namespace Primitives
+};  // namespace Primitives

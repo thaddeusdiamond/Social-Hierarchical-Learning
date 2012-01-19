@@ -38,7 +38,7 @@ OBSVDIR   := ./Observation
 #
 # For overview commands only, the line should read 'V = @'.
 # For overview and verbose commands, the line should read 'V ='.
-V = @
+V = @ 
 
 # Set std compiler options (linking for google test and pthread), LD_LIB
 CXX       := g++

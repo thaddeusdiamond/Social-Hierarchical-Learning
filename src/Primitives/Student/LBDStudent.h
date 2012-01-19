@@ -16,16 +16,20 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include "Common/Utils.h"
+#include "QLearner/QLearner.h"
+#include "QLearner/QTable.h"
 #include "Student/Student.h"
+
+namespace Primitives {
 
 using std::string;
 using std::vector;
 
-namespace Primitives {
-
 class LBDStudent : public Student {
  public:
-/**
+  explicit LBDStudent() {}
+  /**
    * Destructor for a Student must free all memory it received from I/O and
    * had buffered, also release the STUDENT it controls
    **/
@@ -85,21 +89,7 @@ class LBDStudent : public Student {
   * @param filename File to learn skill from
   * @return
   **/
-  virtual QLearner *LearnSkillFromFile(std::string filename);
-
- private:
-  /**
-   * Adds more data to a QLearner based on file input.
-   * File must follow this format:
-   * Line 1: "Unique Skill Name"
-   * Line 2: Min Increment Value for each sensor
-   * Line 3: Nearby-threshold Value for each sensor
-   * Lines 4+: Comma separated sensor values
-   * @param filename File to learn skill from
-   * @return
-   **/
-  virtual void AddTrainingToSkill(std::string primitive_id,
-                                  std::string filename);
+  QLearner *LearnSkillFromFile(std::string filename);
 };
 
 

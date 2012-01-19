@@ -30,13 +30,8 @@ class Dummy : public Observer {
    **/
   virtual ~Dummy() {}
 
-  virtual bool Observe(Task* task, QTable* tables, int tables_len,
-                       vector<Sensor*> const &sensors);
+  virtual bool Observe(Task* task);
   virtual bool StopObserving(void);
-  virtual double AttemptMatch(QTable const &table,
-                              vector<Sensor*> const &sensors,
-                              double min_threshold,
-                              double death_time);
 };
 
 }  // namespace Observation
