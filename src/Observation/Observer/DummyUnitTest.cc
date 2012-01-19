@@ -35,15 +35,8 @@ class DummyObserverTest : public ::testing::Test {
  * @test    Dummy observer simple start/stop
  **/
 TEST_F(DummyObserverTest, StartAndStopObserver) {
-  EXPECT_TRUE(dummy_->Observe(NULL, NULL, 0, vector<Sensor*>()));
+  EXPECT_TRUE(dummy_->Observe(NULL));
   EXPECT_TRUE(dummy_->StopObserving());
-}
-
-/**
- * @test    Dummy observer attempting a match
- **/
-TEST_F(DummyObserverTest, AttemptMatch) {
-  EXPECT_EQ(dummy_->AttemptMatch(QTable(), vector<Sensor*>(), 0, 0), 0.0);
 }
 
 }  // namespace Observation

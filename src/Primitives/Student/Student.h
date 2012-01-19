@@ -17,6 +17,7 @@
 #include <vector>
 #include <cstdlib>
 #include "Student/Sensor.h"
+#include "QLearner/QLearner.h"
 
 using std::string;
 using std::vector;
@@ -100,6 +101,30 @@ class Student {
    **/
   virtual bool StopLearning(void) = 0;
 
+  /**
+   * Returns whether or not the student has a skill matching the given name
+   * @param name String identifying the skill to be searched
+   * @return Pointer to QLearner if found, NULL otherwise
+   **/
+  virtual QLearner* GetSkill(std::string name) {
+    vector<QLearner*>::iterator iter;
+    for (iter = primitives_.begin(); iter != primitives_.end(); ++iter) {
+      std::string const &p_name = (*iter)->get_name();
+      if (p_name.compare(name) == 0) return *iter;
+    }
+    return NULL;
+  }
+
+  /**
+   * Adds the provided QLearner as a skill in the primitives vector
+   * @param skill The skill to be added. Is not copied - uses passed pointer
+   * @return true on success, false if skill with same name exists already
+   **/
+  virtual bool AddSkill(QLearner* skill) {
+    if (GetSkill(skill->get_name())) return false;
+    primitives_.push_back(skill);
+    return true;
+  }
 
   /**
    * Accessor for sensors associated with this student

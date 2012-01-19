@@ -17,6 +17,8 @@
 
 namespace Primitives {
 
+class State;
+
 class QTable {
  public:
   /**
@@ -58,15 +60,42 @@ class QTable {
   /**
    * @return direct access to states vector
    **/
-  virtual std::vector<State *> & get_states() {
+  std::vector<State *> & get_states() {
     return states_;
   }
 
   /**
    * @return direct access to goal states vector
    **/
-  virtual std::vector<State const *> & get_goal_states() {
+  std::vector<State const *> & get_goal_states() {
     return goal_states_;
+  }
+
+  /**
+   * @return "Nearby" threshold distances for each sensor dimension
+   **/
+  std::vector<double> & get_nearby_thresholds() {
+    return nearby_thresholds_;
+  }
+
+  /**
+   * @todo Must make sure this is set before allowing most QTable
+   * operations to occur.
+   * 
+   * Sets the 'nearby' distance thresholds for each state dimension.
+   * Squares all of the distance values coming in, to optimize distance
+   * checks later on (eliminating need for constant sqrt'ing).
+   * @param thresh vector of distance thresholds
+   **/
+  void set_nearby_thresholds(std::vector<double> const &thresh) {
+    nearby_thresholds_ = thresh;
+    std::vector<double>::iterator iter;
+    for (iter = nearby_thresholds_.begin(); iter != nearby_thresholds_.end();
+         ++iter) {
+      double val = (*iter);
+      val *= val;
+      (*iter) = val;
+    }
   }
 
   /**
@@ -78,7 +107,7 @@ class QTable {
    *                         reward values of nearby states if true. 
    * @return NULL if needle not found, else: state pointer to internal version
    **/
-  virtual State *GetState(State const &needle, bool add_if_not_found = false);
+  State *GetState(State const &needle, bool add_estimated_state);
 
   /**
    * Checks if the QTable has a state described by needle via Bloom Filter.
@@ -87,7 +116,15 @@ class QTable {
    * @param needle State to find within QTable
    * @return true if state (probably) contained inside, false if not
    **/
-  virtual bool HasState(State const &needle);
+  bool HasState(State const &needle);
+
+  /**
+   * Returns a vector of existing states determined to be 'nearby' 
+   * to the needle state
+   * @param needle State to look near for existing states
+   * @return vector of nearby states
+   **/
+  std::vector<State*> GetNearbyStates(State const &needle);
 
   /**
    * Copy the state into a piece of memory that the QTable owns/manages. Doesn't
@@ -97,14 +134,14 @@ class QTable {
    * @param state State to copy and insert into QTable
    * @return Pointer to internal copy of state param
    **/
-  virtual State *AddState(State const &state);
+  State *AddState(State const &state);
 
   /**
    * Add the state pointed at by state to the list of goal states of this table
    * 
    * @param state Pointer to internally kept goal state
    */
-  virtual void AddGoalState(State const * state) {
+  void AddGoalState(State const * state) {
     if (isGoalState(*state)) return;
     goal_states_.push_back(state);
   }
@@ -115,7 +152,7 @@ class QTable {
    * @param state Any state object
    * @return true if found in list, false if not a goal state
    */
-  virtual bool isGoalState(State const &state) {
+  bool isGoalState(State const &state) {
     std::vector<State const *>::const_iterator iter;
     for (iter = goal_states_.begin(); iter != goal_states_.end(); ++iter) {
       if (state.Equals(**iter)) return true;
@@ -123,25 +160,6 @@ class QTable {
     return false;
   }
 
-  /**
-   * Checks if the state provided is near a goal state
-   * 
-   * @param state Any state object
-   * @param sensitivity Measure of how close to goal state is 'close enough'
-   *                    This is currently used as a multiple of state unit
-   *                    distance (sum over min. sensor change values in 
-   *                    state vector).
-   * @return true if found in list, false if not a goal state
-   */
-  virtual bool isNearGoalState(State const &state, double sensitivity) {
-    std::vector<State const *>::iterator iter;
-    for (iter = goal_states_.begin(); iter != goal_states_.end(); ++iter) {
-      if (state.GetSquaredDistance(*iter) <
-          sensitivity * state.get_unit_distance())
-        return true;
-    }
-    return false;
-  }
 
  private:
   /**
@@ -149,6 +167,7 @@ class QTable {
    **/
   std::vector<State *> states_;
   std::vector<State const *> goal_states_;
+  std::vector<double> nearby_thresholds_;
 };
 
 }  // namespace Primitives

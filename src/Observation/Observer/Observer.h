@@ -13,7 +13,7 @@
 #define _SHL_OBSERVATION_OBSERVER_OBSERVER_H_
 
 #include <vector>
-#include "Primitives/QLearner/QTable.h"
+#include "Primitives/QLearner/QLearner.h"
 #include "Primitives/Student/Sensor.h"
 
 namespace Observation {
@@ -21,7 +21,7 @@ namespace Observation {
 class Task;
 
 using std::vector;
-using Primitives::QTable;
+using Primitives::QLearner;
 using Primitives::Sensor;
 
 class Observer {
@@ -32,36 +32,14 @@ class Observer {
   virtual ~Observer() {}
 
   /**
-   * Every Observer must, at some point, begin the observation process
+   * Begins the observation process, monitoring the internally kept sensors
+   * and matching primitives as they appear in the input sequence.
    *
-   * @param     task            The task to be observed
-   * @param     tables          The learned QTables to observe the task against
-   * @param     tables_len      How many tables have been passed in as an array
-   * @param     sensors         A vector of sensors to collect scene data from
-   * 
-   * @returns   True unless an error occurs during observation
+   * @param     task (optional) The task to be observed and monitored
+   *
+   * @returns   True if observation mode is engaged, false on error
    **/
-  virtual bool Observe(Task* task, QTable* tables, int tables_len,
-                       vector<Sensor*> const &sensors) = 0;
-
-  /**
-   * During the observation an observer will necessarily diverge the QTable
-   * at some point to test if the current input matches a desired QTable
-   *
-   * @param     table           The table to be tested against
-   * @param     sensors         A set of sensors to be polled over time & tested
-   * @param     min_threshold   Minimum probability that should be allowed
-   *                            before calling it quits
-   * @param     death_time      The amount of time (in s) that the tester should
-   *                            let the probability linger below min_threshold
-   *                            before returning
-   *
-   * @returns   The confidence threshold of the tested QTable
-   **/
-  virtual double AttemptMatch(QTable const &table,
-                              vector<Sensor*> const &sensors,
-                              double min_threshold,
-                              double death_time) = 0;
+  virtual bool Observe(Task* task) = 0;
 
   /**
    * The Observer must be notified to stop the observation process (end of
@@ -72,9 +50,25 @@ class Observer {
   virtual bool StopObserving(void) = 0;
 
   /**
-   * @todo There should probably be a set of sensors here but I wasn't sure
-   *       if they should be environment, motors, sensors, etc...
-   **/
+   * Initialize the observer with the set of sensors it will be using
+   * @param sensors Vector of sensor pointers the be polled by observer
+   */
+  void Init(std::vector<Sensor *> sensors) {
+    sensors_ = sensors;
+  }
+
+  /**
+   * Add a skill into the library of primitives to identify
+   * @param skill
+   */
+  void AddSkill(QLearner * skill) { primitives_.push_back(skill); }
+
+  std::vector<Sensor *> const & get_sensors() { return sensors_; }
+  std::vector<QLearner *> const & get_primitives() { return primitives_; }
+
+ private:
+  std::vector<Sensor *> sensors_;
+  std::vector<QLearner *> primitives_;
 };
 
 }  // namespace Observation

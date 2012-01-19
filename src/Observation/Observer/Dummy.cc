@@ -12,18 +12,12 @@
 
 namespace Observation {
 
-bool Dummy::Observe(Task* task, QTable* table, int tables_len,
-                    vector<Sensor*> const &sensors) {
+bool Dummy::Observe(Task* task) {
   return true;
 }
 
 bool Dummy::StopObserving(void) {
   return true;
-}
-
-double Dummy::AttemptMatch(QTable const &table, vector<Sensor*> const &sensors,
-                           double min_threshold, double death_time) {
-  return 0.0;
 }
 
 }  // namespace Observation

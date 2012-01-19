@@ -20,15 +20,14 @@
 #include "Exploration/ExplorationType.h"
 #include "Credit/CreditAssignmentType.h"
 #include "QLearner/QTable.h"
+#include "QLearner/Object.h"
+
 
 namespace Primitives {
 
 using std::string;
 using std::vector;
 
-class CreditAssignmentType;
-class ExplorationType;
-class Sensor;
 
 class QLearner {
   public:
@@ -66,7 +65,7 @@ class QLearner {
    *                will be passed in to the Learn function
    * @return    True on success, false on failure
    **/
-  virtual bool Init(std::vector<Sensor const *> const &sensors) = 0;
+  virtual bool Init(std::vector<Sensor *> const &sensors) = 0;
 
   /**
    * Copies the state data provided to it and records it in the QTable
@@ -138,7 +137,14 @@ class QLearner {
    * (in order given) when appending environmental data to
    * the state information given to the Learn function.
    **/
-  virtual bool SetEnvironment(vector<Sensor* const> const& sensor_list) = 0;
+  virtual bool SetEnvironment(vector<Sensor*> const& sensor_list) {
+    std::vector<Sensor*>::const_iterator iter;
+    for (iter = sensor_list.begin(); iter != sensor_list.end(); ++iter) {
+      Sensor *s = *iter;
+      sensors_.push_back(s);
+    }
+    return true;
+  }
 
   /**
    * Applies a reinforcement signal through this QLearner's CreditAssignmentType
@@ -163,26 +169,74 @@ class QLearner {
   }
 
   /**
+   * Checks if the state provided is near a goal state
+   *
+   * @param state Any state object
+   * @param sensitivity Measure of how close to goal state is 'close enough'
+   *                    This is currently used as a multiple of state unit
+   *                    distance (sum over min. sensor change values in
+   *                    state vector).
+   * @return true if found in list, false if not a goal state
+   */
+  virtual bool isNearGoalState(State const &state, double sensitivity) {
+    std::vector<State const *>::iterator state_iter;
+    std::vector<double>::const_iterator dist_iter;
+    std::vector<Sensor *>::const_iterator sens_iter;
+
+    std::vector<State const *> &goal_states = q_table_.get_goal_states();
+
+    for (state_iter = goal_states.begin(); state_iter != goal_states.end();
+      ++state_iter) {
+      bool state_fail = false;
+      std::vector<double> dists = state.GetSquaredDistances(*state_iter);
+
+      for (dist_iter = dists.begin(),
+           sens_iter = sensors_.begin();
+           dist_iter != dists.end(),
+           sens_iter != sensors_.end(); ++dist_iter, ++sens_iter) {
+        double sensor_unit_dist = (*sens_iter)->get_nearby_threshold();
+        if ((*dist_iter) > sensor_unit_dist * sensor_unit_dist * sensitivity) {
+          state_fail = true;
+          break;
+        }
+      }
+      if (!state_fail) return true;
+    }
+    return false;
+  }
+
+  /**
    * Returns a stack of recently visited states
    *
    * @return Stack of StateHistoryTuple
    **/
-  std::stack<StateHistoryTuple> &get_state_history() {
+  virtual std::stack<StateHistoryTuple> &get_state_history() {
     return state_history_;
   }
 
-  QTable &get_q_table() { return q_table_; }
+  virtual QTable *get_q_table() { return &q_table_; }
 
-  std::string get_name() { return name_; }
-  void set_name(std::string name) { name_ = name; }
+  virtual std::string get_name() { return name_; }
+  virtual void set_name(std::string name) { name_ = name; }
+
+  virtual int get_trials() { return trials_; }
+  virtual void set_trials(int trials) { trials_ = trials; }
+
+  virtual double get_anticipated_duration() { return anticipated_duration_; }
+  virtual void set_anticipated_duration(int anticipated_duration) {
+    anticipated_duration_ = anticipated_duration;
+  }
 
  protected:
   std::stack<StateHistoryTuple> state_history_;
   QTable q_table_;
+  int trials_;
+  double anticipated_duration_;
+
   std::string name_;
   CreditAssignmentType *credit_assignment_type_;
   ExplorationType *exploration_type_;
-  std::vector<Sensor const *> sensors_;
+  std::vector<Sensor *> sensors_;
 };
 
 }  // namespace Primitives
