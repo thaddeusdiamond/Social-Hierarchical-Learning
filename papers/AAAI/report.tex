@@ -25,19 +25,24 @@ New Haven, Connecticut 06511\\
 \maketitle
 
 \begin{abstract}
-Several variations of Q-Learning have reliably demonstrated that reinforcement
-learning is a viable technique for learning skills in robotic systems.  However,
-very little work has focused on using sensory data to generate an approximation
-of which Q-Table most reliably approximates the skill just observed.  We present
-herein a system which is able to consistently provide accurate decompositions of
-a scene into simple, learned primitives by using what we are terming
-\textit{Inverse Q-Learning}.  The system is then able to take this
-frame-by-frame decomposition to provide an approximation for a suitable 
-hierarchical structure of the task being observed.  This structure is composed
-entirely of either previously learned primitives or unknowns.  Once those
-learned actions have been successfully mapped over time, the entire scene, or
-merely portions of it, can be replicated by robotic agents in a mixed
-human-robot environment.  
+Primitive skill acquisition for robots has been accomplished through a variety
+of techniques, many utilizing Q-Learning. Recent work has shown that with human
+assistance, complex actions can be learned with limited training data. The
+resulting skill representations can be leveraged to replay flexible behaviors
+that dramatically increase the utility of the robot. Despite this, existing
+systems have yet to address the greater problem of cooperative action execution.
+For a robot to effectively cooperate with either human or robotic coworkers,
+it is necessary that the robot be capable of modeling and recognizing its
+coworker’s behaviors within its environment. We approach the task of
+understanding and predicting coworker actions by providing a real-time method
+allowing a robot to solve the inverse problem of skill execution: skill
+recognition. We demonstrate our results through the recognition of selected
+American Sign Language gestures. Our algorithm provides a coded timeline of
+primitive actions generated in real-time, correcting its hypotheses as more
+information is presented. This data can then be directly used in a multitude
+of ways, from within a planning system for the coordination of a robot's
+actions within its space to building a skill hierarchy fully
+decomposing a complex cooperative task into primitive actions.
 \end{abstract}
 
 \section{Introduction}
