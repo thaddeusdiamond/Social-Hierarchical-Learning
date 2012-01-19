@@ -6,6 +6,7 @@
 \usepackage{helvet}
 \usepackage{courier}
 \frenchspacing
+\pdfoutput=1
 \pdfinfo{
 /Title (Primitive Recognition using Inverse Q-Table Matching)
 /Subject (In Proceedings AAAI)
@@ -41,11 +42,44 @@ human-robot environment.
 
 \section{Introduction}
 \label{sec:intro}
-In this section we introduce the problem.
+Empirical data has consistently proven that reinforcement learning can be used
+as a viable method to learn primitive skills in a real robotic systems.
+Standard Q-Learning techniques which traditionally take several hundred or
+several thousand trials to converge on a learned skill have been supplanted
+by techniques yielding convergent results within some small margin of error,
+which require orders of magnitude fewer trials.   Although there are too many
+to enumerate here, some of the techniques include the use of simple external
+feedback such as "good" and "bad" indicators \cite{TAMER} or an animal
+clicker \cite{Clicker}, the use of intermittent human
+guidance \cite{AdviceTaking,TeacherRL}, and the integration of human
+demonstration \cite{DemonstrationRL}.  These results
+have made compelling the use of modified Q-Learning in real robotic systems.
+
+Very little work has focused on using data gathered during the Q-Learning
+process to later decompose a complex scene into a set of primitives via
+observation.  The concept of "inverse reinforcement learning" is not entirely
+novel, as Abbeel and Ng \cite{InverseRL} used inverse reinforcement learning
+to generate reasonable approximations for the reward function underlying an
+observed primitive.  However, their work does not leverage existing data
+to create approximate classifications, but rather uses raw sensory data to
+attempt to recover the unknown reward function.
+
+We present herein a system that, using Q-Tables generated from simple
+Q-Learning in a real robotic system, uses observation to 
+It is important to separate the context of our contribution from that of
+existing research in \textit{learning from demonstration} (LfD).  Standard
+techniques in reinforcement learning have focused on using examples to
+transfer a policy representing some basic skill from a teacher to a
+pupil \cite{JenkinsLFD,LFDSurvey}.  We focus on the use of
+\textit{existing knowledge} to generate an approximate decomposition of
+complex scene data.
 
 \section{Background}
 \label{sec:background}
+\subsection{American Sign Language Gesture Recognition}
 In this section we discuss relevant background to the problem.
+
+\subsection{Hierarchical Task Decomposition}
 
 \section{Primitive Recognition}
 \label{sec:recognition}
@@ -68,7 +102,7 @@ In this section we conclude.
 We would like to thank... grant numbers?  Brad's grad school funding?  God?
 Wayne Brady?
 
-\bibliography{report.bib}
+\bibliography{report}
 \bibliographystyle{aaai}
 
-\end{document}
+\end{document}attempt 
