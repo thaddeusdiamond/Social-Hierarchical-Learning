@@ -5,7 +5,7 @@
  *
  * @section DESCRIPTION
  *
- * This is a sensor that receives feedback from the human controller.
+ * This is a sensor that receives output from the Kinect skeletal tracker.
  */
 
 #ifndef _SHL_PRIMITIVES_STUDENT_KINECTSENSOR_H_
@@ -39,8 +39,6 @@ class KinectSensor : public Sensor {
    * to poll on that port for TCP packets.
    *
    * @param   port            The port to listen for controller sensor data on
-   * @param   file_handle     Optionally, this Kinect sensor can be passed a
-   *                          handle to a file to record the data out to
    **/
   explicit KinectSensor(int port);
 

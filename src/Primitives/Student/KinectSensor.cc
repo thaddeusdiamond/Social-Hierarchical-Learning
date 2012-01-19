@@ -5,7 +5,7 @@
  *
  * @section DESCRIPTION
  *
- * This is the implementation for sensor feedback
+ * This is the implementation for the kinect data sensor
  */
 
 /** @todo This should really have a unit test, but it's not super important
