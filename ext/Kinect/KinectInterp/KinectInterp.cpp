@@ -113,9 +113,6 @@ int main(int argc, char* argv[]) {
 
         KinectData* data = new KinectData();
         assert(data->ParseFromString(serialization));
-        data->PrintDebugString();
-
-        fprintf(stdout, "Sending %d bytes w/%d people\n", storage->ByteSize(), storage->people_size());
         send(outgoing, serialization.c_str(), storage->ByteSize(), 0);
       }
 
