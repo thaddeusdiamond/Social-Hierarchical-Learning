@@ -3,7 +3,8 @@ OBJDIRS := $(OBJDIRS) $(LOWERC_ROOT)/Observer
 TESTS   := $(TESTS)   $(LOWERC_ROOT)ObserverTest
 
 # relative to $(TOP), i.e. $(LOWERC_DIR)/*.cc
-$(UPPERC_ROOT)_OBSERVER_SRCS := $(LOWERC_ROOT)/Observer/Dummy.cc
+$(UPPERC_ROOT)_OBSERVER_SRCS := $(LOWERC_ROOT)/Observer/Dummy.cc \
+				$(LOWERC_ROOT)/Observer/RealtimeObserver.cc
 $(UPPERC_ROOT)_OBSERVER_EXECUTABLES := 
 
 # Set makefile template specific vars
