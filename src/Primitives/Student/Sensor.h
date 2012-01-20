@@ -95,7 +95,7 @@ class Sensor {
   /**
    * Current values
    **/
-  double *values_;
+  double * values_;
 
   /**
    * Number of values encapsulated by sensor

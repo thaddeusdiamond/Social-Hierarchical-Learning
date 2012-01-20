@@ -45,7 +45,7 @@ CXX       := g++
 CXXFLAGS  := -g -I$(PROTOB)/src -I$(GTEST)/include -Wall -Werror
 CXXFLAGS  += -I$(TOP) -I$(OBJDIR) -I$(PRIMDIR) -I$(OBSVDIR)
 MDFLAGS   := -MD
-LDFLAGS   := -lpthread -lgtest -L$(GTEST)/lib/.libs -lprotobuf -L$(PROTOB)/src/.libs
+LDFLAGS   := -lrt -lpthread -lgtest -L$(GTEST)/lib/.libs -lprotobuf -L$(PROTOB)/src/.libs
 LDLIBPATH := LD_LIBRARY_PATH=$(GTEST)/lib/.libs:$(PROTOB)/src/.libs
 
 # Lists that the */Makefile.inc makefile fragments will add to

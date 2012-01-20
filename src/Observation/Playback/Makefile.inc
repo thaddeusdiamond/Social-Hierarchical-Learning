@@ -3,8 +3,8 @@ OBJDIRS := $(OBJDIRS) $(LOWERC_ROOT)/Playback
 TESTS   := $(TESTS)   $(LOWERC_ROOT)PlaybackTest
 
 # relative to $(TOP), i.e. $(LOWERC_DIR)/*.cc
-$(UPPERC_ROOT)_OBSERVER_SRCS := $(LOWERC_ROOT)/Playback/PlaybackSensor.cc
-$(UPPERC_ROOT)_OBSERVER_EXECUTABLES := 
+$(UPPERC_ROOT)_PLAYBACK_SRCS := $(LOWERC_ROOT)/Playback/PlaybackSensor.cc
+$(UPPERC_ROOT)_PLAYBACK_EXECUTABLES := 
 
 # Set makefile template specific vars
 UPPERC_DIR := $(UPPERC_ROOT)_PLAYBACK

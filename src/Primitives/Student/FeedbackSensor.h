@@ -75,7 +75,7 @@ class FeedbackSensor : public Sensor {
   /**
    * Most recent value
    **/
-  double const * values_;
+  double * values_;
 
   /**
    * Number of values encapsulated by sensor

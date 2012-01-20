@@ -229,9 +229,8 @@ namespace Utils {
    **/
   static inline bool Log(string const& filename, Level level,
                          const char* format, ...) {
-    FILE* log;
-    log = fopen(filename.c_str(), "w");
-    if (log == NULL)
+    FILE* log = fopen(filename.c_str(), "w");
+    if (!log)
       return false;
 
     va_list arguments;
@@ -289,6 +288,8 @@ namespace Utils {
    **/
   static inline bool SerializeToFile(string const& filename, Message* message) {
     FILE* log = fopen(filename.c_str(), "w");
+    if (!log)
+      return false;
     return SerializeToFile(log, message, true);
   }
 
@@ -345,6 +346,8 @@ namespace Utils {
    **/
   static inline Message* ParseFromFile(string const& filename) {
     FILE* file = fopen(filename.c_str(), "r");
+    if (!file)
+      return NULL;
     return ParseFromFile(file, true);
   }
 };

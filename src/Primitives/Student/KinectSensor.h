@@ -114,7 +114,7 @@ class KinectSensor : public Sensor {
    *         Right hand dist from head (y),
    *         Right hand dist from head (z)]
    **/
-  double const * values_;
+  double * values_;
 
   /**
    * Number of values encapsulated by sensor
