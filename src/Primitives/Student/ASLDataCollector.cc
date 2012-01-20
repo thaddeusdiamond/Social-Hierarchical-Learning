@@ -20,7 +20,7 @@ static string PRIMITIVE_LIST[] = {
 };
 
 int main(int argc, char* argv[]) {
-  KinectSensor* sensor_ = new KinectSensor(18000);  
+  KinectSensor* sensor_ = new KinectSensor(18000);
 
   for (int i = 0; i < NUMBER_OF_PRIMITIVES; i++) {
     // Set up the file handle
