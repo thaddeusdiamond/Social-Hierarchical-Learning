@@ -5,7 +5,7 @@ $(UPPERC_DIR)_EXECUTABLES := $(wildcard $($(UPPERC_DIR)_EXECUTABLES))
 $(UPPERC_DIR)_OBJS := $(patsubst %.cc, $(OBJDIR)/%.o, $($(UPPERC_DIR)_SRCS))
 ifneq ($($(UPPERC_DIR)_EXECUTABLES),)
   $(UPPERC_DIR)_DEPLOY := $(foreach EXEC, $($(UPPERC_DIR)_EXECUTABLES), $(BINDIR)/$(EXEC))
-  $(UPPERC_DIR)_DEPLOY := $(patsubst $(BINDIR)/$(LOWERC_DIR)/%.cpp, $(BINDIR)/%, $($(UPPERC_DIR)_DEPLOY))
+  $(UPPERC_DIR)_DEPLOY := $(patsubst $(BINDIR)/$(LOWERC_DIR)/%.cc, $(BINDIR)/%, $($(UPPERC_DIR)_DEPLOY))
 else
   $(UPPERC_DIR)_DEPLOY := 
 endif

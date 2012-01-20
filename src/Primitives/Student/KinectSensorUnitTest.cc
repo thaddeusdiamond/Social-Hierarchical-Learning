@@ -14,61 +14,19 @@
 namespace Primitives {
 
 /**
- * @todo    (Thad) Uncomment and move to executable
+ * @todo    (Thad): Create an actual unit test here
  **/
-/*
-static int NUMBER_OF_PRIMITIVES = 8;
-static string Primitives[] = {
-  "coat", "shoes", "school", "store", "drive", "with", "in", "out"
-};
-*/
-
 class KinectSensorTest : public testing::Test {
  protected:
-  // Create a TAMER object before each test
-  KinectSensorTest() {
-    /**
-     * @todo    (Thad) Uncomment and move to executable
-     **/
-    // sensor_ = new KinectSensor(18000);
-  }
+  KinectSensorTest() {}
 
-  // Destroy TAMER memory
-  virtual ~KinectSensorTest() {
-    // delete sensor_;
-  }
-
-  // Create a member variable for the actual sensor
-  // KinectSensor* sensor_;
+  virtual ~KinectSensorTest() {}
 };
 
 /**
  * @test    Listen for incoming Kinect feedback
- *
- * @todo    (Thad) We need to put the Kinect test as a standalone executable 
- *          bc it's causing make Test to fail.
  **/
 TEST_F(KinectSensorTest, CapturePrimitives) {
-  /*
-  for (int i = 0; i < NUMBER_OF_PRIMITIVES; i++) {
-    // Set up the file handle
-    string primitive = Primitives[i];
-    sensor_->set_file_handle((string("learned_primitives/") + primitive +
-                              string(".csv")).c_str());
-
-    // Alert the user
-    Log(stderr, DEBUG, (string("Beginning ") + primitive +
-                        string(" primitive.  Press ctrl-\\ to end")).c_str());
-
-    // Keep going till we get the signal to stop
-    signal(SIGQUIT, &Signal::StopProgram);
-    while (Signal::ProgramIsRunning);
-
-    // Cleanup and I/O reset
-    Signal::ResetProgram();
-    fprintf(stdout, "\n");
-  }
-  */
 }
 
 }  // namespace Primitives
