@@ -178,12 +178,13 @@ class QLearner {
    *                    state vector).
    * @return true if found in list, false if not a goal state
    */
-  virtual bool isNearGoalState(State const &state, double sensitivity) {
+  virtual bool isNearTrainedGoalState(State const &state, double sensitivity) {
     std::vector<State const *>::iterator state_iter;
     std::vector<double>::const_iterator dist_iter;
     std::vector<Sensor *>::const_iterator sens_iter;
 
-    std::vector<State const *> &goal_states = q_table_.get_goal_states();
+    std::vector<State const *> &goal_states = 
+      q_table_.get_trained_goal_states();
 
     for (state_iter = goal_states.begin(); state_iter != goal_states.end();
       ++state_iter) {

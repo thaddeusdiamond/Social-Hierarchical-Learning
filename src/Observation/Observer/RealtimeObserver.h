@@ -20,16 +20,21 @@
 #include "Observer/Task.h"
 #include "Primitives/QLearner/QLearner.h"
 #include "Primitives/Student/Sensor.h"
+#include "Primitives/QLearner/State.h"
 
 namespace Observation {
 
 using std::vector;
 using std::string;
 using std::pair;
+using Primitives::QLearner;
+using Primitives::Sensor;
+using Primitives::State;
 
 class RealtimeObserver : public Observer {
  public:
-  RealtimeObserver() : is_observing_(false) {}
+  RealtimeObserver(double sampling_rate_millis) : is_observing_(false),
+      sampling_rate_(sampling_rate_millis) {}
 
   bool Observe(Task* task);
   bool StopObserving(void);
@@ -42,14 +47,39 @@ class RealtimeObserver : public Observer {
    **/
   vector<string> GetTimeline(void);
 
+  class ObservablePrimitive {
+   public:
+    ObservablePrimitive(string n, QLearner* qlearner)
+      : name(n), q_learner(qlearner), current_state(NULL) { 
+      hit_states.clear(); 
+      duration_max_millis = qlearner->get_anticipated_duration();
+    }
+
+    // Each primitive gets a list of hit states: timestamp 
+    // and the state_descriptor    
+    vector<pair<double, vector<double> > > hit_states;
+    string name;
+    QLearner *q_learner;
+    State *current_state;
+    double duration_max_millis;
+  };
+  
  private:
   /**
    * Internal timeline that is reset each time "Observe" is called
    * Describes what is occurring during each frame of animation
+   * 
+   * Outer vector's elements represent each frame
+   * Inner vector's elements represent <score, label> pairs
    **/
   vector<vector<pair<double, string> > > timeline_;
 
+  /**
+   * Internal representation of received frames
+   **/
+  vector<vector<double> > frames_;
   bool is_observing_;
+  double sampling_rate_;
 };
 
 

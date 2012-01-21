@@ -133,7 +133,7 @@ QLearner* LBDStudent::LearnSkillFromFile(std::string filename) {
 
   if (seen_states.size() != 0) {
     // Should always hit this condition.. otherwise I screwed up above
-    qt->AddGoalState(seen_states[0]);
+    qt->AddGoalState(seen_states[0],true);
   } else {
     // @TODO: Log some error message
     return NULL;

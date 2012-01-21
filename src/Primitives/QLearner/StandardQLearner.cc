@@ -89,7 +89,12 @@ bool StandardQLearner::AddNearbyEmptyStates(State const &state) {
   return true;
 }
 
-
+/**
+ * @todo Requires rewrite to not duplicate functionality introduced in QTable
+ *       class. This function is meant mostly for adding possible states into
+ *       the QTable so the exploration function has more choices to pick from.
+ *       Concept is half-baked at the moment.
+ **/
 bool StandardQLearner::GetNearbyStates(
   State const& cur_state, std::vector<State const *>& nearby_states) {
   // Retrieve all states within search_distances of the cur_state that are
@@ -110,6 +115,8 @@ bool StandardQLearner::GetNearbyStates(
     int i;
     for (i = 0, sensor_iter = sensors_.begin(); sensor_iter != sensors_.end();
          ++sensor_iter, ++i) {
+      
+      // @TODO Make sure that not squaring distance here is correct
       double dist = cmp_state->get_state_vector()[i]
                     - cur_state.get_state_vector()[i];
       dist = (dist < 0) ? -dist : dist;

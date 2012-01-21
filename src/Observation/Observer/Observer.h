@@ -71,7 +71,7 @@ class Observer {
   std::vector<Sensor *> const & get_sensors() { return sensors_; }
   std::vector<QLearner *> const & get_primitives() { return primitives_; }
 
- private:
+ protected:
   std::vector<Sensor *> sensors_;
   std::vector<QLearner *> primitives_;
 };
