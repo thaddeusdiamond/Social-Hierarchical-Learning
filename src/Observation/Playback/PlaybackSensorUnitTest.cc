@@ -73,6 +73,16 @@ TEST_F(PlaybackSensorTest, PollKnownFile) {
   EXPECT_EQ(observed_sensors[3],  0.07953000);
   EXPECT_EQ(observed_sensors[4],  0.35842000);
   EXPECT_EQ(observed_sensors[5], -1128.00000);
+  EXPECT_FALSE(sensor_->stale());
+  
+  observed_sensors = sensor_->GetValues();
+  EXPECT_EQ(observed_sensors[0], -0.07091000);
+  EXPECT_EQ(observed_sensors[1],  0.38668000);
+  EXPECT_EQ(observed_sensors[2], -1544.00000);
+  EXPECT_EQ(observed_sensors[3],  0.07953000);
+  EXPECT_EQ(observed_sensors[4],  0.35842000);
+  EXPECT_EQ(observed_sensors[5], -1128.00000);
+  EXPECT_TRUE(sensor_->stale());
 }
 
 }  // namespace Observation

@@ -37,7 +37,7 @@ class PlaybackSensor : public Sensor {
    **/
   PlaybackSensor(char const * filename, int num_sensors) : Sensor("Playback"),
       filename_(filename), values_(new double[num_sensors]),
-      num_values_(num_sensors), running_(false),
+      stale_(true), num_values_(num_sensors), running_(false),
       last_poll_time_(0), last_poll_frame_(0), file_handle_(NULL) {}
 
   /**
@@ -51,6 +51,16 @@ class PlaybackSensor : public Sensor {
 
   virtual bool SetValues(double const * const values, int num_values);
   virtual double const * const GetValues();
+  
+  /**
+   * Accessor method for stale variable
+   **/
+  virtual bool stale() {
+      bool old_stale = stale_;
+      if (!stale_)
+        stale_ = true;
+      return old_stale;
+  }
 
   /**
    * We create an accessor method for whether or not it's running...
@@ -96,6 +106,13 @@ class PlaybackSensor : public Sensor {
    * the constructor.
    **/
   double * values_;
+  
+  /**
+   * We keep track of whether or not the sensor has been polled as of late
+   * so that we can tell in the observer whether this is a duplicate in
+   * the MDP or a self-loop
+   **/
+  bool stale_;
 
   /**
    * Number of values encapsulated by sensor

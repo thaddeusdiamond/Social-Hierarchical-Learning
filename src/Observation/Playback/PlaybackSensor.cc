@@ -19,7 +19,7 @@ bool PlaybackSensor::SetValues(double const * const values, int num_values) {
 
 double const * const PlaybackSensor::GetValues() {
   // Return a one-element array to most recent value
-  Poll();
+  stale_ = !Poll();
   return values_;
 }
 
@@ -55,10 +55,6 @@ bool PlaybackSensor::Poll() {
   else
     num_frames_recvd = floor((current_time_ms - last_poll_time_) * 3 / 100);
 
-  // Nothing's come from the sensor (polled too fast), don't update
-  if (!num_frames_recvd)
-    return false;
-
   // Shove the frames in a buffer so that we can back up one if need be (EOF)
   int num_frames_read = 0;
   char line_buffer[4096];
@@ -69,6 +65,10 @@ bool PlaybackSensor::Poll() {
     }
     num_frames_read++;
   }
+
+  // Nothing's come from the sensor (polled too fast), don't update
+  if (!num_frames_read)
+    return false;
 
   char* scanner = &line_buffer[0],
       * leftover;
