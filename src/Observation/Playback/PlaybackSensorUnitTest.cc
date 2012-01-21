@@ -16,7 +16,7 @@ namespace Observation {
 class PlaybackSensorTest : public testing::Test {
  protected:
   PlaybackSensorTest() {
-    sensor_ = new PlaybackSensor("../asl_data/coat.csv", 6);
+    sensor_ = new PlaybackSensor("../data/training_data/coat.csv", 6);
   }
 
   virtual ~PlaybackSensorTest() {
