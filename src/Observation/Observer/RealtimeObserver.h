@@ -14,6 +14,7 @@
 
 
 #include <vector>
+#include <deque>
 #include <string>
 #include <utility>
 #include "Observer/Observer.h"
@@ -27,6 +28,7 @@ namespace Observation {
 using std::vector;
 using std::string;
 using std::pair;
+using std::deque;
 using Primitives::QLearner;
 using Primitives::Sensor;
 using Primitives::State;
@@ -45,7 +47,11 @@ class RealtimeObserver : public Observer {
    * from the internal timeline
    * @return Timeline with most confident labels at time of calling
    **/
-  vector<string> GetTimeline(void);
+  vector<string> GetFinalTimeline(void);
+  
+  vector<vector<pair<double,string> > > &get_timeline() {
+    return timeline_;
+  }
 
   class ObservablePrimitive {
    public:
@@ -56,8 +62,8 @@ class RealtimeObserver : public Observer {
     }
 
     // Each primitive gets a list of hit states: timestamp 
-    // and the state_descriptor    
-    vector<pair<double, vector<double> > > hit_states;
+    // and the array index in frames_ containing the state vector    
+    deque<pair<double, State*> > hit_states;
     string name;
     QLearner *q_learner;
     State *current_state;

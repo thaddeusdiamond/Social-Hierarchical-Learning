@@ -146,6 +146,12 @@ class QTable {
   std::vector<State*> GetNearbyStates(State const &needle);
 
   /**
+   * Returns a vector of existing states that have an outbound link to the
+   * state provided. This is guaranteed to only return states
+   */
+  std::vector<State*> GetIncomingStates(State const &s);
+
+  /**
    * Copy the state into a piece of memory that the QTable owns/manages. Doesn't
    * check for a duplicate existing: assumes that you did your homework and you 
    * aren't re-adding something that already exists.

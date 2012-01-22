@@ -134,9 +134,10 @@ bool StandardQLearner::GetNearbyStates(
 }
 
 bool StandardQLearner::GetNextState(State const& cur_state,
-                                    State const** next_state) {
+                                    State **next_state,
+                                    double &reward) {
   if (exploration_type_ == NULL) return false;
-  return exploration_type_->GetNextStep(cur_state, next_state);
+  return exploration_type_->GetNextState(cur_state, next_state, reward);
 }
 
 bool StandardQLearner::AssignCredit(double signal) {

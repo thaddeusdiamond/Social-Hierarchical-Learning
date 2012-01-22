@@ -35,34 +35,21 @@ class ExplorationType {
   /**
    * Given the current state, return a list of possible next states
    *
-   * @param     current_state   System state to explore around
-   * @param     next_states     Plausible next states for the system
+   * @param     cur_state       System state to explore around
+   * @param     next_state      Populated with suggested next state
+   * @reward    reward          Populated with reward for suggested 
+   *                            transition
    *
    * @return    True on success, false on failure.
    **/
-  virtual bool GetNextStep(State const& current_state,
-                           State const **next_states) = 0;
-
- protected:
-  /**
-   * Initialize back-pointer to parent QLearner object
-   * 
-   * @param learner QLearner object associated with this ExplorationType
-   **/
-  explicit ExplorationType(QLearner * const learner) {
-    learner_ = learner;
-  }
-
+  virtual bool GetNextState(State const& cur_state,
+                            State **next_state,
+                            double &reward) = 0;
  private:
   /**
    * Disable default constructor
    **/  
   ExplorationType() {}
-
-  /**
-   * Reference back to the parent QLearner object
-   **/
-  QLearner *learner_;
 };
 
 }  // namespace Primitives

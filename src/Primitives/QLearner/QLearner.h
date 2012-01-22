@@ -97,11 +97,13 @@ class QLearner {
    *
    * @param     cur_state       State descriptor
    * @param     next_state      Overwritten with pointer to next State object
+   * @param     reward          Reward value for transitioning into next state
    *
    * @return True on success, false on lookup error
    **/
   virtual bool GetNextState(State const& cur_state,
-                            State const** next_state) = 0;
+                            State **next_state,
+                            double &reward) = 0;
 
   /**
    * Sets the credit assignment type used by this QLearner. Provided object
@@ -178,7 +180,7 @@ class QLearner {
    *                    state vector).
    * @return true if found in list, false if not a goal state
    */
-  virtual bool isNearTrainedGoalState(State const &state, double sensitivity) {
+  virtual bool IsNearTrainedGoalState(State const &state, double sensitivity) {
     std::vector<State const *>::iterator state_iter;
     std::vector<double>::const_iterator dist_iter;
     std::vector<Sensor *>::const_iterator sens_iter;
@@ -213,6 +215,12 @@ class QLearner {
    **/
   virtual std::stack<StateHistoryTuple> &get_state_history() {
     return state_history_;
+  }
+  
+  virtual State *get_current_state() { 
+    if (state_history_.size())
+      return state_history_.top().state_; 
+    return NULL;
   }
 
   virtual QTable *get_q_table() { return &q_table_; }

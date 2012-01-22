@@ -15,7 +15,9 @@
 #include <map>
 #include <string>
 namespace Primitives {
-
+using std::vector;
+using std::string;
+using std::map;
 class State {
  public:
   /**
@@ -87,25 +89,33 @@ class State {
 
     return distances;
   }
-
+  
   /**
    * Retrieves the reward (transition function) on this state object
    * for a particular State
    * @return Summed reward value
    */
-  virtual double GetRewardValue(State *target) {
+  virtual double GetRewardValue(State *target, bool all_layers=true, 
+                                std::string layer="") {
     if (reward_.find(target) == reward_.end()) return 0.;
     std::map<std::string, double> &reward_layers = reward_[target];
     std::map<std::string, double>::const_iterator iter;
+    
     double total = 0.;
-    for (iter = reward_layers.begin(); iter != reward_layers.end();
-         ++iter) {
-      total += (*iter).second;
+    if (all_layers) {
+      for (iter = reward_layers.begin(); iter != reward_layers.end();
+          ++iter) {
+        total += (*iter).second;
+      }
+    } else {
+      iter = reward_layers.find(layer);
+      if (iter != reward_layers.end())
+        total = (*iter).second;
     }
-
-    return total;
+    
+      return total;
   }
-
+  
 
   /**
    * Returns an immutable state descriptor vector of doubles.
@@ -123,17 +133,51 @@ class State {
    * @param val Reward value to assign
    **/
   virtual void set_reward(State *target, std::string layer, double val) {
+    std::vector<State *> &inc_states = target->get_incoming_states();
+
+    // If setting the reward layer to something
     if (val != 0) {
       std::map<State*, std::map<std::string, double> >::iterator
         layer_map = (reward_.find(target));
+        
+      // If there is no existing link to target, make one
       if (layer_map == reward_.end()) {
         reward_[target] = std::map<std::string, double>();
       }
       (reward_[target])[layer] = val;
+      
+      
+      vector<State *>::iterator inc_iter;
+      bool found = false;
+      for (inc_iter = inc_states.begin(); inc_iter != inc_states.end();
+           ++inc_iter) {
+        if (*inc_iter == target) {
+          found = true;
+          break;
+        }
+      }
+      
+      if (!found)
+        inc_states.push_back(this);
     } else {
+      // Clearing the reward layer away
       std::map<std::string, double>::iterator iter;
       iter = (reward_[target]).find(layer);
       (reward_[target]).erase(iter);
+      
+      if (reward_[target].size() == 0) {
+        vector<State *>::iterator inc_iter;
+        bool found = false;
+        for (inc_iter = inc_states.begin(); inc_iter != inc_states.end();
+             ++inc_iter) {
+          if (*inc_iter == target) {
+            found = true;
+            break;
+          }
+        }
+        if (found)
+          inc_states.erase(inc_iter);
+      }
     }
   }
 
@@ -145,6 +189,10 @@ class State {
   virtual std::map<State*, std::map<std::string, double> > get_reward() const {
     return reward_;
   }
+  
+  virtual std::vector<State *> &get_incoming_states() {
+    return incoming_states_;
+  }
 
  private:
   /**
@@ -154,6 +202,7 @@ class State {
 
   std::vector<double> state_vector_;
   std::map<State*, std::map<std::string, double> > reward_;
+  std::vector<State*> incoming_states_;
   char state_hash_[160];  // @TODO: When state_vector_ is populated,
                           // store hash here to allow quick comparisons
 };

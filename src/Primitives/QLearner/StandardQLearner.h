@@ -98,7 +98,8 @@ class StandardQLearner : public QLearner {
    * @return True on success, false on lookup error
    */
   virtual bool GetNextState(State const& cur_state,
-                    State const** next_state);
+                            State ** next_state,
+                            double &reward);
 
 
   /**

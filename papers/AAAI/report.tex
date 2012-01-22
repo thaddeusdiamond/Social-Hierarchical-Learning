@@ -8,13 +8,13 @@
 \frenchspacing
 \pdfoutput=1
 \pdfinfo{
-/Title (Using a Hierarchical Architecture for Collaborative Social Tasks to Reinforce and Recognize Action Primitives)
+/Title (Using A Hierarchical Architecture for Collaborative Social Tasks to Reinforce and Recognize Action Primitives)
 /Subject (In Proceedings AAAI)
 /Author (Bradley Hayes, Thaddeus Diamond, and Brian Scassellati)
 }
   
 \begin{document}
-\title{Using a Hierarchical Architecture for Collaborative Social Tasks to Reinforce and Recognize Action Primitives}
+\title{Using A Hierarchical Architecture for Collaborative Social Tasks to Reinforce and Recognize Action Primitives}
 \author{Bradley Hayes, Thaddeus Diamond, and Brian Scassellati\\
 Yale University\\
 Arthur K. Watson Hall\\
@@ -41,12 +41,22 @@ American Sign Language gestures. Our algorithm provides a coded timeline of
 primitive actions generated in real-time, correcting its hypotheses as more
 information is presented. This data can then be directly used in a multitude
 of ways, from within a planning system for the coordination of a robot's
-actions within its space to building a skill hierarchy fully
-decomposing a complex cooperative task into primitive actions.
+actions to building a skill hierarchy fully decomposing a complex cooperative 
+task into primitive actions.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:intro}
+1. Talk about the need for cooperative robotics here.
+
+2. Talk about Q-Learning applied to robotics and skill acquisition here.
+
+3. Talk about recent works that reduce the number of trials required to learn a skill.
+
+4. Talk about recent works that remove the need for hand-coded objective functions to gain to new skills here.
+
+5. Talk about high level contribution to solving this problem.
+
 Empirical data has consistently proven that reinforcement learning can be used
 as a viable method to learn primitive skills in a real robotic systems.
 Standard Q-Learning techniques which traditionally take several hundred or
@@ -81,7 +91,32 @@ complex scene data.
 
 \section{Background}
 \label{sec:background}
-\subsection{American Sign Language Gesture Recognition}
+\subsection{Hierarchical Skill Architecture}
+\cite{Hierarchical}
+1. Talk about the need for hierarchical representation when multiple skills are required
+2. Multiple skills makes the agent more adaptable and useful
+3. Talk about decomposing skill sequences into Task plans
+4. Talk about scaffolding within learning context
+5. Accounting for multiple skills complicates the learning and execution problem
+
+
+\subsection{Skill Recognition}
+1. Talk about LBD as an accessible means for non-experts to train robots on skills.
+
+2. Introduce concept of learning skills through traditional robot QLearner system, talk about
+    result: qtable and policy indicating possible executions of skill.
+
+3. Introduce idea that this information can also be leveraged to identify others' execution of these skills
+
+5. Generalize result beyond gesture recognition to other motor tasks, cite konidaris' work
+
+6. Present work as an enhancement layer for konidaris' CST work, generalizing it to automatically work for
+   multiple skills, properly applying training data.
+
+7. Present ASL recognition as an example of a complex skill set to identify, as inconsistency and noise
+   are more likely prevalent with human repetitions of actions than precise robotic replay.
+
+
 The domain in which we test our system is American Sign Language (ASL).
 American sign language is chosen as a domain in which to test our scheme
 because each motion involves six degrees of freedom -- the x, y, and z
@@ -96,12 +131,67 @@ here...\cite{HandGestures}\cite{HSMMRecognition}\cite{POMDPGesture}.
 Several works have already provided robust gesture recognition systems for
 ASL \cite{HoughASL}\cite{ASLRealTime}\cite{MotionASL}.
 
-\subsection{Hierarchical Task Decomposition}
-\cite{Hierarchical}
+\section{Definition of Problem Space}
+\label{sec:pspace}
 
-\section{Primitive Recognition}
+1. Technically define the problem space being utilized, framed as the same data structure that
+   can be leveraged for executing these actions. 
+
+2. Formalize MDP being used, and each skill representation as a QLearner. Use Ng paper as a basis for this. Also include extra metadata
+   being considered, such as time-to-execute and tolerance variables
+
+3. Define policy in terms of the exploration function being utilized, explain that this function can be swapped
+   depending on the agent's goals.
+
+4. Define linear combination of policies (reward layers)
+
+5. Define the optimal policy in terms of the training data being input
+
+6. Define MDP state vector as being a composite of disparate sensor data -- different refresh rates
+7. Self-loops permitted but do not contribute reward
+
+
+\section{Primitive Recognition Algorithm}
 \label{sec:recognition}
-In this section we discuss our work on primitive recognition.
+1. Re-iterate problem: Given a sample demonstration, we seek to determine which known skill is being presented (if any),
+                       if it should be considered an expert demonstration, and to use the new observation to simultaneously
+                       improve recognition of the action as well as improve its execution potential.
+
+2. Unlike solving the skill execution problem, the algorithm does not have explicit control over the policy being enacted over the state space.
+
+3. Unlike the direct inverse reinforcement learning problem, there are multiple primitive candidates and the demonstration given cannot be assumed to be an example/training data for any of them.
+
+4. Describe Algorithm:
+
+	*At the specified sampling rate, poll all sensors to create a state descriptor.
+	*Iterate through all eligible primitive actions:
+		* If transition from previous state to this state is defined and has a positive reward, add to hit_states
+		  otherwise if it isn't and the sliding window, of size = antipicated_duration * tolerance * sampling_rate, contains less
+		  than X percent hit_states, we time-out the primitive as an optimization step, resetting its sliding window size to 0.
+		* If the current state is within an e-neighborhood of an explicitly trained goal state (don't use intuited goal states,
+		  otherwise the goal area will creep outwards):
+			* For each hit_state:
+				* With probability p, designate current hit_state as a waypoint. Add a waypoint policy that heavily favors
+				  transitions to this state from all other eligible states.
+			* Compute A, the percentage of hit_states within the window.
+			* Beginning with the first hit_state, compute B: the expected mean transition reward from following the waypoint policy through to a goal state. Known as the "realistic path".
+			* Beginning with the first hit_state, compute C: the expected mean transition reward from following an optimal policy through to a goal state. Known as the "optimistic path".
+			* Compute D, the duration elapsed when traversing the realistic path, assuming a consistent sampling rate
+			* Compute E, the expected duration of an ideal example of skill execution
+			* Compute F, the mean transition reward for following an optimal policy through the state space fitting the duration requirements.
+
+			* Compute the confidence score: 0.25A + 0.4B/C + 0.1D/E + 0.25B/F
+			* Apply a <score,label> tuple to each frame of data within the sliding window.
+
+
+
+5. Analyze Algorithm:
+
+	* Guards against failure
+	* Guards against exponential state/transition growth
+	* Benefits to execution side of the action primitives being trained
+	* What happens with misclassification -- robustness against slippery-slope failure mode
+	* Execution time required per primitive? How does the time requirement scale as primitives are added?
 
 \section{Results}
 \label{sec:result}
@@ -109,7 +199,8 @@ In this section we discuss our experimental results.
 
 \section{Related and Future Work}
 \label{sec:future}
-In this section we discuss future work (hint at SHL?)
+	* Explain garbage collection to manage state space
+	* Adding human feedback layer
 
 \section{Conclusions}
 \label{sec:conclusions}
@@ -117,8 +208,7 @@ In this section we conclude.
 
 \section{Acknowledgements}
 \label{sec:acknowledgements}
-We would like to thank... grant numbers?  Brad's grad school funding?  God?
-Wayne Brady?
+Get grant details from Scaz
 
 \bibliography{report}
 \bibliographystyle{aaai}
