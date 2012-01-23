@@ -1,7 +1,7 @@
 % File: report.tex
 
 \documentclass[letterpaper]{article}
-\usepackage{styles/aaai}
+\usepackage{aaai}
 \usepackage{times}
 \usepackage{helvet}
 \usepackage{courier}
@@ -34,10 +34,12 @@ systems have yet to address the greater problem of cooperative action execution.
 For a robot to effectively cooperate with either human or robotic coworkers,
 it is necessary that the robot be capable of modeling and recognizing its
 coworker’s behaviors within its environment. We approach the task of
-understanding and predicting coworker actions by providing a real-time method
-allowing a robot to solve the inverse problem of skill execution: skill
-recognition. We demonstrate our results through the recognition of selected
-American Sign Language gestures. Our algorithm provides a coded timeline of
+understanding and predicting coworker actions by providing a novel, fast algorithm
+allowing a robot to solve the inverse problem of skill execution, skill
+recognition, in real-time. We demonstrate our results through the recognition of selected
+American Sign Language gestures. Our work is unique in that it extends a popular existing skill
+representation paradigm to a unified data structure capable of both skill execution and skill recognition. 
+Our algorithm provides a coded timeline of
 primitive actions generated in real-time, correcting its hypotheses as more
 information is presented. This data can then be directly used in a multitude
 of ways, from within a planning system for the coordination of a robot's
@@ -48,35 +50,16 @@ task into primitive actions.
 \section{Introduction}
 \label{sec:intro}
 % 1. Talk about the need for cooperative robotics here.
-As research in recent years has demonstrated, effective co-robots need to be flexible agents, adapting to the changing needs of their daily operations. The introduction of such systems requires a substantial effort not merely aimed at producing capable and robust robots, but also a careful and planned interaction methodology allowing non-expert human operators to contribute to the robot's training with a non-invasive, intuitive procedure. With this in mind, it is greatly important that a co-robot not only achieve competency through direct skill training, but also that it utilize observations of others in its everyday behaviors to reinforce and improve existing abilities. Other works have solved many of the challenges standing in the way of collaborative robotics, including automating option scaffolding through demonstration \cite{AutoSkillAcquisition}, acquiring skills utilizing human reward signals in place of \cite{TAMER} or in addition to \cite{TeacherRL} a traditional objective function, and correcting for critical omissions in non-expert demonstrations \cite{PerspectiveTaking}. Simplifying the human trainer/robot student interaction paradigm by shaping human guidance into usable forms is also rapidly advancing \cite{TAMER,Clicker,AdviceTaking,TeacherRL,DemonstrationRL}. These successful results strongly contribute to the widespread use of Q-Learning variants in real robotic systems. With consideration for the ubiquity of this technique, we present a compatible method for utilizing a generic hierarchical skill architecture to achieve improvement in SMDP-based skill execution while simultaneously providing the ability to recognize known skills when being performed by other agents. This is demonstrated by utilizing the observation and subsequent automated identification of selected American Sign Language gestures to improve an agent's understanding of the underlying primitive skills.
+	As research in recent years has demonstrated, effective co-robots need to be flexible agents, adapting to the changing needs of their daily operations. The introduction of such systems requires a substantial effort not merely aimed at producing capable and robust robots, but also a careful and planned interaction methodology allowing non-expert human operators to contribute to the robot's training with a non-invasive, intuitive procedure. With this in mind, it is greatly important that a co-robot not only achieve competency through direct skill training, but also that it utilize observations of others in its everyday behaviors to reinforce and improve existing abilities.
+
+One representative example emerging in the collaborative robotics spotlight is Robonaut, a humanoid robot designed to match the dexterity of a suited astronaut \cite{Robonaut}. This platform is designed with both autonomous collaboration and teleoperative capbilities in mind,  a desirable set of operating modes for assisting human co-workers in the particularly challenging environments afforded by space exploration. Knox, et. al. continue to make great progress towards bringing accessible robot adaptation to non-expert audiences, facilitating the design of agents with shapable behaviors \cite{TAMER2}. For systems embodying these characteristics, simply maintaining an awareness of peer actions is critical for safety, efficiency, and general performance. We propose a method that robotic agents can leverage to help achieve this awareness while simultaneously using the classified data to improve its own performance and understanding of low level actions.
+
+Other works have offered solutions to many of the challenges standing in the way of mainstreaming collaborative robotics, including automating option scaffolding through demonstration \cite{AutoSkillAcquisition}, acquiring skills utilizing human reward signals in place of \cite{TAMER} or in addition to \cite{TeacherRL} a traditional objective function, and correcting for critical omissions in non-expert demonstrations \cite{PerspectiveTaking}. Simplifying the human trainer/robot student interaction paradigm by shaping human guidance into usable forms is also rapidly advancing \cite{TAMER,Clicker,AdviceTaking,TeacherRL,DemonstrationRL}. These successful results strongly contribute to the widespread use of Q-Learning variants in real robotic systems to model skills as Semi-Markov Decision Processes (SMDPs).
+
+With consideration for the ubiquity of this technique, we present a compatible method for utilizing a generic hierarchical skill architecture to achieve improvement in SMDP-based skill execution while simultaneously providing the ability to recognize known skills when being performed by other agents. This is demonstrated by utilizing the observation and subsequent automated identification of selected American Sign Language gestures to improve an agent's understanding of the underlying primitive skills involved. We then present the significance of this contribution, grounded within the rapidly expanding field of collaborative robotics.
 
 \section{Background and Related Work}
 \label{sec:background}
-\subsection{Q-Learning in Robotics}
-% 2. Talk about Q-Learning applied to robotics and skill acquisition here.
-Markov Decision Processes provide a convenient and efficient mechanism to create flexible, arbitrarily complex options: closed-loop policies describing action sequences \cite{SuttonMDP}. The temporal abstraction and generality of representation make this a favorable method of internally representing knowledge about actionable skills. When designing for a non-expert audience, it is often favorable to trade complexity (and on occasion optimal resource allocation) for simplicity. This accessibility contributes to Q-Learning being one of the most widely utilized reinforcement learning methods within robotics \cite{QLearningWatkins}. Utilizing an environmental reward function, solving for an optimal action policy can often be accomplished autonomously and is only limited by the complexity of the state representation.
-
-% 3. Talk about recent works that reduce the number of trials required to learn a skill.
-Due to the exploration space of the generic QLearning problem scaling exponentially with dimensionality, heuristics are actively being researched that reduce the amount of trials required to achieve desirable policies. One example heuristic includes utilizing human feedback as both an immediate and anticipatory reward signal, leveraging human foresight to effectively reduce the search depth required to learn acceptable paths through state space \cite{TAMER}. Another effective heuristic involves leveraging data obtained through observing demonstrations of skills to favorably influence transition probabilities within the MDP, achieving accelerated convergence to an acceptable policy \cite{LFDSurvey}. Works like these reduce the amount of trials required by several orders of magnitude with minimal sacrifice in resulting skill quality.
-
-% 4. Talk about high level contribution to solving this problem.
-For a co-robot to interact as a productive member of a team, it must be able to recognize and correctly classify peer behaviors. This situational awareness is instrumental in achieving intelligent cooperation, of the same or greater importance as being capable of executing actions independently. To achieve this on a practical level, it is necessary to intelligently group sets of primitive actions together into complex options. 
-
-
-\subsection{Hierarchical Skill Architectures}
-% 1. Talk about the need for hierarchical representation when multiple skills are required
-Within the context of robotics, two focuses of reinforcement learning research that are particularly relevant to co-robot advancement are autonomously building options hierarchies and reducing the trials or information required to achieve new proficiencies. The former heavily overlaps with non- robot-centric reinforcement learning work, which aims to make high-dimensional, continuous domain problem spaces tractable. General solutions are difficult to formulate, due to the vastness of potential methods and goals for such a system. Hierarchical learning systems follow the philosophy that these highly complex problems can very likely be broken into a number of simpler, tractable problems. Discovering the most efficient way to discover and arrange the low-level primitive actions is an open problem, with a multitude of viable approaches\cite{EfficientSkillLearning,AutoHierarchyLearning,LearningHierarchicalControl}.
-
-% 2. Multiple skills makes the agent more adaptable and useful
-Konidaris, et. al. have successfully shown that the latter can be influenced through the former, exploiting hierarchical learning to enable skill transfer between environments \cite{AutoSkillAcquisition}. By extending the usefulness of a skill laboriously acquired through trial and error, the actual cost versus utility of the learned action is reduced substantially. Achieving a general solution for attaining the cognitive capability to recognize instances where already-known actions can be transferred and applied would constitute a significant advance for collaborative robotics. This is emphasized through the ever-increasing incorporation of demonstration-as-training-signal that is becoming more prevalent as the computational costs for doing so diminish. As this incorporation continues, barriers to dynamic, adapatable multi-agent, multi-human collaboration will be removed. 
-	
-% 3. Talk about decomposing skill sequences into Task plans
-A hierarchical skill architecture can be used to great effect when assisting in collaborative task execution. To maximally benefit the collaborative aspects of complex task execution, it is essential for all agents involved to have reasonable approximations of the intent and plan of each other peer worker. With humans being naturally receptive of skill scaffolding, expressing a complicated task in terms of actions, sub-actions, and temporal sequencing, the intentions of each agent can be effectively communicated in a common format. One of the greatest technical challenges faced when orchestrating a collaborative exercise between multiple agents including both humans and robots is the mutual recognition of intention and action. Were there a method by which a participant or external observer could automate this process, a significant hurdle to this capability would be cleared.
- 
-% 5. Accounting for multiple skills complicates the learning and execution problem
-Work by Martinson, et. al. has shown the benefits conferred to an agent utilizing combinations of pre-tested behavioral assemblages to successfully accomplish a complex goal in a dynamic environment outside the agent's control \cite{QLBehaviorSelection}. The paper associates a list of sensor states, referenced as perceptual triggers, with constructed sets of pre-trained actions with stable policies. This decision serves to reduce the MDP search space when considering potential skills to apply, while enhancing the insight human operators have into the agent's potential actions by providing an intuitive mechanism by which action/reaction pairs can be specified. Mugan and Kuipers approached this problem similarly to Konidaris, in that they look to autonomously abstract portable options that can be transferred between environments from their agent's experiences. Particularly of note, the QLAP algorithm operates through qualitative representations of the continuous world. This results in providing a tolerance for incomplete input information while disregarding irrelevant dimensions of the state space. As such, QLAP learns action hierarchies while maintaining both temporal and state abstraction \cite{AutoHierarchyLearning}. From a practical standpoint, maintaining state abstraction is crucial for maintaining usable performance levels as most real-world examples cannot be directly approached due to intractably large state space.
-
-
 \subsection{Skill Recognition}
 1. Talk about LBD as an accessible means for non-experts to train robots on skills.\\
 \\
@@ -94,19 +77,29 @@ Work by Martinson, et. al. has shown the benefits conferred to an agent utilizin
    are more likely prevalent with human repetitions of actions than precise robotic replay.\\
 \\
 
-We chose to test our system on properly identifying and segmenting video of American Sign Language (ASL) gestures.
-American sign language provides a practical use case while testing the algorithm's tolerance to variance in training, as each training 
-example will necessarily be unique. Our state space encompasses six dimensions, corresponding to the relative x, y, and z coordinates of each hand involved.
-Our system has a priori knowledge of a partially overlapping set of ASL gestures, having been giving limited training for each known gesture.
 
-Here are citations about ASL gesture recognition... include short description of why this is interesting by referencing these papers:
-\cite{HandGestures}\cite{HSMMRecognition}\cite{POMDPGesture}
-\cite{HoughASL}\cite{ASLRealTime}\cite{MotionASL}
+\subsection{Hierarchical Skill Architectures}
+% 1. Talk about the need for hierarchical representation when multiple skills are required
+Within the context of robotics, two focuses of reinforcement learning research that are particularly relevant to co-robot advancement are autonomously building options hierarchies and reducing the trials or information required to achieve new proficiencies. The former heavily overlaps with non- robot-centric reinforcement learning work, which aims to make high-dimensional, continuous domain problem spaces tractable. General solutions are difficult to formulate, due to the vastness of potential methods and goals for such a system. Hierarchical learning systems follow the philosophy that these highly complex problems can very likely be broken into a number of simpler, tractable problems. Discovering the most efficient way to discover and arrange the low-level primitive actions is an open problem, with a multitude of viable approaches\cite{EfficientSkillLearning,AutoHierarchyLearning,LearningHierarchicalControl}.
 
-%Gesture recognition is not a novel concept.  Something about gesture recognition
-%here...\cite{HandGestures}\cite{HSMMRecognition}\cite{POMDPGesture}.
-%Several works have already provided robust gesture recognition systems for
-%ASL \cite{HoughASL}\cite{ASLRealTime}\cite{MotionASL}.
+% 2. Multiple skills makes the agent more adaptable and useful
+Konidaris, et. al. have successfully shown that the latter can be influenced through the former, exploiting hierarchical learning to enable skill transfer between environments \cite{AutoSkillAcquisition}. By extending the usefulness of a skill laboriously acquired through trial and error, the actual cost versus utility of the learned action is reduced substantially. Achieving a general solution for attaining the cognitive capability to recognize instances where already-known actions can be transferred and applied would constitute a significant advance for collaborative robotics. This is emphasized through the ever-increasing incorporation of demonstration-as-training-signal that is becoming more prevalent as the computational costs for doing so diminish. As this incorporation continues, barriers to dynamic, adapatable multi-agent, multi-human collaboration will be removed. 
+	
+% 3. Talk about decomposing skill sequences into Task plans
+A hierarchical skill architecture can be used to great effect when assisting in collaborative task execution. To maximally benefit the collaborative aspects of complex task execution, it is essential for all agents involved to have reasonable approximations of the intent and plan of each other peer worker. With humans being naturally receptive of skill scaffolding, expressing a complicated task in terms of actions, sub-actions, and temporal sequencing, the intentions of each agent can be effectively communicated in a common format. One of the greatest technical challenges faced when orchestrating a collaborative exercise between multiple agents including both humans and robots is the mutual recognition of intention and action. Were there a method by which a participant or external observer could automate this process, a significant hurdle to this capability would be cleared.
+ 
+% 5. Accounting for multiple skills complicates the learning and execution problem
+Work by Martinson, et. al. has shown the benefits conferred to an agent utilizing combinations of pre-tested behavioral assemblages to successfully accomplish a complex goal in a dynamic environment outside the agent's control \cite{QLBehaviorSelection}. The paper associates a list of sensor states, referenced as perceptual triggers, with constructed sets of pre-trained actions with stable policies. This decision serves to reduce the MDP search space when considering potential skills to apply, while enhancing the insight human operators have into the agent's potential actions by providing an intuitive mechanism by which action/reaction pairs can be specified. Mugan and Kuipers approached this problem similarly to Konidaris, in that they look to autonomously abstract portable options that can be transferred between environments from their agent's experiences. Particularly of note, the QLAP algorithm operates through qualitative representations of the continuous world. This results in providing a tolerance for incomplete input information while disregarding irrelevant dimensions of the state space. As such, QLAP learns action hierarchies while maintaining both temporal and state abstraction \cite{AutoHierarchyLearning}. From a practical standpoint, maintaining state abstraction is crucial for maintaining usable performance levels as most real-world examples cannot be directly approached due to intractably large state space.
+
+\subsection{Q-Learning in Robotics}
+% 2. Talk about Q-Learning applied to robotics and skill acquisition here.
+Markov Decision Processes provide a convenient and efficient mechanism to create flexible, arbitrarily complex options: closed-loop policies describing action sequences \cite{SuttonMDP}. The temporal abstraction and generality of representation make this a favorable method of internally representing knowledge about actionable skills. When designing for a non-expert audience, it is often favorable to trade complexity (and on occasion optimal resource allocation) for simplicity. This accessibility contributes to Q-Learning being one of the most widely utilized reinforcement learning methods within robotics \cite{QLearningWatkins}. Utilizing an environmental reward function, solving for an optimal action policy can often be accomplished autonomously and is only limited by the complexity of the state representation.
+
+% 3. Talk about recent works that reduce the number of trials required to learn a skill.
+Due to the exploration space of the generic QLearning problem scaling exponentially with dimensionality, heuristics are actively being researched that reduce the amount of trials required to achieve desirable policies. One example heuristic includes utilizing human feedback as both an immediate and anticipatory reward signal, leveraging human foresight to effectively reduce the search depth required to learn acceptable paths through state space \cite{TAMER}. Another effective heuristic involves leveraging data obtained through observing demonstrations of skills to favorably influence transition probabilities within the MDP, achieving accelerated convergence to an acceptable policy \cite{LFDSurvey}. Works like these reduce the amount of trials required by several orders of magnitude with minimal sacrifice in resulting skill quality.
+
+% 4. Talk about high level contribution to solving this problem.
+For a co-robot to interact as a productive member of a team, it must be able to recognize and correctly classify peer behaviors. This situational awareness is instrumental in achieving intelligent cooperation, of the same or greater importance as being capable of executing actions independently. To achieve this on a practical level, it is necessary to intelligently group sets of primitive actions together into complex options. 
 
 \section{Definition of Problem Space}
 \label{sec:pspace}
@@ -169,6 +162,23 @@ Here are citations about ASL gesture recognition... include short description of
 	* Benefits to execution side of the action primitives being trained
 	* What happens with misclassification -- robustness against slippery-slope failure mode
 	* Execution time required per primitive? How does the time requirement scale as primitives are added?
+
+\section{Proof of Concept}
+\label{sec:proofofconcept}
+We chose to test our system on properly identifying and segmenting video of American Sign Language (ASL) gestures.
+American sign language provides a practical use case while testing the algorithm's tolerance to variance in training, as each training 
+example will necessarily be unique. Our state space encompasses six dimensions, corresponding to the relative x, y, and z coordinates of each hand involved.
+Our system has a priori knowledge of a partially overlapping set of ASL gestures, having been giving limited training for each known gesture.
+
+Here are citations about ASL gesture recognition... include short description of why this is interesting by referencing these papers:
+\cite{HandGestures}\cite{HSMMRecognition}\cite{POMDPGesture}
+\cite{HoughASL}\cite{ASLRealTime}\cite{MotionASL}
+
+%Gesture recognition is not a novel concept.  Something about gesture recognition
+%here...\cite{HandGestures}\cite{HSMMRecognition}\cite{POMDPGesture}.
+%Several works have already provided robust gesture recognition systems for
+%ASL \cite{HoughASL}\cite{ASLRealTime}\cite{MotionASL}.
+
 
 \section{Results}
 \label{sec:result}
