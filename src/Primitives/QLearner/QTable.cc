@@ -133,7 +133,9 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
             base_reward = (*reward_layer).second * weight;
           }
 
-          new_state->set_reward(target_state, base_layer, base_reward);
+          if (new_state->GetRewardValue(target_state, false, "base") <
+              base_reward)
+            new_state->set_reward(target_state, base_layer, base_reward);
       }
     }
 
