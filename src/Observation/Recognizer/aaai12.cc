@@ -22,7 +22,7 @@ using namespace Utils;
 static string primitive_list[] = {
     "coat", "shoes", "school", "store", "drive", "in", "out"
 };
-static unsigned int primitives_count = 1;
+static unsigned int primitives_count = 7;
 
 int main(int argc, char* argv[]) {
   
@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
   vector<double> nearby_thresholds;
   double xy_min = 0.05;
   double z_min = 20.;
-  double nearby_multiplier = 10.;
+  double nearby_multiplier = 3.;
   //xy_min *= xy_min;
   //z_min *= z_min;
   //nearby_multiplier *= nearby_multiplier;

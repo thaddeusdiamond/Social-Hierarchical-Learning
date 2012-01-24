@@ -54,7 +54,7 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
   }
 
 
-  // Log(stderr,DEBUG,"State not found in GetState.");
+   // Log(stderr,DEBUG,"State not found in GetState.");
 
   if (add_estimated_state) {
     State s(needle.get_state_vector());

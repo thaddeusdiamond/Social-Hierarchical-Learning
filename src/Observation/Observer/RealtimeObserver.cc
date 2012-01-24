@@ -77,6 +77,7 @@ bool RealtimeObserver::Observe(Task* task) {
   
   while (is_observing_ && cur_time_ms < end_time) {
     unified_frame.clear();
+    bool clear_hit_states = false;
     
     while (sampling_rate_ > cur_time_ms - last_frame_time_ms) {
       clock_gettime(CLOCK_REALTIME, &time);
@@ -109,7 +110,7 @@ bool RealtimeObserver::Observe(Task* task) {
     
     frames_.push_back(unified_frame); // Store incoming frame data
     vector<pair<double, string> > timeline_entry;
-    timeline_entry.push_back(pair<double,string>(0.3,"Unknown"));
+    timeline_entry.push_back(pair<double,string>(0.5,"Unknown"));
     timeline_.push_back(timeline_entry); // Add default guess
 
     //Log(log_stream, DEBUG, 
@@ -174,7 +175,7 @@ bool RealtimeObserver::Observe(Task* task) {
                 " outbound connections. Descriptor size %ld", cur_frame, transition_reward, 
                 prev_state->get_reward().size(),
                 prev_state->get_state_vector().size());
-        Log(log_stream,DEBUG,buf); 
+        //Log(log_stream,DEBUG,buf); 
         /*Log(log_stream,DEBUG,string(
           prev_state->to_string() + " to " + current_state->to_string()
           ).c_str());*/
@@ -188,7 +189,7 @@ bool RealtimeObserver::Observe(Task* task) {
           cur_time_ms,current_state));
       } else {
         // Log(log_stream,ERROR,"...Zero reward transition on training data..?");
-        prev_state->set_reward(current_state,"base",0.0001);
+        prev_state->set_reward(current_state,"base",-1);
       }
       
       // If duration represented by hit_states is greater than 50% of the
@@ -206,7 +207,7 @@ bool RealtimeObserver::Observe(Task* task) {
       
       
       // If hit_state_duration is greater than acceptable duration, trim the start
-      while (hit_state_duration > p->duration_max_millis * 1.25) {
+      while (hit_state_duration > p->duration_max_millis * 1.2) {
         p->hit_states.pop_front();        
         
         first_hit_timestamp = p->hit_states[0].first;
@@ -256,7 +257,7 @@ bool RealtimeObserver::Observe(Task* task) {
         // Calculate the max number of states to pass through before 
         // overshooting the max possible time for that primitive
         double max_state_transitions = sampling_rate_ 
-          * p->q_learner->get_anticipated_duration() * 1.25;
+          * p->q_learner->get_anticipated_duration() * 1.1;
         
         double target_state_transitions = hit_state_duration / sampling_rate_;
 
@@ -299,7 +300,7 @@ bool RealtimeObserver::Observe(Task* task) {
             if (!inc_state)
               Log(stderr,ERROR,"NULL State to be WP'd?");
             if (inc_state != s)
-              inc_state->set_reward(s,string("waypoint"),1000.);
+              inc_state->set_reward(s,string("waypoint"),20.);
           }
           
         }
@@ -312,7 +313,7 @@ bool RealtimeObserver::Observe(Task* task) {
         double match_score_c = 0.;
         vector<State *> optimal_path;
         State *optimal_path_state;
-        State *optimal_path_next_state;
+        State *optimal_path_next_state = NULL;
         states_traversed = 0;
         double optimal_path_score = 0.;
         
@@ -322,7 +323,8 @@ bool RealtimeObserver::Observe(Task* task) {
           temp_reward = 0.;
           bool success = p->q_learner->GetNextState(optimal_path_state,
                                                     &optimal_path_next_state,
-                                                    temp_reward);
+                                                    temp_reward);                                                    
+                                                    
           if (!success) {
             char buf[1024];
             snprintf(buf,1024,"Failed optimized state traversal on primitive %s"
@@ -332,31 +334,51 @@ bool RealtimeObserver::Observe(Task* task) {
             break;
           }
           
-          optimal_path_score += optimal_path_state->GetRewardValue(
+          double transition_reward = optimal_path_state->GetRewardValue(
                                   optimal_path_next_state,false,"base");
+                                  
+          optimal_path_score += transition_reward;
 
           optimal_path_state = optimal_path_next_state;
           optimal_path.push_back(optimal_path_state);
-          
-
                                   
           optimal_path_next_state = NULL;
           ++states_traversed;
+
+          char buf[1024];
+          snprintf(buf,1024,"Chose transition with value %g, real value %g",
+            temp_reward, transition_reward);
+          //Log(stderr,DEBUG,buf);
+
           
-          double temp_dbl = 0.;
+          /*double temp_dbl = 0.;
           if (p->q_learner->IsNearTrainedGoalState(*optimal_path_state, .25,
                                                temp_dbl)) {
             break;
-          } 
+          } */
           
         }
         
         if (optimal_path.size() == 0) continue;
         match_score_c = (optimal_path_score)
-                        / static_cast<double>(optimal_path.size());
+                        / static_cast<double>(optimal_path.size()-1);
 
 
-        
+        // Remove layer "waypoint" from transitions into States in 'waypoints' 
+        for (waypoint_iter = waypoints.begin(); 
+             waypoint_iter != waypoints.end();
+             ++waypoint_iter) {
+          State *s = *waypoint_iter;
+          vector<State *> &incoming_states = s->get_incoming_states();
+          vector<State *>::iterator inc_iter;
+          for (inc_iter = incoming_states.begin();
+               inc_iter != incoming_states.end();
+               ++inc_iter) {
+            State *inc_state = *inc_iter;
+            inc_state->set_reward(s,"waypoint",0.);
+          }
+          
+        }        
 
         // Create a vector 'waypoints' of State* from within p's qlearner
         // sampling from p->hit_states. 
@@ -386,7 +408,7 @@ bool RealtimeObserver::Observe(Task* task) {
             if (!inc_state)
               Log(stderr,ERROR,"NULL State to be WP'd?");
             if (inc_state != s)
-              inc_state->set_reward(s,string("waypoint"),1000.);
+              inc_state->set_reward(s,string("waypoint"),20.);
           }
           
         }
@@ -423,13 +445,12 @@ bool RealtimeObserver::Observe(Task* task) {
           waypointed_path.push_back(wp_path_state);
           wp_path_next_state = NULL;
           ++states_traversed;
-          
+          /*
           double temp_dbl = 0.;
-          if (states_traversed > target_state_transitions*0.25
-            && p->q_learner->IsNearTrainedGoalState(*wp_path_state, .25,
+          if (p->q_learner->IsNearTrainedGoalState(*wp_path_state, .25,
                                                temp_dbl)) {
             break;
-          } 
+          } */
         }
         
         double wp_path_score = 0.;
@@ -440,11 +461,12 @@ bool RealtimeObserver::Observe(Task* task) {
           State *next = (*waypointed_path_iter);
           
           wp_path_score += wp_path_state->GetRewardValue(next,false,"base");
+          wp_path_state = next;
         }
         
         if (waypointed_path.size() == 0) continue;
         match_score_b = (wp_path_score)
-                        / static_cast<double>(waypointed_path.size());
+                        / static_cast<double>(waypointed_path.size()-1);
         
 
         // Remove layer "waypoint" from transitions into States in 'waypoints' 
@@ -545,19 +567,24 @@ bool RealtimeObserver::Observe(Task* task) {
         // Calculate best possible per-state score for gesture
         double match_score_f = 100.;
         
-        
         // Calculate confidence score for label:
         // score = A * 0.2 + [B/C] * .7 + [D/E] * 0.1
-        double final_score = match_score_a * 0.20
-                             + (match_score_b/match_score_c) * 0.6
-//                             + match_distance_d_e  * 0.15
-                             + (match_score_b / match_score_f) * 0.2;
+        double final_score = match_score_a * 0.10
+                             + (match_score_b/100.) * 0.40
+                             + (match_score_b/match_score_c) * 0.25
+                             + match_distance_d_e  * 0.25;
+                             
+        if (match_score_a < .75) final_score *= 0.8;
+        if (match_score_b < 75.) final_score *= 0.8;
+        if (match_score_c < 75.) final_score *= 0.8;
+        if (match_score_b > match_score_c) final_score *= 0.9;
+        if (match_distance_d_e < .80) final_score *= 0.8;
         
         
         // For all frames covered from first_hit_timestamp to now, apply label
         // pair: < score, p->name >
         
-        // Figure out which frame to start with: offset from start * frames/sec
+        // Figure out which frame to start with: offset from start / (frames/sec)
         int frame_start = static_cast<int>((first_hit_timestamp - start_time)
                                             / sampling_rate_);
         int frame_end = cur_frame;
@@ -577,8 +604,18 @@ bool RealtimeObserver::Observe(Task* task) {
           timeline_[i].push_back(label);
         }
         
+        if (final_score > 90) { clear_hit_states = true; }
       }
     }
+    
+    if (clear_hit_states) {
+      for (p_iter = primitives.begin(); p_iter != primitives.end();
+         ++p_iter) {
+        ObservablePrimitive *p = *p_iter;
+        p->hit_states.clear();
+      }
+    }
+    
     ++cur_frame;
   } 
 

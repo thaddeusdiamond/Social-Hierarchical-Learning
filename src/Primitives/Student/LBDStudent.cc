@@ -27,6 +27,7 @@ using Utils::Log;
 QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
   double MAX_REWARD = 100.;
   const int BUF_SIZE = 4096;
+  unsigned int FRAME_BUFFER = 5;
   char line_buf[BUF_SIZE];
   // char *saveptr_min_incr, *saveptr_nearby_thresh;
   char *saveptr_state_val;
@@ -88,7 +89,6 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
 
   // Every subsequent line: CSV of sensor values
   int frame_num = 1;
-  unsigned int frame_buffer = 2;
   QTable *qt = skill->get_q_table();
   std::deque<State*> seen_states;
   // Create array of "loaded states"
@@ -137,18 +137,18 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
       
     seen_states.push_back(new_state);
 
-    if (seen_states.size() > frame_buffer) {
+    if (seen_states.size() > FRAME_BUFFER) {
       // Start making connections from state at index 0
       State *root = seen_states[0];
       unsigned int s_iter;
       double weight;
       unsigned int connect_count;
       for (s_iter = 1, connect_count = 1;
-           s_iter < seen_states.size() && connect_count <= frame_buffer;
+           s_iter < seen_states.size() && connect_count <= FRAME_BUFFER;
            ++s_iter, ++connect_count) {
         State *connect_state = seen_states[s_iter];
         if (!connect_state) Log(log_stream,ERROR,"Connecting to un-added state!"); //connect_state = qt->AddState((**s_iter));
-        weight = MAX_REWARD / sqrt(static_cast<double>(connect_count));
+        weight = MAX_REWARD / (static_cast<double>(connect_count));
         if (root == connect_state)
           root->set_reward(connect_state, "base", 0.001);
         else
@@ -168,11 +168,11 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
       double weight;
       unsigned int connect_count;
       for (s_iter = 1, connect_count = 1;
-           s_iter < seen_states.size() && connect_count <= frame_buffer;
+           s_iter < seen_states.size() && connect_count <= FRAME_BUFFER;
            ++s_iter, ++connect_count) {
         State *connect_state = seen_states[s_iter];
         if (!connect_state) Log(log_stream,ERROR,"Connecting to un-added state!"); //connect_state = qt->AddState((**s_iter));        
-        weight = MAX_REWARD / sqrt(static_cast<double>(connect_count));
+        weight = MAX_REWARD / (static_cast<double>(connect_count));
         if (root == connect_state)
           root->set_reward(connect_state, "base", 0.001);
         else
