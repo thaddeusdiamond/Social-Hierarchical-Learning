@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
   
   char filename[100];
   //Give multiple training examples per skill
-  for (int reps = 0; reps < 5; ++reps) {
+  for (int reps = 0; reps < 1; ++reps) {
     for (unsigned int i = 0; i < primitives_count; ++i) {
       snprintf(filename,100,"%s%s.csv", base_dir.c_str(), 
                primitive_list[i].c_str());

@@ -7,6 +7,7 @@
 \usepackage{helvet}
 \usepackage{courier}
 \usepackage[pdftex]{graphicx}
+\usepackage{amssymb}
 \frenchspacing
 \pdfinfo{
 /Title (Using A Hierarchical Architecture for Collaborative Social Tasks to Reinforce and Recognize Action Primitives)
@@ -103,22 +104,28 @@ For a co-robot to interact as a productive member of a team, it must be able to 
 
 \section{Definition of Problem Space}
 \label{sec:pspace}
+%1. Technically define the problem space being utilized, framed as the same data structure that can be leveraged for executing these actions. 
+The agent and operating environment are represented by a continuous-state, continuous-time Semi-Markov decision process, defined by the tuple $(S,A,\mathbb{P},\Lambda,\gamma,D,R)$, where $S$ represents a continuous set of states, $A$ is a set of actions, $\mathbb{P}$ is a set of policies referred to as primitive actions, $\Lambda$ is a set of $\epsilon-$neighborhoods defined for readings from each input sensor comprising the state descriptor, $\gamma \in [0,1)$ as a discount factor, $D$ is the initial-state distribution, and $R : S \times A \rightarrow \mathbb{R}$ is an unknown state-action reward function. This data structure is representative of those commonly utilized within skill training and execution systems. We further define $S \rightarrow \mathbb{R}^k$ for $k$ sensor values.
 
-1. Technically define the problem space being utilized, framed as the same data structure that
-   can be leveraged for executing these actions. 
+We assume the agent holds limited a priori knowledge of a set of primitive skills $\mathbb{P}$, each describing a policy $P_\pi$ for traversing the agent-environment SMDP. Each primitive action contains its own exploration function, $P_e$, to guide its traversal while solving for known branches of the problem-space MDP. Additionally, each primitive $p \in P$ contains metadata indicating the estimated time required for completion of the primitive $P_t$. Completion of a primitive action is defined as traversing state space from an unknown initial state to with the $\epsilon-$neighborhood of a known goal state.
 
-2. Formalize SMDP being used, and each skill representation as a QLearner. Use Ng paper as a basis for this. Also include extra metadata
-   being considered, such as time-to-execute and tolerance variables
+Each policy $P_\pi$ can be described as a series of decision rules to be applied when appearing in familiar situations. These decisions may range from complete deterministic to randomized, and are influenced by the exploration function $P_e$. Within each primitive, we introduce the notion of reward layers, able to be utilized to influence exploration transition probabilities but not artifically affect reward signal propagation.
 
-3. Define policy in terms of the exploration function being utilized, explain that this function can be swapped
-   depending on the agent's goals.
+Our work does not assume a uniform sensor refresh rate, as a state sampled at a given time may represent stale data from a subset of its input sensors. The algorithm presented has shown robustness to lossy sampling by remaining capable of confidently classifying observations under such conditions.
 
-4. Define linear combination of policies (reward layers)
+% opportunistic inverse reinforcement learning as applied to skill recognition. 
+% Field robotics operates within a continuous-space Markov decision process
 
-5. Define the optimal policy in terms of the training data being input
+%2. Formalize SMDP being used, and each skill representation as a QLearner. Use Ng paper as a basis for this. Also include extra metadata being considered, such as time-to-execute and tolerance variables
 
-6. Define MDP state vector as being a composite of disparate sensor data -- different refresh rates
-7. Self-loops permitted but do not contribute reward
+%3. Define policy in terms of the exploration function being utilized, explain that this function can be swapped depending on the agent's goals.
+
+% 4. Define linear combination of policies (reward layers)
+
+% 5. Define the optimal policy in terms of the training data being input
+
+% 6. Define MDP state vector as being a composite of disparate sensor data -- different refresh rates
+% 7. Self-loops permitted but do not contribute reward
 
 
 \section{Primitive Recognition Algorithm}
