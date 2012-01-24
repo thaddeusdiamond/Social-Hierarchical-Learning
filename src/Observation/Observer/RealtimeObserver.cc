@@ -34,7 +34,8 @@ bool RealtimeObserver::Observe(Task* task, double duration) {
   
 bool RealtimeObserver::Observe(Task* task) {
   FILE *log_stream = stderr;
-  
+  double LEARNING_RATE = 0.2;
+  double DISCOUNT_FACTOR = 0.9;
   
   if (sensors_.size() == 0) {
     Log(log_stream, DEBUG, (string("No sensors defined on observer.")).c_str());
@@ -101,8 +102,10 @@ bool RealtimeObserver::Observe(Task* task) {
       // snprintf(buf,1024,"... contains %d values ...",
       //    sensor->get_num_values());
       // Log(log_stream,DEBUG,buf);
-      for (int i = 0; i < sensor->get_num_values(); ++i)
-        unified_frame.push_back(values[i]);
+      for (int i = 0; i < sensor->get_num_values(); ++i) {
+        double rand_factor = double(rand() % 6) / 100. + 0.97;
+        unified_frame.push_back(values[i] * rand_factor);
+      }
     }
 
     //snprintf(buf,1024,"...inc frame has size %ld", unified_frame.size());
@@ -110,7 +113,7 @@ bool RealtimeObserver::Observe(Task* task) {
     
     frames_.push_back(unified_frame); // Store incoming frame data
     vector<pair<double, string> > timeline_entry;
-    timeline_entry.push_back(pair<double,string>(0.5,"Unknown"));
+    timeline_entry.push_back(pair<double,string>(0.3,"Unknown"));
     timeline_.push_back(timeline_entry); // Add default guess
 
     //Log(log_stream, DEBUG, 
@@ -246,7 +249,7 @@ bool RealtimeObserver::Observe(Task* task) {
       // state of p:
       //Log(log_stream,DEBUG,"...Checking for goal!");
       double distance_to_goal = 0.;
-      if (p->q_learner->IsNearTrainedGoalState(*current_state, 1.,
+      if (p->q_learner->IsNearTrainedGoalState(*current_state, 5.,
                                                distance_to_goal)) {
       //Log(log_stream, DEBUG, 
       //  string("ZOMG Near goal state for " + p->name).c_str()); 
@@ -277,7 +280,7 @@ bool RealtimeObserver::Observe(Task* task) {
              ++hit_iter) {
           int r_val = rand() % 100;
           
-          if (r_val < 30)
+          if (r_val < 60)
             waypoints.push_back(hit_iter->second);
         }                
         
@@ -300,7 +303,7 @@ bool RealtimeObserver::Observe(Task* task) {
             if (!inc_state)
               Log(stderr,ERROR,"NULL State to be WP'd?");
             if (inc_state != s)
-              inc_state->set_reward(s,string("waypoint"),20.);
+              inc_state->set_reward(s,string("waypoint"),45.);
           }
           
         }
@@ -336,6 +339,26 @@ bool RealtimeObserver::Observe(Task* task) {
           
           double transition_reward = optimal_path_state->GetRewardValue(
                                   optimal_path_next_state,false,"base");
+          
+          double best_transition_from_next_state = 0.;
+          map<State*, map<string, double> > const &next_state_rewards = optimal_path_next_state->get_reward();
+          map<State*, std::map<std::string, double> >::const_iterator future_reward;
+          for (future_reward = next_state_rewards.begin();
+               future_reward != next_state_rewards.end();
+               ++future_reward) {
+                double reward = optimal_path_next_state->GetRewardValue(future_reward->first, false, "base");
+                if (reward > best_transition_from_next_state)
+                  best_transition_from_next_state = reward;
+          }
+          // Transition update rule
+          vector<State *> &inc_states = optimal_path_state->get_incoming_states(); 
+          for (unsigned int i=0;i<inc_states.size();++i) {
+              State *inc_state = inc_states[i];
+              double reward_to_cur_state = inc_state->GetRewardValue(optimal_path_state,false,"base");
+              reward_to_cur_state = (1.-LEARNING_RATE)*reward_to_cur_state 
+                + LEARNING_RATE * ( transition_reward  + DISCOUNT_FACTOR*best_transition_from_next_state - reward_to_cur_state);
+              inc_state->set_reward(optimal_path_state,string("base"),reward_to_cur_state);
+          }
                                   
           optimal_path_score += transition_reward;
 
@@ -351,11 +374,12 @@ bool RealtimeObserver::Observe(Task* task) {
           //Log(stderr,DEBUG,buf);
 
           
-          /*double temp_dbl = 0.;
-          if (p->q_learner->IsNearTrainedGoalState(*optimal_path_state, .25,
+          double temp_dbl = 0.;
+          if (states_traversed > anticipated_frames_elapsed/4. &&
+              p->q_learner->IsNearTrainedGoalState(*optimal_path_state, .25,
                                                temp_dbl)) {
             break;
-          } */
+          } 
           
         }
         
@@ -408,7 +432,7 @@ bool RealtimeObserver::Observe(Task* task) {
             if (!inc_state)
               Log(stderr,ERROR,"NULL State to be WP'd?");
             if (inc_state != s)
-              inc_state->set_reward(s,string("waypoint"),20.);
+              inc_state->set_reward(s,string("waypoint"),100.);
           }
           
         }
@@ -445,12 +469,12 @@ bool RealtimeObserver::Observe(Task* task) {
           waypointed_path.push_back(wp_path_state);
           wp_path_next_state = NULL;
           ++states_traversed;
-          /*
-          double temp_dbl = 0.;
-          if (p->q_learner->IsNearTrainedGoalState(*wp_path_state, .25,
+          
+          /*double temp_dbl = 0.;
+          if (p->q_learner->IsNearTrainedGoalState(*wp_path_state, 1.,
                                                temp_dbl)) {
             break;
-          } */
+          }*/
         }
         
         double wp_path_score = 0.;
@@ -561,7 +585,7 @@ bool RealtimeObserver::Observe(Task* task) {
         double match_score_e = p->q_learner->get_anticipated_duration();
         
         double match_distance_d_e = 1 
-            - (fabs(match_score_e - match_score_d) / match_score_e);
+            - (fabs(match_score_d - match_score_e) / match_score_e);
         
         // Calculate F:
         // Calculate best possible per-state score for gesture
@@ -569,17 +593,31 @@ bool RealtimeObserver::Observe(Task* task) {
         
         // Calculate confidence score for label:
         // score = A * 0.2 + [B/C] * .7 + [D/E] * 0.1
-        double final_score = match_score_a * 0.10
-                             + (match_score_b/100.) * 0.40
-                             + (match_score_b/match_score_c) * 0.25
-                             + match_distance_d_e  * 0.25;
-                             
-        if (match_score_a < .75) final_score *= 0.8;
-        if (match_score_b < 75.) final_score *= 0.8;
-        if (match_score_c < 75.) final_score *= 0.8;
-        if (match_score_b > match_score_c) final_score *= 0.9;
-        if (match_distance_d_e < .80) final_score *= 0.8;
+        double final_score = 0.;
+
+        if (use_waypointing_) {
+          final_score =  match_score_a * 0.25;
+          final_score += (match_score_b/100.) * 0.40;
+          if (match_score_b/match_score_c > 1.)
+            final_score += 0.2;
+          else
+            final_score += (match_score_b/match_score_c) * 0.20;
+            final_score += match_distance_d_e  * 0.15;
         
+          if (match_score_a < 0.75) final_score *= 0.8;
+          if (match_score_b < 75.) final_score *= 0.8;
+          if (match_score_c < 75.) final_score *= 0.8;
+          if (match_score_b - 10. > match_score_c) final_score *= 0.8;
+          if (match_distance_d_e < .80) final_score *= 0.8;
+        } else {
+          final_score =  match_score_a * 0.25
+                           + (match_score_b/100.) * 0.60
+                           + match_distance_d_e  * 0.15;
+        
+          if (match_score_a < .75) final_score *= 0.8;
+          if (match_score_b < 75.) final_score *= 0.8;
+          if (match_distance_d_e < .80) final_score *= 0.8;          
+        }
         
         // For all frames covered from first_hit_timestamp to now, apply label
         // pair: < score, p->name >
@@ -597,14 +635,32 @@ bool RealtimeObserver::Observe(Task* task) {
           match_score_e,
           match_distance_d_e,
           match_score_f);
-        //Log(stderr,DEBUG,scorebuf);
+        Log(stderr,DEBUG,scorebuf);
         
         pair<double, string> label(final_score, p->name);
         for (int i=frame_start; i <= frame_end; ++i) {
           timeline_[i].push_back(label);
         }
         
-        if (final_score > 90) { clear_hit_states = true; }
+        if (final_score > 90) { 
+          clear_hit_states = false; 
+          for (unsigned int hidx = 0; hidx < p->hit_states.size();++hidx) {
+            State *s  = p->hit_states[hidx].second;
+            // Transition update rule
+            vector<State *> &inc_states = s->get_incoming_states(); 
+            for (unsigned int i=0;i<inc_states.size();++i) {
+                State *inc_state = inc_states[i];
+                double reward_to_cur_state = inc_state->GetRewardValue(optimal_path_state,false,"base");
+                reward_to_cur_state *= (1.+LEARNING_RATE);
+                inc_state->set_reward(s,string("base"),reward_to_cur_state);
+            }
+          }
+          
+          
+          unsigned int h_sz = p->hit_states.size() / 2;
+          while (--h_sz > 0) 
+            p->hit_states.pop_front();  
+        }
       }
     }
     
@@ -614,7 +670,7 @@ bool RealtimeObserver::Observe(Task* task) {
         ObservablePrimitive *p = *p_iter;
         p->hit_states.clear();
       }
-    }
+    } 
     
     ++cur_frame;
   } 
@@ -668,6 +724,72 @@ vector<string> RealtimeObserver::GetFinalTimeline() {
 
   return best_timeline;
 }
+
+
+/**
+ * Returns a frame-by-frame mapping of primitive name -> confidence score
+ * 
+ **/
+vector<map<string,double> > RealtimeObserver::GetPrimitivePerformanceTimeline(void) {
+//  vector<vector<pair<double, string> > > timeline_;
+  vector<map<string, double> > result;
+  
+  for (unsigned int i = 0; i < timeline_.size(); ++i) {
+    map<string, double> frame_result;
+    for (unsigned int j = 0; j < primitives_.size(); ++j) {
+      frame_result[primitives_[j]->get_name()] = 0.;
+    }
+    
+    vector<pair<double,string> > &labels = timeline_[i];
+    for (unsigned int j = 0; j < labels.size(); ++j) {
+      if (labels[j].first > frame_result[labels[j].second])
+        frame_result[labels[j].second] = labels[j].first;
+    }
+    
+    result.push_back(frame_result);
+  }
+  return result;  
+}
+
+
+/**
+ * Returns a primitive-centric mapping of each frame's confidence score
+ * 
+ **/
+map<string, vector<double> > RealtimeObserver::GetPrimitiveCentricPerformanceTimeline(void) {
+//  vector<vector<pair<double, string> > > timeline_;
+  map<string, vector<double> > result;
+  
+  for (unsigned int j = 0; j < primitives_.size(); ++j) {
+    vector<double> confidences;
+    
+    for (unsigned int i = 0; i < timeline_.size(); ++i) {
+      vector<pair<double,string> > &labels = timeline_[i];
+      double best_score = 0.;
+
+      for (unsigned int k = 0; k < labels.size(); ++k) {
+        if (labels[k].first > best_score && !strcmp(labels[k].second.c_str(), primitives_[j]->get_name().c_str()))
+          best_score = labels[k].first;
+      }
+      
+      confidences.push_back(best_score);
+    }
+    
+    result[primitives_[j]->get_name()] = confidences;
+  }
+  
+  return result;  
+}
+
+
+
+
+
+
+
+
+
+
 
 
 }  // namespace Observation

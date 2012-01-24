@@ -17,6 +17,7 @@
 #include <deque>
 #include <string>
 #include <utility>
+#include <map>
 #include "Observer/Observer.h"
 #include "Observer/Task.h"
 #include "Primitives/QLearner/QLearner.h"
@@ -26,6 +27,7 @@
 namespace Observation {
 
 using std::vector;
+using std::map;
 using std::string;
 using std::pair;
 using std::deque;
@@ -35,8 +37,8 @@ using Primitives::State;
 
 class RealtimeObserver : public Observer {
  public:
-  RealtimeObserver(double sampling_rate_hz) : is_observing_(false),
-      duration_(0.), sampling_rate_(sampling_rate_hz) {}
+  RealtimeObserver(double sampling_rate_hz) :  use_waypointing_(true),
+      is_observing_(false), duration_(0.), sampling_rate_(sampling_rate_hz) {}
 
   bool Observe(Task* task, double duration);
   bool Observe(Task* task);
@@ -49,6 +51,9 @@ class RealtimeObserver : public Observer {
    * @return Timeline with most confident labels at time of calling
    **/
   vector<string> GetFinalTimeline(void);
+  
+  vector<map<string,double> > GetPrimitivePerformanceTimeline(void);
+  map<string, vector<double> > GetPrimitiveCentricPerformanceTimeline(void);
   
   vector<vector<pair<double,string> > > &get_timeline() {
     return timeline_;
@@ -73,6 +78,9 @@ class RealtimeObserver : public Observer {
     int strikes;
     double duration_max_millis;
   };
+  
+  
+  bool use_waypointing_;  
   
  private:
   /**

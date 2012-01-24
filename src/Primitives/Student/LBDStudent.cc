@@ -106,6 +106,10 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
     
     while (tokenizer != NULL) {
       double sensor_val = atof(tokenizer);
+      
+      //double rand_factor = double(rand() % 2) / 100. + .99;
+      //sensor_val *= rand_factor;
+      
       state_vector.push_back(sensor_val);
       snprintf(dbuf,100,"%g, ",sensor_val);
       state_str += dbuf;
@@ -149,9 +153,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
         State *connect_state = seen_states[s_iter];
         if (!connect_state) Log(log_stream,ERROR,"Connecting to un-added state!"); //connect_state = qt->AddState((**s_iter));
         weight = MAX_REWARD / (static_cast<double>(connect_count));
-        if (root == connect_state)
-          root->set_reward(connect_state, "base", 0.001);
-        else
+        if (root != connect_state)
           root->set_reward(connect_state, "base", weight);
       }
       
@@ -173,9 +175,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
         State *connect_state = seen_states[s_iter];
         if (!connect_state) Log(log_stream,ERROR,"Connecting to un-added state!"); //connect_state = qt->AddState((**s_iter));        
         weight = MAX_REWARD / (static_cast<double>(connect_count));
-        if (root == connect_state)
-          root->set_reward(connect_state, "base", 0.001);
-        else
+        if (root != connect_state)
           root->set_reward(connect_state, "base", weight);
       }
       seen_states.pop_front();
