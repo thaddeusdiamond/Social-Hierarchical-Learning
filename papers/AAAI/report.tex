@@ -179,15 +179,7 @@ We chose to test our system on properly identifying and segmenting video of Amer
 % 7. Present ASL recognition as an example of a complex skill set to identify, as inconsistency and noise are more likely prevalent with human repetitions of actions than precise robotic replay.
 Our reasons for using ASL here are several.  First and foremost, ASL requires, at a minimum, a six-dimensional state space representation.  This provides sufficient complexity to prove that our skill representation can be used in environments where brute force and other na\"ive methods would be intractable.  Furthermore, the noise associated with human performance of the ASL symbols is large enough to ensure that our recognition techniques rely on the overall trajectory of the training data, and not merely frame-by-frame matching of exact states over time.  Finally, the ASL gestures chosen overlap significantly, as seen in figure \ref{fig:asl_sign_overlap}, avoiding segmentation based on region of the state space that a primitive action occupies.
 
-Here are citations about ASL gesture recognition... include short description of why this is interesting by referencing these papers:
-\cite{HandGestures}\cite{HSMMRecognition}\cite{POMDPGesture}
-\cite{HoughASL}\cite{ASLRealTime}\cite{MotionASL}
-
-%Gesture recognition is not a novel concept.  Something about gesture recognition
-%here...\cite{HandGestures}\cite{HSMMRecognition}\cite{POMDPGesture}.
-%Several works have already provided robust gesture recognition systems for
-%ASL \cite{HoughASL}\cite{ASLRealTime}\cite{MotionASL}.
-
+Gesture recognition for ASL symbols is not novel.  Our attempt here is not to recognize gestures with an extremely high degree of fidelity.  Although an interesting problem in its own right, several researchers have already made formidable contributions in this arena \cite{HandGestures,HSMMRecognition,POMDPGesture,HoughASL,ASLRealTime,MotionASL}.  What is interesting here is using our system to perform frame-by-frame classification of which gesture is likely being performed, while simultaneously improving the accuracy of an internal policy representing that respective gesture.
 
 \section{Results}
 \label{sec:result}
@@ -196,37 +188,30 @@ In this section we discuss our experimental results.
 \section{Related and Future Work}
 \label{sec:future}
 It is important to differentiate our contribution from that of
-existing research in \textit{learning from demonstration}.  Much previous research within reinforcement learning has focused on using examples to
+existing research in learning from demonstration.  Much previous research
+within reinforcement learning has focused on using examples to
 transfer a policy representing some basic skill from teacher to
 pupil \cite{JenkinsLFD,LFDSurvey}.  Our algorithm focuses on the use of
 \textit{existing knowledge} to generate an approximate decomposition of
-complex scene data while simultaneously using our classifications and observation to continue to shape actionable policies.
+complex scene data while simultaneously using our classifications and 
+observation to continue to shape actionable policies.
 
+While work partially overlapping our goals has been published previously
+\cite{LearningBehaviorFusion}, our work differs substantially in terms of both
+our algorithm and the resulting simultaneous benefit to observation
+classification and action execution. The problem of hierarchy assignment is
+left for other methods to more fully explore.
 
-While work partially overlapping our goals has been published previously \cite{LearningBehaviorFusion}, 
-our work differs substantially in terms of both our algorithm and the resulting simultaneous benefit to
-observation classification and action execution. The problem of hierarchy assignment is left for other
-methods to more fully explore.
+Another issue that is left unexplored in this discussion is that of garbage collection.  As we discuss, a crucial part of the algorithm provided is to limit the window of comparison to the length of the recorded primitive plus some epsilon, enabling its feasibility for use as an online algorithm.  However, a separate measure of the ``leanness'' of the algorithm is the amount of memory it consumes.  Currently, every observed state is added to an action's representative MDP, and it is connected to all possible neighboring states via interpolation.  This could easily lead to a ``state space explosion,'' where the primitive skills each contained an enormous amount of unnecessary states in their MDP.  This problem could be solved cursorily by providing a garbage-collector thread that continuously removes states with transitions whose values are below some threshold $\tau$.
 
-The concept of "inverse reinforcement learning" is not a novel one, 
-as others \cite{InverseRL} have used inverse reinforcement learning
-to generate reasonable policy approximations within the context of learning 
-pre-specified, observed primitives. Our work enhances contributions similar to this both by utilizing
-observations to shape policies used within execution and by allowing for the identification of sub-actions
-without the need to specify them explicitly.\\ 
+Furthermore, it is crucial that this system be deployed in a complex, collaborative, multi-human multi-agent environment.  For example, given a limited set of observation data from a factory floor, a robotic system using our algorithm should have been able to decompose the scene into several agents performing several primitives simultaneously.  Once deployed in the actual factory, the robot should be capable of both performing actions it has learned in cooperation with humans and continue gathering observational data in order to improve its understanding of the task construction and policy execution.
 
-Other works have offered solutions to many of the challenges standing in the way of mainstreaming collaborative robotics, including automating option scaffolding through demonstration \cite{AutoSkillAcquisition}, acquiring skills utilizing human reward signals in place of \cite{TAMER} or in addition to \cite{TeacherRL} a traditional objective function, and correcting for critical omissions in non-expert demonstrations \cite{PerspectiveTaking}. Simplifying the human trainer/robot student interaction paradigm by shaping human guidance into usable forms is also rapidly advancing \cite{TAMER,Clicker,AdviceTaking,TeacherRL,DemonstrationRL}. These successful results strongly contribute to the widespread use of Q-Learning variants in real robotic systems to model skills as Semi-Markov Decision Processes (SMDPs).
-
-
-	(Cite Constructing Skill Trees paper as use case for timeline data)
-	(Explain garbage collection to manage state space)
-	(Adding human feedback layer)
 
 \section{Conclusions}
-Re-iterate introduction and abstract here, rehash accomplishment and broader impact of contribution.
-
 \label{sec:conclusions}
+We have presented herein a method for action recognition that simultaneously leverages an existing representation of primitive skills and improves the accuracy with which those skills can be performed by the observer.  This real-time recognition of learned actions is essential for any co-robot to be able to cooperate effectively in a multi-human multi-robot environment.
 
+Other works have offered solutions to many of the challenges standing in the way of mainstreaming collaborative robotics, including automating option scaffolding through demonstration \cite{AutoSkillAcquisition}, acquiring skills utilizing human reward signals in place of \cite{TAMER} or in addition to \cite{TeacherRL} a traditional objective function, and correcting for critical omissions in non-expert demonstrations \cite{PerspectiveTaking}. Simplifying the human trainer/robot student interaction paradigm by shaping human guidance into usable forms is also rapidly advancing \cite{TAMER,Clicker,AdviceTaking,TeacherRL,DemonstrationRL}. These successful results strongly contribute to the widespread use of Q-Learning variants in real robotic systems and, more generally, to the feasibility of real-time human-robot collaboration.
 
 \section{Acknowledgements}
 \label{sec:acknowledgements}
@@ -235,4 +220,4 @@ Get grant details from Scaz
 \bibliographystyle{aaai}
 \bibliography{report}
 
-\end{document}attempt 
+\end{document}
