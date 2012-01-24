@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
   vector<double> nearby_thresholds;
   double xy_min = 0.05;
   double z_min = 20.;
-  double nearby_multiplier = 3.;
+  double nearby_multiplier = 5.;
   //xy_min *= xy_min;
   //z_min *= z_min;
   //nearby_multiplier *= nearby_multiplier;

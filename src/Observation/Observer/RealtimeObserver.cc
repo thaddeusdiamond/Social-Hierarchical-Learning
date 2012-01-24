@@ -207,7 +207,7 @@ bool RealtimeObserver::Observe(Task* task) {
       
       
       // If hit_state_duration is greater than acceptable duration, trim the start
-      while (hit_state_duration > p->duration_max_millis * 1.2) {
+      while (hit_state_duration > p->duration_max_millis * 1.5) {
         p->hit_states.pop_front();        
         
         first_hit_timestamp = p->hit_states[0].first;
@@ -257,7 +257,7 @@ bool RealtimeObserver::Observe(Task* task) {
         // Calculate the max number of states to pass through before 
         // overshooting the max possible time for that primitive
         double max_state_transitions = sampling_rate_ 
-          * p->q_learner->get_anticipated_duration() * 1.1;
+          * p->q_learner->get_anticipated_duration() * 1.5;
         
         double target_state_transitions = hit_state_duration / sampling_rate_;
 
@@ -597,7 +597,7 @@ bool RealtimeObserver::Observe(Task* task) {
           match_score_e,
           match_distance_d_e,
           match_score_f);
-        Log(stderr,ERROR,scorebuf);
+        //Log(stderr,DEBUG,scorebuf);
         
         pair<double, string> label(final_score, p->name);
         for (int i=frame_start; i <= frame_end; ++i) {
@@ -619,8 +619,14 @@ bool RealtimeObserver::Observe(Task* task) {
     ++cur_frame;
   } 
 
+  vector<ObservablePrimitive *>::iterator op_iter;
+  for (op_iter = primitives.begin(); op_iter != primitives.end();
+     ++op_iter) {
+    ObservablePrimitive *p = *op_iter;
+    delete p;
+    p = NULL;
+  }
   
-  //TODO: Free up memory
   return true;
 }
 
