@@ -33,7 +33,15 @@ class LBDStudent : public Student {
    * Destructor for a Student must free all memory it received from I/O and
    * had buffered, also release the STUDENT it controls
    **/
-  virtual ~LBDStudent() {}
+  virtual ~LBDStudent() {
+      std::vector<QLearner *>::iterator s_iter;
+      for (s_iter = primitives_.begin(); s_iter != primitives_.end();
+           ++s_iter) {
+        if (*s_iter)
+          delete *s_iter;
+      }
+      primitives_.clear();
+  }
 
   /**
    * No functionality in this student type
@@ -82,14 +90,16 @@ class LBDStudent : public Student {
 
   /**
   * Trains a QLearner based on file input. File must follow this format:
-  * Line 1: "Unique Skill Name"
+  * **Not implemented yet -- currently just CSV data **
+  * Line 1: "Unique Skill Name" 
   * Line 2: Min Increment Value for each sensor
   * Line 3: Nearby-threshold Value for each sensor
   * Lines 4+: Comma separated sensor values
   * @param filename File to learn skill from
+  * @param skill_name Name of skill
   * @return
   **/
-  QLearner *LearnSkillFromFile(std::string filename);
+  QLearner *LearnSkillFromFile(string filename, string skill_name);
 };
 
 

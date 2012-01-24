@@ -28,7 +28,12 @@ class StandardQLearner : public QLearner {
  public:
   explicit StandardQLearner(std::string name);
   StandardQLearner(std::string name, QTable qt);
-  ~StandardQLearner() {}
+  ~StandardQLearner() {
+    if (exploration_type_)
+      delete exploration_type_;
+    if (credit_assignment_type_)
+      delete credit_assignment_type_;    
+  }
 
 /**
    * Populates this object with the QTable contained in the target file
@@ -97,8 +102,8 @@ class StandardQLearner : public QLearner {
    * 
    * @return True on success, false on lookup error
    */
-  virtual bool GetNextState(State const& cur_state,
-                            State ** next_state,
+  virtual bool GetNextState(State *cur_state,
+                            State **next_state,
                             double &reward);
 
 

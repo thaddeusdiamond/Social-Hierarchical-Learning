@@ -42,14 +42,10 @@ class ExplorationType {
    *
    * @return    True on success, false on failure.
    **/
-  virtual bool GetNextState(State const& cur_state,
+  virtual bool GetNextState(State *cur_state,
                             State **next_state,
-                            double &reward) = 0;
+                            double *reward) = 0;
  private:
-  /**
-   * Disable default constructor
-   **/  
-  ExplorationType() {}
 };
 
 }  // namespace Primitives

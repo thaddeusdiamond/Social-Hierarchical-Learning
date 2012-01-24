@@ -24,7 +24,7 @@
 namespace Observation {
 
 using Primitives::Sensor;
-
+using Utils::Log;
 class PlaybackSensor : public Sensor {
  public:
   /**
@@ -36,9 +36,11 @@ class PlaybackSensor : public Sensor {
    * @param   num_sensors   The number of sensors (doubles) per line of file
    **/
   PlaybackSensor(char const * filename, int num_sensors) : Sensor("Playback"),
-      filename_(filename), values_(new double[num_sensors]),
-      stale_(true), num_values_(num_sensors), running_(false),
-      last_poll_time_(0), last_poll_frame_(0), file_handle_(NULL) {}
+      filename_(filename), stale_(true), running_(false),
+      last_poll_time_(0), last_poll_frame_(0), file_handle_(NULL) {
+    values_ = new double[num_sensors];
+    num_values_ = (num_sensors);
+  }
 
   /**
    * The destructor for a PlaybackSensor must free all memory aggregated
@@ -93,7 +95,7 @@ class PlaybackSensor : public Sensor {
   /**
    * Sensor plaintext name
    **/
-  char const * name_;
+  //char const * name_;
 
   /**
    * Separately keep track of the file name we're reading in from
@@ -105,7 +107,7 @@ class PlaybackSensor : public Sensor {
    * file on a call to Poll().  The length of the array is predetermined in
    * the constructor.
    **/
-  double * values_;
+  //double * values_;
   
   /**
    * We keep track of whether or not the sensor has been polled as of late
@@ -117,7 +119,7 @@ class PlaybackSensor : public Sensor {
   /**
    * Number of values encapsulated by sensor
    **/
-  int num_values_;
+  //int num_values_;
 
   /**
    * Keep track of whether we're still even observing... Turned off after EOF

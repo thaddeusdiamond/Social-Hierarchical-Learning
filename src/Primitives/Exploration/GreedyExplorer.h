@@ -20,22 +20,23 @@
 namespace Primitives {
 
 class GreedyExplorer : public ExplorationType {
+ public:
   GreedyExplorer() {}
   ~GreedyExplorer() {}
   
-  bool GreedyExplorer::GetNextState(State const& cur_state,
-                                    State ** next_state,
-                                    double &reward) {
+  bool GetNextState(State *cur_state,
+                    State ** next_state,
+                    double *reward) {
     std::map<State*, std::map<std::string, double> > const &rewards =
-      cur_state.get_reward();
-    std::map<State*, std::map<std::string, double> >::iterator iter;
+      cur_state->get_reward();
+    std::map<State*, std::map<std::string, double> >::const_iterator iter;
     
     State *best_candidate = NULL;
-    double best_reward = 0.;
+    double best_reward = -10000.;
 
     for (iter = rewards.begin(); iter != rewards.end(); ++iter) {
       State *prospect = iter->first;
-      double prospect_reward = cur_state.GetRewardValue(prospect);
+      double prospect_reward = cur_state->GetRewardValue(prospect);
       if (best_candidate == NULL || prospect_reward > best_reward) {
         best_candidate = prospect;
         best_reward = prospect_reward;
@@ -44,7 +45,7 @@ class GreedyExplorer : public ExplorationType {
     
     if (best_candidate == NULL) return false;
     
-    reward = best_reward;
+    *reward = best_reward;    
     *next_state = best_candidate;
     return true;
   }

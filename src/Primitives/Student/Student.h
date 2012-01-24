@@ -148,7 +148,7 @@ class Student {
   /**
    * Accessor for primitives this student knows
    **/
-  virtual vector<QLearner*> const * const  get_primitives() const {
+  virtual vector<QLearner*> * const get_primitives() {
     return &primitives_;
   }
 

@@ -21,13 +21,15 @@
 #include "Credit/CreditAssignmentType.h"
 #include "QLearner/QTable.h"
 #include "QLearner/Object.h"
+#include "Common/Utils.h"
 
 
 namespace Primitives {
 
 using std::string;
 using std::vector;
-
+using Utils::Log;
+class ExplorationType;
 
 class QLearner {
   public:
@@ -101,7 +103,7 @@ class QLearner {
    *
    * @return True on success, false on lookup error
    **/
-  virtual bool GetNextState(State const& cur_state,
+  virtual bool GetNextState(State *cur_state,
                             State **next_state,
                             double &reward) = 0;
 
@@ -115,7 +117,7 @@ class QLearner {
    * @return    True if initialized properly, false if error.
    **/
   virtual bool SetCreditFunction(
-    CreditAssignmentType* const credit_assigner) {
+    CreditAssignmentType* credit_assigner) {
     credit_assignment_type_ = credit_assigner;
     return (credit_assignment_type_ != NULL);
   };
@@ -129,7 +131,7 @@ class QLearner {
    *
    * @return    True if initialized properly, false if error.
    **/
-  virtual bool SetExplorationFunction(ExplorationType* const explorer) {
+  virtual bool SetExplorationFunction(ExplorationType* explorer) {
     exploration_type_ = explorer;
     return (exploration_type_ != NULL);
   }
@@ -140,11 +142,13 @@ class QLearner {
    * the state information given to the Learn function.
    **/
   virtual bool SetEnvironment(vector<Sensor*> const& sensor_list) {
+    sensors_ = sensor_list;
+    /*
     std::vector<Sensor*>::const_iterator iter;
     for (iter = sensor_list.begin(); iter != sensor_list.end(); ++iter) {
       Sensor *s = *iter;
       sensors_.push_back(s);
-    }
+    }*/
     return true;
   }
 
@@ -178,31 +182,47 @@ class QLearner {
    *                    This is currently used as a multiple of state unit
    *                    distance (sum over min. sensor change values in
    *                    state vector).
+   * @param distance Distance from nearest goal expressed as percentage of
+   *                 nearby thresholds, summed for each sensor value
    * @return true if found in list, false if not a goal state
    */
-  virtual bool IsNearTrainedGoalState(State const &state, double sensitivity) {
-    std::vector<State const *>::iterator state_iter;
-    std::vector<double>::const_iterator dist_iter;
-    std::vector<Sensor *>::const_iterator sens_iter;
+  virtual bool IsNearTrainedGoalState(State const &state, double sensitivity,
+                                      double &best_distance) {
+    std::vector<State *>::iterator state_iter;
+    std::vector<State *> &goal_states = q_table_.get_trained_goal_states();
 
-    std::vector<State const *> &goal_states = 
-      q_table_.get_trained_goal_states();
-
+    best_distance = 1E10;
+    
+    // Iterate through all candidate goal states...
     for (state_iter = goal_states.begin(); state_iter != goal_states.end();
       ++state_iter) {
       bool state_fail = false;
       std::vector<double> dists = state.GetSquaredDistances(*state_iter);
 
-      for (dist_iter = dists.begin(),
-           sens_iter = sensors_.begin();
-           dist_iter != dists.end(),
-           sens_iter != sensors_.end(); ++dist_iter, ++sens_iter) {
-        double sensor_unit_dist = (*sens_iter)->get_nearby_threshold();
-        if ((*dist_iter) > sensor_unit_dist * sensor_unit_dist * sensitivity) {
+      vector<double> const &nearby_thresholds = 
+        q_table_.get_nearby_thresholds();
+    
+      double tmp_distance = 0.;
+      
+      // Check each sensor value distance for violation of near-ness
+      for (unsigned int idx = 0;
+           idx < dists.size() && idx < nearby_thresholds.size(); 
+           ++idx) {
+        double sensor_unit_dist = nearby_thresholds[idx];
+        double distance = dists[idx];
+
+        tmp_distance += distance / sensor_unit_dist;
+        if (distance > sensor_unit_dist * sensitivity) {          
+          //double dist_val = distance - (sensor_unit_dist * sensitivity);
+          //char buf[1024];
+          //snprintf(buf,1024,"State too far from goal by %g.",dist_val);
+          //Log(stderr,DEBUG,buf);
           state_fail = true;
-          break;
         }
       }
+      
+      tmp_distance /= dists.size();      
+      if (tmp_distance < best_distance) best_distance = tmp_distance;
       if (!state_fail) return true;
     }
     return false;

@@ -14,10 +14,12 @@
 #include <string>
 #include <vector>
 #include "QLearner/State.h"
+#include "Common/Utils.h"
 
 namespace Primitives {
 
 class State;
+using Utils::Log;
 
 class QTable {
  public:
@@ -32,15 +34,15 @@ class QTable {
   explicit QTable(QTable *q_table) {
     QTable &q = (*q_table);
     std::vector<State *> qstates = q.get_states();
-    std::vector<State const *> goal_states = q.get_goal_states();
-    std::vector<State const *> trained_goal_states = 
+    std::vector<State *> goal_states = q.get_goal_states();
+    std::vector<State *> trained_goal_states = 
         q.get_trained_goal_states();
-    std::vector<State *>::const_iterator iter;
+    std::vector<State *>::iterator iter;
     for (iter = qstates.begin(); iter != qstates.end(); ++iter) {
       State *added_state = this->AddState(**iter);
-      std::vector<State const *>::const_iterator iter;
+      std::vector<State *>::iterator iter;
       for (iter = goal_states.begin(); iter != goal_states.end(); ++iter) {
-        if ((*iter)->Equals(*added_state)) {
+        if ((*iter)->Equals(added_state)) {
           this->AddGoalState(added_state,false);
           break;
         }
@@ -48,7 +50,7 @@ class QTable {
 
       for (iter = trained_goal_states.begin(); 
            iter != trained_goal_states.end(); ++iter) {
-        if ((*iter)->Equals(*added_state)) {
+        if ((*iter)->Equals(added_state)) {
           this->AddGoalState(added_state,true);
           break;
         }
@@ -64,9 +66,10 @@ class QTable {
   virtual ~QTable() {
     std::vector<State *>::iterator iter;
     for (iter = states_.begin(); iter != states_.end(); iter++) {
-      delete (*iter);
-      iter = states_.erase(iter);
+      if (*iter)
+        delete (*iter);
     }
+    states_.clear();
   }
 
   /**
@@ -79,14 +82,14 @@ class QTable {
   /**
    * @return direct access to 'intuited' goal states vector
    **/
-  std::vector<State const *> & get_goal_states() {
+  std::vector<State *> & get_goal_states() {
     return goal_states_;
   }
 
   /**
    * @return direct access to trained goal states vector
    **/
-  std::vector<State const *> & get_trained_goal_states() {
+  std::vector<State *> & get_trained_goal_states() {
     return trained_goal_states_;
   }
 
@@ -169,7 +172,7 @@ class QTable {
    *                      or was it just within a threshold of a real 
    *                      goal state?
    */
-  void AddGoalState(State const * state, bool from_training) {
+  void AddGoalState(State *state, bool from_training) {
     if (IsGoalState(*state)) return;
     if (from_training)
       trained_goal_states_.push_back(state);
@@ -184,14 +187,14 @@ class QTable {
    * @return true if found in list, false if not a goal state
    */
   bool IsGoalState(State const &state) {
-    std::vector<State const *>::const_iterator iter;
+    std::vector<State *>::const_iterator iter;
     for (iter = trained_goal_states_.begin(); 
          iter != trained_goal_states_.end(); ++iter) {
-      if (state.Equals(**iter)) return true;
+      if (state.Equals(*iter)) return true;
     }
 
     for (iter = goal_states_.begin(); iter != goal_states_.end(); ++iter) {
-      if (state.Equals(**iter)) return true;
+      if (state.Equals(*iter)) return true;
     }
 
     return false;
@@ -205,10 +208,10 @@ class QTable {
    * @return true if found in list, false if not a goal state
    */
   bool IsTrainedGoalState(State const &state) {
-    std::vector<State const *>::const_iterator iter;
+    std::vector<State *>::const_iterator iter;
     for (iter = trained_goal_states_.begin(); 
          iter != trained_goal_states_.end(); ++iter) {
-      if (state.Equals(**iter)) return true;
+      if (state.Equals(*iter)) return true;
     }
 
     return false;
@@ -230,14 +233,11 @@ class QTable {
         || a.get_state_vector().size() != nearby_thresholds_.size())
       return false;
 
-    std::vector<double>::const_iterator iter;
     unsigned int i;
-    for (i=0, iter = nearby_thresholds_.begin(); 
-         iter != nearby_thresholds_.end(); ++iter, ++i) {
-
+    for (i=0; i < nearby_thresholds_.size(); ++i) {
       double dist = a_sv[i] - b_sv[i];
       dist *= dist;
-      if (dist > *iter) return false;
+      if (dist > nearby_thresholds_[i]) return false;
     }
     
     return true;
@@ -249,8 +249,8 @@ class QTable {
    * Huge array of all states seen thus far 
    **/
   std::vector<State *> states_;
-  std::vector<State const *> goal_states_;
-  std::vector<State const *> trained_goal_states_;
+  std::vector<State *> goal_states_;
+  std::vector<State *> trained_goal_states_;
   
   // Squared thresholds for a point to be "nearby" some other point
   std::vector<double> nearby_thresholds_;

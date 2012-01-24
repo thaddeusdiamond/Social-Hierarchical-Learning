@@ -33,8 +33,11 @@ bool PlaybackSensor::Poll() {
     base_time_ = time_holder.tv_sec;
 
     file_handle_ = fopen(filename_, "r");
-    if (!file_handle_)
+    if (!file_handle_) {
+      Log(stderr, ERROR, 
+        string("Could not load file for playback").c_str()); 
       return false;
+    }
   }
 
   // DO YOU KNOW WHAT TIME IT ISSSS???

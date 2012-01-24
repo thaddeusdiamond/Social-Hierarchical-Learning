@@ -19,6 +19,8 @@ StandardQLearner::StandardQLearner(std::string name) {
   name_ = name;
   trials_ = 0;
   anticipated_duration_ = 0;
+  exploration_type_ = NULL;
+  credit_assignment_type_ = NULL;
 }
 
 StandardQLearner::StandardQLearner(std::string name, QTable qt) {
@@ -26,6 +28,8 @@ StandardQLearner::StandardQLearner(std::string name, QTable qt) {
   q_table_ = qt;
   trials_ = 0;
   anticipated_duration_ = 0;
+  exploration_type_ = NULL;
+  credit_assignment_type_ = NULL;
 }
 
 bool StandardQLearner::Load(string const& filename) {
@@ -133,11 +137,11 @@ bool StandardQLearner::GetNearbyStates(
   return (nearby_states.size() > 0);
 }
 
-bool StandardQLearner::GetNextState(State const& cur_state,
+bool StandardQLearner::GetNextState(State *cur_state,
                                     State **next_state,
                                     double &reward) {
   if (exploration_type_ == NULL) return false;
-  return exploration_type_->GetNextState(cur_state, next_state, reward);
+  return exploration_type_->GetNextState(cur_state, next_state, &reward);
 }
 
 bool StandardQLearner::AssignCredit(double signal) {

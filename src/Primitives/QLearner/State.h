@@ -13,11 +13,17 @@
 
 #include <vector>
 #include <map>
+#include <cmath>
+#include <stdio.h>
 #include <string>
+#include "Common/Utils.h"
+
 namespace Primitives {
 using std::vector;
 using std::string;
 using std::map;
+using Utils::Log;
+
 class State {
  public:
   /**
@@ -44,20 +50,33 @@ class State {
    * @param state State to compare to
    * @return true if state vectors are equal, false if not
    **/
-  virtual bool Equals(State const &state) const  {
-    if (state.get_state_vector().size() != state_vector_.size())
+  virtual bool Equals(State *state) const {
+    if (state->get_state_vector().size() != state_vector_.size())
       return false;
 
-    // Only check this if stateHash
+
+    vector<double> const &cmp_vector = state->get_state_vector();
+    int vector_size = state_vector_.size();
+    for (int i = 0; i < vector_size; ++i) {
+      if (fabs((state_vector_[i]) - (cmp_vector[i])) > 0.00001) {
+        return false;
+      }
+    }
+    
+    /* Only check this if stateHash
     std::vector<double>::const_iterator iter;
     std::vector<double>::const_iterator needle_iter;
     for (iter = state_vector_.begin(),
-         needle_iter = state.get_state_vector().begin();
+         needle_iter = state->get_state_vector().begin();
          iter != state_vector_.end(),
-         needle_iter != state.get_state_vector().end();
+         needle_iter != state->get_state_vector().end();
          ++iter, ++needle_iter) {
-      if ((*iter) != (*needle_iter)) return false;
+      if (fabs((*iter) - (*needle_iter)) > 0.00001) {
+        return false;
+      }
     }
+    */
+ 
     return true;
   }
 
@@ -74,17 +93,14 @@ class State {
     if (state->get_state_vector().size() != state_vector_.size())
       return distances;
 
-    double distance = 0.;
+    vector<double> const &cmp_vector = state->get_state_vector();
 
-    std::vector<double>::const_iterator iter;
-    std::vector<double>::const_iterator needle_iter;
-    for (iter = state_vector_.begin(),
-         needle_iter = state->get_state_vector().begin();
-         iter != state_vector_.end(),
-         needle_iter != state->get_state_vector().end();
-         ++iter, ++needle_iter) {
-      distance = ((*iter) - (*needle_iter)) * ((*iter) - (*needle_iter));
-      distances.push_back(distance);
+    double distance = 0.;
+    unsigned int idx;
+    for (idx = 0; idx < state_vector_.size(); ++idx) {
+      distance = (state_vector_[idx] - cmp_vector[idx]) 
+      * (state_vector_[idx] - cmp_vector[idx]);
+      distances.push_back(distance);      
     }
 
     return distances;
@@ -133,6 +149,7 @@ class State {
    * @param val Reward value to assign
    **/
   virtual void set_reward(State *target, std::string layer, double val) {
+    if (target == NULL) return;
     std::vector<State *> &inc_states = target->get_incoming_states();
 
     // If setting the reward layer to something
@@ -151,7 +168,7 @@ class State {
       bool found = false;
       for (inc_iter = inc_states.begin(); inc_iter != inc_states.end();
            ++inc_iter) {
-        if (*inc_iter == target) {
+        if (*inc_iter == this) {
           found = true;
           break;
         }
@@ -160,17 +177,20 @@ class State {
       if (!found)
         inc_states.push_back(this);
     } else {
+      if (reward_.find(target) == reward_.end()) return;
+
       // Clearing the reward layer away
       std::map<std::string, double>::iterator iter;
       iter = (reward_[target]).find(layer);
-      (reward_[target]).erase(iter);
+      if (iter != reward_[target].end())
+        (reward_[target]).erase(iter);
       
       if (reward_[target].size() == 0) {
         vector<State *>::iterator inc_iter;
         bool found = false;
         for (inc_iter = inc_states.begin(); inc_iter != inc_states.end();
              ++inc_iter) {
-          if (*inc_iter == target) {
+          if (*inc_iter == this) {
             found = true;
             break;
           }
@@ -192,6 +212,17 @@ class State {
   
   virtual std::vector<State *> &get_incoming_states() {
     return incoming_states_;
+  }
+  
+  virtual std::string to_string() {
+    char buf[4096];
+    unsigned int state_count = state_vector_.size();
+    for (unsigned int i = 0; i < state_count; ++i)
+      if (i)
+        sprintf(buf,"%s, %g", buf, state_vector_[i]);
+      else
+        sprintf(buf,"%g", state_vector_[i]);
+    return std::string(buf);
   }
 
  private:

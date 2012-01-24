@@ -25,19 +25,16 @@ std::vector<State*> QTable::GetNearbyStates(State const &needle) {
     std::vector<double> dists = needle.GetSquaredDistances((*iter));
 
     bool fail = false;
-    std::vector<double>::iterator thresh_iter;
-    std::vector<double>::iterator dist_iter;
-    for (thresh_iter = nearby_thresholds_.begin(),
-         dist_iter = dists.begin();
-         thresh_iter != nearby_thresholds_.end()
-         && dist_iter != dists.end(); ++thresh_iter, ++dist_iter) {
-      double squared_thresh = (*thresh_iter);
-      double squared_dist = (*dist_iter);
+    unsigned int idx;
+    for (idx = 0; idx < nearby_thresholds_.size(); ++idx) {
+      double squared_thresh = nearby_thresholds_[idx];
+      double squared_dist = dists[idx];
       if (squared_dist > squared_thresh) {
         fail = true;
         break;
       }
     }
+  
     if (!fail) nearby_states.push_back(*iter);
   }
 
@@ -52,23 +49,29 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
   for (iter = states_.begin(); iter != states_.end(); iter++) {
     if (*iter == NULL) continue;  // Shouldn't have deleted states in the table
 
-    if (needle.Equals(**iter))
+    if (needle.Equals(*iter))
       return (*iter);
   }
 
 
-
+  // Log(stderr,DEBUG,"State not found in GetState.");
 
   if (add_estimated_state) {
     State s(needle.get_state_vector());
     State *new_state = this->AddState(s);
 
+    if (new_state->get_state_vector().size() != 
+        needle.get_state_vector().size())
+      Log(stderr,ERROR,"AddState portion of GetState didn't copy the vector.");
+
     std::vector<State *> nearby_states = this->GetNearbyStates(needle);
+    
+    if (nearby_states.size() == 0)
+      Log(stderr,ERROR,"No nearby states on GetState!");
+    
     std::map<std::string, double> reward_layers;
 
     std::vector<State *>::iterator nearby_iter;
-    std::vector<double>::iterator nearby_dist_iter;
-    std::vector<double>::iterator nearby_threshold_iter;
 
     // For each nearby state, take a fraction of its reward related to distance
     // and apply it to the new state to be created
@@ -83,16 +86,13 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
         needle.GetSquaredDistances(*nearby_iter);
 
       double weight = 0.;
-
-      for (nearby_threshold_iter = nearby_state_dists.begin(),
-           nearby_dist_iter = squared_dists.begin();
-           nearby_threshold_iter != nearby_state_dists.end(),
-           nearby_dist_iter != squared_dists.end();
-           ++nearby_threshold_iter, ++nearby_dist_iter) {
-        weight += 1. - ((*nearby_dist_iter) / (*nearby_threshold_iter));
-      }
+      unsigned int idx;
+      for (idx = 0; 
+          idx < nearby_state_dists.size() && idx < squared_dists.size(); 
+          ++idx) {
+        weight += 1. - (squared_dists[idx] / nearby_state_dists[idx]);
+      }      
       weight /= squared_dists.size();
-
 
       // Add the same incoming reward transitions as the found state, reward
       // value weighted by the distance of the found state from the needle state
@@ -103,10 +103,10 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
            ++inc_iter) {
         State *inc_state = (*inc_iter);
         double orig_reward = inc_state->GetRewardValue(near_state,false,"base");
-        inc_state->set_reward(new_state,"base",orig_reward*weight);
+        inc_state->set_reward(new_state,string("base"),orig_reward*weight);
       }
 
-      // Add the same reward transitions as the found state, reward value
+      // Add the same outgoing reward transitions as the found state, reward 
       // weighted by the distance of the found state from the needle state
       // --Only transfer the 'base' layer--
       std::map<State*, std::map<std::string, double> > const &rewards
@@ -115,7 +115,7 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
       std::map<State*, std::map<std::string, double> >::const_iterator
         state_reward_iter;
 
-      std::string base_layer = std::string("base");
+      std::string base_layer = string("base");
 
       // iterate through each state near_state links to, and copy the base
       // reward layer to the new state
@@ -126,7 +126,7 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
           std::map<std::string, double> const &reward_layers =
             (*state_reward_iter).second;
 
-          double base_reward = 0.;
+          double base_reward = 1.;
           std::map<std::string, double>::const_iterator reward_layer =
             reward_layers.find(base_layer);
           if (reward_layer != reward_layers.end()) {

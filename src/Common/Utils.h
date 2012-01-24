@@ -193,6 +193,8 @@ namespace Utils {
    **/
   static inline bool Log(FILE* filedes, Level level,
                          const char* format, ...) {
+    if (!filedes) return false;
+
 #ifdef PREPENDED
   #ifdef COLOR_OUT
     fprintf(filedes, "%s[%s]%s ", level_colors[level].c_str(),

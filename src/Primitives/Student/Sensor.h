@@ -66,6 +66,7 @@ class Sensor {
    * @return Const char* string with the name of this sensor
    **/
   virtual double get_nearby_threshold() const { return nearby_threshold_; }
+  virtual void set_nearby_threshold(double t) { nearby_threshold_ = t; }
 
   /**
    * Provides an english-readable name for this sensor
@@ -82,7 +83,7 @@ class Sensor {
    **/
   virtual bool Poll() = 0;
 
- private:
+ protected:
   /** @todo I think these should really be removed since Sensor defines
    *        an interface, though we can leave it to show some of the things
    *        that might belong in a Sensor object **/

@@ -68,8 +68,11 @@ class Observer {
    */
   void AddSkill(QLearner * skill) { primitives_.push_back(skill); }
 
-  std::vector<Sensor *> const & get_sensors() { return sensors_; }
-  std::vector<QLearner *> const & get_primitives() { return primitives_; }
+  void AddSensor(Sensor * sensor) { sensors_.push_back(sensor); }
+
+
+  std::vector<Sensor *> & get_sensors() { return sensors_; }
+  std::vector<QLearner *> & get_primitives() { return primitives_; }
 
  protected:
   std::vector<Sensor *> sensors_;

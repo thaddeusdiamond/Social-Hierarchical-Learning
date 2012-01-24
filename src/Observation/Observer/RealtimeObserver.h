@@ -35,9 +35,10 @@ using Primitives::State;
 
 class RealtimeObserver : public Observer {
  public:
-  RealtimeObserver(double sampling_rate_millis) : is_observing_(false),
-      sampling_rate_(sampling_rate_millis) {}
+  RealtimeObserver(double sampling_rate_hz) : is_observing_(false),
+      duration_(0.), sampling_rate_(sampling_rate_hz) {}
 
+  bool Observe(Task* task, double duration);
   bool Observe(Task* task);
   bool StopObserving(void);
   void reset(void);
@@ -56,7 +57,8 @@ class RealtimeObserver : public Observer {
   class ObservablePrimitive {
    public:
     ObservablePrimitive(string n, QLearner* qlearner)
-      : name(n), q_learner(qlearner), current_state(NULL) { 
+      : name(n), q_learner(qlearner), current_state(NULL),
+        goal_distance(1E10), strikes(0) { 
       hit_states.clear(); 
       duration_max_millis = qlearner->get_anticipated_duration();
     }
@@ -67,6 +69,8 @@ class RealtimeObserver : public Observer {
     string name;
     QLearner *q_learner;
     State *current_state;
+    double goal_distance;
+    int strikes;
     double duration_max_millis;
   };
   
@@ -85,6 +89,7 @@ class RealtimeObserver : public Observer {
    **/
   vector<vector<double> > frames_;
   bool is_observing_;
+  double duration_;
   double sampling_rate_;
 };
 
