@@ -280,7 +280,7 @@ bool RealtimeObserver::Observe(Task* task) {
              ++hit_iter) {
           int r_val = rand() % 100;
           
-          if (r_val < 60)
+          if (r_val < 85)
             waypoints.push_back(hit_iter->second);
         }                
         
@@ -303,7 +303,7 @@ bool RealtimeObserver::Observe(Task* task) {
             if (!inc_state)
               Log(stderr,ERROR,"NULL State to be WP'd?");
             if (inc_state != s)
-              inc_state->set_reward(s,string("waypoint"),45.);
+              inc_state->set_reward(s,string("waypoint"),100.);
           }
           
         }
