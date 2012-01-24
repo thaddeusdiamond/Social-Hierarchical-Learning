@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classPrimitives_1_1State.html#ad0b1b340fc23ccbc11bd48ed98141d77" title="Primitives::State::get_unit_distance" alt="" coords="297,5,527,35"/>
-<area shape="rect" id="node5" href="$classPrimitives_1_1State.html#a2c9e99f30fce7787a981e869203a7057" title="Primitives::State::GetSquaredDistance" alt="" coords="288,59,536,88"/>
-<area shape="rect" id="node7" href="$classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="584,59,808,88"/>
-</map>

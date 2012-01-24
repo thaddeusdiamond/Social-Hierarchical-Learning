@@ -103,7 +103,7 @@ Collaboration diagram for Primitives::QLearner:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPrimitives_1_1QLearner__coll__graph.png" border="0" usemap="#Primitives_1_1QLearner_coll__map" alt="Collaboration graph"/></div>
 <map name="Primitives_1_1QLearner_coll__map" id="Primitives_1_1QLearner_coll__map">
-<area shape="rect" id="node6" href="classPrimitives_1_1ExplorationType.html" title="Primitives::ExplorationType" alt="" coords="591,23,772,52"/><area shape="rect" id="node9" href="classPrimitives_1_1CreditAssignmentType.html" title="Primitives::CreditAssignmentType" alt="" coords="571,97,792,127"/><area shape="rect" id="node2" href="classPrimitives_1_1QTable.html" title="Primitives::QTable" alt="" coords="5,33,136,63"/></map>
+<area shape="rect" id="node8" href="classPrimitives_1_1CreditAssignmentType.html" title="Primitives::CreditAssignmentType" alt="" coords="677,59,899,88"/><area shape="rect" id="node2" href="classPrimitives_1_1QTable.html" title="Primitives::QTable" alt="" coords="32,5,163,35"/><area shape="rect" id="node6" href="classPrimitives_1_1ExplorationType.html" title="Primitives::ExplorationType" alt="" coords="7,112,188,141"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classPrimitives_1_1QLearner-members.html">List of all members.</a></p>
@@ -113,31 +113,40 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a7a12b5c09f3649d30c148215bb982d00">~QLearner</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a933b05080139164afed1723d822f9a96">Load</a> (string const &amp;filename)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a6fcd9ddea202678a7930b0078c5c1b69">Save</a> (string const &amp;filename)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a0211a17fa943f2a8ae0bbd6434346b30">Init</a> (std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const * &gt; const &amp;sensors)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a18cafe0b850dadbca54a0041d3355366">Init</a> (std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;sensors)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a8ac72330276bd067dde2841072d83bbe">Learn</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a85e0dc9cf95da44552406e0c4b5c6365">GetNearbyStates</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;cur_state, std::vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> const * &gt; &amp;nearby_states)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#ad0d6e0772822df7b36edca90d559420f">GetNextState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;cur_state, <a class="el" href="classPrimitives_1_1State.html">State</a> const **next_state)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a1c04444e3ca68232788d9902334ae738">GetNextState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;cur_state, <a class="el" href="classPrimitives_1_1State.html">State</a> **next_state, double &amp;reward)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a06131387110e005a3aab55b7297600ac">SetCreditFunction</a> (<a class="el" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a> *const credit_assigner)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#ade4b87f17814298751e907eb82f2cea5">SetExplorationFunction</a> (<a class="el" href="classPrimitives_1_1ExplorationType.html">ExplorationType</a> *const explorer)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a63f6ce306abd5aaaff72c8f606d3d83c">SetEnvironment</a> (vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> *const  &gt; const &amp;sensor_list)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a6dea18ac1888e0c23e60e798faba1930">SetEnvironment</a> (vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;sensor_list)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#abe879e7a03b5f116ef70284e77481b02">AssignCredit</a> (double signal)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a4efce0391c10cd6dd14e12bb0646e237">SetCurrentState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> *const state)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::stack&lt; <a class="el" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a48d45b9c27a3dac167b2d06f7bd0e212">get_state_history</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1QTable.html">QTable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a057ea58224d599b593fe4e2538d10025">get_q_table</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a9eae27432facdecf260b7271837ed223">get_name</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a48f097390a019f31988a2e8ad5bc3493">set_name</a> (std::string name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a8e35ed38b6aa5c8b877b6472e8406244">IsNearTrainedGoalState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state, double sensitivity)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual std::stack<br class="typebreak"/>
+&lt; <a class="el" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a80abd6bd062ac66f602b7be33e7a23c4">get_state_history</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPrimitives_1_1State.html">State</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a3bf06fb8fd39ace119a6737043aef8d4">get_current_state</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPrimitives_1_1QTable.html">QTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#ab5c5e93c2f703db57b3d3835a1afcfc9">get_q_table</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a52f3228e0ff83d26165b8c6d6063165f">get_name</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a248c4693f034a9121a1b21e68bb1733c">set_name</a> (std::string name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a6b63d8ab0899bd33f64d26ba352f3596">get_trials</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#ae5fffa9cbe19c38f92b4a1b1d18ace66">set_trials</a> (int trials)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a8018d90fd016ceddee141175a8f9fc8d">get_anticipated_duration</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a2c990dd1a5303c91b0964fc295d04de8">set_anticipated_duration</a> (int anticipated_duration)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::stack&lt; <a class="el" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1QTable.html">QTable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a464a0338cc146d7b2f0061cf64bd78f9">trials_</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a489f67c4a9405b550df9e934f014040e">anticipated_duration_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1ExplorationType.html">ExplorationType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00033">33</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00032">32</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a7a12b5c09f3649d30c148215bb982d00"></a><!-- doxytag: member="Primitives::QLearner::~QLearner" ref="a7a12b5c09f3649d30c148215bb982d00" args="()" -->
 <div class="memitem">
@@ -154,7 +163,7 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Destructor for <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> must free all memory it received from I/O and had buffered </p>
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00039">39</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00038">38</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -182,55 +191,91 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true on successful application, false on error </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1StandardQLearner.html#a7024946b539f2cd0454b22c124ddaa1c">Primitives::StandardQLearner</a>.</p>
+<p>Implemented in <a class="el" href="classPrimitives_1_1StandardQLearner.html#a263a87c02b02da0a45598712080e6646">Primitives::StandardQLearner</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9eae27432facdecf260b7271837ed223"></a><!-- doxytag: member="Primitives::QLearner::get_name" ref="a9eae27432facdecf260b7271837ed223" args="()" -->
+<a class="anchor" id="a8018d90fd016ceddee141175a8f9fc8d"></a><!-- doxytag: member="Primitives::QLearner::get_anticipated_duration" ref="a8018d90fd016ceddee141175a8f9fc8d" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Primitives::QLearner::get_name </td>
+          <td class="memname">virtual double Primitives::QLearner::get_anticipated_duration </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00176">176</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00234">234</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a057ea58224d599b593fe4e2538d10025"></a><!-- doxytag: member="Primitives::QLearner::get_q_table" ref="a057ea58224d599b593fe4e2538d10025" args="()" -->
+<a class="anchor" id="a3bf06fb8fd39ace119a6737043aef8d4"></a><!-- doxytag: member="Primitives::QLearner::get_current_state" ref="a3bf06fb8fd39ace119a6737043aef8d4" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPrimitives_1_1QTable.html">QTable</a>&amp; Primitives::QLearner::get_q_table </td>
+          <td class="memname">virtual <a class="el" href="classPrimitives_1_1State.html">State</a>* Primitives::QLearner::get_current_state </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00174">174</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00220">220</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a48d45b9c27a3dac167b2d06f7bd0e212"></a><!-- doxytag: member="Primitives::QLearner::get_state_history" ref="a48d45b9c27a3dac167b2d06f7bd0e212" args="()" -->
+<a class="anchor" id="a52f3228e0ff83d26165b8c6d6063165f"></a><!-- doxytag: member="Primitives::QLearner::get_name" ref="a52f3228e0ff83d26165b8c6d6063165f" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::stack&lt;<a class="el" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a>&gt;&amp; Primitives::QLearner::get_state_history </td>
+          <td class="memname">virtual std::string Primitives::QLearner::get_name </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00228">228</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab5c5e93c2f703db57b3d3835a1afcfc9"></a><!-- doxytag: member="Primitives::QLearner::get_q_table" ref="ab5c5e93c2f703db57b3d3835a1afcfc9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classPrimitives_1_1QTable.html">QTable</a>* Primitives::QLearner::get_q_table </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00226">226</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a80abd6bd062ac66f602b7be33e7a23c4"></a><!-- doxytag: member="Primitives::QLearner::get_state_history" ref="a80abd6bd062ac66f602b7be33e7a23c4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::stack&lt;<a class="el" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a>&gt;&amp; Primitives::QLearner::get_state_history </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -238,7 +283,25 @@ Protected Attributes</h2></td></tr>
 <p>Returns a stack of recently visited states</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Stack of <a class="el" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00170">170</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00216">216</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6b63d8ab0899bd33f64d26ba352f3596"></a><!-- doxytag: member="Primitives::QLearner::get_trials" ref="a6b63d8ab0899bd33f64d26ba352f3596" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int Primitives::QLearner::get_trials </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00231">231</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -278,7 +341,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad0d6e0772822df7b36edca90d559420f"></a><!-- doxytag: member="Primitives::QLearner::GetNextState" ref="ad0d6e0772822df7b36edca90d559420f" args="(State const &amp;cur_state, State const **next_state)=0" -->
+<a class="anchor" id="a1c04444e3ca68232788d9902334ae738"></a><!-- doxytag: member="Primitives::QLearner::GetNextState" ref="a1c04444e3ca68232788d9902334ae738" args="(State const &amp;cur_state, State **next_state, double &amp;reward)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -291,8 +354,14 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const **&#160;</td>
-          <td class="paramname"><em>next_state</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> **&#160;</td>
+          <td class="paramname"><em>next_state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>reward</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -306,24 +375,25 @@ Protected Attributes</h2></td></tr>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">cur_state</td><td><a class="el" href="classPrimitives_1_1State.html">State</a> descriptor </td></tr>
-    <tr><td class="paramname">next_state</td><td>Overwritten with pointer to next <a class="el" href="classPrimitives_1_1State.html">State</a> object</td></tr>
+    <tr><td class="paramname">next_state</td><td>Overwritten with pointer to next <a class="el" href="classPrimitives_1_1State.html">State</a> object </td></tr>
+    <tr><td class="paramname">reward</td><td>Reward value for transitioning into next state</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false on lookup error </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1StandardQLearner.html#a568667b0dce8b156bcf32432e2f69add">Primitives::StandardQLearner</a>.</p>
+<p>Implemented in <a class="el" href="classPrimitives_1_1StandardQLearner.html#a068873d9911a678c76b37e286ae93702">Primitives::StandardQLearner</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0211a17fa943f2a8ae0bbd6434346b30"></a><!-- doxytag: member="Primitives::QLearner::Init" ref="a0211a17fa943f2a8ae0bbd6434346b30" args="(std::vector&lt; Sensor const * &gt; const &amp;sensors)=0" -->
+<a class="anchor" id="a18cafe0b850dadbca54a0041d3355366"></a><!-- doxytag: member="Primitives::QLearner::Init" ref="a18cafe0b850dadbca54a0041d3355366" args="(std::vector&lt; Sensor * &gt; const &amp;sensors)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual bool Primitives::QLearner::Init </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const * &gt; const &amp;&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;&#160;</td>
           <td class="paramname"><em>sensors</em></td><td>)</td>
           <td><code> [pure virtual]</code></td>
         </tr>
@@ -339,7 +409,54 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false on failure </dd></dl>
 
-<p>Implemented in <a class="el" href="classPrimitives_1_1StandardQLearner.html#aea6749f0208f7bba3f21667de2d112a7">Primitives::StandardQLearner</a>.</p>
+<p>Implemented in <a class="el" href="classPrimitives_1_1StandardQLearner.html#a32867285584f8df0a0c49567875d26b6">Primitives::StandardQLearner</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8e35ed38b6aa5c8b877b6472e8406244"></a><!-- doxytag: member="Primitives::QLearner::IsNearTrainedGoalState" ref="a8e35ed38b6aa5c8b877b6472e8406244" args="(State const &amp;state, double sensitivity)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Primitives::QLearner::IsNearTrainedGoalState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>sensitivity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Checks if the state provided is near a goal state</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Any state object </td></tr>
+    <tr><td class="paramname">sensitivity</td><td>Measure of how close to goal state is 'close enough' This is currently used as a multiple of state unit distance (sum over min. sensor change values in state vector). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if found in list, false if not a goal state </dd></dl>
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00183">183</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classPrimitives_1_1QLearner_a8e35ed38b6aa5c8b877b6472e8406244_cgraph.png" border="0" usemap="#classPrimitives_1_1QLearner_a8e35ed38b6aa5c8b877b6472e8406244_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1QLearner_a8e35ed38b6aa5c8b877b6472e8406244_cgraph" id="classPrimitives_1_1QLearner_a8e35ed38b6aa5c8b877b6472e8406244_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1QTable.html#af998c958bb7772121097d5f3b52e812a" title="Primitives::QTable::get_trained_goal_states" alt="" coords="345,5,620,35"/><area shape="rect" id="node5" href="classPrimitives_1_1State.html#ad05ccb0a74403f27c4ab898e4812c825" title="Primitives::State::GetSquaredDistances" alt="" coords="356,59,609,88"/><area shape="rect" id="node7" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="669,59,893,88"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -424,22 +541,60 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a48f097390a019f31988a2e8ad5bc3493"></a><!-- doxytag: member="Primitives::QLearner::set_name" ref="a48f097390a019f31988a2e8ad5bc3493" args="(std::string name)" -->
+<a class="anchor" id="a2c990dd1a5303c91b0964fc295d04de8"></a><!-- doxytag: member="Primitives::QLearner::set_anticipated_duration" ref="a2c990dd1a5303c91b0964fc295d04de8" args="(int anticipated_duration)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Primitives::QLearner::set_name </td>
+          <td class="memname">virtual void Primitives::QLearner::set_anticipated_duration </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>anticipated_duration</em></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00177">177</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00235">235</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a248c4693f034a9121a1b21e68bb1733c"></a><!-- doxytag: member="Primitives::QLearner::set_name" ref="a248c4693f034a9121a1b21e68bb1733c" args="(std::string name)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Primitives::QLearner::set_name </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00229">229</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae5fffa9cbe19c38f92b4a1b1d18ace66"></a><!-- doxytag: member="Primitives::QLearner::set_trials" ref="ae5fffa9cbe19c38f92b4a1b1d18ace66" args="(int trials)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Primitives::QLearner::set_trials </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>trials</em></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00232">232</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -466,7 +621,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if initialized properly, false if error. </dd></dl>
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00116">116</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00117">117</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -492,25 +647,27 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00157">157</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00165">165</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a63f6ce306abd5aaaff72c8f606d3d83c"></a><!-- doxytag: member="Primitives::QLearner::SetEnvironment" ref="a63f6ce306abd5aaaff72c8f606d3d83c" args="(vector&lt; Sensor *const  &gt; const &amp;sensor_list)=0" -->
+<a class="anchor" id="a6dea18ac1888e0c23e60e798faba1930"></a><!-- doxytag: member="Primitives::QLearner::SetEnvironment" ref="a6dea18ac1888e0c23e60e798faba1930" args="(vector&lt; Sensor * &gt; const &amp;sensor_list)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual bool Primitives::QLearner::SetEnvironment </td>
           <td>(</td>
-          <td class="paramtype">vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> *const  &gt; const &amp;&#160;</td>
+          <td class="paramtype">vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;&#160;</td>
           <td class="paramname"><em>sensor_list</em></td><td>)</td>
-          <td><code> [pure virtual]</code></td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 <p>Copies <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> pointers from provided list to be polled (in order given) when appending environmental data to the state information given to the Learn function. </p>
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00142">142</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -537,11 +694,26 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if initialized properly, false if error. </dd></dl>
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00131">131</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00132">132</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a489f67c4a9405b550df9e934f014040e"></a><!-- doxytag: member="Primitives::QLearner::anticipated_duration_" ref="a489f67c4a9405b550df9e934f014040e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classPrimitives_1_1QLearner.html#a489f67c4a9405b550df9e934f014040e">Primitives::QLearner::anticipated_duration_</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00243">243</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ac70de308cfd1ee4ac4d2b57567c13b8f"></a><!-- doxytag: member="Primitives::QLearner::credit_assignment_type_" ref="ac70de308cfd1ee4ac4d2b57567c13b8f" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -553,7 +725,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00183">183</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00246">246</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -568,7 +740,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00184">184</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00247">247</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -583,7 +755,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00182">182</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00245">245</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -598,22 +770,22 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00181">181</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00241">241</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a5f2f5a43b40cbbdef54a0a42cd8bac52"></a><!-- doxytag: member="Primitives::QLearner::sensors_" ref="a5f2f5a43b40cbbdef54a0a42cd8bac52" args="" -->
+<a class="anchor" id="a5f23b2f4bf7f83b30ac293b88e7946d5"></a><!-- doxytag: member="Primitives::QLearner::sensors_" ref="a5f23b2f4bf7f83b30ac293b88e7946d5" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const *&gt; <a class="el" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">Primitives::QLearner::sensors_</a><code> [protected]</code></td>
+          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> *&gt; <a class="el" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">Primitives::QLearner::sensors_</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00185">185</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00248">248</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>
@@ -628,7 +800,22 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00180">180</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00240">240</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a464a0338cc146d7b2f0061cf64bd78f9"></a><!-- doxytag: member="Primitives::QLearner::trials_" ref="a464a0338cc146d7b2f0061cf64bd78f9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classPrimitives_1_1QLearner.html#a464a0338cc146d7b2f0061cf64bd78f9">Primitives::QLearner::trials_</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="QLearner_8h_source.html#l00242">242</a> of file <a class="el" href="QLearner_8h_source.html">QLearner.h</a>.</p>
 
 </div>
 </div>

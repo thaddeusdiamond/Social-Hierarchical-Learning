@@ -1,15 +1,16 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classPrimitives_1_1StandardQLearner.html#ab896dcd9e9d1c2aaca3c9a96e4fa2d6e" title="Primitives::StandardQLearner::AddNearbyEmptyStates" alt="" coords="359,109,700,139"/>
-<area shape="rect" id="node7" href="$classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="1288,321,1512,351"/>
-<area shape="rect" id="node32" href="$classPrimitives_1_1QTable.html#a1002a8968b415e2a8645bc847ab20563" title="Primitives::QTable::get_states" alt="" coords="431,637,628,667"/>
-<area shape="rect" id="node5" href="$classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4" title="Primitives::QTable::AddState" alt="" coords="1020,109,1212,139"/>
-<area shape="rect" id="node9" href="$classPrimitives_1_1QTable.html#a609d90f8ac31da1296ec4a092036abca" title="Primitives::QTable::GetState" alt="" coords="752,296,941,325"/>
-<area shape="rect" id="node29" href="$classPrimitives_1_1QTable.html#aec673f322384dae23266716d3abca851" title="Primitives::QTable::HasState" alt="" coords="751,5,943,35"/>
-<area shape="rect" id="node12" href="$classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="1033,373,1199,403"/>
-<area shape="rect" id="node15" href="$classPrimitives_1_1State.html#a2d096d41744e6b9ecba2fadd5e8ea047" title="Primitives::State::get_base_reward" alt="" coords="1003,427,1229,456"/>
-<area shape="rect" id="node17" href="$classPrimitives_1_1State.html#a4b1a082431ff870f18b219013d71e815" title="Primitives::State::get_reward_layers" alt="" coords="1000,480,1232,509"/>
-<area shape="rect" id="node20" href="$classPrimitives_1_1State.html#ad0b1b340fc23ccbc11bd48ed98141d77" title="Primitives::State::get_unit_distance" alt="" coords="1001,533,1231,563"/>
-<area shape="rect" id="node22" href="$classPrimitives_1_1State.html#a2c9e99f30fce7787a981e869203a7057" title="Primitives::State::GetSquaredDistance" alt="" coords="992,163,1240,192"/>
-<area shape="rect" id="node25" href="$classPrimitives_1_1State.html#a2a8b0624650b8a4cb9ef7b57694b6028" title="Primitives::State::set_base_reward" alt="" coords="1003,216,1229,245"/>
-<area shape="rect" id="node27" href="$classPrimitives_1_1State.html#aac0151a2e4dd7c76f54074d73a160504" title="Primitives::State::set_reward_layers" alt="" coords="1000,269,1232,299"/>
+<area shape="rect" id="node3" href="$classPrimitives_1_1StandardQLearner.html#ab896dcd9e9d1c2aaca3c9a96e4fa2d6e" title="Primitives::StandardQLearner::AddNearbyEmptyStates" alt="" coords="359,95,700,124"/>
+<area shape="rect" id="node7" href="$classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="1613,356,1837,385"/>
+<area shape="rect" id="node36" href="$classPrimitives_1_1QTable.html#ac15316b7e2d8a9f7cbdcc46619d60c27" title="Primitives::QTable::get_states" alt="" coords="431,148,628,177"/>
+<area shape="rect" id="node5" href="$classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4" title="Primitives::QTable::AddState" alt="" coords="1031,147,1223,176"/>
+<area shape="rect" id="node9" href="$classPrimitives_1_1QTable.html#aba7baad325ca76799cd0b23b4434eb72" title="Primitives::QTable::GetState" alt="" coords="752,356,941,385"/>
+<area shape="rect" id="node33" href="$classPrimitives_1_1QTable.html#aec673f322384dae23266716d3abca851" title="Primitives::QTable::HasState" alt="" coords="751,43,943,72"/>
+<area shape="rect" id="node12" href="$classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="1355,539,1520,568"/>
+<area shape="rect" id="node15" href="$classPrimitives_1_1State.html#a85c802772f98f346d2ab259f1e997057" title="Primitives::State::get_incoming_states" alt="" coords="1315,277,1560,307"/>
+<area shape="rect" id="node17" href="$classPrimitives_1_1QTable.html#a2947f9dc071756f73efcda4c222718fb" title="Primitives::QTable::get_nearby_thresholds" alt="" coords="992,459,1261,488"/>
+<area shape="rect" id="node19" href="$classPrimitives_1_1State.html#aa961f4af28ca0a9448097dfda435fc1c" title="Primitives::State::get_reward" alt="" coords="1032,512,1221,541"/>
+<area shape="rect" id="node22" href="$classPrimitives_1_1QTable.html#a6134b9e5b8960758c232df26bbd3d710" title="Primitives::QTable::GetNearbyStates" alt="" coords="1008,565,1245,595"/>
+<area shape="rect" id="node24" href="$classPrimitives_1_1State.html#ad05ccb0a74403f27c4ab898e4812c825" title="Primitives::State::GetSquaredDistances" alt="" coords="1311,408,1564,437"/>
+<area shape="rect" id="node27" href="$classPrimitives_1_1State.html#aaac81a7b40709c392f2f4ba1e47cc5a1" title="Primitives::State::GetRewardValue" alt="" coords="1013,200,1240,229"/>
+<area shape="rect" id="node30" href="$classPrimitives_1_1State.html#a102754baa864a5f6f6ed4ed991c36aab" title="Primitives::State::set_reward" alt="" coords="1032,304,1221,333"/>
 </map>

@@ -15,24 +15,33 @@ var NAVTREE =
       [ "Observation::Dummy", "classObservation_1_1Dummy.html", null ],
       [ "Primitives::Dummy", "classPrimitives_1_1Dummy.html", null ],
       [ "Observation::DummyObserverTest", "classObservation_1_1DummyObserverTest.html", null ],
-      [ "Observation::DummyObserverTest_AttemptMatch_Test", "classObservation_1_1DummyObserverTest__AttemptMatch__Test.html", null ],
       [ "Observation::DummyObserverTest_StartAndStopObserver_Test", "classObservation_1_1DummyObserverTest__StartAndStopObserver__Test.html", null ],
       [ "Primitives::DummyTest", "classPrimitives_1_1DummyTest.html", null ],
       [ "Primitives::DummyTest_Setup_Env_and_motors_Test", "classPrimitives_1_1DummyTest__Setup__Env__and__motors__Test.html", null ],
       [ "Primitives::ExplorationType", "classPrimitives_1_1ExplorationType.html", null ],
       [ "Primitives::FeedbackSensor", "classPrimitives_1_1FeedbackSensor.html", null ],
+      [ "Primitives::GreedyExplorer", "classPrimitives_1_1GreedyExplorer.html", null ],
       [ "Primitives::KinectSensor", "classPrimitives_1_1KinectSensor.html", null ],
       [ "Primitives::KinectSensorTest", "classPrimitives_1_1KinectSensorTest.html", null ],
       [ "Primitives::KinectSensorTest_CapturePrimitives_Test", "classPrimitives_1_1KinectSensorTest__CapturePrimitives__Test.html", null ],
       [ "Primitives::LBDStudent", "classPrimitives_1_1LBDStudent.html", null ],
+      [ "Primitives::Object", "classPrimitives_1_1Object.html", null ],
+      [ "Observation::RealtimeObserver::ObservablePrimitive", "classObservation_1_1RealtimeObserver_1_1ObservablePrimitive.html", null ],
       [ "Observation::Observer", "classObservation_1_1Observer.html", null ],
+      [ "Observation::PlaybackSensor", "classObservation_1_1PlaybackSensor.html", null ],
+      [ "Observation::PlaybackSensorTest", "classObservation_1_1PlaybackSensorTest.html", null ],
+      [ "Observation::PlaybackSensorTest_CheckUpdatedTimesAndRunning_Test", "classObservation_1_1PlaybackSensorTest__CheckUpdatedTimesAndRunning__Test.html", null ],
+      [ "Observation::PlaybackSensorTest_PollKnownFile_Test", "classObservation_1_1PlaybackSensorTest__PollKnownFile__Test.html", null ],
+      [ "Primitives::Primitive", "classPrimitives_1_1Primitive.html", null ],
       [ "Primitives::QLearner", "classPrimitives_1_1QLearner.html", null ],
       [ "Primitives::QTable", "classPrimitives_1_1QTable.html", null ],
+      [ "Observation::RealtimeObserver", "classObservation_1_1RealtimeObserver.html", null ],
       [ "Primitives::Sensor", "classPrimitives_1_1Sensor.html", null ],
       [ "Primitives::StandardQLearner", "classPrimitives_1_1StandardQLearner.html", null ],
       [ "Primitives::State", "classPrimitives_1_1State.html", null ],
       [ "Primitives::StateHistoryTuple", "classPrimitives_1_1StateHistoryTuple.html", null ],
       [ "Primitives::Student", "classPrimitives_1_1Student.html", null ],
+      [ "Observation::Task", "classObservation_1_1Task.html", null ],
       [ "UtilsTest", "classUtilsTest.html", null ],
       [ "UtilsTest_FileLogging_Test", "classUtilsTest__FileLogging__Test.html", null ],
       [ "UtilsTest_FileSerialization_Test", "classUtilsTest__FileSerialization__Test.html", null ],
@@ -42,24 +51,34 @@ var NAVTREE =
     [ "Class Hierarchy", "hierarchy.html", [
       [ "Primitives::CreditAssignmentType", "classPrimitives_1_1CreditAssignmentType.html", null ],
       [ "Observation::DummyObserverTest", "classObservation_1_1DummyObserverTest.html", [
-        [ "Observation::DummyObserverTest_AttemptMatch_Test", "classObservation_1_1DummyObserverTest__AttemptMatch__Test.html", null ],
         [ "Observation::DummyObserverTest_StartAndStopObserver_Test", "classObservation_1_1DummyObserverTest__StartAndStopObserver__Test.html", null ]
       ] ],
       [ "Primitives::DummyTest", "classPrimitives_1_1DummyTest.html", [
         [ "Primitives::DummyTest_Setup_Env_and_motors_Test", "classPrimitives_1_1DummyTest__Setup__Env__and__motors__Test.html", null ]
       ] ],
-      [ "Primitives::ExplorationType", "classPrimitives_1_1ExplorationType.html", null ],
+      [ "Primitives::ExplorationType", "classPrimitives_1_1ExplorationType.html", [
+        [ "Primitives::GreedyExplorer", "classPrimitives_1_1GreedyExplorer.html", null ]
+      ] ],
       [ "Primitives::KinectSensorTest", "classPrimitives_1_1KinectSensorTest.html", [
         [ "Primitives::KinectSensorTest_CapturePrimitives_Test", "classPrimitives_1_1KinectSensorTest__CapturePrimitives__Test.html", null ]
       ] ],
+      [ "Primitives::Object", "classPrimitives_1_1Object.html", null ],
+      [ "Observation::RealtimeObserver::ObservablePrimitive", "classObservation_1_1RealtimeObserver_1_1ObservablePrimitive.html", null ],
       [ "Observation::Observer", "classObservation_1_1Observer.html", [
-        [ "Observation::Dummy", "classObservation_1_1Dummy.html", null ]
+        [ "Observation::Dummy", "classObservation_1_1Dummy.html", null ],
+        [ "Observation::RealtimeObserver", "classObservation_1_1RealtimeObserver.html", null ]
       ] ],
+      [ "Observation::PlaybackSensorTest", "classObservation_1_1PlaybackSensorTest.html", [
+        [ "Observation::PlaybackSensorTest_CheckUpdatedTimesAndRunning_Test", "classObservation_1_1PlaybackSensorTest__CheckUpdatedTimesAndRunning__Test.html", null ],
+        [ "Observation::PlaybackSensorTest_PollKnownFile_Test", "classObservation_1_1PlaybackSensorTest__PollKnownFile__Test.html", null ]
+      ] ],
+      [ "Primitives::Primitive", "classPrimitives_1_1Primitive.html", null ],
       [ "Primitives::QLearner", "classPrimitives_1_1QLearner.html", [
         [ "Primitives::StandardQLearner", "classPrimitives_1_1StandardQLearner.html", null ]
       ] ],
       [ "Primitives::QTable", "classPrimitives_1_1QTable.html", null ],
       [ "Primitives::Sensor", "classPrimitives_1_1Sensor.html", [
+        [ "Observation::PlaybackSensor", "classObservation_1_1PlaybackSensor.html", null ],
         [ "Primitives::CreateSensor", "classPrimitives_1_1CreateSensor.html", null ],
         [ "Primitives::FeedbackSensor", "classPrimitives_1_1FeedbackSensor.html", null ],
         [ "Primitives::KinectSensor", "classPrimitives_1_1KinectSensor.html", null ]
@@ -70,6 +89,7 @@ var NAVTREE =
         [ "Primitives::Dummy", "classPrimitives_1_1Dummy.html", null ],
         [ "Primitives::LBDStudent", "classPrimitives_1_1LBDStudent.html", null ]
       ] ],
+      [ "Observation::Task", "classObservation_1_1Task.html", null ],
       [ "UtilsTest", "classUtilsTest.html", [
         [ "UtilsTest_FileLogging_Test", "classUtilsTest__FileLogging__Test.html", null ],
         [ "UtilsTest_FileSerialization_Test", "classUtilsTest__FileSerialization__Test.html", null ],
@@ -93,8 +113,18 @@ var NAVTREE =
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/Dummy.h", "Observation_2Observer_2Dummy_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/DummyUnitTest.cc", "Observation_2Observer_2DummyUnitTest_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/Observer.h", "Observer_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/RealtimeObserver.cc", "RealtimeObserver_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/RealtimeObserver.h", "RealtimeObserver_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Observer/Task.h", "Task_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Playback/PlaybackSensor.cc", "PlaybackSensor_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Playback/PlaybackSensor.h", "PlaybackSensor_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Observation/Playback/PlaybackSensorUnitTest.cc", "PlaybackSensorUnitTest_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Credit/CreditAssignmentType.h", "CreditAssignmentType_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Exploration/ExplorationType.h", "ExplorationType_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Exploration/GreedyExplorer.cc", "GreedyExplorer_8cc.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Exploration/GreedyExplorer.h", "GreedyExplorer_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/Object.h", "Object_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/Primitive.h", "Primitive_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/QLearner.h", "QLearner_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/QTable.cc", "QTable_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/QTable.h", "QTable_8h.html", null ],
@@ -102,6 +132,7 @@ var NAVTREE =
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/StandardQLearner.h", "StandardQLearner_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/State.h", "State_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/QLearner/StateHistoryTuple.h", "StateHistoryTuple_8h.html", null ],
+      [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/ASLDataCollector.cc", "ASLDataCollector_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/CreateSensor.cc", "CreateSensor_8cc.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/CreateSensor.h", "CreateSensor_8h.html", null ],
       [ "/home/accts/tcd2/Documents/Senior/Independent_Research/Spring/SHLSystem/src/Primitives/Student/Dummy.cc", "Primitives_2Student_2Dummy_8cc.html", null ],
@@ -121,7 +152,8 @@ var NAVTREE =
       [ "src", "dir_c75693cbfe18ae561db82d6a20cc191a.html", [
         [ "Common", "dir_97cc3576ec3db4e8dce7ee16ca9741b8.html", null ],
         [ "Observation", "dir_c742db9350b49471277f9d0d09124efa.html", [
-          [ "Observer", "dir_0a6b5c7244a615c347a03f710f56280d.html", null ]
+          [ "Observer", "dir_0a6b5c7244a615c347a03f710f56280d.html", null ],
+          [ "Playback", "dir_1e7143db1bd9c0a932f4f4c5c2412db6.html", null ]
         ] ],
         [ "Primitives", "dir_5c9b9b70cc45876b6f52f4b52401637b.html", [
           [ "Credit", "dir_805dbd00f5e18a05c9a92271b75bc828.html", null ],

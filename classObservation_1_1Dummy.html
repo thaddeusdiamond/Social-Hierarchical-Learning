@@ -111,9 +111,8 @@ Collaboration diagram for Observation::Dummy:</div>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Dummy.html#ae743115f85f60cfb73154e6d38ec58fb">Dummy</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Dummy.html#a2f5a4fa08eb850f94decb1823f1e59a7">~Dummy</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Dummy.html#a973895976e976e039e8156bcbcaa163b">Observe</a> (Task *task, <a class="el" href="classPrimitives_1_1QTable.html">QTable</a> *tables, int tables_len, vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;sensors)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Dummy.html#a5a508447fbd38a4da11af1a35e04bf8b">Observe</a> (<a class="el" href="classObservation_1_1Task.html">Task</a> *task)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Dummy.html#a4246a2a7023f150eb96e129eccdd32d8">StopObserving</a> (void)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Dummy.html#a6adc2431a0fc44271bd5ea65c40a1a97">AttemptMatch</a> (<a class="el" href="classPrimitives_1_1QTable.html">QTable</a> const &amp;table, vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;sensors, double min_threshold, double death_time)</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock">
@@ -158,109 +157,30 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a6adc2431a0fc44271bd5ea65c40a1a97"></a><!-- doxytag: member="Observation::Dummy::AttemptMatch" ref="a6adc2431a0fc44271bd5ea65c40a1a97" args="(QTable const &amp;table, vector&lt; Sensor * &gt; const &amp;sensors, double min_threshold, double death_time)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double Observation::Dummy::AttemptMatch </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classPrimitives_1_1QTable.html">QTable</a> const &amp;&#160;</td>
-          <td class="paramname"><em>table</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>sensors</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>min_threshold</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>death_time</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>During the observation an observer will necessarily diverge the QTable at some point to test if the current input matches a desired QTable</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">table</td><td>The table to be tested against </td></tr>
-    <tr><td class="paramname">sensors</td><td>A set of sensors to be polled over time &amp; tested </td></tr>
-    <tr><td class="paramname">min_threshold</td><td>Minimum probability that should be allowed before calling it quits </td></tr>
-    <tr><td class="paramname">death_time</td><td>The amount of time (in s) that the tester should let the probability linger below min_threshold before returning</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The confidence threshold of the tested QTable </dd></dl>
-
-<p>Implements <a class="el" href="classObservation_1_1Observer.html#a87c2f9264c26926ef96b6a0284ba1b26">Observation::Observer</a>.</p>
-
-<p>Definition at line <a class="el" href="Observation_2Observer_2Dummy_8cc_source.html#l00024">24</a> of file <a class="el" href="Observation_2Observer_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a973895976e976e039e8156bcbcaa163b"></a><!-- doxytag: member="Observation::Dummy::Observe" ref="a973895976e976e039e8156bcbcaa163b" args="(Task *task, QTable *tables, int tables_len, vector&lt; Sensor * &gt; const &amp;sensors)" -->
+<a class="anchor" id="a5a508447fbd38a4da11af1a35e04bf8b"></a><!-- doxytag: member="Observation::Dummy::Observe" ref="a5a508447fbd38a4da11af1a35e04bf8b" args="(Task *task)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool Observation::Dummy::Observe </td>
           <td>(</td>
-          <td class="paramtype">Task *&#160;</td>
-          <td class="paramname"><em>task</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classPrimitives_1_1QTable.html">QTable</a> *&#160;</td>
-          <td class="paramname"><em>tables</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>tables_len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>sensors</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [virtual]</code></td>
+          <td class="paramtype"><a class="el" href="classObservation_1_1Task.html">Task</a> *&#160;</td>
+          <td class="paramname"><em>task</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Every <a class="el" href="classObservation_1_1Observer.html">Observer</a> must, at some point, begin the observation process</p>
+<p>Begins the observation process, monitoring the internally kept sensors and matching primitives as they appear in the input sequence.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">task</td><td>The task to be observed </td></tr>
-    <tr><td class="paramname">tables</td><td>The learned QTables to observe the task against </td></tr>
-    <tr><td class="paramname">tables_len</td><td>How many tables have been passed in as an array </td></tr>
-    <tr><td class="paramname">sensors</td><td>A vector of sensors to collect scene data from</td></tr>
+    <tr><td class="paramname">task</td><td>(optional) The task to be observed and monitored</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>True unless an error occurs during observation </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>True if observation mode is engaged, false on error </dd></dl>
 
-<p>Implements <a class="el" href="classObservation_1_1Observer.html#aa3c487a0bdd8ad4d8b0746d6795aaa2e">Observation::Observer</a>.</p>
+<p>Implements <a class="el" href="classObservation_1_1Observer.html#a325635d9d539f472b5d658fb01baf7f8">Observation::Observer</a>.</p>
 
 <p>Definition at line <a class="el" href="Observation_2Observer_2Dummy_8cc_source.html#l00015">15</a> of file <a class="el" href="Observation_2Observer_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
 
@@ -285,7 +205,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classObservation_1_1Observer.html#ab93010ce6ed97e211eaeb0ce7983b1fd">Observation::Observer</a>.</p>
 
-<p>Definition at line <a class="el" href="Observation_2Observer_2Dummy_8cc_source.html#l00020">20</a> of file <a class="el" href="Observation_2Observer_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
+<p>Definition at line <a class="el" href="Observation_2Observer_2Dummy_8cc_source.html#l00019">19</a> of file <a class="el" href="Observation_2Observer_2Dummy_8cc_source.html">Dummy.cc</a>.</p>
 
 </div>
 </div>

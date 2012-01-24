@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$namespaceUtils.html#ac859c14784f69cfb1d933f869fb715af" title="Utils::Log" alt="" coords="196,5,273,35"/>
+<area shape="rect" id="node5" href="$namespaceSignal.html#a47c91050a2e4ff686ca8760fa201a3d9" title="Signal::ResetProgram" alt="" coords="160,59,309,88"/>
+<area shape="rect" id="node7" href="$classPrimitives_1_1KinectSensor.html#a80c37dc13da95e057c776313accc9919" title="Primitives::KinectSensor::set_file_handle" alt="" coords="104,112,365,141"/>
+<area shape="rect" id="node9" href="$namespaceSignal.html#a6d0ca1aaa410491b62fbe0b85afe2028" title="Signal::StopProgram" alt="" coords="164,165,305,195"/>
+</map>

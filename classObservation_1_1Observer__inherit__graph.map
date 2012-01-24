@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classObservation_1_1Dummy.html" title="Observation::Dummy" alt="" coords="8,83,155,112"/>
+<area shape="rect" id="node3" href="$classObservation_1_1Dummy.html" title="Observation::Dummy" alt="" coords="5,83,152,112"/>
+<area shape="rect" id="node5" href="$classObservation_1_1RealtimeObserver.html" title="Observation::RealtimeObserver" alt="" coords="176,83,381,112"/>
 </map>

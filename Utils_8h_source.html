@@ -233,91 +233,94 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00218"></a>00218 
 <a name="l00230"></a><a class="code" href="namespaceUtils.html#aed23b95921a2718dec495f66a3b2352c">00230</a>   <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceUtils.html#ac859c14784f69cfb1d933f869fb715af">Log</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename, <a class="code" href="Utils_8h.html#a221b779e6bb7b8d40677d7642bfefac5">Level</a> level,
 <a name="l00231"></a>00231                          <span class="keyword">const</span> <span class="keywordtype">char</span>* format, ...) {
-<a name="l00232"></a>00232     FILE* log;
-<a name="l00233"></a>00233     log = fopen(filename.c_str(), <span class="stringliteral">&quot;w&quot;</span>);
-<a name="l00234"></a>00234     <span class="keywordflow">if</span> (log == NULL)
-<a name="l00235"></a>00235       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00236"></a>00236 
-<a name="l00237"></a>00237     va_list arguments;
-<a name="l00238"></a>00238     va_start(arguments, format);
-<a name="l00239"></a>00239 
-<a name="l00240"></a>00240     <span class="keywordtype">char</span> buffer[4096];
-<a name="l00241"></a>00241     memset(buffer, 0, <span class="keyword">sizeof</span>(buffer));
-<a name="l00242"></a>00242     vsprintf(buffer, format, arguments);
-<a name="l00243"></a>00243 
-<a name="l00244"></a>00244     <span class="keywordflow">return</span> <a class="code" href="namespaceUtils.html#ac859c14784f69cfb1d933f869fb715af">Log</a>(log, level, buffer);
-<a name="l00245"></a>00245   }
-<a name="l00246"></a>00246 
-<a name="l00257"></a><a class="code" href="namespaceUtils.html#a23163bb7cc4af90abbca1683a42607af">00257</a>   <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceUtils.html#a23163bb7cc4af90abbca1683a42607af">SerializeToFile</a>(FILE* filedes, Message* message,
-<a name="l00258"></a>00258                                      <span class="keywordtype">bool</span> should_close = <span class="keyword">false</span>) {
-<a name="l00259"></a>00259     <span class="keywordflow">if</span> (filedes == NULL)
-<a name="l00260"></a>00260       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00261"></a>00261 
-<a name="l00262"></a>00262     <span class="keywordtype">string</span> serialization;
-<a name="l00263"></a>00263     <span class="keywordflow">if</span> (!message-&gt;SerializeToString(&amp;serialization))
-<a name="l00264"></a>00264       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00265"></a>00265     <span class="keywordtype">string</span> name = message-&gt;GetTypeName();
-<a name="l00266"></a>00266 
-<a name="l00267"></a>00267     <span class="comment">// The format used in printing to a file is this:</span>
-<a name="l00268"></a>00268     <span class="comment">//   [Size of name - 2 bytes][Protobuf type name - Var Len]</span>
-<a name="l00269"></a>00269     <span class="comment">//   [Size of serialization - 2 bytes][Serialization - Var Len]</span>
-<a name="l00270"></a>00270     fprintf(filedes, <span class="stringliteral">&quot;%c%c%s%c%c%s&quot;</span>, static_cast&lt;char&gt;(name.size() &gt;&gt; 8),
-<a name="l00271"></a>00271             static_cast&lt;char&gt;(name.size()), name.c_str(),
-<a name="l00272"></a>00272             <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(message-&gt;ByteSize() &gt;&gt; 8),
-<a name="l00273"></a>00273             static_cast&lt;char&gt;(message-&gt;ByteSize()), serialization.c_str());
-<a name="l00274"></a>00274 
-<a name="l00275"></a>00275     <span class="keywordflow">if</span> (should_close)
-<a name="l00276"></a>00276       fclose(filedes);
-<a name="l00277"></a>00277     <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00278"></a>00278   }
-<a name="l00279"></a>00279 
-<a name="l00290"></a><a class="code" href="namespaceUtils.html#a9a82fe2d51eb02bc0ff0c853db1f5837">00290</a>   <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceUtils.html#a23163bb7cc4af90abbca1683a42607af">SerializeToFile</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename, Message* message) {
-<a name="l00291"></a>00291     FILE* log = fopen(filename.c_str(), <span class="stringliteral">&quot;w&quot;</span>);
-<a name="l00292"></a>00292     <span class="keywordflow">return</span> <a class="code" href="namespaceUtils.html#a23163bb7cc4af90abbca1683a42607af">SerializeToFile</a>(log, message, <span class="keyword">true</span>);
-<a name="l00293"></a>00293   }
-<a name="l00294"></a>00294 
-<a name="l00304"></a><a class="code" href="namespaceUtils.html#a00a11c91604f263dcb00df3c9b915692">00304</a>   <span class="keyword">static</span> <span class="keyword">inline</span> Message* <a class="code" href="namespaceUtils.html#a00a11c91604f263dcb00df3c9b915692">ParseFromFile</a>(FILE* filedes,
-<a name="l00305"></a>00305                                        <span class="keywordtype">bool</span> should_close = <span class="keyword">false</span>) {
-<a name="l00306"></a>00306     <span class="keywordflow">if</span> (filedes == NULL)
-<a name="l00307"></a>00307       <span class="keywordflow">return</span> NULL;
-<a name="l00308"></a>00308 
-<a name="l00309"></a>00309     <span class="comment">// Read in the message type into a buffer</span>
-<a name="l00310"></a>00310     <span class="keywordtype">char</span> message_type[4096];
-<a name="l00311"></a>00311     memset(message_type, 0, <span class="keyword">sizeof</span>(message_type));
-<a name="l00312"></a>00312     fread(message_type, <span class="keyword">sizeof</span>(message_type[0]), 2, filedes);
-<a name="l00313"></a>00313     <span class="keywordtype">int</span> name_length = (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(message_type[0]) &lt;&lt; 8) +
-<a name="l00314"></a>00314       <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(message_type[1]);
-<a name="l00315"></a>00315     fread(message_type, <span class="keyword">sizeof</span>(message_type[0]), name_length, filedes);
-<a name="l00316"></a>00316 
-<a name="l00317"></a>00317     <span class="comment">// Read in the serialized form for future use</span>
-<a name="l00318"></a>00318     <span class="keywordtype">char</span> buffer[4096];
-<a name="l00319"></a>00319     memset(buffer, 0, <span class="keyword">sizeof</span>(buffer));
-<a name="l00320"></a>00320     fread(buffer, <span class="keyword">sizeof</span>(buffer[0]), 2, filedes);
-<a name="l00321"></a>00321     <span class="keywordtype">int</span> serialized_length = (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(buffer[0]) &lt;&lt; 8) +
-<a name="l00322"></a>00322       <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(buffer[1]);
-<a name="l00323"></a>00323     fread(buffer, <span class="keyword">sizeof</span>(buffer[0]), serialized_length, filedes);
-<a name="l00324"></a>00324 
-<a name="l00325"></a>00325     <span class="comment">// Switch how we parse based on message type</span>
-<a name="l00326"></a>00326     Message* message;
-<a name="l00327"></a>00327     <span class="keywordflow">if</span> (!strcmp(message_type, <span class="stringliteral">&quot;Primitive&quot;</span>)) {
-<a name="l00328"></a>00328       message = <span class="keyword">new</span> Primitive();
-<a name="l00329"></a>00329       <span class="keywordflow">if</span> (!message-&gt;ParseFromArray(buffer, serialized_length))
-<a name="l00330"></a>00330         <span class="keywordflow">return</span> NULL;
-<a name="l00331"></a>00331     }
-<a name="l00332"></a>00332 
-<a name="l00333"></a>00333     <span class="keywordflow">if</span> (should_close)
-<a name="l00334"></a>00334       fclose(filedes);
-<a name="l00335"></a>00335     <span class="keywordflow">return</span> message;
-<a name="l00336"></a>00336   }
-<a name="l00337"></a>00337 
-<a name="l00346"></a><a class="code" href="namespaceUtils.html#afdd1d103e9feac170bfcb52fd24a6e26">00346</a>   <span class="keyword">static</span> <span class="keyword">inline</span> Message* <a class="code" href="namespaceUtils.html#a00a11c91604f263dcb00df3c9b915692">ParseFromFile</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) {
-<a name="l00347"></a>00347     FILE* file = fopen(filename.c_str(), <span class="stringliteral">&quot;r&quot;</span>);
-<a name="l00348"></a>00348     <span class="keywordflow">return</span> <a class="code" href="namespaceUtils.html#a00a11c91604f263dcb00df3c9b915692">ParseFromFile</a>(file, <span class="keyword">true</span>);
-<a name="l00349"></a>00349   }
-<a name="l00350"></a>00350 };
-<a name="l00351"></a>00351 
-<a name="l00352"></a>00352 
-<a name="l00353"></a>00353 <span class="preprocessor">#endif  // _SHL_COMMON_UTILS_H_</span>
+<a name="l00232"></a>00232     FILE* log = fopen(filename.c_str(), <span class="stringliteral">&quot;w&quot;</span>);
+<a name="l00233"></a>00233     <span class="keywordflow">if</span> (!log)
+<a name="l00234"></a>00234       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00235"></a>00235 
+<a name="l00236"></a>00236     va_list arguments;
+<a name="l00237"></a>00237     va_start(arguments, format);
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239     <span class="keywordtype">char</span> buffer[4096];
+<a name="l00240"></a>00240     memset(buffer, 0, <span class="keyword">sizeof</span>(buffer));
+<a name="l00241"></a>00241     vsprintf(buffer, format, arguments);
+<a name="l00242"></a>00242 
+<a name="l00243"></a>00243     <span class="keywordflow">return</span> <a class="code" href="namespaceUtils.html#ac859c14784f69cfb1d933f869fb715af">Log</a>(log, level, buffer);
+<a name="l00244"></a>00244   }
+<a name="l00245"></a>00245 
+<a name="l00256"></a><a class="code" href="namespaceUtils.html#a23163bb7cc4af90abbca1683a42607af">00256</a>   <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceUtils.html#a23163bb7cc4af90abbca1683a42607af">SerializeToFile</a>(FILE* filedes, Message* message,
+<a name="l00257"></a>00257                                      <span class="keywordtype">bool</span> should_close = <span class="keyword">false</span>) {
+<a name="l00258"></a>00258     <span class="keywordflow">if</span> (filedes == NULL)
+<a name="l00259"></a>00259       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00260"></a>00260 
+<a name="l00261"></a>00261     <span class="keywordtype">string</span> serialization;
+<a name="l00262"></a>00262     <span class="keywordflow">if</span> (!message-&gt;SerializeToString(&amp;serialization))
+<a name="l00263"></a>00263       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00264"></a>00264     <span class="keywordtype">string</span> name = message-&gt;GetTypeName();
+<a name="l00265"></a>00265 
+<a name="l00266"></a>00266     <span class="comment">// The format used in printing to a file is this:</span>
+<a name="l00267"></a>00267     <span class="comment">//   [Size of name - 2 bytes][Protobuf type name - Var Len]</span>
+<a name="l00268"></a>00268     <span class="comment">//   [Size of serialization - 2 bytes][Serialization - Var Len]</span>
+<a name="l00269"></a>00269     fprintf(filedes, <span class="stringliteral">&quot;%c%c%s%c%c%s&quot;</span>, static_cast&lt;char&gt;(name.size() &gt;&gt; 8),
+<a name="l00270"></a>00270             static_cast&lt;char&gt;(name.size()), name.c_str(),
+<a name="l00271"></a>00271             <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(message-&gt;ByteSize() &gt;&gt; 8),
+<a name="l00272"></a>00272             static_cast&lt;char&gt;(message-&gt;ByteSize()), serialization.c_str());
+<a name="l00273"></a>00273 
+<a name="l00274"></a>00274     <span class="keywordflow">if</span> (should_close)
+<a name="l00275"></a>00275       fclose(filedes);
+<a name="l00276"></a>00276     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00277"></a>00277   }
+<a name="l00278"></a>00278 
+<a name="l00289"></a><a class="code" href="namespaceUtils.html#a9a82fe2d51eb02bc0ff0c853db1f5837">00289</a>   <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceUtils.html#a23163bb7cc4af90abbca1683a42607af">SerializeToFile</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename, Message* message) {
+<a name="l00290"></a>00290     FILE* log = fopen(filename.c_str(), <span class="stringliteral">&quot;w&quot;</span>);
+<a name="l00291"></a>00291     <span class="keywordflow">if</span> (!log)
+<a name="l00292"></a>00292       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00293"></a>00293     <span class="keywordflow">return</span> <a class="code" href="namespaceUtils.html#a23163bb7cc4af90abbca1683a42607af">SerializeToFile</a>(log, message, <span class="keyword">true</span>);
+<a name="l00294"></a>00294   }
+<a name="l00295"></a>00295 
+<a name="l00305"></a><a class="code" href="namespaceUtils.html#a00a11c91604f263dcb00df3c9b915692">00305</a>   <span class="keyword">static</span> <span class="keyword">inline</span> Message* <a class="code" href="namespaceUtils.html#a00a11c91604f263dcb00df3c9b915692">ParseFromFile</a>(FILE* filedes,
+<a name="l00306"></a>00306                                        <span class="keywordtype">bool</span> should_close = <span class="keyword">false</span>) {
+<a name="l00307"></a>00307     <span class="keywordflow">if</span> (filedes == NULL)
+<a name="l00308"></a>00308       <span class="keywordflow">return</span> NULL;
+<a name="l00309"></a>00309 
+<a name="l00310"></a>00310     <span class="comment">// Read in the message type into a buffer</span>
+<a name="l00311"></a>00311     <span class="keywordtype">char</span> message_type[4096];
+<a name="l00312"></a>00312     memset(message_type, 0, <span class="keyword">sizeof</span>(message_type));
+<a name="l00313"></a>00313     fread(message_type, <span class="keyword">sizeof</span>(message_type[0]), 2, filedes);
+<a name="l00314"></a>00314     <span class="keywordtype">int</span> name_length = (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(message_type[0]) &lt;&lt; 8) +
+<a name="l00315"></a>00315       <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(message_type[1]);
+<a name="l00316"></a>00316     fread(message_type, <span class="keyword">sizeof</span>(message_type[0]), name_length, filedes);
+<a name="l00317"></a>00317 
+<a name="l00318"></a>00318     <span class="comment">// Read in the serialized form for future use</span>
+<a name="l00319"></a>00319     <span class="keywordtype">char</span> buffer[4096];
+<a name="l00320"></a>00320     memset(buffer, 0, <span class="keyword">sizeof</span>(buffer));
+<a name="l00321"></a>00321     fread(buffer, <span class="keyword">sizeof</span>(buffer[0]), 2, filedes);
+<a name="l00322"></a>00322     <span class="keywordtype">int</span> serialized_length = (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(buffer[0]) &lt;&lt; 8) +
+<a name="l00323"></a>00323       <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(buffer[1]);
+<a name="l00324"></a>00324     fread(buffer, <span class="keyword">sizeof</span>(buffer[0]), serialized_length, filedes);
+<a name="l00325"></a>00325 
+<a name="l00326"></a>00326     <span class="comment">// Switch how we parse based on message type</span>
+<a name="l00327"></a>00327     Message* message;
+<a name="l00328"></a>00328     <span class="keywordflow">if</span> (!strcmp(message_type, <span class="stringliteral">&quot;Primitive&quot;</span>)) {
+<a name="l00329"></a>00329       message = <span class="keyword">new</span> Primitive();
+<a name="l00330"></a>00330       <span class="keywordflow">if</span> (!message-&gt;ParseFromArray(buffer, serialized_length))
+<a name="l00331"></a>00331         <span class="keywordflow">return</span> NULL;
+<a name="l00332"></a>00332     }
+<a name="l00333"></a>00333 
+<a name="l00334"></a>00334     <span class="keywordflow">if</span> (should_close)
+<a name="l00335"></a>00335       fclose(filedes);
+<a name="l00336"></a>00336     <span class="keywordflow">return</span> message;
+<a name="l00337"></a>00337   }
+<a name="l00338"></a>00338 
+<a name="l00347"></a><a class="code" href="namespaceUtils.html#afdd1d103e9feac170bfcb52fd24a6e26">00347</a>   <span class="keyword">static</span> <span class="keyword">inline</span> Message* <a class="code" href="namespaceUtils.html#a00a11c91604f263dcb00df3c9b915692">ParseFromFile</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) {
+<a name="l00348"></a>00348     FILE* file = fopen(filename.c_str(), <span class="stringliteral">&quot;r&quot;</span>);
+<a name="l00349"></a>00349     <span class="keywordflow">if</span> (!file)
+<a name="l00350"></a>00350       <span class="keywordflow">return</span> NULL;
+<a name="l00351"></a>00351     <span class="keywordflow">return</span> <a class="code" href="namespaceUtils.html#a00a11c91604f263dcb00df3c9b915692">ParseFromFile</a>(file, <span class="keyword">true</span>);
+<a name="l00352"></a>00352   }
+<a name="l00353"></a>00353 };
+<a name="l00354"></a>00354 
+<a name="l00355"></a>00355 
+<a name="l00356"></a>00356 <span class="preprocessor">#endif  // _SHL_COMMON_UTILS_H_</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">

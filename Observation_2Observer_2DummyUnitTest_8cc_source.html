@@ -108,20 +108,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00032"></a>00032 };
 <a name="l00033"></a>00033 
 <a name="l00037"></a><a class="code" href="classObservation_1_1DummyObserverTest__StartAndStopObserver__Test.html#a67c5f259c4374f6bdcb4b488a6d9cc9c">00037</a> TEST_F(<a class="code" href="classObservation_1_1DummyObserverTest.html">DummyObserverTest</a>, StartAndStopObserver) {
-<a name="l00038"></a>00038   EXPECT_TRUE(dummy_-&gt;Observe(NULL, NULL, 0, vector&lt;Sensor*&gt;()));
+<a name="l00038"></a>00038   EXPECT_TRUE(dummy_-&gt;Observe(NULL));
 <a name="l00039"></a>00039   EXPECT_TRUE(dummy_-&gt;StopObserving());
 <a name="l00040"></a>00040 }
 <a name="l00041"></a>00041 
-<a name="l00045"></a><a class="code" href="classObservation_1_1DummyObserverTest__AttemptMatch__Test.html#ae71605e538d3bd38dd4ca76f32dc8f0c">00045</a> TEST_F(<a class="code" href="classObservation_1_1DummyObserverTest.html">DummyObserverTest</a>, AttemptMatch) {
-<a name="l00046"></a>00046   EXPECT_EQ(dummy_-&gt;AttemptMatch(<a class="code" href="classPrimitives_1_1QTable.html">QTable</a>(), vector&lt;Sensor*&gt;(), 0, 0), 0.0);
+<a name="l00042"></a>00042 }  <span class="comment">// namespace Observation</span>
+<a name="l00043"></a>00043 
+<a name="l00044"></a><a class="code" href="Observation_2Observer_2DummyUnitTest_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">00044</a> <span class="keywordtype">int</span> <a class="code" href="UtilsUnitTest_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) {
+<a name="l00045"></a>00045   ::testing::InitGoogleTest(&amp;argc, argv);
+<a name="l00046"></a>00046   <span class="keywordflow">return</span> RUN_ALL_TESTS();
 <a name="l00047"></a>00047 }
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049 }  <span class="comment">// namespace Observation</span>
-<a name="l00050"></a>00050 
-<a name="l00051"></a><a class="code" href="Observation_2Observer_2DummyUnitTest_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">00051</a> <span class="keywordtype">int</span> <a class="code" href="UtilsUnitTest_8cc.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) {
-<a name="l00052"></a>00052   ::testing::InitGoogleTest(&amp;argc, argv);
-<a name="l00053"></a>00053   <span class="keywordflow">return</span> RUN_ALL_TESTS();
-<a name="l00054"></a>00054 }
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">

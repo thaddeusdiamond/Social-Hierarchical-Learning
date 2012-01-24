@@ -1,5 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classPrimitives_1_1Student.html" title="Primitives::Student" alt="" coords="5,32,139,61"/>
-<area shape="rect" id="node3" href="$classPrimitives_1_1Dummy.html" title="Primitives::Dummy" alt="" coords="200,5,333,35"/>
-<area shape="rect" id="node5" href="$classPrimitives_1_1LBDStudent.html" title="Primitives::LBDStudent" alt="" coords="188,59,345,88"/>
+<area shape="rect" id="node1" href="$classPrimitives_1_1QLearner.html" title="Primitives::QLearner" alt="" coords="5,5,147,35"/>
+<area shape="rect" id="node3" href="$classPrimitives_1_1StandardQLearner.html" title="Primitives::StandardQLearner" alt="" coords="196,5,388,35"/>
 </map>

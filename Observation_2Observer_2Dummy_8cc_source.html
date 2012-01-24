@@ -89,21 +89,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00012"></a>00012 
 <a name="l00013"></a><a class="code" href="namespaceObservation.html">00013</a> <span class="keyword">namespace </span>Observation {
 <a name="l00014"></a>00014 
-<a name="l00015"></a><a class="code" href="classObservation_1_1Dummy.html#a973895976e976e039e8156bcbcaa163b">00015</a> <span class="keywordtype">bool</span> <a class="code" href="classObservation_1_1Dummy.html#a973895976e976e039e8156bcbcaa163b">Dummy::Observe</a>(Task* task, <a class="code" href="classPrimitives_1_1QTable.html">QTable</a>* table, <span class="keywordtype">int</span> tables_len,
-<a name="l00016"></a>00016                     vector&lt;Sensor*&gt; <span class="keyword">const</span> &amp;sensors) {
-<a name="l00017"></a>00017   <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00018"></a>00018 }
-<a name="l00019"></a>00019 
-<a name="l00020"></a><a class="code" href="classObservation_1_1Dummy.html#a4246a2a7023f150eb96e129eccdd32d8">00020</a> <span class="keywordtype">bool</span> <a class="code" href="classObservation_1_1Dummy.html#a4246a2a7023f150eb96e129eccdd32d8">Dummy::StopObserving</a>(<span class="keywordtype">void</span>) {
-<a name="l00021"></a>00021   <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00022"></a>00022 }
-<a name="l00023"></a>00023 
-<a name="l00024"></a><a class="code" href="classObservation_1_1Dummy.html#a6adc2431a0fc44271bd5ea65c40a1a97">00024</a> <span class="keywordtype">double</span> <a class="code" href="classObservation_1_1Dummy.html#a6adc2431a0fc44271bd5ea65c40a1a97">Dummy::AttemptMatch</a>(<a class="code" href="classPrimitives_1_1QTable.html">QTable</a> <span class="keyword">const</span> &amp;table, vector&lt;Sensor*&gt; <span class="keyword">const</span> &amp;sensors,
-<a name="l00025"></a>00025                            <span class="keywordtype">double</span> min_threshold, <span class="keywordtype">double</span> death_time) {
-<a name="l00026"></a>00026   <span class="keywordflow">return</span> 0.0;
-<a name="l00027"></a>00027 }
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029 }  <span class="comment">// namespace Observation</span>
+<a name="l00015"></a><a class="code" href="classObservation_1_1Dummy.html#a5a508447fbd38a4da11af1a35e04bf8b">00015</a> <span class="keywordtype">bool</span> <a class="code" href="classObservation_1_1Dummy.html#a5a508447fbd38a4da11af1a35e04bf8b">Dummy::Observe</a>(<a class="code" href="classObservation_1_1Task.html">Task</a>* task) {
+<a name="l00016"></a>00016   <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00017"></a>00017 }
+<a name="l00018"></a>00018 
+<a name="l00019"></a><a class="code" href="classObservation_1_1Dummy.html#a4246a2a7023f150eb96e129eccdd32d8">00019</a> <span class="keywordtype">bool</span> <a class="code" href="classObservation_1_1Dummy.html#a4246a2a7023f150eb96e129eccdd32d8">Dummy::StopObserving</a>(<span class="keywordtype">void</span>) {
+<a name="l00020"></a>00020   <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00021"></a>00021 }
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 }  <span class="comment">// namespace Observation</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">

@@ -98,19 +98,24 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a6264ecae3a2580ed42026960a477b6a9">QTable</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a63621ba03ac4c05a81cc277f34cf3f94">QTable</a> (<a class="el" href="classPrimitives_1_1QTable.html">QTable</a> *q_table)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a007367c2744dd94e98160c81744ca823">~QTable</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a1002a8968b415e2a8645bc847ab20563">get_states</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> <br class="typebreak"/>
-const * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a9163472282d93c84298c5ca74008033a">get_goal_states</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPrimitives_1_1State.html">State</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a609d90f8ac31da1296ec4a092036abca">GetState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;needle, bool add_if_not_found=false)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#aec673f322384dae23266716d3abca851">HasState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;needle)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPrimitives_1_1State.html">State</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4">AddState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#aeae35227596c04fc5084893adff6ddb1">AddGoalState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const *state)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#aeba507f2e3dfc84deb494d73a592ec30">isGoalState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#aba55e2559fc177fc6d8f1dcdcf3a3faa">isNearGoalState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state, double sensitivity)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#ac15316b7e2d8a9f7cbdcc46619d60c27">get_states</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> const * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a77a6204003948524ee869028a28777ca">get_goal_states</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> const * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#af998c958bb7772121097d5f3b52e812a">get_trained_goal_states</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a2947f9dc071756f73efcda4c222718fb">get_nearby_thresholds</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a9edb7938105ceb81970f7ad8df76f8a2">set_nearby_thresholds</a> (std::vector&lt; double &gt; const &amp;thresh)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1State.html">State</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#aba7baad325ca76799cd0b23b4434eb72">GetState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;needle, bool add_estimated_state)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#aec673f322384dae23266716d3abca851">HasState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;needle)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a6134b9e5b8960758c232df26bbd3d710">GetNearbyStates</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;needle)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a512fe7a460f08d0ba3d965235b5ec680">GetIncomingStates</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;s)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPrimitives_1_1State.html">State</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4">AddState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a3a144b02d790b534d0fd75cc64536fe6">AddGoalState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const *state, bool from_training)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#ae730ce40a4e0410260bafec5eb60e8a8">IsGoalState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a15ec1c697ee639c79f01e07474defc8b">IsTrainedGoalState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;state)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1QTable.html#a9189f0aea430fe4ca9130ed20a7b4c55">IsNearState</a> (<a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;a, <a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;b)</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="QTable_8h_source.html#l00020">20</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00022">22</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a6264ecae3a2580ed42026960a477b6a9"></a><!-- doxytag: member="Primitives::QTable::QTable" ref="a6264ecae3a2580ed42026960a477b6a9" args="()" -->
 <div class="memitem">
@@ -127,7 +132,7 @@ const * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="
 <div class="memdoc">
 <p>Default Constructor </p>
 
-<p>Definition at line <a class="el" href="QTable_8h_source.html#l00025">25</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00027">27</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 </div>
 </div>
@@ -147,14 +152,14 @@ const * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="
 <div class="memdoc">
 <p>Copy Constructor </p>
 
-<p>Definition at line <a class="el" href="QTable_8h_source.html#l00030">30</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00032">32</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPrimitives_1_1QTable_a63621ba03ac4c05a81cc277f34cf3f94_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_a63621ba03ac4c05a81cc277f34cf3f94_cgraph" alt=""/></div>
 <map name="classPrimitives_1_1QTable_a63621ba03ac4c05a81cc277f34cf3f94_cgraph" id="classPrimitives_1_1QTable_a63621ba03ac4c05a81cc277f34cf3f94_cgraph">
-<area shape="rect" id="node3" href="classPrimitives_1_1QTable.html#aeae35227596c04fc5084893adff6ddb1" title="Primitives::QTable::AddGoalState" alt="" coords="241,5,460,35"/><area shape="rect" id="node11" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4" title="Primitives::QTable::AddState" alt="" coords="255,59,447,88"/><area shape="rect" id="node13" href="classPrimitives_1_1QTable.html#a9163472282d93c84298c5ca74008033a" title="Primitives::QTable::get_goal_states" alt="" coords="236,112,465,141"/><area shape="rect" id="node15" href="classPrimitives_1_1QTable.html#a1002a8968b415e2a8645bc847ab20563" title="Primitives::QTable::get_states" alt="" coords="252,165,449,195"/><area shape="rect" id="node5" href="classPrimitives_1_1QTable.html#aeba507f2e3dfc84deb494d73a592ec30" title="Primitives::QTable::isGoalState" alt="" coords="516,5,721,35"/><area shape="rect" id="node7" href="classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="772,5,937,35"/><area shape="rect" id="node9" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="987,5,1211,35"/></map>
+<area shape="rect" id="node3" href="classPrimitives_1_1QTable.html#a3a144b02d790b534d0fd75cc64536fe6" title="Primitives::QTable::AddGoalState" alt="" coords="264,5,483,35"/><area shape="rect" id="node11" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4" title="Primitives::QTable::AddState" alt="" coords="277,59,469,88"/><area shape="rect" id="node13" href="classPrimitives_1_1QTable.html#a77a6204003948524ee869028a28777ca" title="Primitives::QTable::get_goal_states" alt="" coords="259,112,488,141"/><area shape="rect" id="node15" href="classPrimitives_1_1QTable.html#ac15316b7e2d8a9f7cbdcc46619d60c27" title="Primitives::QTable::get_states" alt="" coords="275,165,472,195"/><area shape="rect" id="node17" href="classPrimitives_1_1QTable.html#af998c958bb7772121097d5f3b52e812a" title="Primitives::QTable::get_trained_goal_states" alt="" coords="236,219,511,248"/><area shape="rect" id="node5" href="classPrimitives_1_1QTable.html#ae730ce40a4e0410260bafec5eb60e8a8" title="Primitives::QTable::IsGoalState" alt="" coords="561,5,767,35"/><area shape="rect" id="node7" href="classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="817,5,983,35"/><area shape="rect" id="node9" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="1032,5,1256,35"/></map>
 </div>
 </p>
 
@@ -175,21 +180,31 @@ Here is the call graph for this function:</div>
 <div class="memdoc">
 <p>Destructor for <a class="el" href="classPrimitives_1_1QTable.html">QTable</a>: Deletes all states internally created/held </p>
 
-<p>Definition at line <a class="el" href="QTable_8h_source.html#l00050">50</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00064">64</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aeae35227596c04fc5084893adff6ddb1"></a><!-- doxytag: member="Primitives::QTable::AddGoalState" ref="aeae35227596c04fc5084893adff6ddb1" args="(State const *state)" -->
+<a class="anchor" id="a3a144b02d790b534d0fd75cc64536fe6"></a><!-- doxytag: member="Primitives::QTable::AddGoalState" ref="a3a144b02d790b534d0fd75cc64536fe6" args="(State const *state, bool from_training)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void Primitives::QTable::AddGoalState </td>
+          <td class="memname">void Primitives::QTable::AddGoalState </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const *&#160;</td>
-          <td class="paramname"><em>state</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>from_training</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -198,18 +213,19 @@ Here is the call graph for this function:</div>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>Pointer to internally kept goal state </td></tr>
+    <tr><td class="paramname">from_training</td><td>Is this a goal state from training data or was it just within a threshold of a real goal state? </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="QTable_8h_source.html#l00107">107</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00172">172</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classPrimitives_1_1QTable_aeae35227596c04fc5084893adff6ddb1_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_aeae35227596c04fc5084893adff6ddb1_cgraph" alt=""/></div>
-<map name="classPrimitives_1_1QTable_aeae35227596c04fc5084893adff6ddb1_cgraph" id="classPrimitives_1_1QTable_aeae35227596c04fc5084893adff6ddb1_cgraph">
-<area shape="rect" id="node3" href="classPrimitives_1_1QTable.html#aeba507f2e3dfc84deb494d73a592ec30" title="Primitives::QTable::isGoalState" alt="" coords="273,5,479,35"/><area shape="rect" id="node5" href="classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="529,5,695,35"/><area shape="rect" id="node7" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="744,5,968,35"/></map>
+<div class="center"><img src="classPrimitives_1_1QTable_a3a144b02d790b534d0fd75cc64536fe6_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_a3a144b02d790b534d0fd75cc64536fe6_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1QTable_a3a144b02d790b534d0fd75cc64536fe6_cgraph" id="classPrimitives_1_1QTable_a3a144b02d790b534d0fd75cc64536fe6_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1QTable.html#ae730ce40a4e0410260bafec5eb60e8a8" title="Primitives::QTable::IsGoalState" alt="" coords="273,5,479,35"/><area shape="rect" id="node5" href="classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="529,5,695,35"/><area shape="rect" id="node7" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="744,5,968,35"/></map>
 </div>
 </p>
 
@@ -224,7 +240,7 @@ Here is the call graph for this function:</div>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
-          <td><code> [virtual]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -238,49 +254,141 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Pointer to internal copy of state param </dd></dl>
 
-<p>Definition at line <a class="el" href="QTable_8cc_source.html#l00103">103</a> of file <a class="el" href="QTable_8cc_source.html">QTable.cc</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8cc_source.html#l00159">159</a> of file <a class="el" href="QTable_8cc_source.html">QTable.cc</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a9163472282d93c84298c5ca74008033a"></a><!-- doxytag: member="Primitives::QTable::get_goal_states" ref="a9163472282d93c84298c5ca74008033a" args="()" -->
+<a class="anchor" id="a77a6204003948524ee869028a28777ca"></a><!-- doxytag: member="Primitives::QTable::get_goal_states" ref="a77a6204003948524ee869028a28777ca" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt;<a class="el" href="classPrimitives_1_1State.html">State</a> const *&gt;&amp; Primitives::QTable::get_goal_states </td>
+          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1State.html">State</a> const *&gt;&amp; Primitives::QTable::get_goal_states </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<dl class="return"><dt><b>Returns:</b></dt><dd>direct access to goal states vector </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>direct access to 'intuited' goal states vector </dd></dl>
 
-<p>Definition at line <a class="el" href="QTable_8h_source.html#l00068">68</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00082">82</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a1002a8968b415e2a8645bc847ab20563"></a><!-- doxytag: member="Primitives::QTable::get_states" ref="a1002a8968b415e2a8645bc847ab20563" args="()" -->
+<a class="anchor" id="a2947f9dc071756f73efcda4c222718fb"></a><!-- doxytag: member="Primitives::QTable::get_nearby_thresholds" ref="a2947f9dc071756f73efcda4c222718fb" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt;<a class="el" href="classPrimitives_1_1State.html">State</a> *&gt;&amp; Primitives::QTable::get_states </td>
+          <td class="memname">std::vector&lt;double&gt;&amp; Primitives::QTable::get_nearby_thresholds </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="return"><dt><b>Returns:</b></dt><dd>"Nearby" threshold distances for each sensor dimension </dd></dl>
+
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00096">96</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac15316b7e2d8a9f7cbdcc46619d60c27"></a><!-- doxytag: member="Primitives::QTable::get_states" ref="ac15316b7e2d8a9f7cbdcc46619d60c27" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1State.html">State</a> *&gt;&amp; Primitives::QTable::get_states </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 <dl class="return"><dt><b>Returns:</b></dt><dd>direct access to states vector </dd></dl>
 
-<p>Definition at line <a class="el" href="QTable_8h_source.html#l00061">61</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00075">75</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a609d90f8ac31da1296ec4a092036abca"></a><!-- doxytag: member="Primitives::QTable::GetState" ref="a609d90f8ac31da1296ec4a092036abca" args="(State const &amp;needle, bool add_if_not_found=false)" -->
+<a class="anchor" id="af998c958bb7772121097d5f3b52e812a"></a><!-- doxytag: member="Primitives::QTable::get_trained_goal_states" ref="af998c958bb7772121097d5f3b52e812a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1State.html">State</a> const *&gt;&amp; Primitives::QTable::get_trained_goal_states </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="return"><dt><b>Returns:</b></dt><dd>direct access to trained goal states vector </dd></dl>
+
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00089">89</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a512fe7a460f08d0ba3d965235b5ec680"></a><!-- doxytag: member="Primitives::QTable::GetIncomingStates" ref="a512fe7a460f08d0ba3d965235b5ec680" args="(State const &amp;s)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1State.html">State</a>*&gt; Primitives::QTable::GetIncomingStates </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns a vector of existing states that have an outbound link to the state provided. This is guaranteed to only return states </p>
+
+</div>
+</div>
+<a class="anchor" id="a6134b9e5b8960758c232df26bbd3d710"></a><!-- doxytag: member="Primitives::QTable::GetNearbyStates" ref="a6134b9e5b8960758c232df26bbd3d710" args="(State const &amp;needle)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classPrimitives_1_1State.html">State</a> * &gt; Primitives::QTable::GetNearbyStates </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
+          <td class="paramname"><em>needle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns a vector of existing states determined to be 'nearby' to the needle state </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">needle</td><td><a class="el" href="classPrimitives_1_1State.html">State</a> to look near for existing states </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>vector of nearby states </dd></dl>
+
+<p>Definition at line <a class="el" href="QTable_8cc_source.html#l00019">19</a> of file <a class="el" href="QTable_8cc_source.html">QTable.cc</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classPrimitives_1_1QTable_a6134b9e5b8960758c232df26bbd3d710_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_a6134b9e5b8960758c232df26bbd3d710_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1QTable_a6134b9e5b8960758c232df26bbd3d710_cgraph" id="classPrimitives_1_1QTable_a6134b9e5b8960758c232df26bbd3d710_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1State.html#ad05ccb0a74403f27c4ab898e4812c825" title="Primitives::State::GetSquaredDistances" alt="" coords="295,5,548,35"/><area shape="rect" id="node5" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="597,5,821,35"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aba7baad325ca76799cd0b23b4434eb72"></a><!-- doxytag: member="Primitives::QTable::GetState" ref="aba7baad325ca76799cd0b23b4434eb72" args="(State const &amp;needle, bool add_estimated_state)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -294,12 +402,12 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>add_if_not_found</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>add_estimated_state</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [virtual]</code></td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -308,20 +416,20 @@ Here is the call graph for this function:</div>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">needle</td><td><a class="el" href="classPrimitives_1_1State.html">State</a> to find within the <a class="el" href="classPrimitives_1_1QTable.html">QTable</a> </td></tr>
-    <tr><td class="paramname">add_if_not_found</td><td>Adds state to table with estimated rewards based on reward values of nearby states if true. </td></tr>
+    <tr><td class="paramname">add_estimated_state</td><td>Adds state to table with estimated rewards based on reward values of nearby states if true. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>NULL if needle not found, else: state pointer to internal version </dd></dl>
 
-<p>Definition at line <a class="el" href="QTable_8cc_source.html#l00017">17</a> of file <a class="el" href="QTable_8cc_source.html">QTable.cc</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8cc_source.html#l00047">47</a> of file <a class="el" href="QTable_8cc_source.html">QTable.cc</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classPrimitives_1_1QTable_a609d90f8ac31da1296ec4a092036abca_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_a609d90f8ac31da1296ec4a092036abca_cgraph" alt=""/></div>
-<map name="classPrimitives_1_1QTable_a609d90f8ac31da1296ec4a092036abca_cgraph" id="classPrimitives_1_1QTable_a609d90f8ac31da1296ec4a092036abca_cgraph">
-<area shape="rect" id="node3" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4" title="Primitives::QTable::AddState" alt="" coords="273,5,465,35"/><area shape="rect" id="node5" href="classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="287,59,452,88"/><area shape="rect" id="node7" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="541,111,765,140"/><area shape="rect" id="node9" href="classPrimitives_1_1State.html#a2d096d41744e6b9ecba2fadd5e8ea047" title="Primitives::State::get_base_reward" alt="" coords="256,163,483,192"/><area shape="rect" id="node11" href="classPrimitives_1_1State.html#a4b1a082431ff870f18b219013d71e815" title="Primitives::State::get_reward_layers" alt="" coords="253,216,485,245"/><area shape="rect" id="node14" href="classPrimitives_1_1State.html#ad0b1b340fc23ccbc11bd48ed98141d77" title="Primitives::State::get_unit_distance" alt="" coords="255,269,484,299"/><area shape="rect" id="node16" href="classPrimitives_1_1State.html#a2c9e99f30fce7787a981e869203a7057" title="Primitives::State::GetSquaredDistance" alt="" coords="245,323,493,352"/><area shape="rect" id="node19" href="classPrimitives_1_1State.html#a2a8b0624650b8a4cb9ef7b57694b6028" title="Primitives::State::set_base_reward" alt="" coords="256,376,483,405"/><area shape="rect" id="node21" href="classPrimitives_1_1State.html#aac0151a2e4dd7c76f54074d73a160504" title="Primitives::State::set_reward_layers" alt="" coords="253,429,485,459"/></map>
+<div class="center"><img src="classPrimitives_1_1QTable_aba7baad325ca76799cd0b23b4434eb72_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_aba7baad325ca76799cd0b23b4434eb72_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1QTable_aba7baad325ca76799cd0b23b4434eb72_cgraph" id="classPrimitives_1_1QTable_aba7baad325ca76799cd0b23b4434eb72_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4" title="Primitives::QTable::AddState" alt="" coords="284,5,476,35"/><area shape="rect" id="node5" href="classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="608,163,773,192"/><area shape="rect" id="node7" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="867,163,1091,192"/><area shape="rect" id="node9" href="classPrimitives_1_1State.html#a85c802772f98f346d2ab259f1e997057" title="Primitives::State::get_incoming_states" alt="" coords="568,344,813,373"/><area shape="rect" id="node11" href="classPrimitives_1_1QTable.html#a2947f9dc071756f73efcda4c222718fb" title="Primitives::QTable::get_nearby_thresholds" alt="" coords="245,213,515,243"/><area shape="rect" id="node13" href="classPrimitives_1_1State.html#aa961f4af28ca0a9448097dfda435fc1c" title="Primitives::State::get_reward" alt="" coords="285,267,475,296"/><area shape="rect" id="node16" href="classPrimitives_1_1QTable.html#a6134b9e5b8960758c232df26bbd3d710" title="Primitives::QTable::GetNearbyStates" alt="" coords="261,59,499,88"/><area shape="rect" id="node18" href="classPrimitives_1_1State.html#ad05ccb0a74403f27c4ab898e4812c825" title="Primitives::State::GetSquaredDistances" alt="" coords="564,109,817,139"/><area shape="rect" id="node21" href="classPrimitives_1_1State.html#aaac81a7b40709c392f2f4ba1e47cc5a1" title="Primitives::State::GetRewardValue" alt="" coords="267,424,493,453"/><area shape="rect" id="node24" href="classPrimitives_1_1State.html#a102754baa864a5f6f6ed4ed991c36aab" title="Primitives::State::set_reward" alt="" coords="285,371,475,400"/></map>
 </div>
 </p>
 
@@ -336,7 +444,7 @@ Here is the call graph for this function:</div>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
           <td class="paramname"><em>needle</em></td><td>)</td>
-          <td><code> [virtual]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -352,25 +460,25 @@ Here is the call graph for this function:</div>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Use a bloom filter to find whether or not the <a class="el" href="classPrimitives_1_1QTable.html">QTable</a> contains the needle. Returning true here doesn't actually mean we have the state, it just means that we probably have it, and it's worth the cycles to search for it in the big mess that is the states_ vector.</dd></dl>
 <p>Returning a value of false means we absolutely 100% have not seen that state. </p>
 
-<p>Definition at line <a class="el" href="QTable_8cc_source.html#l00099">99</a> of file <a class="el" href="QTable_8cc_source.html">QTable.cc</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8cc_source.html#l00155">155</a> of file <a class="el" href="QTable_8cc_source.html">QTable.cc</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aeba507f2e3dfc84deb494d73a592ec30"></a><!-- doxytag: member="Primitives::QTable::isGoalState" ref="aeba507f2e3dfc84deb494d73a592ec30" args="(State const &amp;state)" -->
+<a class="anchor" id="ae730ce40a4e0410260bafec5eb60e8a8"></a><!-- doxytag: member="Primitives::QTable::IsGoalState" ref="ae730ce40a4e0410260bafec5eb60e8a8" args="(State const &amp;state)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool Primitives::QTable::isGoalState </td>
+          <td class="memname">bool Primitives::QTable::IsGoalState </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Checks if the state provided is directly a goal state</p>
+<p>Checks if the state provided is a known goal state</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>Any state object </td></tr>
@@ -379,63 +487,126 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true if found in list, false if not a goal state </dd></dl>
 
-<p>Definition at line <a class="el" href="QTable_8h_source.html#l00118">118</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00186">186</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classPrimitives_1_1QTable_aeba507f2e3dfc84deb494d73a592ec30_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_aeba507f2e3dfc84deb494d73a592ec30_cgraph" alt=""/></div>
-<map name="classPrimitives_1_1QTable_aeba507f2e3dfc84deb494d73a592ec30_cgraph" id="classPrimitives_1_1QTable_aeba507f2e3dfc84deb494d73a592ec30_cgraph">
+<div class="center"><img src="classPrimitives_1_1QTable_ae730ce40a4e0410260bafec5eb60e8a8_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_ae730ce40a4e0410260bafec5eb60e8a8_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1QTable_ae730ce40a4e0410260bafec5eb60e8a8_cgraph" id="classPrimitives_1_1QTable_ae730ce40a4e0410260bafec5eb60e8a8_cgraph">
 <area shape="rect" id="node3" href="classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="263,5,428,35"/><area shape="rect" id="node5" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="477,5,701,35"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="aba55e2559fc177fc6d8f1dcdcf3a3faa"></a><!-- doxytag: member="Primitives::QTable::isNearGoalState" ref="aba55e2559fc177fc6d8f1dcdcf3a3faa" args="(State const &amp;state, double sensitivity)" -->
+<a class="anchor" id="a9189f0aea430fe4ca9130ed20a7b4c55"></a><!-- doxytag: member="Primitives::QTable::IsNearState" ref="a9189f0aea430fe4ca9130ed20a7b4c55" args="(State const &amp;a, State const &amp;b)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool Primitives::QTable::isNearGoalState </td>
+          <td class="memname">bool Primitives::QTable::IsNearState </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
-          <td class="paramname"><em>state</em>, </td>
+          <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>sensitivity</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [inline, virtual]</code></td>
+          <td></td><td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Checks if the state provided is near a goal state</p>
+<p>Checks if the states provided are nearby each other</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>Any state object </td></tr>
+    <tr><td class="paramname">b</td><td>Any state object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if a and b are within nearby thresholds for all elements </dd></dl>
+
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00225">225</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classPrimitives_1_1QTable_a9189f0aea430fe4ca9130ed20a7b4c55_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_a9189f0aea430fe4ca9130ed20a7b4c55_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1QTable_a9189f0aea430fe4ca9130ed20a7b4c55_cgraph" id="classPrimitives_1_1QTable_a9189f0aea430fe4ca9130ed20a7b4c55_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="261,5,485,35"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a15ec1c697ee639c79f01e07474defc8b"></a><!-- doxytag: member="Primitives::QTable::IsTrainedGoalState" ref="a15ec1c697ee639c79f01e07474defc8b" args="(State const &amp;state)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Primitives::QTable::IsTrainedGoalState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classPrimitives_1_1State.html">State</a> const &amp;&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Checks if the state provided is a trained goal state, as opposed to a 'learned' or 'approximate' goal state.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>Any state object </td></tr>
-    <tr><td class="paramname">sensitivity</td><td>Measure of how close to goal state is 'close enough' This is currently used as a multiple of state unit distance (sum over min. sensor change values in state vector). </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true if found in list, false if not a goal state </dd></dl>
 
-<p>Definition at line <a class="el" href="QTable_8h_source.html#l00136">136</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00207">207</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classPrimitives_1_1QTable_aba55e2559fc177fc6d8f1dcdcf3a3faa_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_aba55e2559fc177fc6d8f1dcdcf3a3faa_cgraph" alt=""/></div>
-<map name="classPrimitives_1_1QTable_aba55e2559fc177fc6d8f1dcdcf3a3faa_cgraph" id="classPrimitives_1_1QTable_aba55e2559fc177fc6d8f1dcdcf3a3faa_cgraph">
-<area shape="rect" id="node3" href="classPrimitives_1_1State.html#ad0b1b340fc23ccbc11bd48ed98141d77" title="Primitives::State::get_unit_distance" alt="" coords="297,5,527,35"/><area shape="rect" id="node5" href="classPrimitives_1_1State.html#a2c9e99f30fce7787a981e869203a7057" title="Primitives::State::GetSquaredDistance" alt="" coords="288,59,536,88"/><area shape="rect" id="node7" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="584,59,808,88"/></map>
+<div class="center"><img src="classPrimitives_1_1QTable_a15ec1c697ee639c79f01e07474defc8b_cgraph.png" border="0" usemap="#classPrimitives_1_1QTable_a15ec1c697ee639c79f01e07474defc8b_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1QTable_a15ec1c697ee639c79f01e07474defc8b_cgraph" id="classPrimitives_1_1QTable_a15ec1c697ee639c79f01e07474defc8b_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1State.html#a8d64c81357170d4d8e2e0350025ad78e" title="Primitives::State::Equals" alt="" coords="305,5,471,35"/><area shape="rect" id="node5" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0" title="Primitives::State::get_state_vector" alt="" coords="520,5,744,35"/></map>
 </div>
 </p>
+
+</div>
+</div>
+<a class="anchor" id="a9edb7938105ceb81970f7ad8df76f8a2"></a><!-- doxytag: member="Primitives::QTable::set_nearby_thresholds" ref="a9edb7938105ceb81970f7ad8df76f8a2" args="(std::vector&lt; double &gt; const &amp;thresh)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Primitives::QTable::set_nearby_thresholds </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>thresh</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Must make sure this is set before allowing most <a class="el" href="classPrimitives_1_1QTable.html">QTable</a> operations to occur.</dd></dl>
+<p>Sets the 'nearby' distance thresholds for each state dimension. Squares all of the distance values coming in, to optimize distance checks later on (eliminating need for constant sqrt'ing). </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thresh</td><td>vector of distance thresholds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="QTable_8h_source.html#l00109">109</a> of file <a class="el" href="QTable_8h_source.html">QTable.h</a>.</p>
 
 </div>
 </div>

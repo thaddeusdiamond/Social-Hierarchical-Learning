@@ -86,143 +86,135 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <a href="StandardQLearner_8cc.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
 <a name="l00012"></a>00012 <span class="preprocessor">#include &quot;QLearner/StandardQLearner.h&quot;</span>
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 <span class="keyword">namespace </span>Primitives {
+<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;QLearner/QTable.h&quot;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;QLearner/State.h&quot;</span>
 <a name="l00015"></a>00015 
-<a name="l00016"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#a3e30c92b703e783bfaf974c4b070556e">00016</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#a3e30c92b703e783bfaf974c4b070556e">StandardQLearner::Load</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) {
-<a name="l00017"></a>00017   <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00018"></a>00018 }
-<a name="l00019"></a>00019 
-<a name="l00020"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#afd3d900034baaf79f613deb3c3edcfd1">00020</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#afd3d900034baaf79f613deb3c3edcfd1">StandardQLearner::Save</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) {
-<a name="l00021"></a>00021   <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00016"></a>00016 <span class="keyword">namespace </span>Primitives {
+<a name="l00017"></a>00017 
+<a name="l00018"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#a5786a9ef184431b221a616dc611e05ba">00018</a> StandardQLearner::StandardQLearner(std::string name) {
+<a name="l00019"></a>00019   <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a> = name;
+<a name="l00020"></a>00020   <a class="code" href="classPrimitives_1_1QLearner.html#a464a0338cc146d7b2f0061cf64bd78f9">trials_</a> = 0;
+<a name="l00021"></a>00021   <a class="code" href="classPrimitives_1_1QLearner.html#a489f67c4a9405b550df9e934f014040e">anticipated_duration_</a> = 0;
 <a name="l00022"></a>00022 }
 <a name="l00023"></a>00023 
-<a name="l00024"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#aea6749f0208f7bba3f21667de2d112a7">00024</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#aea6749f0208f7bba3f21667de2d112a7">StandardQLearner::Init</a>(std::vector&lt;Sensor const *&gt; <span class="keyword">const</span> &amp;sensors) {
-<a name="l00025"></a>00025   this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a> = sensors;
-<a name="l00026"></a>00026   <a class="code" href="classPrimitives_1_1QTable.html">QTable</a> qt;
-<a name="l00027"></a>00027   this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a> = qt;
-<a name="l00028"></a>00028   <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00024"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#a041635416994c9a1c9d457ac87155654">00024</a> StandardQLearner::StandardQLearner(std::string name, <a class="code" href="classPrimitives_1_1QTable.html">QTable</a> qt) {
+<a name="l00025"></a>00025   <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a> = name;
+<a name="l00026"></a>00026   <a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a> = qt;
+<a name="l00027"></a>00027   <a class="code" href="classPrimitives_1_1QLearner.html#a464a0338cc146d7b2f0061cf64bd78f9">trials_</a> = 0;
+<a name="l00028"></a>00028   <a class="code" href="classPrimitives_1_1QLearner.html#a489f67c4a9405b550df9e934f014040e">anticipated_duration_</a> = 0;
 <a name="l00029"></a>00029 }
 <a name="l00030"></a>00030 
-<a name="l00031"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#ad6c97f2e9c2fb2b289e9a0fb77bd5ffe">00031</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#ad6c97f2e9c2fb2b289e9a0fb77bd5ffe">StandardQLearner::Learn</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; state) {
-<a name="l00032"></a>00032   <a class="code" href="classPrimitives_1_1State.html">State</a> *existing_state = this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#a609d90f8ac31da1296ec4a092036abca">GetState</a>(state);
-<a name="l00033"></a>00033   <span class="keywordflow">if</span> (existing_state) {
-<a name="l00034"></a>00034     existing_state-&gt;<a class="code" href="classPrimitives_1_1State.html#a2a8b0624650b8a4cb9ef7b57694b6028">set_base_reward</a>(state.<a class="code" href="classPrimitives_1_1State.html#a2d096d41744e6b9ecba2fadd5e8ea047">get_base_reward</a>());
-<a name="l00035"></a>00035     <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00036"></a>00036   } <span class="keywordflow">else</span> {
-<a name="l00037"></a>00037     <a class="code" href="classPrimitives_1_1State.html">State</a> *s = this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4">AddState</a>(state);
-<a name="l00038"></a>00038     <span class="keywordflow">return</span> (s != NULL);
-<a name="l00039"></a>00039   }
-<a name="l00040"></a>00040 }
-<a name="l00041"></a>00041 
-<a name="l00042"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#ab896dcd9e9d1c2aaca3c9a96e4fa2d6e">00042</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#ab896dcd9e9d1c2aaca3c9a96e4fa2d6e">StandardQLearner::AddNearbyEmptyStates</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span> &amp;state) {
-<a name="l00043"></a>00043   std::vector&lt;double&gt; base_descriptor = state.<a class="code" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0">get_state_vector</a>();
-<a name="l00044"></a>00044   std::vector&lt;Sensor const *&gt;::const_iterator sensor_iter;
-<a name="l00045"></a>00045   <span class="keywordtype">int</span> i = 0;
-<a name="l00046"></a>00046   <span class="keywordflow">for</span> (i = 0, sensor_iter = <a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a>.begin(); sensor_iter != <a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a>.end();
-<a name="l00047"></a>00047        ++i, ++sensor_iter) {
-<a name="l00048"></a>00048     <span class="keywordtype">double</span> min_increment = (*sensor_iter)-&gt;get_min_increment();
-<a name="l00049"></a>00049     std::vector&lt;double&gt; incr_descriptor = base_descriptor;
-<a name="l00050"></a>00050     std::vector&lt;double&gt; decr_descriptor = base_descriptor;
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052     incr_descriptor[i] += min_increment;
-<a name="l00053"></a>00053     decr_descriptor[i] -= min_increment;
+<a name="l00031"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#a3e30c92b703e783bfaf974c4b070556e">00031</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#a3e30c92b703e783bfaf974c4b070556e">StandardQLearner::Load</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) {
+<a name="l00032"></a>00032   <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00033"></a>00033 }
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#afd3d900034baaf79f613deb3c3edcfd1">00035</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#afd3d900034baaf79f613deb3c3edcfd1">StandardQLearner::Save</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) {
+<a name="l00036"></a>00036   <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00037"></a>00037 }
+<a name="l00038"></a>00038 
+<a name="l00039"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#a32867285584f8df0a0c49567875d26b6">00039</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#a32867285584f8df0a0c49567875d26b6">StandardQLearner::Init</a>(std::vector&lt;Sensor *&gt; <span class="keyword">const</span> &amp;sensors) {
+<a name="l00040"></a>00040   this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a> = sensors;
+<a name="l00041"></a>00041   <a class="code" href="classPrimitives_1_1QTable.html">QTable</a> qt;
+<a name="l00042"></a>00042   this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a> = qt;
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044   std::vector&lt;double&gt; thresh;
+<a name="l00045"></a>00045   std::vector&lt;Sensor *&gt;::const_iterator iter;
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047   <span class="keywordflow">for</span> (iter = <a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a>.begin(); iter != <a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a>.end(); ++iter) {
+<a name="l00048"></a>00048     thresh.push_back((*iter)-&gt;get_nearby_threshold());
+<a name="l00049"></a>00049   }
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051   this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#a9edb7938105ceb81970f7ad8df76f8a2">set_nearby_thresholds</a>(thresh);
+<a name="l00052"></a>00052   <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00053"></a>00053 }
 <a name="l00054"></a>00054 
-<a name="l00055"></a>00055     <a class="code" href="classPrimitives_1_1State.html">State</a> increment_state(incr_descriptor);
-<a name="l00056"></a>00056     <a class="code" href="classPrimitives_1_1State.html">State</a> decrement_state(decr_descriptor);
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058     <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#aec673f322384dae23266716d3abca851">HasState</a>(increment_state)) {
-<a name="l00059"></a>00059       <span class="keywordflow">if</span> (!this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#a609d90f8ac31da1296ec4a092036abca">GetState</a>(increment_state)) {
-<a name="l00060"></a>00060         this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4">AddState</a>(increment_state);
-<a name="l00061"></a>00061       }
-<a name="l00062"></a>00062     }
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064     <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#aec673f322384dae23266716d3abca851">HasState</a>(decrement_state)) {
-<a name="l00065"></a>00065       <span class="keywordflow">if</span> (!this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#a609d90f8ac31da1296ec4a092036abca">GetState</a>(decrement_state)) {
-<a name="l00066"></a>00066         this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4">AddState</a>(decrement_state);
-<a name="l00067"></a>00067       }
-<a name="l00068"></a>00068     }
-<a name="l00069"></a>00069   }
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071   <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00072"></a>00072 }
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074 
-<a name="l00075"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#adb3d1cf222b59b5b2e917390a72b4810">00075</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#adb3d1cf222b59b5b2e917390a72b4810">StandardQLearner::GetNearbyStates</a>(
-<a name="l00076"></a>00076   <a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; cur_state, std::vector&lt;State const *&gt;&amp; nearby_states) {
-<a name="l00077"></a>00077   <span class="comment">// Retrieve all states within search_distances of the cur_state that are</span>
-<a name="l00078"></a>00078   <span class="comment">// in the qtable.</span>
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080   this-&gt;<a class="code" href="classPrimitives_1_1StandardQLearner.html#ab896dcd9e9d1c2aaca3c9a96e4fa2d6e">AddNearbyEmptyStates</a>(cur_state);
+<a name="l00055"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#ad6c97f2e9c2fb2b289e9a0fb77bd5ffe">00055</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#ad6c97f2e9c2fb2b289e9a0fb77bd5ffe">StandardQLearner::Learn</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; state) {
+<a name="l00056"></a>00056   <span class="comment">// @TODO: This should start the primitives recording process</span>
+<a name="l00057"></a>00057   <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00058"></a>00058 }
+<a name="l00059"></a>00059 
+<a name="l00060"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#ab896dcd9e9d1c2aaca3c9a96e4fa2d6e">00060</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#ab896dcd9e9d1c2aaca3c9a96e4fa2d6e">StandardQLearner::AddNearbyEmptyStates</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span> &amp;state) {
+<a name="l00061"></a>00061   std::vector&lt;double&gt; base_descriptor = state.<a class="code" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0">get_state_vector</a>();
+<a name="l00062"></a>00062   std::vector&lt;Sensor *&gt;::const_iterator sensor_iter;
+<a name="l00063"></a>00063   <span class="keywordtype">int</span> i = 0;
+<a name="l00064"></a>00064   <span class="keywordflow">for</span> (i = 0, sensor_iter = <a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a>.begin(); sensor_iter != <a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a>.end();
+<a name="l00065"></a>00065        ++i, ++sensor_iter) {
+<a name="l00066"></a>00066     <span class="keywordtype">double</span> min_increment = (*sensor_iter)-&gt;get_min_increment();
+<a name="l00067"></a>00067     std::vector&lt;double&gt; incr_descriptor = base_descriptor;
+<a name="l00068"></a>00068     std::vector&lt;double&gt; decr_descriptor = base_descriptor;
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070     incr_descriptor[i] += min_increment;
+<a name="l00071"></a>00071     decr_descriptor[i] -= min_increment;
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073     <a class="code" href="classPrimitives_1_1State.html">State</a> increment_state(incr_descriptor);
+<a name="l00074"></a>00074     <a class="code" href="classPrimitives_1_1State.html">State</a> decrement_state(decr_descriptor);
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076     <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#aec673f322384dae23266716d3abca851">HasState</a>(increment_state)) {
+<a name="l00077"></a>00077       <span class="keywordflow">if</span> (!this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#aba7baad325ca76799cd0b23b4434eb72">GetState</a>(increment_state, <span class="keyword">false</span>)) {
+<a name="l00078"></a>00078         this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4">AddState</a>(increment_state);
+<a name="l00079"></a>00079       }
+<a name="l00080"></a>00080     }
 <a name="l00081"></a>00081 
-<a name="l00082"></a>00082   std::vector&lt;State *&gt; all_states = this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#a1002a8968b415e2a8645bc847ab20563">get_states</a>();
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084   std::vector&lt;State *&gt;::const_iterator iter;
-<a name="l00085"></a>00085   <span class="keywordtype">bool</span> state_distance_fail = <span class="keyword">false</span>;
-<a name="l00086"></a>00086   <span class="keywordflow">for</span> (iter = all_states.begin(); iter != all_states.end(); ++iter) {
-<a name="l00087"></a>00087     <a class="code" href="classPrimitives_1_1State.html">State</a> *cmp_state = (*iter);
-<a name="l00088"></a>00088     state_distance_fail = <span class="keyword">false</span>;
-<a name="l00089"></a>00089     <span class="comment">// iterate through each value in the state and check if it&#39;s within required</span>
-<a name="l00090"></a>00090     <span class="comment">// distance from the current state (according to the internal sensor vector)</span>
-<a name="l00091"></a>00091     std::vector&lt;Sensor const *&gt;::const_iterator sensor_iter;
-<a name="l00092"></a>00092     <span class="keywordtype">int</span> i;
-<a name="l00093"></a>00093     <span class="keywordflow">for</span> (i = 0, sensor_iter = <a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a>.begin(); sensor_iter != <a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a>.end();
-<a name="l00094"></a>00094          ++sensor_iter, ++i) {
-<a name="l00095"></a>00095       <span class="keywordtype">double</span> dist = cmp_state-&gt;<a class="code" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0">get_state_vector</a>()[i]
-<a name="l00096"></a>00096                     - cur_state.<a class="code" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0">get_state_vector</a>()[i];
-<a name="l00097"></a>00097       dist = (dist &lt; 0) ? -dist : dist;
-<a name="l00098"></a>00098       <span class="keywordflow">if</span> (dist &gt; (*sensor_iter)-&gt;get_nearby_threshold()) {
-<a name="l00099"></a>00099         state_distance_fail = <span class="keyword">true</span>;
-<a name="l00100"></a>00100         <span class="keywordflow">break</span>;
-<a name="l00101"></a>00101       }
-<a name="l00102"></a>00102     }
-<a name="l00103"></a>00103 
-<a name="l00104"></a>00104     <span class="keywordflow">if</span> (state_distance_fail) <span class="keywordflow">continue</span>;
-<a name="l00105"></a>00105     nearby_states.push_back(*iter);
-<a name="l00106"></a>00106   }
-<a name="l00107"></a>00107 
-<a name="l00108"></a>00108   <span class="keywordflow">return</span> (nearby_states.size() &gt; 0);
-<a name="l00109"></a>00109 }
-<a name="l00110"></a>00110 
-<a name="l00111"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#a568667b0dce8b156bcf32432e2f69add">00111</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#a568667b0dce8b156bcf32432e2f69add">StandardQLearner::GetNextState</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; cur_state,
-<a name="l00112"></a>00112                                     <a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>** next_state) {
-<a name="l00113"></a>00113   <span class="keywordflow">if</span> (<a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a> == NULL) {
-<a name="l00114"></a>00114     std::vector&lt;State const *&gt; nearby_states;
-<a name="l00115"></a>00115     this-&gt;<a class="code" href="classPrimitives_1_1StandardQLearner.html#adb3d1cf222b59b5b2e917390a72b4810">GetNearbyStates</a>(cur_state, nearby_states);
-<a name="l00116"></a>00116 
-<a name="l00117"></a>00117     std::vector&lt;State const *&gt;::const_iterator iter;
-<a name="l00118"></a>00118     <span class="keywordtype">double</span> best_score = 0.;
-<a name="l00119"></a>00119     std::vector&lt;State const *&gt; best_states;
-<a name="l00120"></a>00120     <span class="keywordflow">for</span> (iter = nearby_states.begin(); iter != nearby_states.end(); ++iter) {
-<a name="l00121"></a>00121       <span class="keywordflow">if</span> ((*iter)-&gt;get_reward() &gt; best_score) {
-<a name="l00122"></a>00122         best_states.clear();
-<a name="l00123"></a>00123         best_score = (*iter)-&gt;get_reward();
-<a name="l00124"></a>00124         best_states.push_back(*iter);
-<a name="l00125"></a>00125       } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((*iter)-&gt;get_reward() == best_score) {
-<a name="l00126"></a>00126         best_states.push_back(*iter);
-<a name="l00127"></a>00127       }
-<a name="l00128"></a>00128     }
-<a name="l00129"></a>00129 
-<a name="l00130"></a>00130     <span class="comment">// Randomly choose from the best available states</span>
-<a name="l00131"></a>00131     <span class="keywordtype">int</span> idx = rand() % best_states.size();
+<a name="l00082"></a>00082     <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#aec673f322384dae23266716d3abca851">HasState</a>(decrement_state)) {
+<a name="l00083"></a>00083       <span class="keywordflow">if</span> (!this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#aba7baad325ca76799cd0b23b4434eb72">GetState</a>(decrement_state, <span class="keyword">false</span>)) {
+<a name="l00084"></a>00084         this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#a3d764bfdd4d6611a24cda96768e5e4b4">AddState</a>(decrement_state);
+<a name="l00085"></a>00085       }
+<a name="l00086"></a>00086     }
+<a name="l00087"></a>00087   }
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089   <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00090"></a>00090 }
+<a name="l00091"></a>00091 
+<a name="l00098"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#adb3d1cf222b59b5b2e917390a72b4810">00098</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#adb3d1cf222b59b5b2e917390a72b4810">StandardQLearner::GetNearbyStates</a>(
+<a name="l00099"></a>00099   <a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; cur_state, std::vector&lt;State const *&gt;&amp; nearby_states) {
+<a name="l00100"></a>00100   <span class="comment">// Retrieve all states within search_distances of the cur_state that are</span>
+<a name="l00101"></a>00101   <span class="comment">// in the qtable.</span>
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103   this-&gt;<a class="code" href="classPrimitives_1_1StandardQLearner.html#ab896dcd9e9d1c2aaca3c9a96e4fa2d6e">AddNearbyEmptyStates</a>(cur_state);
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105   std::vector&lt;State *&gt; all_states = this-&gt;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#ac15316b7e2d8a9f7cbdcc46619d60c27">get_states</a>();
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107   std::vector&lt;State *&gt;::const_iterator iter;
+<a name="l00108"></a>00108   <span class="keywordtype">bool</span> state_distance_fail = <span class="keyword">false</span>;
+<a name="l00109"></a>00109   <span class="keywordflow">for</span> (iter = all_states.begin(); iter != all_states.end(); ++iter) {
+<a name="l00110"></a>00110     <a class="code" href="classPrimitives_1_1State.html">State</a> *cmp_state = (*iter);
+<a name="l00111"></a>00111     state_distance_fail = <span class="keyword">false</span>;
+<a name="l00112"></a>00112     <span class="comment">// iterate through each value in the state and check if it&#39;s within required</span>
+<a name="l00113"></a>00113     <span class="comment">// distance from the current state (according to the internal sensor vector)</span>
+<a name="l00114"></a>00114     std::vector&lt;Sensor *&gt;::const_iterator sensor_iter;
+<a name="l00115"></a>00115     <span class="keywordtype">int</span> i;
+<a name="l00116"></a>00116     <span class="keywordflow">for</span> (i = 0, sensor_iter = <a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a>.begin(); sensor_iter != <a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a>.end();
+<a name="l00117"></a>00117          ++sensor_iter, ++i) {
+<a name="l00118"></a>00118       
+<a name="l00119"></a>00119       <span class="comment">// @TODO Make sure that not squaring distance here is correct</span>
+<a name="l00120"></a>00120       <span class="keywordtype">double</span> dist = cmp_state-&gt;<a class="code" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0">get_state_vector</a>()[i]
+<a name="l00121"></a>00121                     - cur_state.<a class="code" href="classPrimitives_1_1State.html#a01118e2403d484a79b2c12d3adcf48b0">get_state_vector</a>()[i];
+<a name="l00122"></a>00122       dist = (dist &lt; 0) ? -dist : dist;
+<a name="l00123"></a>00123       <span class="keywordflow">if</span> (dist &gt; (*sensor_iter)-&gt;get_nearby_threshold()) {
+<a name="l00124"></a>00124         state_distance_fail = <span class="keyword">true</span>;
+<a name="l00125"></a>00125         <span class="keywordflow">break</span>;
+<a name="l00126"></a>00126       }
+<a name="l00127"></a>00127     }
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129     <span class="keywordflow">if</span> (state_distance_fail) <span class="keywordflow">continue</span>;
+<a name="l00130"></a>00130     nearby_states.push_back(*iter);
+<a name="l00131"></a>00131   }
 <a name="l00132"></a>00132 
-<a name="l00133"></a>00133     <span class="comment">// Set return value</span>
-<a name="l00134"></a>00134     (*next_state) = best_states[idx];
+<a name="l00133"></a>00133   <span class="keywordflow">return</span> (nearby_states.size() &gt; 0);
+<a name="l00134"></a>00134 }
 <a name="l00135"></a>00135 
-<a name="l00136"></a>00136     <span class="comment">// Couldn&#39;t find any next state -- we failed!</span>
-<a name="l00137"></a>00137     <span class="keywordflow">if</span> (best_states.size() == 0) <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00138"></a>00138 
-<a name="l00139"></a>00139     <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00140"></a>00140   } <span class="keywordflow">else</span> {
-<a name="l00141"></a>00141     <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a>-&gt;<a class="code" href="classPrimitives_1_1ExplorationType.html#a999c7d8407125e6fe82b9bca5c373999">GetNextStep</a>(cur_state, next_state);
-<a name="l00142"></a>00142   }
-<a name="l00143"></a>00143 }
-<a name="l00144"></a>00144 
-<a name="l00145"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#a7024946b539f2cd0454b22c124ddaa1c">00145</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#a7024946b539f2cd0454b22c124ddaa1c">StandardQLearner::AssignCredit</a>(<span class="keywordtype">double</span> signal) {
-<a name="l00146"></a>00146   <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a>-&gt;<a class="code" href="classPrimitives_1_1CreditAssignmentType.html#a20eafec4c92d1a701baa24147fe48618">ApplyCredit</a>(signal);
-<a name="l00147"></a>00147 }
-<a name="l00148"></a>00148 
-<a name="l00149"></a>00149 }  <span class="comment">// namespace Primitives</span>
+<a name="l00136"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#a068873d9911a678c76b37e286ae93702">00136</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#a068873d9911a678c76b37e286ae93702">StandardQLearner::GetNextState</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; cur_state,
+<a name="l00137"></a>00137                                     <a class="code" href="classPrimitives_1_1State.html">State</a> **next_state,
+<a name="l00138"></a>00138                                     <span class="keywordtype">double</span> &amp;reward) {
+<a name="l00139"></a>00139   <span class="keywordflow">if</span> (<a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a> == NULL) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00140"></a>00140   <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a>-&gt;<a class="code" href="classPrimitives_1_1ExplorationType.html#adea7533d0b0a4bb270948c9fc4e9e7c9">GetNextState</a>(cur_state, next_state, reward);
+<a name="l00141"></a>00141 }
+<a name="l00142"></a>00142 
+<a name="l00143"></a><a class="code" href="classPrimitives_1_1StandardQLearner.html#a263a87c02b02da0a45598712080e6646">00143</a> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1StandardQLearner.html#a263a87c02b02da0a45598712080e6646">StandardQLearner::AssignCredit</a>(<span class="keywordtype">double</span> signal) {
+<a name="l00144"></a>00144   <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a>-&gt;<a class="code" href="classPrimitives_1_1CreditAssignmentType.html#a20eafec4c92d1a701baa24147fe48618">ApplyCredit</a>(signal);
+<a name="l00145"></a>00145 }
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147 };  <span class="comment">// namespace Primitives</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">

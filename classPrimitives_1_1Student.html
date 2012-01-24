@@ -107,8 +107,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a1aaf839e724e693dd5288b88081019a3">SetEnvironment</a> (vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;sensors)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a665e87639a9e3af29b24b50678b7d3a6">SetMotors</a> (vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;motors)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#af405e7fa77284ae9e4dd093016f1a50c">SetFeedbackHandler</a> (<a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> const &amp;feedback_device)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a5beeeffe2bb8708652ad1060ff868b48">Learn</a> (std::string primitive_id, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_motors, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_sensors, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_environment, std::vector&lt; Object &gt; objects)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a5beeeffe2bb8708652ad1060ff868b48">Learn</a> (std::string primitive_id, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_motors, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_sensors, std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; active_environment, std::vector&lt; <a class="el" href="classPrimitives_1_1Object.html">Object</a> &gt; objects)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a31140dfb0361a08965ebf99d9113b33a">StopLearning</a> (void)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a0c1491313a7dd4646056acfb667f25a3">GetSkill</a> (std::string name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a76e00280531de76a8a192d0b097f4ee8">AddSkill</a> (<a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> *skill)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;<br class="typebreak"/>
  const *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrimitives_1_1Student.html#a4f565f5aa2cbaca7f396783d8e587e97">get_sensors</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;<br class="typebreak"/>
@@ -126,7 +128,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00035">35</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00036">36</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a710cbc8bc2959acb1d01fcab97d3c27f"></a><!-- doxytag: member="Primitives::Student::~Student" ref="a710cbc8bc2959acb1d01fcab97d3c27f" args="()" -->
 <div class="memitem">
@@ -143,11 +145,47 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Destructor for a <a class="el" href="classPrimitives_1_1Student.html">Student</a> must free all memory it received from I/O and had buffered, also release the STUDENT it controls </p>
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00041">41</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00042">42</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a76e00280531de76a8a192d0b097f4ee8"></a><!-- doxytag: member="Primitives::Student::AddSkill" ref="a76e00280531de76a8a192d0b097f4ee8" args="(QLearner *skill)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Primitives::Student::AddSkill </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> *&#160;</td>
+          <td class="paramname"><em>skill</em></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Adds the provided <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> as a skill in the primitives vector </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">skill</td><td>The skill to be added. Is not copied - uses passed pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true on success, false if skill with same name exists already </dd></dl>
+
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00123">123</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classPrimitives_1_1Student_a76e00280531de76a8a192d0b097f4ee8_cgraph.png" border="0" usemap="#classPrimitives_1_1Student_a76e00280531de76a8a192d0b097f4ee8_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1Student_a76e00280531de76a8a192d0b097f4ee8_cgraph" id="classPrimitives_1_1Student_a76e00280531de76a8a192d0b097f4ee8_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1QLearner.html#a52f3228e0ff83d26165b8c6d6063165f" title="Primitives::QLearner::get_name" alt="" coords="479,5,684,35"/><area shape="rect" id="node5" href="classPrimitives_1_1Student.html#a0c1491313a7dd4646056acfb667f25a3" title="Primitives::Student::GetSkill" alt="" coords="243,31,429,60"/></map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="a6697db2edd47a1fe40db96840ba5011d"></a><!-- doxytag: member="Primitives::Student::get_environment" ref="a6697db2edd47a1fe40db96840ba5011d" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -163,7 +201,7 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Accessor for sensors this student's environment </p>
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00114">114</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00139">139</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -182,7 +220,7 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Accessor for sensors this student's environment </p>
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00121">121</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00146">146</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -201,7 +239,7 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Accessor for primitives this student knows </p>
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00126">126</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00151">151</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -220,7 +258,43 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Accessor for sensors associated with this student </p>
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00107">107</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00132">132</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0c1491313a7dd4646056acfb667f25a3"></a><!-- doxytag: member="Primitives::Student::GetSkill" ref="a0c1491313a7dd4646056acfb667f25a3" args="(std::string name)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a>* Primitives::Student::GetSkill </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns whether or not the student has a skill matching the given name </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>String identifying the skill to be searched </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Pointer to <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> if found, NULL otherwise </dd></dl>
+
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00109">109</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classPrimitives_1_1Student_a0c1491313a7dd4646056acfb667f25a3_cgraph.png" border="0" usemap="#classPrimitives_1_1Student_a0c1491313a7dd4646056acfb667f25a3_cgraph" alt=""/></div>
+<map name="classPrimitives_1_1Student_a0c1491313a7dd4646056acfb667f25a3_cgraph" id="classPrimitives_1_1Student_a0c1491313a7dd4646056acfb667f25a3_cgraph">
+<area shape="rect" id="node3" href="classPrimitives_1_1QLearner.html#a52f3228e0ff83d26165b8c6d6063165f" title="Primitives::QLearner::get_name" alt="" coords="241,5,447,35"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -255,7 +329,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; Object &gt;&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Object.html">Object</a> &gt;&#160;</td>
           <td class="paramname"><em>objects</em>&#160;</td>
         </tr>
         <tr>
@@ -390,7 +464,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00134">134</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00159">159</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -405,7 +479,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00135">135</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00160">160</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -420,7 +494,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00136">136</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00161">161</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>
@@ -435,7 +509,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="Student_8h_source.html#l00133">133</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
+<p>Definition at line <a class="el" href="Student_8h_source.html#l00158">158</a> of file <a class="el" href="Student_8h_source.html">Student.h</a>.</p>
 
 </div>
 </div>

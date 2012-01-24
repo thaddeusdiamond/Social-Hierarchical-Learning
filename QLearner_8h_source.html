@@ -97,79 +97,131 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00020"></a>00020 <span class="preprocessor">#include &quot;Exploration/ExplorationType.h&quot;</span>
 <a name="l00021"></a>00021 <span class="preprocessor">#include &quot;Credit/CreditAssignmentType.h&quot;</span>
 <a name="l00022"></a>00022 <span class="preprocessor">#include &quot;QLearner/QTable.h&quot;</span>
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024 <span class="keyword">namespace </span>Primitives {
+<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;QLearner/Object.h&quot;</span>
+<a name="l00024"></a>00024 
 <a name="l00025"></a>00025 
-<a name="l00026"></a>00026 <span class="keyword">using</span> std::string;
-<a name="l00027"></a>00027 <span class="keyword">using</span> std::vector;
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029 <span class="keyword">class </span>CreditAssignmentType;
-<a name="l00030"></a>00030 <span class="keyword">class </span>ExplorationType;
-<a name="l00031"></a>00031 <span class="keyword">class </span>Sensor;
-<a name="l00032"></a>00032 
-<a name="l00033"></a><a class="code" href="classPrimitives_1_1QLearner.html">00033</a> <span class="keyword">class </span><a class="code" href="classPrimitives_1_1QLearner.html">QLearner</a> {
-<a name="l00034"></a>00034   <span class="keyword">public</span>:
-<a name="l00039"></a><a class="code" href="classPrimitives_1_1QLearner.html#a7a12b5c09f3649d30c148215bb982d00">00039</a>   <span class="keyword">virtual</span> <a class="code" href="classPrimitives_1_1QLearner.html#a7a12b5c09f3649d30c148215bb982d00">~QLearner</a>() {}
-<a name="l00040"></a>00040 
-<a name="l00048"></a>00048   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a933b05080139164afed1723d822f9a96">Load</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) = 0;
-<a name="l00049"></a>00049 
-<a name="l00058"></a>00058   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a6fcd9ddea202678a7930b0078c5c1b69">Save</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) = 0;
-<a name="l00059"></a>00059 
-<a name="l00069"></a>00069   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a0211a17fa943f2a8ae0bbd6434346b30">Init</a>(std::vector&lt;Sensor const *&gt; <span class="keyword">const</span> &amp;sensors) = 0;
-<a name="l00070"></a>00070 
-<a name="l00078"></a>00078   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a8ac72330276bd067dde2841072d83bbe">Learn</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; state) = 0;
-<a name="l00079"></a>00079 
-<a name="l00092"></a>00092   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a85e0dc9cf95da44552406e0c4b5c6365">GetNearbyStates</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; cur_state,
-<a name="l00093"></a>00093                                std::vector&lt;State const *&gt;&amp; nearby_states) = 0;
+<a name="l00026"></a>00026 <span class="keyword">namespace </span>Primitives {
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028 <span class="keyword">using</span> std::string;
+<a name="l00029"></a>00029 <span class="keyword">using</span> std::vector;
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031 
+<a name="l00032"></a><a class="code" href="classPrimitives_1_1QLearner.html">00032</a> <span class="keyword">class </span><a class="code" href="classPrimitives_1_1QLearner.html">QLearner</a> {
+<a name="l00033"></a>00033   <span class="keyword">public</span>:
+<a name="l00038"></a><a class="code" href="classPrimitives_1_1QLearner.html#a7a12b5c09f3649d30c148215bb982d00">00038</a>   <span class="keyword">virtual</span> <a class="code" href="classPrimitives_1_1QLearner.html#a7a12b5c09f3649d30c148215bb982d00">~QLearner</a>() {}
+<a name="l00039"></a>00039 
+<a name="l00047"></a>00047   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a933b05080139164afed1723d822f9a96">Load</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) = 0;
+<a name="l00048"></a>00048 
+<a name="l00057"></a>00057   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a6fcd9ddea202678a7930b0078c5c1b69">Save</a>(<span class="keywordtype">string</span> <span class="keyword">const</span>&amp; filename) = 0;
+<a name="l00058"></a>00058 
+<a name="l00068"></a>00068   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a18cafe0b850dadbca54a0041d3355366">Init</a>(std::vector&lt;Sensor *&gt; <span class="keyword">const</span> &amp;sensors) = 0;
+<a name="l00069"></a>00069 
+<a name="l00077"></a>00077   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a8ac72330276bd067dde2841072d83bbe">Learn</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; state) = 0;
+<a name="l00078"></a>00078 
+<a name="l00091"></a>00091   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a85e0dc9cf95da44552406e0c4b5c6365">GetNearbyStates</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; cur_state,
+<a name="l00092"></a>00092                                std::vector&lt;State const *&gt;&amp; nearby_states) = 0;
+<a name="l00093"></a>00093 
 <a name="l00094"></a>00094 
-<a name="l00095"></a>00095 
-<a name="l00104"></a>00104   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#ad0d6e0772822df7b36edca90d559420f">GetNextState</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; cur_state,
-<a name="l00105"></a>00105                             <a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>** next_state) = 0;
-<a name="l00106"></a>00106 
-<a name="l00116"></a><a class="code" href="classPrimitives_1_1QLearner.html#a06131387110e005a3aab55b7297600ac">00116</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a06131387110e005a3aab55b7297600ac">SetCreditFunction</a>(
-<a name="l00117"></a>00117     <a class="code" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a>* <span class="keyword">const</span> credit_assigner) {
-<a name="l00118"></a>00118     <a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a> = credit_assigner;
-<a name="l00119"></a>00119     <span class="keywordflow">return</span> (<a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a> != NULL);
-<a name="l00120"></a>00120   };
-<a name="l00121"></a>00121 
-<a name="l00131"></a><a class="code" href="classPrimitives_1_1QLearner.html#ade4b87f17814298751e907eb82f2cea5">00131</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#ade4b87f17814298751e907eb82f2cea5">SetExplorationFunction</a>(<a class="code" href="classPrimitives_1_1ExplorationType.html">ExplorationType</a>* <span class="keyword">const</span> explorer) {
-<a name="l00132"></a>00132     <a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a> = explorer;
-<a name="l00133"></a>00133     <span class="keywordflow">return</span> (<a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a> != NULL);
-<a name="l00134"></a>00134   }
-<a name="l00135"></a>00135 
-<a name="l00141"></a>00141   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a63f6ce306abd5aaaff72c8f606d3d83c">SetEnvironment</a>(vector&lt;Sensor* const&gt; <span class="keyword">const</span>&amp; sensor_list) = 0;
-<a name="l00142"></a>00142 
-<a name="l00150"></a>00150   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#abe879e7a03b5f116ef70284e77481b02">AssignCredit</a>(<span class="keywordtype">double</span> signal) = 0;
-<a name="l00151"></a>00151 
-<a name="l00157"></a><a class="code" href="classPrimitives_1_1QLearner.html#a4efce0391c10cd6dd14e12bb0646e237">00157</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1QLearner.html#a4efce0391c10cd6dd14e12bb0646e237">SetCurrentState</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> * <span class="keyword">const</span> state) {
-<a name="l00158"></a>00158     timeval now;
-<a name="l00159"></a>00159     gettimeofday(&amp;now, NULL);
-<a name="l00160"></a>00160     <span class="keywordtype">double</span> millis = (now.tv_sec*1000.) + (now.tv_usec/1000.);
-<a name="l00161"></a>00161     <a class="code" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a> sht(state, millis);
-<a name="l00162"></a>00162     <a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>.push(sht);
-<a name="l00163"></a>00163   }
-<a name="l00164"></a>00164 
-<a name="l00170"></a><a class="code" href="classPrimitives_1_1QLearner.html#a48d45b9c27a3dac167b2d06f7bd0e212">00170</a>   std::stack&lt;StateHistoryTuple&gt; &amp;<a class="code" href="classPrimitives_1_1QLearner.html#a48d45b9c27a3dac167b2d06f7bd0e212">get_state_history</a>() {
-<a name="l00171"></a>00171     <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>;
-<a name="l00172"></a>00172   }
-<a name="l00173"></a>00173 
-<a name="l00174"></a><a class="code" href="classPrimitives_1_1QLearner.html#a057ea58224d599b593fe4e2538d10025">00174</a>   <a class="code" href="classPrimitives_1_1QTable.html">QTable</a> &amp;<a class="code" href="classPrimitives_1_1QLearner.html#a057ea58224d599b593fe4e2538d10025">get_q_table</a>() { <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>; }
-<a name="l00175"></a>00175 
-<a name="l00176"></a><a class="code" href="classPrimitives_1_1QLearner.html#a9eae27432facdecf260b7271837ed223">00176</a>   std::string <a class="code" href="classPrimitives_1_1QLearner.html#a9eae27432facdecf260b7271837ed223">get_name</a>() { <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a>; }
-<a name="l00177"></a><a class="code" href="classPrimitives_1_1QLearner.html#a48f097390a019f31988a2e8ad5bc3493">00177</a>   <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1QLearner.html#a48f097390a019f31988a2e8ad5bc3493">set_name</a>(std::string name) { <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a> = name; }
-<a name="l00178"></a>00178 
-<a name="l00179"></a>00179  <span class="keyword">protected</span>:
-<a name="l00180"></a><a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">00180</a>   std::stack&lt;StateHistoryTuple&gt; <a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>;
-<a name="l00181"></a><a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">00181</a>   <a class="code" href="classPrimitives_1_1QTable.html">QTable</a> <a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>;
-<a name="l00182"></a><a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">00182</a>   std::string <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a>;
-<a name="l00183"></a><a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">00183</a>   <a class="code" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a> *<a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a>;
-<a name="l00184"></a><a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">00184</a>   <a class="code" href="classPrimitives_1_1ExplorationType.html">ExplorationType</a> *<a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a>;
-<a name="l00185"></a><a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">00185</a>   std::vector&lt;Sensor const *&gt; <a class="code" href="classPrimitives_1_1QLearner.html#a5f2f5a43b40cbbdef54a0a42cd8bac52">sensors_</a>;
-<a name="l00186"></a>00186 };
+<a name="l00104"></a>00104   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a1c04444e3ca68232788d9902334ae738">GetNextState</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span>&amp; cur_state,
+<a name="l00105"></a>00105                             <a class="code" href="classPrimitives_1_1State.html">State</a> **next_state,
+<a name="l00106"></a>00106                             <span class="keywordtype">double</span> &amp;reward) = 0;
+<a name="l00107"></a>00107 
+<a name="l00117"></a><a class="code" href="classPrimitives_1_1QLearner.html#a06131387110e005a3aab55b7297600ac">00117</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a06131387110e005a3aab55b7297600ac">SetCreditFunction</a>(
+<a name="l00118"></a>00118     <a class="code" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a>* <span class="keyword">const</span> credit_assigner) {
+<a name="l00119"></a>00119     <a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a> = credit_assigner;
+<a name="l00120"></a>00120     <span class="keywordflow">return</span> (<a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a> != NULL);
+<a name="l00121"></a>00121   };
+<a name="l00122"></a>00122 
+<a name="l00132"></a><a class="code" href="classPrimitives_1_1QLearner.html#ade4b87f17814298751e907eb82f2cea5">00132</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#ade4b87f17814298751e907eb82f2cea5">SetExplorationFunction</a>(<a class="code" href="classPrimitives_1_1ExplorationType.html">ExplorationType</a>* <span class="keyword">const</span> explorer) {
+<a name="l00133"></a>00133     <a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a> = explorer;
+<a name="l00134"></a>00134     <span class="keywordflow">return</span> (<a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a> != NULL);
+<a name="l00135"></a>00135   }
+<a name="l00136"></a>00136 
+<a name="l00142"></a><a class="code" href="classPrimitives_1_1QLearner.html#a6dea18ac1888e0c23e60e798faba1930">00142</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a6dea18ac1888e0c23e60e798faba1930">SetEnvironment</a>(vector&lt;Sensor*&gt; <span class="keyword">const</span>&amp; sensor_list) {
+<a name="l00143"></a>00143     std::vector&lt;Sensor*&gt;::const_iterator iter;
+<a name="l00144"></a>00144     <span class="keywordflow">for</span> (iter = sensor_list.begin(); iter != sensor_list.end(); ++iter) {
+<a name="l00145"></a>00145       <a class="code" href="classPrimitives_1_1Sensor.html">Sensor</a> *s = *iter;
+<a name="l00146"></a>00146       <a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a>.push_back(s);
+<a name="l00147"></a>00147     }
+<a name="l00148"></a>00148     <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00149"></a>00149   }
+<a name="l00150"></a>00150 
+<a name="l00158"></a>00158   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#abe879e7a03b5f116ef70284e77481b02">AssignCredit</a>(<span class="keywordtype">double</span> signal) = 0;
+<a name="l00159"></a>00159 
+<a name="l00165"></a><a class="code" href="classPrimitives_1_1QLearner.html#a4efce0391c10cd6dd14e12bb0646e237">00165</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1QLearner.html#a4efce0391c10cd6dd14e12bb0646e237">SetCurrentState</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> * <span class="keyword">const</span> state) {
+<a name="l00166"></a>00166     timeval now;
+<a name="l00167"></a>00167     gettimeofday(&amp;now, NULL);
+<a name="l00168"></a>00168     <span class="keywordtype">double</span> millis = (now.tv_sec*1000.) + (now.tv_usec/1000.);
+<a name="l00169"></a>00169     <a class="code" href="classPrimitives_1_1StateHistoryTuple.html">StateHistoryTuple</a> sht(state, millis);
+<a name="l00170"></a>00170     <a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>.push(sht);
+<a name="l00171"></a>00171   }
+<a name="l00172"></a>00172 
+<a name="l00183"></a><a class="code" href="classPrimitives_1_1QLearner.html#a8e35ed38b6aa5c8b877b6472e8406244">00183</a>   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1QLearner.html#a8e35ed38b6aa5c8b877b6472e8406244">IsNearTrainedGoalState</a>(<a class="code" href="classPrimitives_1_1State.html">State</a> <span class="keyword">const</span> &amp;state, <span class="keywordtype">double</span> sensitivity) {
+<a name="l00184"></a>00184     std::vector&lt;State const *&gt;::iterator state_iter;
+<a name="l00185"></a>00185     std::vector&lt;double&gt;::const_iterator dist_iter;
+<a name="l00186"></a>00186     std::vector&lt;Sensor *&gt;::const_iterator sens_iter;
 <a name="l00187"></a>00187 
-<a name="l00188"></a>00188 }  <span class="comment">// namespace Primitives</span>
-<a name="l00189"></a>00189 
-<a name="l00190"></a>00190 <span class="preprocessor">#endif  // _SHL_PRIMITIVES_QLEARNER_QLEARNER_H_</span>
+<a name="l00188"></a>00188     std::vector&lt;State const *&gt; &amp;goal_states = 
+<a name="l00189"></a>00189       <a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>.<a class="code" href="classPrimitives_1_1QTable.html#af998c958bb7772121097d5f3b52e812a">get_trained_goal_states</a>();
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191     <span class="keywordflow">for</span> (state_iter = goal_states.begin(); state_iter != goal_states.end();
+<a name="l00192"></a>00192       ++state_iter) {
+<a name="l00193"></a>00193       <span class="keywordtype">bool</span> state_fail = <span class="keyword">false</span>;
+<a name="l00194"></a>00194       std::vector&lt;double&gt; dists = state.<a class="code" href="classPrimitives_1_1State.html#ad05ccb0a74403f27c4ab898e4812c825">GetSquaredDistances</a>(*state_iter);
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196       <span class="keywordflow">for</span> (dist_iter = dists.begin(),
+<a name="l00197"></a>00197            sens_iter = <a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a>.begin();
+<a name="l00198"></a>00198            dist_iter != dists.end(),
+<a name="l00199"></a>00199            sens_iter != <a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a>.end(); ++dist_iter, ++sens_iter) {
+<a name="l00200"></a>00200         <span class="keywordtype">double</span> sensor_unit_dist = (*sens_iter)-&gt;get_nearby_threshold();
+<a name="l00201"></a>00201         <span class="keywordflow">if</span> ((*dist_iter) &gt; sensor_unit_dist * sensor_unit_dist * sensitivity) {
+<a name="l00202"></a>00202           state_fail = <span class="keyword">true</span>;
+<a name="l00203"></a>00203           <span class="keywordflow">break</span>;
+<a name="l00204"></a>00204         }
+<a name="l00205"></a>00205       }
+<a name="l00206"></a>00206       <span class="keywordflow">if</span> (!state_fail) <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00207"></a>00207     }
+<a name="l00208"></a>00208     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00209"></a>00209   }
+<a name="l00210"></a>00210 
+<a name="l00216"></a><a class="code" href="classPrimitives_1_1QLearner.html#a80abd6bd062ac66f602b7be33e7a23c4">00216</a>   <span class="keyword">virtual</span> std::stack&lt;StateHistoryTuple&gt; &amp;<a class="code" href="classPrimitives_1_1QLearner.html#a80abd6bd062ac66f602b7be33e7a23c4">get_state_history</a>() {
+<a name="l00217"></a>00217     <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>;
+<a name="l00218"></a>00218   }
+<a name="l00219"></a>00219   
+<a name="l00220"></a><a class="code" href="classPrimitives_1_1QLearner.html#a3bf06fb8fd39ace119a6737043aef8d4">00220</a>   <span class="keyword">virtual</span> <a class="code" href="classPrimitives_1_1State.html">State</a> *<a class="code" href="classPrimitives_1_1QLearner.html#a3bf06fb8fd39ace119a6737043aef8d4">get_current_state</a>() { 
+<a name="l00221"></a>00221     <span class="keywordflow">if</span> (<a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>.size())
+<a name="l00222"></a>00222       <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>.top().state_; 
+<a name="l00223"></a>00223     <span class="keywordflow">return</span> NULL;
+<a name="l00224"></a>00224   }
+<a name="l00225"></a>00225 
+<a name="l00226"></a><a class="code" href="classPrimitives_1_1QLearner.html#ab5c5e93c2f703db57b3d3835a1afcfc9">00226</a>   <span class="keyword">virtual</span> <a class="code" href="classPrimitives_1_1QTable.html">QTable</a> *<a class="code" href="classPrimitives_1_1QLearner.html#ab5c5e93c2f703db57b3d3835a1afcfc9">get_q_table</a>() { <span class="keywordflow">return</span> &amp;<a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>; }
+<a name="l00227"></a>00227 
+<a name="l00228"></a><a class="code" href="classPrimitives_1_1QLearner.html#a52f3228e0ff83d26165b8c6d6063165f">00228</a>   <span class="keyword">virtual</span> std::string <a class="code" href="classPrimitives_1_1QLearner.html#a52f3228e0ff83d26165b8c6d6063165f">get_name</a>() { <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a>; }
+<a name="l00229"></a><a class="code" href="classPrimitives_1_1QLearner.html#a248c4693f034a9121a1b21e68bb1733c">00229</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1QLearner.html#a248c4693f034a9121a1b21e68bb1733c">set_name</a>(std::string name) { <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a> = name; }
+<a name="l00230"></a>00230 
+<a name="l00231"></a><a class="code" href="classPrimitives_1_1QLearner.html#a6b63d8ab0899bd33f64d26ba352f3596">00231</a>   <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classPrimitives_1_1QLearner.html#a6b63d8ab0899bd33f64d26ba352f3596">get_trials</a>() { <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#a464a0338cc146d7b2f0061cf64bd78f9">trials_</a>; }
+<a name="l00232"></a><a class="code" href="classPrimitives_1_1QLearner.html#ae5fffa9cbe19c38f92b4a1b1d18ace66">00232</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1QLearner.html#ae5fffa9cbe19c38f92b4a1b1d18ace66">set_trials</a>(<span class="keywordtype">int</span> trials) { <a class="code" href="classPrimitives_1_1QLearner.html#a464a0338cc146d7b2f0061cf64bd78f9">trials_</a> = trials; }
+<a name="l00233"></a>00233 
+<a name="l00234"></a><a class="code" href="classPrimitives_1_1QLearner.html#a8018d90fd016ceddee141175a8f9fc8d">00234</a>   <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classPrimitives_1_1QLearner.html#a8018d90fd016ceddee141175a8f9fc8d">get_anticipated_duration</a>() { <span class="keywordflow">return</span> <a class="code" href="classPrimitives_1_1QLearner.html#a489f67c4a9405b550df9e934f014040e">anticipated_duration_</a>; }
+<a name="l00235"></a><a class="code" href="classPrimitives_1_1QLearner.html#a2c990dd1a5303c91b0964fc295d04de8">00235</a>   <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1QLearner.html#a2c990dd1a5303c91b0964fc295d04de8">set_anticipated_duration</a>(<span class="keywordtype">int</span> anticipated_duration) {
+<a name="l00236"></a>00236     <a class="code" href="classPrimitives_1_1QLearner.html#a489f67c4a9405b550df9e934f014040e">anticipated_duration_</a> = anticipated_duration;
+<a name="l00237"></a>00237   }
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239  <span class="keyword">protected</span>:
+<a name="l00240"></a><a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">00240</a>   std::stack&lt;StateHistoryTuple&gt; <a class="code" href="classPrimitives_1_1QLearner.html#a2487a9ae6acce1779ca8902cca562c81">state_history_</a>;
+<a name="l00241"></a><a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">00241</a>   <a class="code" href="classPrimitives_1_1QTable.html">QTable</a> <a class="code" href="classPrimitives_1_1QLearner.html#a4c169e7c1754695fc26b60c505412195">q_table_</a>;
+<a name="l00242"></a><a class="code" href="classPrimitives_1_1QLearner.html#a464a0338cc146d7b2f0061cf64bd78f9">00242</a>   <span class="keywordtype">int</span> <a class="code" href="classPrimitives_1_1QLearner.html#a464a0338cc146d7b2f0061cf64bd78f9">trials_</a>;
+<a name="l00243"></a><a class="code" href="classPrimitives_1_1QLearner.html#a489f67c4a9405b550df9e934f014040e">00243</a>   <span class="keywordtype">double</span> <a class="code" href="classPrimitives_1_1QLearner.html#a489f67c4a9405b550df9e934f014040e">anticipated_duration_</a>;
+<a name="l00244"></a>00244 
+<a name="l00245"></a><a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">00245</a>   std::string <a class="code" href="classPrimitives_1_1QLearner.html#ad2c8ec935db84f6d20a14125526cf061">name_</a>;
+<a name="l00246"></a><a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">00246</a>   <a class="code" href="classPrimitives_1_1CreditAssignmentType.html">CreditAssignmentType</a> *<a class="code" href="classPrimitives_1_1QLearner.html#ac70de308cfd1ee4ac4d2b57567c13b8f">credit_assignment_type_</a>;
+<a name="l00247"></a><a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">00247</a>   <a class="code" href="classPrimitives_1_1ExplorationType.html">ExplorationType</a> *<a class="code" href="classPrimitives_1_1QLearner.html#a7bc3dfe443f9b87191fffcdf8918c331">exploration_type_</a>;
+<a name="l00248"></a><a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">00248</a>   std::vector&lt;Sensor *&gt; <a class="code" href="classPrimitives_1_1QLearner.html#a5f23b2f4bf7f83b30ac293b88e7946d5">sensors_</a>;
+<a name="l00249"></a>00249 };
+<a name="l00250"></a>00250 
+<a name="l00251"></a>00251 }  <span class="comment">// namespace Primitives</span>
+<a name="l00252"></a>00252 
+<a name="l00253"></a>00253 <span class="preprocessor">#endif  // _SHL_PRIMITIVES_QLEARNER_QLEARNER_H_</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">

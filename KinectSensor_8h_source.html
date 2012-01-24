@@ -111,75 +111,75 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00034"></a>00034 
 <a name="l00035"></a><a class="code" href="classPrimitives_1_1KinectSensor.html">00035</a> <span class="keyword">class </span><a class="code" href="classPrimitives_1_1KinectSensor.html">KinectSensor</a> : <span class="keyword">public</span> <a class="code" href="classPrimitives_1_1Sensor.html">Sensor</a> {
 <a name="l00036"></a>00036  <span class="keyword">public</span>:
-<a name="l00045"></a>00045   <span class="keyword">explicit</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#ac29d1366a7fd3e71717fb69d3921b643">KinectSensor</a>(<span class="keywordtype">int</span> port);
-<a name="l00046"></a>00046 
-<a name="l00050"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a83e4a378149c873232511726f2c10526">00050</a>   <span class="keyword">virtual</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#a83e4a378149c873232511726f2c10526">~KinectSensor</a>() {
-<a name="l00051"></a>00051     <span class="keywordflow">if</span> (file_handle_ != NULL)
-<a name="l00052"></a>00052       fclose(file_handle_);
-<a name="l00053"></a>00053     close(polling_socket_);
-<a name="l00054"></a>00054     pthread_join(polling_thread_, NULL);
-<a name="l00055"></a>00055   }
-<a name="l00056"></a>00056 
-<a name="l00061"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274">00061</a>   <span class="keyword">enum</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274">_NUI_SKELETON_POSITION_INDEX</a> {
-<a name="l00062"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274ade0198950f28a947a4cf0bebdc090731">00062</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274ade0198950f28a947a4cf0bebdc090731">NUI_SKELETON_POSITION_HIP_CENTER</a> = 0,
-<a name="l00063"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274aade8e3a018fe878183fd4f15882d4330">00063</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274aade8e3a018fe878183fd4f15882d4330">NUI_SKELETON_POSITION_SPINE</a>,
-<a name="l00064"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a3aef26045a1bbe807635ead305eb15bc">00064</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a3aef26045a1bbe807635ead305eb15bc">NUI_SKELETON_POSITION_SHOULDER_CENTER</a>,
-<a name="l00065"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274abf2c2c27a8e0a8599316a1f5f672430d">00065</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274abf2c2c27a8e0a8599316a1f5f672430d">NUI_SKELETON_POSITION_HEAD</a>,
-<a name="l00066"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a992e8406a52a3d2f39faeb0b4e5b4170">00066</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a992e8406a52a3d2f39faeb0b4e5b4170">NUI_SKELETON_POSITION_SHOULDER_LEFT</a>,
-<a name="l00067"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a442ebc6c9c3f2e229462fc5dd053ddfb">00067</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a442ebc6c9c3f2e229462fc5dd053ddfb">NUI_SKELETON_POSITION_ELBOW_LEFT</a>,
-<a name="l00068"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af05024b528f5f1c9ead47b1fb07a7813">00068</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af05024b528f5f1c9ead47b1fb07a7813">NUI_SKELETON_POSITION_WRIST_LEFT</a>,
-<a name="l00069"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a161e32cc991ddb27af8bf39ce6f36115">00069</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a161e32cc991ddb27af8bf39ce6f36115">NUI_SKELETON_POSITION_HAND_LEFT</a>,
-<a name="l00070"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a00453815e36e6fb7d92ebb3328669597">00070</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a00453815e36e6fb7d92ebb3328669597">NUI_SKELETON_POSITION_SHOULDER_RIGHT</a>,
-<a name="l00071"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a18e840fca56eb0249c900a2ece97c5ba">00071</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a18e840fca56eb0249c900a2ece97c5ba">NUI_SKELETON_POSITION_ELBOW_RIGHT</a>,
-<a name="l00072"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274acc808d0fdd93db94306d9ef7e06e0469">00072</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274acc808d0fdd93db94306d9ef7e06e0469">NUI_SKELETON_POSITION_WRIST_RIGHT</a>,
-<a name="l00073"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274adf7253e3e6dacafc1514454f6efee4d0">00073</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274adf7253e3e6dacafc1514454f6efee4d0">NUI_SKELETON_POSITION_HAND_RIGHT</a>,
-<a name="l00074"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a12e2401a7a7271857df05b18e3ef5ce3">00074</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a12e2401a7a7271857df05b18e3ef5ce3">NUI_SKELETON_POSITION_HIP_LEFT</a>,
-<a name="l00075"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af17e381d104080eccf2b7f99e206dcdd">00075</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af17e381d104080eccf2b7f99e206dcdd">NUI_SKELETON_POSITION_KNEE_LEFT</a>,
-<a name="l00076"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274ada6983be0fddb5a4f2c253366b781717">00076</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274ada6983be0fddb5a4f2c253366b781717">NUI_SKELETON_POSITION_ANKLE_LEFT</a>,
-<a name="l00077"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a3e8455fcb07bd43f6fd527220bd79995">00077</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a3e8455fcb07bd43f6fd527220bd79995">NUI_SKELETON_POSITION_FOOT_LEFT</a>,
-<a name="l00078"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a71e02936c41355fabdfefbb57ddc3613">00078</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a71e02936c41355fabdfefbb57ddc3613">NUI_SKELETON_POSITION_HIP_RIGHT</a>,
-<a name="l00079"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274aa4ff2ec9669454088cea7b3f20dd84d4">00079</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274aa4ff2ec9669454088cea7b3f20dd84d4">NUI_SKELETON_POSITION_KNEE_RIGHT</a>,
-<a name="l00080"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a8d70e54bb0c98cee9e119655d55f36c2">00080</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a8d70e54bb0c98cee9e119655d55f36c2">NUI_SKELETON_POSITION_ANKLE_RIGHT</a>,
-<a name="l00081"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a9882a4b60cd43d2deef489a106e43ae1">00081</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a9882a4b60cd43d2deef489a106e43ae1">NUI_SKELETON_POSITION_FOOT_RIGHT</a>,
-<a name="l00082"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af4eb1d1ec59041328407bcfea515ee6c">00082</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af4eb1d1ec59041328407bcfea515ee6c">NUI_SKELPOS_COUNT</a>
-<a name="l00083"></a>00083   } <a class="code" href="classPrimitives_1_1KinectSensor.html#ad145d649d0eea4f0cc5f8b71d21efc10">NUI_SKELETON_POSITION_INDEX</a>;
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#af1c008f0ba9b7ff3a7d78f95b0460ec1">SetValues</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> * <span class="keyword">const</span> values, <span class="keywordtype">int</span> num_values);
-<a name="l00086"></a>00086   <span class="keyword">virtual</span> <span class="keywordtype">double</span> <span class="keyword">const</span> * <span class="keyword">const</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#aff49b6e44575159e5bfe582f6b20e091">GetValues</a>();
-<a name="l00087"></a>00087 
-<a name="l00092"></a>00092   <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#a78ccf1063f2f76fe58a5ae2b2378f1a4">ListenOnSocket</a>();
-<a name="l00093"></a>00093 
-<a name="l00097"></a>00097   <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#a80c37dc13da95e057c776313accc9919">set_file_handle</a>(<span class="keywordtype">char</span> <span class="keyword">const</span> * filename);
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099  <span class="keyword">protected</span>:
-<a name="l00100"></a>00100   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#ac9e07ccd5ef4b87b495f24681c1e4856">Poll</a>();
-<a name="l00101"></a>00101 
-<a name="l00102"></a>00102  <span class="keyword">private</span>:
-<a name="l00106"></a>00106   <span class="keywordtype">char</span> <span class="keyword">const</span> * name_;
-<a name="l00107"></a>00107 
-<a name="l00119"></a>00119   <span class="keywordtype">double</span> <span class="keyword">const</span> * values_;
-<a name="l00120"></a>00120 
-<a name="l00124"></a>00124   <span class="keywordtype">int</span> num_values_;
-<a name="l00125"></a>00125 
-<a name="l00129"></a>00129   <span class="keywordtype">bool</span> received_;
-<a name="l00130"></a>00130 
-<a name="l00135"></a>00135   FILE* file_handle_;
-<a name="l00136"></a>00136 
-<a name="l00140"></a>00140   <span class="keywordtype">int</span> polling_socket_;
-<a name="l00141"></a>00141 
-<a name="l00145"></a>00145   pthread_t polling_thread_;
-<a name="l00146"></a>00146 };
-<a name="l00147"></a>00147 
-<a name="l00148"></a>00148 <span class="comment">// Due to pthread issues we create the poller as a non-member function</span>
-<a name="l00149"></a><a class="code" href="namespacePrimitives.html#a83b2f389c093388dcd4022ee60b7a6b9">00149</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span>* <a class="code" href="namespacePrimitives.html#a83b2f389c093388dcd4022ee60b7a6b9">PollForKinect</a>(<span class="keywordtype">void</span>* <span class="keywordtype">object</span>) {
-<a name="l00150"></a>00150   <a class="code" href="classPrimitives_1_1KinectSensor.html">KinectSensor</a>* feedback_sensor = <span class="keyword">reinterpret_cast&lt;</span><a class="code" href="classPrimitives_1_1KinectSensor.html">KinectSensor</a>*<span class="keyword">&gt;</span>(object);
-<a name="l00151"></a>00151   feedback_sensor-&gt;<a class="code" href="classPrimitives_1_1KinectSensor.html#a78ccf1063f2f76fe58a5ae2b2378f1a4">ListenOnSocket</a>();
-<a name="l00152"></a>00152   <span class="keywordflow">return</span> NULL;
-<a name="l00153"></a>00153 }
+<a name="l00043"></a>00043   <span class="keyword">explicit</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#ac29d1366a7fd3e71717fb69d3921b643">KinectSensor</a>(<span class="keywordtype">int</span> port);
+<a name="l00044"></a>00044 
+<a name="l00048"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a83e4a378149c873232511726f2c10526">00048</a>   <span class="keyword">virtual</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#a83e4a378149c873232511726f2c10526">~KinectSensor</a>() {
+<a name="l00049"></a>00049     <span class="keywordflow">if</span> (file_handle_ != NULL)
+<a name="l00050"></a>00050       fclose(file_handle_);
+<a name="l00051"></a>00051     close(polling_socket_);
+<a name="l00052"></a>00052     pthread_join(polling_thread_, NULL);
+<a name="l00053"></a>00053   }
+<a name="l00054"></a>00054 
+<a name="l00059"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274">00059</a>   <span class="keyword">enum</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274">_NUI_SKELETON_POSITION_INDEX</a> {
+<a name="l00060"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274ade0198950f28a947a4cf0bebdc090731">00060</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274ade0198950f28a947a4cf0bebdc090731">NUI_SKELETON_POSITION_HIP_CENTER</a> = 0,
+<a name="l00061"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274aade8e3a018fe878183fd4f15882d4330">00061</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274aade8e3a018fe878183fd4f15882d4330">NUI_SKELETON_POSITION_SPINE</a>,
+<a name="l00062"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a3aef26045a1bbe807635ead305eb15bc">00062</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a3aef26045a1bbe807635ead305eb15bc">NUI_SKELETON_POSITION_SHOULDER_CENTER</a>,
+<a name="l00063"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274abf2c2c27a8e0a8599316a1f5f672430d">00063</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274abf2c2c27a8e0a8599316a1f5f672430d">NUI_SKELETON_POSITION_HEAD</a>,
+<a name="l00064"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a992e8406a52a3d2f39faeb0b4e5b4170">00064</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a992e8406a52a3d2f39faeb0b4e5b4170">NUI_SKELETON_POSITION_SHOULDER_LEFT</a>,
+<a name="l00065"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a442ebc6c9c3f2e229462fc5dd053ddfb">00065</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a442ebc6c9c3f2e229462fc5dd053ddfb">NUI_SKELETON_POSITION_ELBOW_LEFT</a>,
+<a name="l00066"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af05024b528f5f1c9ead47b1fb07a7813">00066</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af05024b528f5f1c9ead47b1fb07a7813">NUI_SKELETON_POSITION_WRIST_LEFT</a>,
+<a name="l00067"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a161e32cc991ddb27af8bf39ce6f36115">00067</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a161e32cc991ddb27af8bf39ce6f36115">NUI_SKELETON_POSITION_HAND_LEFT</a>,
+<a name="l00068"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a00453815e36e6fb7d92ebb3328669597">00068</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a00453815e36e6fb7d92ebb3328669597">NUI_SKELETON_POSITION_SHOULDER_RIGHT</a>,
+<a name="l00069"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a18e840fca56eb0249c900a2ece97c5ba">00069</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a18e840fca56eb0249c900a2ece97c5ba">NUI_SKELETON_POSITION_ELBOW_RIGHT</a>,
+<a name="l00070"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274acc808d0fdd93db94306d9ef7e06e0469">00070</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274acc808d0fdd93db94306d9ef7e06e0469">NUI_SKELETON_POSITION_WRIST_RIGHT</a>,
+<a name="l00071"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274adf7253e3e6dacafc1514454f6efee4d0">00071</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274adf7253e3e6dacafc1514454f6efee4d0">NUI_SKELETON_POSITION_HAND_RIGHT</a>,
+<a name="l00072"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a12e2401a7a7271857df05b18e3ef5ce3">00072</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a12e2401a7a7271857df05b18e3ef5ce3">NUI_SKELETON_POSITION_HIP_LEFT</a>,
+<a name="l00073"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af17e381d104080eccf2b7f99e206dcdd">00073</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af17e381d104080eccf2b7f99e206dcdd">NUI_SKELETON_POSITION_KNEE_LEFT</a>,
+<a name="l00074"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274ada6983be0fddb5a4f2c253366b781717">00074</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274ada6983be0fddb5a4f2c253366b781717">NUI_SKELETON_POSITION_ANKLE_LEFT</a>,
+<a name="l00075"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a3e8455fcb07bd43f6fd527220bd79995">00075</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a3e8455fcb07bd43f6fd527220bd79995">NUI_SKELETON_POSITION_FOOT_LEFT</a>,
+<a name="l00076"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a71e02936c41355fabdfefbb57ddc3613">00076</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a71e02936c41355fabdfefbb57ddc3613">NUI_SKELETON_POSITION_HIP_RIGHT</a>,
+<a name="l00077"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274aa4ff2ec9669454088cea7b3f20dd84d4">00077</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274aa4ff2ec9669454088cea7b3f20dd84d4">NUI_SKELETON_POSITION_KNEE_RIGHT</a>,
+<a name="l00078"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a8d70e54bb0c98cee9e119655d55f36c2">00078</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a8d70e54bb0c98cee9e119655d55f36c2">NUI_SKELETON_POSITION_ANKLE_RIGHT</a>,
+<a name="l00079"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a9882a4b60cd43d2deef489a106e43ae1">00079</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274a9882a4b60cd43d2deef489a106e43ae1">NUI_SKELETON_POSITION_FOOT_RIGHT</a>,
+<a name="l00080"></a><a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af4eb1d1ec59041328407bcfea515ee6c">00080</a>     <a class="code" href="classPrimitives_1_1KinectSensor.html#a1a80eacb96e09f7505e5314c010c2274af4eb1d1ec59041328407bcfea515ee6c">NUI_SKELPOS_COUNT</a>
+<a name="l00081"></a>00081   } <a class="code" href="classPrimitives_1_1KinectSensor.html#ad145d649d0eea4f0cc5f8b71d21efc10">NUI_SKELETON_POSITION_INDEX</a>;
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#af1c008f0ba9b7ff3a7d78f95b0460ec1">SetValues</a>(<span class="keywordtype">double</span> <span class="keyword">const</span> * <span class="keyword">const</span> values, <span class="keywordtype">int</span> num_values);
+<a name="l00084"></a>00084   <span class="keyword">virtual</span> <span class="keywordtype">double</span> <span class="keyword">const</span> * <span class="keyword">const</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#aff49b6e44575159e5bfe582f6b20e091">GetValues</a>();
+<a name="l00085"></a>00085 
+<a name="l00090"></a>00090   <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#a78ccf1063f2f76fe58a5ae2b2378f1a4">ListenOnSocket</a>();
+<a name="l00091"></a>00091 
+<a name="l00095"></a>00095   <span class="keywordtype">void</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#a80c37dc13da95e057c776313accc9919">set_file_handle</a>(<span class="keywordtype">char</span> <span class="keyword">const</span> * filename);
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097  <span class="keyword">protected</span>:
+<a name="l00098"></a>00098   <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPrimitives_1_1KinectSensor.html#ac9e07ccd5ef4b87b495f24681c1e4856">Poll</a>();
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100  <span class="keyword">private</span>:
+<a name="l00104"></a>00104   <span class="keywordtype">char</span> <span class="keyword">const</span> * name_;
+<a name="l00105"></a>00105 
+<a name="l00117"></a>00117   <span class="keywordtype">double</span> * values_;
+<a name="l00118"></a>00118 
+<a name="l00122"></a>00122   <span class="keywordtype">int</span> num_values_;
+<a name="l00123"></a>00123 
+<a name="l00127"></a>00127   <span class="keywordtype">bool</span> received_;
+<a name="l00128"></a>00128 
+<a name="l00133"></a>00133   FILE* file_handle_;
+<a name="l00134"></a>00134 
+<a name="l00138"></a>00138   <span class="keywordtype">int</span> polling_socket_;
+<a name="l00139"></a>00139 
+<a name="l00143"></a>00143   pthread_t polling_thread_;
+<a name="l00144"></a>00144 };
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146 <span class="comment">// Due to pthread issues we create the poller as a non-member function</span>
+<a name="l00147"></a><a class="code" href="namespacePrimitives.html#a83b2f389c093388dcd4022ee60b7a6b9">00147</a> <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span>* <a class="code" href="namespacePrimitives.html#a83b2f389c093388dcd4022ee60b7a6b9">PollForKinect</a>(<span class="keywordtype">void</span>* <span class="keywordtype">object</span>) {
+<a name="l00148"></a>00148   <a class="code" href="classPrimitives_1_1KinectSensor.html">KinectSensor</a>* feedback_sensor = <span class="keyword">reinterpret_cast&lt;</span><a class="code" href="classPrimitives_1_1KinectSensor.html">KinectSensor</a>*<span class="keyword">&gt;</span>(object);
+<a name="l00149"></a>00149   feedback_sensor-&gt;<a class="code" href="classPrimitives_1_1KinectSensor.html#a78ccf1063f2f76fe58a5ae2b2378f1a4">ListenOnSocket</a>();
+<a name="l00150"></a>00150   <span class="keywordflow">return</span> NULL;
+<a name="l00151"></a>00151 }
+<a name="l00152"></a>00152 
+<a name="l00153"></a>00153 }  <span class="comment">// namespace Primitives</span>
 <a name="l00154"></a>00154 
-<a name="l00155"></a>00155 }  <span class="comment">// namespace Primitives</span>
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157 <span class="preprocessor">#endif  // _SHL_PRIMITIVES_STUDENT_KINECTSENSOR_H_</span>
+<a name="l00155"></a>00155 <span class="preprocessor">#endif  // _SHL_PRIMITIVES_STUDENT_KINECTSENSOR_H_</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">

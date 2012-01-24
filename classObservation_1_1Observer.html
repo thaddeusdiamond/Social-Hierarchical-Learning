@@ -83,7 +83,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a>  </div>
   <div class="headertitle">
 <h1>Observation::Observer Class Reference</h1>  </div>
 </div>
@@ -95,7 +96,7 @@ Inheritance diagram for Observation::Observer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classObservation_1_1Observer__inherit__graph.png" border="0" usemap="#Observation_1_1Observer_inherit__map" alt="Inheritance graph"/></div>
 <map name="Observation_1_1Observer_inherit__map" id="Observation_1_1Observer_inherit__map">
-<area shape="rect" id="node3" href="classObservation_1_1Dummy.html" title="Observation::Dummy" alt="" coords="8,83,155,112"/></map>
+<area shape="rect" id="node3" href="classObservation_1_1Dummy.html" title="Observation::Dummy" alt="" coords="5,83,152,112"/><area shape="rect" id="node5" href="classObservation_1_1RealtimeObserver.html" title="Observation::RealtimeObserver" alt="" coords="176,83,381,112"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classObservation_1_1Observer-members.html">List of all members.</a></p>
@@ -103,13 +104,20 @@ Inheritance diagram for Observation::Observer:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#af9f2ef12fc97d366879b6b1fdf5d8795">~Observer</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#aa3c487a0bdd8ad4d8b0746d6795aaa2e">Observe</a> (Task *task, <a class="el" href="classPrimitives_1_1QTable.html">QTable</a> *tables, int tables_len, vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;sensors)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#a87c2f9264c26926ef96b6a0284ba1b26">AttemptMatch</a> (<a class="el" href="classPrimitives_1_1QTable.html">QTable</a> const &amp;table, vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;sensors, double min_threshold, double death_time)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#a325635d9d539f472b5d658fb01baf7f8">Observe</a> (<a class="el" href="classObservation_1_1Task.html">Task</a> *task)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#ab93010ce6ed97e211eaeb0ce7983b1fd">StopObserving</a> (void)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#ab451fb45246c811aa7bae8220d68a27d">Init</a> (std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; sensors)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#a064f953e12e106f3bb0eca78465ea55f">AddSkill</a> (<a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> *skill)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#a849437339769d1c8efc6c45f58ecc558">get_sensors</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> * &gt; const &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#a6a61ade1b4cb4a422af9c55cbbd089d8">get_primitives</a> ()</td></tr>
+<tr><td colspan="2"><h2><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#a9defc6fb06b215707d4cbd6146627bc6">sensors_</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObservation_1_1Observer.html#acdcf16806bfd47a9f6e40bc464febd13">primitives_</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="Observer_8h_source.html#l00027">27</a> of file <a class="el" href="Observer_8h_source.html">Observer.h</a>.</p>
+<p>Definition at line <a class="el" href="Observer_8h_source.html#l00032">32</a> of file <a class="el" href="Observer_8h_source.html">Observer.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="af9f2ef12fc97d366879b6b1fdf5d8795"></a><!-- doxytag: member="Observation::Observer::~Observer" ref="af9f2ef12fc97d366879b6b1fdf5d8795" args="()" -->
 <div class="memitem">
@@ -126,112 +134,123 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <p>The destructor for an <a class="el" href="classObservation_1_1Observer.html">Observer</a> is made virtual for polymorphism </p>
 
-<p>Definition at line <a class="el" href="Observer_8h_source.html#l00032">32</a> of file <a class="el" href="Observer_8h_source.html">Observer.h</a>.</p>
+<p>Definition at line <a class="el" href="Observer_8h_source.html#l00037">37</a> of file <a class="el" href="Observer_8h_source.html">Observer.h</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a87c2f9264c26926ef96b6a0284ba1b26"></a><!-- doxytag: member="Observation::Observer::AttemptMatch" ref="a87c2f9264c26926ef96b6a0284ba1b26" args="(QTable const &amp;table, vector&lt; Sensor * &gt; const &amp;sensors, double min_threshold, double death_time)=0" -->
+<a class="anchor" id="a064f953e12e106f3bb0eca78465ea55f"></a><!-- doxytag: member="Observation::Observer::AddSkill" ref="a064f953e12e106f3bb0eca78465ea55f" args="(QLearner *skill)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double Observation::Observer::AttemptMatch </td>
+          <td class="memname">void Observation::Observer::AddSkill </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classPrimitives_1_1QTable.html">QTable</a> const &amp;&#160;</td>
-          <td class="paramname"><em>table</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>sensors</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>min_threshold</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>death_time</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [pure virtual]</code></td>
+          <td class="paramtype"><a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> *&#160;</td>
+          <td class="paramname"><em>skill</em></td><td>)</td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>During the observation an observer will necessarily diverge the QTable at some point to test if the current input matches a desired QTable</p>
+<p>Add a skill into the library of primitives to identify </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">table</td><td>The table to be tested against </td></tr>
-    <tr><td class="paramname">sensors</td><td>A set of sensors to be polled over time &amp; tested </td></tr>
-    <tr><td class="paramname">min_threshold</td><td>Minimum probability that should be allowed before calling it quits </td></tr>
-    <tr><td class="paramname">death_time</td><td>The amount of time (in s) that the tester should let the probability linger below min_threshold before returning</td></tr>
+    <tr><td class="paramname">skill</td><td></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The confidence threshold of the tested QTable </dd></dl>
 
-<p>Implemented in <a class="el" href="classObservation_1_1Dummy.html#a6adc2431a0fc44271bd5ea65c40a1a97">Observation::Dummy</a>.</p>
+<p>Definition at line <a class="el" href="Observer_8h_source.html#l00069">69</a> of file <a class="el" href="Observer_8h_source.html">Observer.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aa3c487a0bdd8ad4d8b0746d6795aaa2e"></a><!-- doxytag: member="Observation::Observer::Observe" ref="aa3c487a0bdd8ad4d8b0746d6795aaa2e" args="(Task *task, QTable *tables, int tables_len, vector&lt; Sensor * &gt; const &amp;sensors)=0" -->
+<a class="anchor" id="a6a61ade1b4cb4a422af9c55cbbd089d8"></a><!-- doxytag: member="Observation::Observer::get_primitives" ref="a6a61ade1b4cb4a422af9c55cbbd089d8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> *&gt; const&amp; Observation::Observer::get_primitives </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="Observer_8h_source.html#l00072">72</a> of file <a class="el" href="Observer_8h_source.html">Observer.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a849437339769d1c8efc6c45f58ecc558"></a><!-- doxytag: member="Observation::Observer::get_sensors" ref="a849437339769d1c8efc6c45f58ecc558" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> *&gt; const&amp; Observation::Observer::get_sensors </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="Observer_8h_source.html#l00071">71</a> of file <a class="el" href="Observer_8h_source.html">Observer.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab451fb45246c811aa7bae8220d68a27d"></a><!-- doxytag: member="Observation::Observer::Init" ref="ab451fb45246c811aa7bae8220d68a27d" args="(std::vector&lt; Sensor * &gt; sensors)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Observation::Observer::Init </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt;&#160;</td>
+          <td class="paramname"><em>sensors</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Initialize the observer with the set of sensors it will be using </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sensors</td><td>Vector of sensor pointers the be polled by observer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="Observer_8h_source.html#l00061">61</a> of file <a class="el" href="Observer_8h_source.html">Observer.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a325635d9d539f472b5d658fb01baf7f8"></a><!-- doxytag: member="Observation::Observer::Observe" ref="a325635d9d539f472b5d658fb01baf7f8" args="(Task *task)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual bool Observation::Observer::Observe </td>
           <td>(</td>
-          <td class="paramtype">Task *&#160;</td>
-          <td class="paramname"><em>task</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classPrimitives_1_1QTable.html">QTable</a> *&#160;</td>
-          <td class="paramname"><em>tables</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>tables_len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; <a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> * &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>sensors</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [pure virtual]</code></td>
+          <td class="paramtype"><a class="el" href="classObservation_1_1Task.html">Task</a> *&#160;</td>
+          <td class="paramname"><em>task</em></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Every <a class="el" href="classObservation_1_1Observer.html">Observer</a> must, at some point, begin the observation process</p>
+<p>Begins the observation process, monitoring the internally kept sensors and matching primitives as they appear in the input sequence.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">task</td><td>The task to be observed </td></tr>
-    <tr><td class="paramname">tables</td><td>The learned QTables to observe the task against </td></tr>
-    <tr><td class="paramname">tables_len</td><td>How many tables have been passed in as an array </td></tr>
-    <tr><td class="paramname">sensors</td><td>A vector of sensors to collect scene data from</td></tr>
+    <tr><td class="paramname">task</td><td>(optional) The task to be observed and monitored</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>True unless an error occurs during observation </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>True if observation mode is engaged, false on error </dd></dl>
 
-<p>Implemented in <a class="el" href="classObservation_1_1Dummy.html#a973895976e976e039e8156bcbcaa163b">Observation::Dummy</a>.</p>
+<p>Implemented in <a class="el" href="classObservation_1_1Dummy.html#a5a508447fbd38a4da11af1a35e04bf8b">Observation::Dummy</a>, and <a class="el" href="classObservation_1_1RealtimeObserver.html#ab749b98979821ad23abe58d6aa9c9d08">Observation::RealtimeObserver</a>.</p>
 
 </div>
 </div>
@@ -252,7 +271,38 @@ Public Member Functions</h2></td></tr>
 <p>The <a class="el" href="classObservation_1_1Observer.html">Observer</a> must be notified to stop the observation process (end of tape or time)</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True unless an error stopping </dd></dl>
 
-<p>Implemented in <a class="el" href="classObservation_1_1Dummy.html#a4246a2a7023f150eb96e129eccdd32d8">Observation::Dummy</a>.</p>
+<p>Implemented in <a class="el" href="classObservation_1_1Dummy.html#a4246a2a7023f150eb96e129eccdd32d8">Observation::Dummy</a>, and <a class="el" href="classObservation_1_1RealtimeObserver.html#a3373c346c45dd48f60f11a0441e7beec">Observation::RealtimeObserver</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="acdcf16806bfd47a9f6e40bc464febd13"></a><!-- doxytag: member="Observation::Observer::primitives_" ref="acdcf16806bfd47a9f6e40bc464febd13" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1QLearner.html">QLearner</a> *&gt; <a class="el" href="classObservation_1_1Observer.html#acdcf16806bfd47a9f6e40bc464febd13">Observation::Observer::primitives_</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="Observer_8h_source.html#l00076">76</a> of file <a class="el" href="Observer_8h_source.html">Observer.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9defc6fb06b215707d4cbd6146627bc6"></a><!-- doxytag: member="Observation::Observer::sensors_" ref="a9defc6fb06b215707d4cbd6146627bc6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classPrimitives_1_1Sensor.html">Sensor</a> *&gt; <a class="el" href="classObservation_1_1Observer.html#a9defc6fb06b215707d4cbd6146627bc6">Observation::Observer::sensors_</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="Observer_8h_source.html#l00075">75</a> of file <a class="el" href="Observer_8h_source.html">Observer.h</a>.</p>
 
 </div>
 </div>
