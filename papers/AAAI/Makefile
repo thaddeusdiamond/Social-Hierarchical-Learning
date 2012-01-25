@@ -1,6 +1,6 @@
 # Global configuration (report name, system path names)
 REPORT  := report
-LATEX   := latex
+LATEX   := latex --shell-escape
 BIBTEX  := bibtex
 
 # Directory structure for output
