@@ -222,6 +222,8 @@ As expected, our algorithm performed without error when tested on its training d
 
 The complex scenario shown in \ref{fig:output_nowaypoints_repeatedtrials} and \ref{fig:output_waypoints_repeatedtrials} included the placement of some of the most similar of the seven trained gestures in close temporal proximity. We introduced additional noisy data, composited randomly from familiar states in each of the seven gestures' training data, to demonstrate our algorithm's ability to discern when there is an unrecognized action taking place. The introduction of waypointing, shown in \ref{fig:output_waypoints_repeatedtrials}, boosted overall confidence values for correct classifications and smoothed the transitions between non-confident and confident classifications. One particular example of this can be seen near frame 410, as without waypointing the gesture for 'school' is confused with the end of the 'shoes' gesture preceeding it. The lack of classification of the final 'shoes' gesture is explained by the step in which after a high confidence classification is made, the window through which the algorithm searches for effective state space traversals, $P_{\mathrm{hit}}$, is cut in half to prevent harmful self-reinforcement looping.
 
+Our successful application of our algorithm to this representative example of non-trivial action classification serves as a proof-of-concept that can be applied to benefit any generic hierarchical learning framework.
+
 \section{Related and Future Work}
 \label{sec:future}
 It is important to differentiate our contribution from that of
