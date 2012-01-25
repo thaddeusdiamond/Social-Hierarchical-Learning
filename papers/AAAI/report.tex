@@ -40,13 +40,11 @@ allowing a robot to solve skill recognition, the inverse problem of skill execut
 in real-time. Our algorithm provides a coded timeline of
 primitive actions generated in real-time, correcting its hypotheses as more
 information is presented. We demonstrate our results through the recognition of selected
-American Sign Language gestures. Primitive skill acquisition for robots has been
-accomplished through a variety of techniques, many utilizing Q-Learning. 
-Our work is unique in that it extends the skill representation paradigm provided
-by Q-Learning to create a unified data structure capable of both skill execution
-and skill recognition.  This data can then be directly used within a planning
-system, for instance, for the coordination of a robot's
-actions or building a skill hierarchy fully decomposing a complex cooperative 
+American Sign Language gestures. Our work is unique in that it extends Q-Tables,
+a product of Q-Learning that are consistently used to model skills,
+to create a unified data structure capable of both skill execution
+and skill recognition.  This data can then be directly used to facilitate the
+creation of a skill hierarchy fully decomposing a complex cooperative 
 task into primitive actions.
 \end{abstract}
 
@@ -55,9 +53,16 @@ task into primitive actions.
 % 1. Talk about the need for cooperative robotics here.
 	As research in recent years has demonstrated, robots operating in a collaborative environment (co-robots) need to be flexible agents, adapting to the changing needs of their daily operations. An excellent example of such a system is Robonaut, a humanoid robot designed to match the dexterity of a suited astronaut \cite{Robonaut}. This platform is designed for both autonomous collaboration and teleoperative capabilities, a desirable set of operating modes for assisting human coworkers in the particularly challenging environment of outer space.
 	
-  The introduction of such systems requires a substantial effort not merely to produce capable and robust robots, but also to generate a careful and planned interaction method allowing non-expert human operators to contribute to the robot's training with a autonomous, intuitive procedure.  Observation is an extremely common method for teaching rudimentary skills required in a collaborative effort.  Therefore, it is important that a co-robot not only achieve competency through direct skill training, but also that it use observations of others in its everyday behaviors to reinforce and improve existing abilities.
-
-  For systems embodying these characteristics, maintaining an awareness of peer actions is critical for safety, efficiency, and general performance. Direct skill training is still, however, a vital part of a co-robot's success.  Knox et. al. \shortcite{TAMER2} continue to make progress towards allowing non-experts to guide skill acquisition in such systems, facilitating the design of agents with shapeable behaviors. We propose a method that robotic agents can leverage to help achieve this awareness while simultaneously using the observed data to improve its own performance and understanding of low level actions.  Our method relies on the use of a simple Q-Learning variant to model skills as Semi-Markov Decision Processes (SMDPs).  However, we also present a compatible method for using a generic hierarchical skill architecture to achieve improvement in SMDP-based skill execution while simultaneously providing the ability to recognize known skills when being performed by other agents. 
+  The introduction of such systems requires a substantial effort not merely to produce capable and robust robots, but also to generate a careful and planned interaction method allowing non-expert human operators to contribute to the robot's training with a autonomous, intuitive procedure.  Observation is an extremely common method for teaching rudimentary skills required in a collaborative effort.  Therefore, it is important that a co-robot not only achieve competency through direct skill training, but also that it use observations of others in its everyday behaviors to reinforce and improve existing abilities.  For systems embodying these characteristics, maintaining an awareness of peer actions is critical for safety, efficiency, and general performance. Direct skill training is still, however, a vital part of a co-robot's success.  Knox et. al. \shortcite{TAMER2} continue to make progress towards allowing non-experts to guide skill acquisition in such systems, facilitating the design of agents with shapeable behaviors.
+  
+  We propose a novel method for online action classification that robotic agents can leverage to:
+  \begin{itemize}
+    \item Categorize a set of observed actions into labeled primitives and unknowns using Semi-Markov Decision Processes (SMDPs), the existing standard of skill representation in Q-Learning
+    \item Help achieve this awareness while simultaneously using the observed data to improve its own performance and understanding of low level actions
+    \item Facilitate the creation of a generic skill hierarchy fully decomposing a complex cooperative 
+task into primitive actions
+    \item Utilize the generated skill hierarchy in a generic hierarchical learning system in order to simultaneously execute primitive actions recognize known skills being performed by co-workers
+  \end{itemize}
 
   We demonstrate our system's functionality by automating identification of selected American Sign Language gestures, while simultaneously using that observed data to improve our agent's internal representation of the underlying primitive skills involved. We then present the significance of this contribution, grounded within the rapidly expanding field of collaborative robotics.
 
@@ -110,7 +115,7 @@ task into primitive actions.
 
 We assume the agent holds limited a priori knowledge of a set of primitive skills $\mathbb{P}$, each describing a policy $P_\pi$ for traversing the agent-environment SMDP. Each primitive action contains its own exploration function, $P_e$, to guide its traversal while solving for known branches of the problem-space MDP. Additionally, each primitive $p \in P$ contains metadata indicating the estimated time required for completion of the primitive $P_t$. Completion of a primitive action is defined as traversing state space from an unknown initial state to with the $\epsilon-$neighborhood of a known goal state.
 
-Each policy $P_\pi$ can be described as a series of decision rules to be applied when appearing in familiar situations. These decisions may range from complete deterministic to randomized, and are influenced by the exploration function $P_e$. Within each primitive, we introduce the notion of reward layers, able to be utilized to influence exploration transition probabilities but not artifically affect reward signal propagation.
+Each policy $P_\pi$ can be described as a series of decision rules to be applied when appearing in familiar situations. These decisions may range from complete deterministic to randomized, and are influenced by the exploration function $P_e$. Within each primitive, we introduce the notion of reward layers, able to be utilized to influence exploration transition probabilities but not artificially affect reward signal propagation.
 
 Our environment definition does not assume a uniform sensor refresh rate, as states may be sampled with stale data from a subset of its input sensors. The algorithm presented has shown robustness to lossy and noisy sampling by remaining capable of confidently classifying observations under such conditions within our proof-of-concept implementation.
 
@@ -135,7 +140,7 @@ If the duration represented between $P_{\mathrm{hit}}[0]$ and the current time i
 \item
 Continue to the next primitive $P \in \mathbb{P}$ if either the duration $d$ represented within $P_{\mathrm{hit}}$ fails to satisfy $d \geq 1/t_1 * P_t$ or if the density of $P_{\mathrm{hit}}$ is less than a predefined accuracy constant $a_1$.
 \item
-For a pre-specified neighborhood-distance relaxation constant $d_g \in [1,\infty)$, if the currently observed state is within the $(d_g * \epsilon)-$neighborhood of a known expert-trained goal state:
+For a previously specified neighborhood-distance relaxation constant $d_g \in [1,\infty)$, if the currently observed state is within the $(d_g * \epsilon)-$neighborhood of a known expert-trained goal state:
 
 Compute a confidence $C_P \in [0,1]$ representing likelihood that $P_{\mathrm{hit}}$ is an example of $P$.
 
@@ -148,7 +153,7 @@ $$\sum_{i=0}^{4}\alpha_i = 1.0 $$
 
 	\begin{enumerate}
 	\item
-	Generate an 'optimistic' policy $\pi_o$. This is accomplished by adding states from $P_{\mathrm{hit}}$ into set $W_p$ with probability $p_{wp}$. For each state in $W_p$, modify all incoming action-reward transitions by adding a "waypoint" reward bonus $w$ to bias towards generating policies favoring transitions through waypointed states. We utilize these policies of idealized traversal for reward propagation, encouraging the agent to traverse similar paths during action execution, influencing the agent's behaviors through observations of its peers.
+	Generate an 'optimistic' policy $\pi_o$. This is accomplished by adding states from $P_{\mathrm{hit}}$ into set $W_p$ with probability $p_{wp}$. For each state in $W_p$, modify all incoming action-reward transitions by adding a ``waypoint'' reward bonus $w$ to bias towards generating policies favoring transitions through waypointed states. We utilize these policies of idealized traversal for reward propagation, encouraging the agent to traverse similar paths during action execution, influencing the agent's behaviors through observations of its peers.
 	\item
 	Compute a path through MDP-space according to the optimistic policy, beginning at state $P_{\mathrm{hit}}[0]$, terminating when within a reduced $\epsilon-$neighborhood of an expert-trained goal state in $P$ or when no outgoing transitions remain. We define $\bar{R}_{\mathrm{optimist}}$ as the mean transition reward sustained throughout the execution of $\pi_o$.
 	\item
@@ -244,10 +249,11 @@ Furthermore, it is crucial that this system be deployed in a complex, collaborat
 
 \section{Conclusions}
 \label{sec:conclusions}
-We have presented herein a method for action recognition that simultaneously leverages an existing representation of primitive skills and improves the accuracy with which those skills can be performed by the observer.  This real-time recognition of learned actions is essential for any co-robot to be able to cooperate effectively in a multi-human multi-robot environment.
+We have presented herein a method for action recognition that simultaneously leverages an existing representation of primitive skills and improves the accuracy with which those skills can be performed by the observer.  This real-time recognition of learned actions is essential for any co-robot to be able to cooperate effectively in a multi-human multi-robot environment.  
+
+Our system can be easily qualified as an extension to what Ng and Abeel \shortcite{OriginalInverseRL} originally termed ``inverse reinforcement learning''.  By opportunistically incorporating observed data as propagated rewards to the SMDP skill representation, our system converges on a stable learned primitive with fewer trials.  Furthermore, the bonus rewards assigned to those observations that achieve extremely high confidence allows us to treat specific portions of noisy, lossy, and otherwise unreliable observed data as, essentially, expert training.
 
 Other works have offered solutions to many of the challenges standing in the way of mainstreaming collaborative robotics, including automating option scaffolding through demonstration \cite{AutoSkillAcquisition}, acquiring skills utilizing human reward signals in place of \cite{TAMER} or in addition to \cite{TeacherRL} a traditional objective function, and correcting for critical omissions in non-expert demonstrations \cite{PerspectiveTaking}. Simplifying the human trainer/robot student interaction paradigm by shaping human guidance into usable forms is also rapidly advancing \cite{TAMER,Clicker,AdviceTaking,TeacherRL,DemonstrationRL}. These successful results strongly contribute to the widespread use of Q-Learning variants in real robotic systems and, more generally, to the feasibility of real-time human-robot collaboration.
-% opportunistic inverse reinforcement learning as applied to skill recognition. 
 
 \bibliographystyle{aaai}
 \bibliography{report}
