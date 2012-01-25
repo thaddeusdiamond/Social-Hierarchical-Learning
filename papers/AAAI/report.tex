@@ -130,7 +130,7 @@ Our environment definition does not assume a uniform sensor refresh rate, as sta
 %3. Unlike the direct inverse reinforcement learning problem, there are multiple primitive candidates and the demonstration given cannot be assumed to be an example/training data for any of them.
 Given a continuous feed of sensor inputs, we seek to determine if any skills known to the agent are being demonstrated. We utilize our SMDPs, constructed for skill execution, to estimate whether or not the incoming information can applicably benefit the agent's understanding of its known primitive actions. This algorithm for opportunistic inverse reinforcement learning, when there exist multiple possible affected policies, is as follows:
 
-Initialize $P_{\mathrm{hit}} = \{\varnothing\}$ for each $P \in \mathBB{P}$. \\
+Initialize $P_{\mathrm{hit}} = \{\varnothing\}$ for each $P \in \mathbb{P}$. \\
 \begin{enumerate}
 \item
 Poll each sensor to generate a composite state descriptor vector, $\vec{v} \in \mathbb{R}^k$.
