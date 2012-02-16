@@ -8,9 +8,9 @@
  * Greedily take the best transition possible from each state
  **/
 
-#include "Exploration/ExplorationType.h"
+#include "Exploration/GreedyExplorer.h"
 #include <string>
 #include <vector>
+#include "Exploration/ExplorationType.h"
 #include "Student/Sensor.h"
 #include "QLearner/QLearner.h"
-

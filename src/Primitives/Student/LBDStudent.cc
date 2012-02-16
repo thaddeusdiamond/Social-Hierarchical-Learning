@@ -21,7 +21,7 @@
 #include "Exploration/GreedyExplorer.h"
 
 namespace Primitives {
-using std::string; 
+using std::string;
 using Utils::Log;
 
 QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
@@ -103,42 +103,38 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
     std::vector<double> state_vector;
     string state_str = "Inserted: ";
     char dbuf[100];
-    
+
     while (tokenizer != NULL) {
       double sensor_val = atof(tokenizer);
-      
-      //double rand_factor = double(rand() % 2) / 100. + .99;
-      //sensor_val *= rand_factor;
-      
+
+      // Uncomment below if noising the input data
+      // double rand_factor = double(rand() % 2) / 100. + .99;
+      // sensor_val *= rand_factor;
+
       state_vector.push_back(sensor_val);
-      snprintf(dbuf,100,"%g, ",sensor_val);
+      snprintf(dbuf, sizeof(dbuf), "%g, ", sensor_val);
       state_str += dbuf;
       tokenizer = strtok_r(NULL, ", ", &saveptr_state_val);
     }
-    
-    // if (state_vector.size()>0)
-    //   Log(log_stream, DEBUG, 
-    //     (state_str.c_str())); 
 
-    //Handle newlines in the file...
+    // Handle newlines in the file...
     if (state_vector.size() == 0) continue;
-    
+
     State s(state_vector);
     char buf[1024];
-    snprintf(buf,1024,"Loaded state vector of size %ld",state_vector.size());
-    Log(log_stream,DEBUG,buf);
+    snprintf(buf, sizeof(buf), "Loaded state vector of size %ld",
+             state_vector.size());
+    Log(log_stream, DEBUG, buf);
     State *new_state = qt->GetState(s, false);
-    if (!new_state) { 
+    if (!new_state) {
       new_state = qt->AddState(s);
-    
-      if (s.Equals(new_state) == false)
-        Log(stderr,ERROR,"WTF");
     }
-    
-    snprintf(buf,1024,"...New state vector of size %ld",state_vector.size());
-    Log(log_stream,DEBUG,buf);
-    Log(log_stream,DEBUG,new_state->to_string().c_str());
-      
+
+    snprintf(buf, sizeof(buf), "...New state vector of size %ld",
+             state_vector.size());
+    Log(log_stream, DEBUG, buf);
+    Log(log_stream, DEBUG, new_state->to_string().c_str());
+
     seen_states.push_back(new_state);
 
     if (seen_states.size() > FRAME_BUFFER) {
@@ -151,14 +147,18 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
            s_iter < seen_states.size() && connect_count <= FRAME_BUFFER;
            ++s_iter, ++connect_count) {
         State *connect_state = seen_states[s_iter];
-        if (!connect_state) Log(log_stream,ERROR,"Connecting to un-added state!"); //connect_state = qt->AddState((**s_iter));
+
+        if (!connect_state)
+          Log(log_stream, ERROR, "Connecting to un-added state!");
+
         weight = MAX_REWARD / (static_cast<double>(connect_count));
         if (root != connect_state)
           root->set_reward(connect_state, "base", weight);
       }
-      
-      snprintf(buf,1024,"State has %ld connections.", root->get_reward().size());
-      Log(log_stream,DEBUG,buf);
+
+      snprintf(buf, sizeof(buf), "State has %ld connections.",
+               root->get_reward().size());
+      Log(log_stream, DEBUG, buf);
       seen_states.pop_front();
     }
     ++frame_num;
@@ -173,7 +173,10 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
            s_iter < seen_states.size() && connect_count <= FRAME_BUFFER;
            ++s_iter, ++connect_count) {
         State *connect_state = seen_states[s_iter];
-        if (!connect_state) Log(log_stream,ERROR,"Connecting to un-added state!"); //connect_state = qt->AddState((**s_iter));        
+
+        if (!connect_state)
+          Log(log_stream, ERROR, "Connecting to un-added state!");
+
         weight = MAX_REWARD / (static_cast<double>(connect_count));
         if (root != connect_state)
           root->set_reward(connect_state, "base", weight);
@@ -184,23 +187,23 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
   training_file.close();
 
   char buf[1024];
-  snprintf(buf,1024,"Finished loading %d frames into LBD Student for %s. "
-    "It now has %ld states",
-    frame_num-1,skill_name.c_str(),qt->get_states().size());
-  Log(log_stream, DEBUG, buf); 
+  snprintf(buf, sizeof(buf), "Finished loading %d frames into LBD Student "
+    "for %s. It now has %ld states", (frame_num-1), skill_name.c_str(),
+    qt->get_states().size());
+  Log(log_stream, DEBUG, buf);
 
 
   if (seen_states.size() == 1) {
     // Should always hit this condition.. otherwise I screwed up above
-    snprintf(buf,1024,"Added Goal State: %s", seen_states[0]->to_string().c_str());
-    Log(stderr,ERROR,buf);
-    qt->AddGoalState(seen_states[0],true);
+    snprintf(buf, sizeof(buf), "Added Goal State: %s",
+             seen_states[0]->to_string().c_str());
+    Log(stderr, ERROR, buf);
+    qt->AddGoalState(seen_states[0], true);
   } else {
-    // @TODO: Log some error message
-    Log(stderr,ERROR,"No goal states on this primitive...?");
+    Log(stderr, ERROR, "No goal states on this primitive...?");
     return NULL;
   }
-  
+
 
   return skill;
 }

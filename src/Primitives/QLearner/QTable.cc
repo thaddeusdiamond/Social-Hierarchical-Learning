@@ -34,7 +34,7 @@ std::vector<State*> QTable::GetNearbyStates(State const &needle) {
         break;
       }
     }
-  
+
     if (!fail) nearby_states.push_back(*iter);
   }
 
@@ -54,21 +54,22 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
   }
 
 
-   // Log(stderr,DEBUG,"State not found in GetState.");
+  // Log(stderr,DEBUG,"State not found in GetState.");
 
   if (add_estimated_state) {
     State s(needle.get_state_vector());
     State *new_state = this->AddState(s);
 
-    if (new_state->get_state_vector().size() != 
+    if (new_state->get_state_vector().size() !=
         needle.get_state_vector().size())
-      Log(stderr,ERROR,"AddState portion of GetState didn't copy the vector.");
+      Log(stderr, ERROR,
+          "AddState portion of GetState didn't copy the vector.");
 
     std::vector<State *> nearby_states = this->GetNearbyStates(needle);
-    
+
     if (nearby_states.size() == 0)
-      Log(stderr,ERROR,"No nearby states on GetState!");
-    
+      Log(stderr, ERROR, "No nearby states on GetState!");
+
     std::map<std::string, double> reward_layers;
 
     std::vector<State *>::iterator nearby_iter;
@@ -87,11 +88,11 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
 
       double weight = 0.;
       unsigned int idx;
-      for (idx = 0; 
-          idx < nearby_state_dists.size() && idx < squared_dists.size(); 
+      for (idx = 0;
+          idx < nearby_state_dists.size() && idx < squared_dists.size();
           ++idx) {
         weight += 1. - (squared_dists[idx] / nearby_state_dists[idx]);
-      }      
+      }
       weight /= squared_dists.size();
 
       // Add the same incoming reward transitions as the found state, reward
@@ -102,11 +103,12 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
       for (inc_iter = inc_states.begin(); inc_iter != inc_states.end();
            ++inc_iter) {
         State *inc_state = (*inc_iter);
-        double orig_reward = inc_state->GetRewardValue(near_state,false,"base");
-        inc_state->set_reward(new_state,string("base"),orig_reward*weight);
+        double orig_reward = inc_state->GetRewardValue(
+                                near_state, false, "base");
+        inc_state->set_reward(new_state, string("base"), orig_reward * weight);
       }
 
-      // Add the same outgoing reward transitions as the found state, reward 
+      // Add the same outgoing reward transitions as the found state, reward
       // weighted by the distance of the found state from the needle state
       // --Only transfer the 'base' layer--
       std::map<State*, std::map<std::string, double> > const &rewards

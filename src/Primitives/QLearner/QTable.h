@@ -35,7 +35,7 @@ class QTable {
     QTable &q = (*q_table);
     std::vector<State *> qstates = q.get_states();
     std::vector<State *> goal_states = q.get_goal_states();
-    std::vector<State *> trained_goal_states = 
+    std::vector<State *> trained_goal_states =
         q.get_trained_goal_states();
     std::vector<State *>::iterator iter;
     for (iter = qstates.begin(); iter != qstates.end(); ++iter) {
@@ -43,20 +43,18 @@ class QTable {
       std::vector<State *>::iterator iter;
       for (iter = goal_states.begin(); iter != goal_states.end(); ++iter) {
         if ((*iter)->Equals(added_state)) {
-          this->AddGoalState(added_state,false);
+          this->AddGoalState(added_state, false);
           break;
         }
       }
 
-      for (iter = trained_goal_states.begin(); 
+      for (iter = trained_goal_states.begin();
            iter != trained_goal_states.end(); ++iter) {
         if ((*iter)->Equals(added_state)) {
-          this->AddGoalState(added_state,true);
+          this->AddGoalState(added_state, true);
           break;
         }
       }
-
-
     }
   }
 
@@ -103,7 +101,7 @@ class QTable {
   /**
    * @todo Must make sure this is set before allowing most QTable
    * operations to occur.
-   * 
+   *
    * Sets the 'nearby' distance thresholds for each state dimension.
    * Squares all of the distance values coming in, to optimize distance
    * checks later on (eliminating need for constant sqrt'ing).
@@ -126,7 +124,7 @@ class QTable {
    *
    * @param needle State to find within the QTable
    * @param add_estimated_state Adds state to table with estimated rewards based
-                                on reward values of nearby states if true. 
+                                on reward values of nearby states if true.
    * @return NULL if needle not found, else: state pointer to internal version
    **/
   State *GetState(State const &needle, bool add_estimated_state);
@@ -141,7 +139,7 @@ class QTable {
   bool HasState(State const &needle);
 
   /**
-   * Returns a vector of existing states determined to be 'nearby' 
+   * Returns a vector of existing states determined to be 'nearby'
    * to the needle state
    * @param needle State to look near for existing states
    * @return vector of nearby states
@@ -156,7 +154,7 @@ class QTable {
 
   /**
    * Copy the state into a piece of memory that the QTable owns/manages. Doesn't
-   * check for a duplicate existing: assumes that you did your homework and you 
+   * check for a duplicate existing: assumes that you did your homework and you
    * aren't re-adding something that already exists.
    *
    * @param state State to copy and insert into QTable
@@ -166,10 +164,10 @@ class QTable {
 
   /**
    * Add the state pointed at by state to the list of goal states of this table
-   * 
+   *
    * @param state Pointer to internally kept goal state
    * @param from_training Is this a goal state from training data
-   *                      or was it just within a threshold of a real 
+   *                      or was it just within a threshold of a real
    *                      goal state?
    */
   void AddGoalState(State *state, bool from_training) {
@@ -182,13 +180,13 @@ class QTable {
 
   /**
    * Checks if the state provided is a known goal state
-   * 
+   *
    * @param state Any state object
    * @return true if found in list, false if not a goal state
    */
   bool IsGoalState(State const &state) {
     std::vector<State *>::const_iterator iter;
-    for (iter = trained_goal_states_.begin(); 
+    for (iter = trained_goal_states_.begin();
          iter != trained_goal_states_.end(); ++iter) {
       if (state.Equals(*iter)) return true;
     }
@@ -203,13 +201,13 @@ class QTable {
   /**
    * Checks if the state provided is a trained goal state, as opposed
    * to a 'learned' or 'approximate' goal state.
-   * 
+   *
    * @param state Any state object
    * @return true if found in list, false if not a goal state
    */
   bool IsTrainedGoalState(State const &state) {
     std::vector<State *>::const_iterator iter;
-    for (iter = trained_goal_states_.begin(); 
+    for (iter = trained_goal_states_.begin();
          iter != trained_goal_states_.end(); ++iter) {
       if (state.Equals(*iter)) return true;
     }
@@ -220,7 +218,7 @@ class QTable {
 
   /**
    * Checks if the states provided are nearby each other
-   * 
+   *
    * @param a Any state object
    * @param b Any state object
    * @return true if a and b are within nearby thresholds for all elements
@@ -228,30 +226,30 @@ class QTable {
   bool IsNearState(State const &a, State const &b) {
     std::vector<double> const &a_sv = a.get_state_vector();
     std::vector<double> const &b_sv = b.get_state_vector();
-    
+
     if (a.get_state_vector().size() != b.get_state_vector().size()
         || a.get_state_vector().size() != nearby_thresholds_.size())
       return false;
 
     unsigned int i;
-    for (i=0; i < nearby_thresholds_.size(); ++i) {
+    for (i = 0; i < nearby_thresholds_.size(); ++i) {
       double dist = a_sv[i] - b_sv[i];
       dist *= dist;
       if (dist > nearby_thresholds_[i]) return false;
     }
-    
+
     return true;
   }
 
 
  private:
   /**
-   * Huge array of all states seen thus far 
+   * Huge array of all states seen thus far
    **/
   std::vector<State *> states_;
   std::vector<State *> goal_states_;
   std::vector<State *> trained_goal_states_;
-  
+
   // Squared thresholds for a point to be "nearby" some other point
   std::vector<double> nearby_thresholds_;
 };

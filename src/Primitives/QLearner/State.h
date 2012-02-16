@@ -11,10 +11,10 @@
 #ifndef _SHL_PRIMITIVES_QLEARNER_STATE_H_
 #define _SHL_PRIMITIVES_QLEARNER_STATE_H_
 
+#include <stdio.h>
 #include <vector>
 #include <map>
 #include <cmath>
-#include <stdio.h>
 #include <string>
 #include "Common/Utils.h"
 
@@ -62,7 +62,7 @@ class State {
         return false;
       }
     }
-    
+
     /* Only check this if stateHash
     std::vector<double>::const_iterator iter;
     std::vector<double>::const_iterator needle_iter;
@@ -76,7 +76,7 @@ class State {
       }
     }
     */
- 
+
     return true;
   }
 
@@ -98,25 +98,25 @@ class State {
     double distance = 0.;
     unsigned int idx;
     for (idx = 0; idx < state_vector_.size(); ++idx) {
-      distance = (state_vector_[idx] - cmp_vector[idx]) 
+      distance = (state_vector_[idx] - cmp_vector[idx])
       * (state_vector_[idx] - cmp_vector[idx]);
-      distances.push_back(distance);      
+      distances.push_back(distance);
     }
 
     return distances;
   }
-  
+
   /**
    * Retrieves the reward (transition function) on this state object
    * for a particular State
    * @return Summed reward value
    */
-  virtual double GetRewardValue(State *target, bool all_layers=true, 
-                                std::string layer="") {
+  virtual double GetRewardValue(State *target, bool all_layers = true,
+                                std::string layer = "") {
     if (reward_.find(target) == reward_.end()) return 0.;
     std::map<std::string, double> &reward_layers = reward_[target];
     std::map<std::string, double>::const_iterator iter;
-    
+
     double total = 0.;
     if (all_layers) {
       for (iter = reward_layers.begin(); iter != reward_layers.end();
@@ -128,10 +128,10 @@ class State {
       if (iter != reward_layers.end())
         total = (*iter).second;
     }
-    
+
       return total;
   }
-  
+
 
   /**
    * Returns an immutable state descriptor vector of doubles.
@@ -156,14 +156,14 @@ class State {
     if (val != 0) {
       std::map<State*, std::map<std::string, double> >::iterator
         layer_map = (reward_.find(target));
-        
+
       // If there is no existing link to target, make one
       if (layer_map == reward_.end()) {
         reward_[target] = std::map<std::string, double>();
       }
       (reward_[target])[layer] = val;
-      
-      
+
+
       vector<State *>::iterator inc_iter;
       bool found = false;
       for (inc_iter = inc_states.begin(); inc_iter != inc_states.end();
@@ -173,7 +173,7 @@ class State {
           break;
         }
       }
-      
+
       if (!found)
         inc_states.push_back(this);
     } else {
@@ -184,7 +184,7 @@ class State {
       iter = (reward_[target]).find(layer);
       if (iter != reward_[target].end())
         (reward_[target]).erase(iter);
-      
+
       if (reward_[target].size() == 0) {
         vector<State *>::iterator inc_iter;
         bool found = false;
@@ -209,19 +209,19 @@ class State {
   virtual std::map<State*, std::map<std::string, double> > get_reward() const {
     return reward_;
   }
-  
+
   virtual std::vector<State *> &get_incoming_states() {
     return incoming_states_;
   }
-  
+
   virtual std::string to_string() {
     char buf[4096];
     unsigned int state_count = state_vector_.size();
     for (unsigned int i = 0; i < state_count; ++i)
       if (i)
-        sprintf(buf,"%s, %g", buf, state_vector_[i]);
+        snprintf(buf, sizeof(buf), "%s, %g", buf, state_vector_[i]);
       else
-        sprintf(buf,"%g", state_vector_[i]);
+        snprintf(buf, sizeof(buf), "%g", state_vector_[i]);
     return std::string(buf);
   }
 

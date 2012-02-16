@@ -8,6 +8,7 @@
  * This is the implementation for a playback sensor (read from file I/O)
  */
 
+#include <string>
 #include "Playback/PlaybackSensor.h"
 
 namespace Observation {
@@ -34,8 +35,8 @@ bool PlaybackSensor::Poll() {
 
     file_handle_ = fopen(filename_, "r");
     if (!file_handle_) {
-      Log(stderr, ERROR, 
-        string("Could not load file for playback").c_str()); 
+      Log(stderr, ERROR,
+        string("Could not load file for playback").c_str());
       return false;
     }
   }

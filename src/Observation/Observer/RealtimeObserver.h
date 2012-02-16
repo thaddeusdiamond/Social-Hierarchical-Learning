@@ -37,7 +37,7 @@ using Primitives::State;
 
 class RealtimeObserver : public Observer {
  public:
-  RealtimeObserver(double sampling_rate_hz) :  use_waypointing_(true),
+  explicit RealtimeObserver(double sampling_rate_hz) :  use_waypointing_(true),
       is_observing_(false), duration_(0.), sampling_rate_(sampling_rate_hz) {}
 
   bool Observe(Task* task, double duration);
@@ -51,11 +51,11 @@ class RealtimeObserver : public Observer {
    * @return Timeline with most confident labels at time of calling
    **/
   vector<string> GetFinalTimeline(void);
-  
-  vector<map<string,double> > GetPrimitivePerformanceTimeline(void);
+
+  vector<map<string, double> > GetPrimitivePerformanceTimeline(void);
   map<string, vector<double> > GetPrimitiveCentricPerformanceTimeline(void);
-  
-  vector<vector<pair<double,string> > > &get_timeline() {
+
+  vector<vector<pair<double, string> > > &get_timeline() {
     return timeline_;
   }
 
@@ -63,13 +63,13 @@ class RealtimeObserver : public Observer {
    public:
     ObservablePrimitive(string n, QLearner* qlearner)
       : name(n), q_learner(qlearner), current_state(NULL),
-        goal_distance(1E10), strikes(0) { 
-      hit_states.clear(); 
+        goal_distance(1E10), strikes(0) {
+      hit_states.clear();
       duration_max_millis = qlearner->get_anticipated_duration();
     }
 
-    // Each primitive gets a list of hit states: timestamp 
-    // and the array index in frames_ containing the state vector    
+    // Each primitive gets a list of hit states: timestamp
+    // and the array index in frames_ containing the state vector
     deque<pair<double, State*> > hit_states;
     string name;
     QLearner *q_learner;
@@ -78,15 +78,15 @@ class RealtimeObserver : public Observer {
     int strikes;
     double duration_max_millis;
   };
-  
-  
-  bool use_waypointing_;  
-  
+
+
+  bool use_waypointing_;
+
  private:
   /**
    * Internal timeline that is reset each time "Observe" is called
    * Describes what is occurring during each frame of animation
-   * 
+   *
    * Outer vector's elements represent each frame
    * Inner vector's elements represent <score, label> pairs
    **/

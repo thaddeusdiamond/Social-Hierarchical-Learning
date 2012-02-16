@@ -53,7 +53,7 @@ class PlaybackSensor : public Sensor {
 
   virtual bool SetValues(double const * const values, int num_values);
   virtual double const * const GetValues();
-  
+
   /**
    * Accessor method for stale variable
    **/
@@ -95,7 +95,7 @@ class PlaybackSensor : public Sensor {
   /**
    * Sensor plaintext name
    **/
-  //char const * name_;
+  // char const * name_;
 
   /**
    * Separately keep track of the file name we're reading in from
@@ -107,8 +107,8 @@ class PlaybackSensor : public Sensor {
    * file on a call to Poll().  The length of the array is predetermined in
    * the constructor.
    **/
-  //double * values_;
-  
+  // double * values_;
+
   /**
    * We keep track of whether or not the sensor has been polled as of late
    * so that we can tell in the observer whether this is a duplicate in
@@ -119,7 +119,7 @@ class PlaybackSensor : public Sensor {
   /**
    * Number of values encapsulated by sensor
    **/
-  //int num_values_;
+  // int num_values_;
 
   /**
    * Keep track of whether we're still even observing... Turned off after EOF

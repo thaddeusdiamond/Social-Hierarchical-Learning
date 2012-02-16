@@ -119,7 +119,6 @@ bool StandardQLearner::GetNearbyStates(
     int i;
     for (i = 0, sensor_iter = sensors_.begin(); sensor_iter != sensors_.end();
          ++sensor_iter, ++i) {
-      
       // @TODO Make sure that not squaring distance here is correct
       double dist = cmp_state->get_state_vector()[i]
                     - cur_state.get_state_vector()[i];

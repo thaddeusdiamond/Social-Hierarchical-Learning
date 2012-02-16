@@ -192,36 +192,37 @@ class QLearner {
     std::vector<State *> &goal_states = q_table_.get_trained_goal_states();
 
     best_distance = 1E10;
-    
+
     // Iterate through all candidate goal states...
     for (state_iter = goal_states.begin(); state_iter != goal_states.end();
       ++state_iter) {
       bool state_fail = false;
       std::vector<double> dists = state.GetSquaredDistances(*state_iter);
 
-      vector<double> const &nearby_thresholds = 
+      vector<double> const &nearby_thresholds =
         q_table_.get_nearby_thresholds();
-    
+
       double tmp_distance = 0.;
-      
+
       // Check each sensor value distance for violation of near-ness
       for (unsigned int idx = 0;
-           idx < dists.size() && idx < nearby_thresholds.size(); 
+           idx < dists.size() && idx < nearby_thresholds.size();
            ++idx) {
         double sensor_unit_dist = nearby_thresholds[idx];
         double distance = dists[idx];
 
         tmp_distance += distance / sensor_unit_dist;
-        if (distance > sensor_unit_dist * sensitivity) {          
-          //double dist_val = distance - (sensor_unit_dist * sensitivity);
-          //char buf[1024];
-          //snprintf(buf,1024,"State too far from goal by %g.",dist_val);
-          //Log(stderr,DEBUG,buf);
+        if (distance > sensor_unit_dist * sensitivity) {
+          // Uncomment to get debugging info about distance threshold checks
+          // double dist_val = distance - (sensor_unit_dist * sensitivity);
+          // char buf[1024];
+          // snprintf(buf,1024,"State too far from goal by %g.",dist_val);
+          // Log(stderr,DEBUG,buf);
           state_fail = true;
         }
       }
-      
-      tmp_distance /= dists.size();      
+
+      tmp_distance /= dists.size();
       if (tmp_distance < best_distance) best_distance = tmp_distance;
       if (!state_fail) return true;
     }
@@ -236,10 +237,10 @@ class QLearner {
   virtual std::stack<StateHistoryTuple> &get_state_history() {
     return state_history_;
   }
-  
-  virtual State *get_current_state() { 
+
+  virtual State *get_current_state() {
     if (state_history_.size())
-      return state_history_.top().state_; 
+      return state_history_.top().state_;
     return NULL;
   }
 

@@ -32,7 +32,7 @@ class StandardQLearner : public QLearner {
     if (exploration_type_)
       delete exploration_type_;
     if (credit_assignment_type_)
-      delete credit_assignment_type_;    
+      delete credit_assignment_type_;
   }
 
 /**
