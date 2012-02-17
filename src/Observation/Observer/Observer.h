@@ -13,9 +13,7 @@
 #define _SHL_OBSERVATION_OBSERVER_OBSERVER_H_
 
 #include <vector>
-// #include "Primitives/QLearner/QLearner.h"
-// #include "Primitives/Student/Sensor.h"
-// Prefer forward declaration over including header files to remove dependency.
+
 namespace Primitives {
 class QLearner;
 class Sensor;
