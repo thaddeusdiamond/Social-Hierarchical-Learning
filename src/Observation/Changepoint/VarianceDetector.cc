@@ -24,7 +24,6 @@ namespace Observation {
 
     vector<double> moving_variance;
     vector<double> moving_variance_derivative;
-    vector<double> confidence;
 
     int offset = window_size_ - 1;
     
