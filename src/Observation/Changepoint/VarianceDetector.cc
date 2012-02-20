@@ -58,7 +58,7 @@ namespace Observation {
     for (unsigned int i = 1; i < moving_variance.size(); ++i) {
       double d = moving_variance[i] - moving_variance[i-1];
       if (fabs(d) > max_first_derivative)
-        max_first_derivative = d;
+        max_first_derivative = fabs(d);
       moving_variance_derivative.push_back(d);                                          
     }
 
