@@ -1,0 +1,17 @@
+<package>
+  <description brief="KinectNaoPipeline">
+
+     KinectNaoPipeline
+
+  </description>
+  <author>Thad Diamond</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/KinectNaoPipeline</url>
+  <depend package="tf" />
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+
+</package>
+
+
