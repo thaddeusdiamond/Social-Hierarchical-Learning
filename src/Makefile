@@ -68,7 +68,6 @@ MAKEFILE_TEMPLATE := Makefile.template
 include Proto/Makefile.inc
 include Common/Makefile.inc
 include Backend/Makefile.inc
-include Voice/Makefile.inc
 include Primitives/Makefile.inc
 include Observation/Makefile.inc
 include Performance/Makefile.inc

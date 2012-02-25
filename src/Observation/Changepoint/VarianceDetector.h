@@ -7,14 +7,17 @@
  *
  * Tracks the moving average variance over a timespan
  **/
- 
+
+#ifndef _SHL_OBSERVATION_CHANGEPOINT_VARIANCEDETECTOR_H_
+#define _SHL_OBSERVATION_CHANGEPOINT_VARIANCEDETECTOR_H_
+
 #include <vector>
-#include "ChangepointDetector.h"
- 
+#include "Changepoint/ChangepointDetector.h"
+
 namespace Observation {
 
 using std::vector;
-  
+
 class VarianceDetector : public ChangepointDetector {
  public:
   VarianceDetector(int dimension, int min_len = 10) : dimension_(dimension),
@@ -23,19 +26,19 @@ class VarianceDetector : public ChangepointDetector {
     window_size_ = min_length_;
   }
 
-  vector<int> GetChangepoints(vector<vector<double> > &signal);
+  vector<int> GetChangepoints(const vector<vector<double> > &signal);
 
   /**
    * This detector only works reliably after at least 10 frames exist to be
    * analyzed
    **/
-  unsigned int GetMinimumInputLength() { return min_length_; };
+  unsigned int GetMinimumInputLength() { return min_length_; }
 
   void IncreaseSensitivity() {
     if (window_size_ > 3)
       --window_size_;
   }
-  
+
   void DecreaseSensitivity() {
     ++window_size_;
     if (window_size_ >= min_length_)
@@ -54,4 +57,6 @@ class VarianceDetector : public ChangepointDetector {
   vector<double> confidences_;
 };
 
-} // namespace Observation
+}  // namespace Observation
+
+#endif  // _SHL_OBSERVATION_CHANGEPOINT_VARIANCEDETECTOR_H_

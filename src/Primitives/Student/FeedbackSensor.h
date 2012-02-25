@@ -14,6 +14,7 @@
 #include <pthread.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <gtest/gtest.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -96,6 +97,11 @@ class FeedbackSensor : public Sensor {
    * We keep track of the thread performing the sensor polling asynchronously
    **/
   pthread_t polling_thread_;
+
+  /**
+   * Allow unit test to call Poll()
+   **/
+  FRIEND_TEST(FeedbackSensorTest, CaptureFeedback);
 };
 
 // Due to pthread issues we create the poller as a non-member function

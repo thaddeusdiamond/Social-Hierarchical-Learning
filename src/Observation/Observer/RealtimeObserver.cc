@@ -19,6 +19,7 @@
 #include "Common/Utils.h"
 namespace Observation {
 
+using google::protobuf::int64;
 using std::pair;
 using std::vector;
 using std::string;
@@ -174,11 +175,11 @@ bool RealtimeObserver::Observe(Task* task) {
                                                        true, "");
         char buf[1024];
         snprintf(buf, sizeof(buf), "...State transition %d has reward %g. "
-                "Prev_state has %ld"
-                " outbound connections. Descriptor size %ld",
+                "Prev_state has %lld"
+                " outbound connections. Descriptor size %lld",
                 cur_frame, transition_reward,
-                prev_state->get_reward().size(),
-                prev_state->get_state_vector().size());
+                static_cast<int64>(prev_state->get_reward().size()),
+                static_cast<int64>(prev_state->get_state_vector().size()));
         /*Log(log_stream,DEBUG,string(
           prev_state->to_string() + " to " + current_state->to_string()
           ).c_str());*/
@@ -333,8 +334,9 @@ bool RealtimeObserver::Observe(Task* task) {
             char buf[1024];
             snprintf(buf, sizeof(buf),
                     "Failed optimized state traversal on primitive %s"
-                    " after %ld steps",
-                    p->name.c_str(), optimal_path.size());
+                    " after %lld steps",
+                    p->name.c_str(),
+                    static_cast<int64>(optimal_path.size()));
             Log(stderr, ERROR, buf);
             break;
           }
@@ -469,7 +471,9 @@ bool RealtimeObserver::Observe(Task* task) {
             // Shouldn't run into this case... maybe errorlog message here
             char buf[1024];
             snprintf(buf, sizeof(buf), "Failed state traversal on primitive %s"
-                " after %ld steps.", p->name.c_str(), waypointed_path.size());
+                " after %lld steps.",
+                p->name.c_str(),
+                static_cast<int64>(waypointed_path.size()));
             Log(stderr, ERROR, buf);
             break;
           }
