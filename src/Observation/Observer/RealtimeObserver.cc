@@ -11,6 +11,7 @@
 
 #include "Observer/RealtimeObserver.h"
 #include <stdlib.h>
+#include <unistd.h>
 #include <vector>
 #include <deque>
 #include <utility>
@@ -54,7 +55,7 @@ bool RealtimeObserver::Observe(Task* task) {
   // Pair of timestamps and primitive pointers
   vector<pair<double, ObservablePrimitive *> > timed_out_primitives;
 
-  // Setup observable primitives based on skills lis
+  // Setup observable primitives based on skills list
   vector<QLearner *>::iterator p_iter;
   for (p_iter = primitives_.begin(); p_iter != primitives_.end(); ++p_iter) {
     ObservablePrimitive *op =
@@ -62,7 +63,7 @@ bool RealtimeObserver::Observe(Task* task) {
     primitives.push_back(op);
   }
 
-  timespec time;
+  struct timespec time;
   clock_gettime(CLOCK_REALTIME, &time);
   double cur_time_ms = (time.tv_sec * 1000.) +
                        (static_cast<double>(time.tv_nsec) / 1000000.);
@@ -76,61 +77,87 @@ bool RealtimeObserver::Observe(Task* task) {
   timeline_.clear();
   frames_.clear();
 
+  // Observe for pre-specified duration
   while (is_observing_ && cur_time_ms < end_time) {
     unified_frame.clear();
     bool clear_hit_states = false;
 
+
+    // Wait for next sensor update
+    double wait_time_ms = (sampling_rate_ - (cur_time_ms - last_frame_time_ms));
+    if (wait_time_ms > 0) {
+      struct timespec wait_ts;
+      wait_ts.tv_sec = 0;
+      wait_ts.tv_nsec = wait_time_ms * 1000000;
+      nanosleep(&wait_ts, NULL);
+    }
+
+    /* Busywait
     while (sampling_rate_ > cur_time_ms - last_frame_time_ms) {
+      sleep()
       clock_gettime(CLOCK_REALTIME, &time);
       cur_time_ms = (time.tv_sec * 1000.) +
                            (static_cast<double>(time.tv_nsec) / 1000000.);
-    }
+    } */
+    
+    clock_gettime(CLOCK_REALTIME, &time);
+    cur_time_ms = (time.tv_sec * 1000.) +
+                         (static_cast<double>(time.tv_nsec) / 1000000.);
     last_frame_time_ms = cur_time_ms;
 
-    // Retrieve latest sensor d
-    // char buf[1024];
-    // snprintf(buf,1024,"Capturing Frame %d with %ld sensors...",cur_frame,
-    //          sensors_.size());
-    // Log(log_stream, DEBUG, buf);
-
+    #ifdef VERBOSE_MODE
+    Retrieve latest sensor d
+    char buf[1024];
+    snprintf(buf, sizeof(buf), 
+            "Capturing Frame %d with %ld sensors...", cur_frame,
+             sensors_.size());
+    Log(log_stream, DEBUG, buf);
+    #endif
+    
     unsigned int sens_iter;
     for (sens_iter = 0; sens_iter < sensors_.size();
          ++sens_iter) {
       Sensor *sensor = sensors_[sens_iter];
 
       const double *values = sensor->GetValues();
-      // snprintf(buf,1024,"... contains %d values ...",
-      //    sensor->get_num_values());
-      // Log(log_stream,DEBUG,buf);
+
+      #ifdef VERBOSE_MODE
+        snprintf(buf, sizeof(buf), "... contains %d values ...",
+           sensor->get_num_values());
+        Log(log_stream, DEBUG, buf);
+      #endif
+      
       for (int i = 0; i < sensor->get_num_values(); ++i) {
         double rand_factor = static_cast<double>(rand() % 6) / 100. + 0.97;
         unified_frame.push_back(values[i] * rand_factor);
       }
     }
 
-    // snprintf(buf,1024,"...inc frame has size %ld", unified_frame.size());
-    // Log(log_stream,DEBUG,buf);
-
     frames_.push_back(unified_frame);  // Store incoming frame d
     vector<pair<double, string> > timeline_entry;
     timeline_entry.push_back(pair<double, string>(0.3, "Unknown"));
     timeline_.push_back(timeline_entry);  // Add default guess
-
-    // Log(log_stream, DEBUG,
-    //  string("Done capturing frame. Beginning primitive loop").c_str());
+    #ifdef VERBOSE_MODE
+      Log(log_stream, DEBUG,
+          string("Done capturing frame. Beginning primitive loop").c_str());
+    #endif
 
     vector<ObservablePrimitive *>::iterator p_iter;
     for (p_iter = primitives.begin(); p_iter != primitives.end();
          ++p_iter) {
       ObservablePrimitive *p = *p_iter;
 
-      /*char buf[1024];
-       snprintf(buf,1024,"Analyzing primitive %s with state count %ld",
-        p->name.c_str(), p->q_learner->get_q_table()->get_states().size());
-      Log(log_stream, DEBUG, buf); */
+      QTable *qtable = p->q_learner->get_q_table();
 
+      #ifdef VERBOSE_MODE
+        char buf[1024];
+         snprintf(buf, sizeof(buf), 
+                  "Analyzing primitive %s with state count %ld",
+                  p->name.c_str(), 
+                  qtable->get_states().size());
+        Log(log_stream, DEBUG, buf);
+      #endif
 
-      // QTable *qtable = p->q_learner->get_q_table();
 
 
       // @TODO Check for timeout status- if yes, then continue
@@ -142,15 +169,9 @@ bool RealtimeObserver::Observe(Task* task) {
 
       // Get current state from QTable with descriptor unified_frame
       State input_frame(unified_frame);
-      // Log(log_stream,DEBUG, input_frame.to_string().c_str());
 
-      State *current_state = p->q_learner->get_q_table()->GetState(
+      State *current_state = qtable->GetState(
         input_frame, true);
-
-      /*char buf[1024];
-      snprintf(buf,1024,"Current_state has descriptorsize %ld",
-        current_state->get_state_vector().size());
-      Log(log_stream,DEBUG,buf);*/
 
       if (!current_state) {
         Log(log_stream, ERROR, "QTable failed to add state");
@@ -161,8 +182,8 @@ bool RealtimeObserver::Observe(Task* task) {
       State *prev_state = p->current_state;
 
       if (prev_state == current_state) {
-        //  Log(stderr,DEBUG,"Duplicate frame.");
-        //    continue;
+        Log(stderr, DEBUG, "Duplicate frame received in RealtimeObserver.");
+        continue;
       }
 
       p->current_state = current_state;
@@ -172,16 +193,18 @@ bool RealtimeObserver::Observe(Task* task) {
       if (prev_state != NULL) {
         transition_reward = prev_state->GetRewardValue(current_state,
                                                        true, "");
-        char buf[1024];
-        snprintf(buf, sizeof(buf), "...State transition %d has reward %g. "
-                "Prev_state has %ld"
-                " outbound connections. Descriptor size %ld",
-                cur_frame, transition_reward,
-                prev_state->get_reward().size(),
-                prev_state->get_state_vector().size());
-        /*Log(log_stream,DEBUG,string(
-          prev_state->to_string() + " to " + current_state->to_string()
-          ).c_str());*/
+        #ifdef VERBOSE_MODE
+          char buf[1024];
+          snprintf(buf, sizeof(buf), "...State transition %d has reward %g. "
+                  "Prev_state has %ld"
+                  " outbound connections. Descriptor size %ld",
+                  cur_frame, transition_reward,
+                  prev_state->get_reward().size(),
+                  prev_state->get_state_vector().size());
+          Log(log_stream, DEBUG, string(
+            prev_state->to_string() + " to " + 
+            current_state->to_string()).c_str());
+        #endif
       } else {
         continue;
       }
