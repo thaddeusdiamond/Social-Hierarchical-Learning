@@ -35,13 +35,14 @@ bool PlaybackSensor::Poll() {
 
     file_handle_ = fopen(filename_, "r");
     if (!file_handle_) {
-      Log(stderr, ERROR,
-        string("Could not load file for playback").c_str());
+      char buf[1024];
+      snprintf(buf, sizeof(buf), "Could not load file %s for playback",
+              filename_);
+      Log(stderr, ERROR, buf);
       return false;
     }
   }
 
-  // DO YOU KNOW WHAT TIME IT ISSSS???
   timespec time_holder;
   clock_gettime(CLOCK_REALTIME, &time_holder);
   double current_time_ms = ((time_holder.tv_sec - base_time_) * 1000) +
