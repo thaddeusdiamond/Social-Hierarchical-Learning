@@ -36,6 +36,7 @@ int main(int argc, char* argv[]) {
   if (argc < 5) {
     cout << "aaai12 <training dir> <test file> <observation duration>"
          << "<waypointing: 1 or 0>" << endl;
+    return 0;
   }
 
   double duration = atof(argv[3]);
