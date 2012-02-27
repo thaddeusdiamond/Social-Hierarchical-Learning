@@ -26,13 +26,7 @@ namespace Observation {
     vector<double> moving_variance_derivative;
 
     int offset = window_size_ - 1;
-    
-    double mean = 0.;
-    for (unsigned int i = 0; i < signal.size(); ++i) {
-      mean += signal[i][dimension_];
-    }
-    mean /= signal.size();
-    
+       
     // Compute variance over time, storing N frame variance in first slot
     // of interval within moving_variance
     for (unsigned int i = 0; i < signal.size() - window_size_; ++i) {
