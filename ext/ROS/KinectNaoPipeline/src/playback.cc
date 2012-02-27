@@ -26,12 +26,18 @@ int main(int argc, char* argv[]) {
   tf::TransformBroadcaster broadcaster;
 
   // Prompt user for filename
-  fprintf(stdout, "Please enter the name of the file being played back: ");
-  char c, filename[4096];
-  int i = 0;
-  while ((c = getchar()) != '\n')
-    filename[i++] = c;
-  filename[i] = '\0';
+  char* filename;
+  if (argc >= 2) {
+    filename = argv[1];
+  } else {
+    fprintf(stdout, "Please enter the name of the file being played back: ");
+    char c;
+    filename = new char[4096];
+    int i = 0;
+    while ((c = getchar()) != '\n')
+      filename[i++] = c;
+    filename[i] = '\0';
+  }
 
   // Try to open that file
   FILE* file_handle;
@@ -39,8 +45,10 @@ int main(int argc, char* argv[]) {
     die(EXIT_FAILURE, "Could not open specified file.\n");
 
   // Wait on the user to start the capture
-  fprintf(stdout, "LOADED.  Press any button to begin playback...");
-  getchar();
+  if (argc < 3 || strcmp(argv[2], "--nonblocking")) {
+    fprintf(stdout, "LOADED.  Press any button to begin playback...");
+    getchar();
+  }
 
   // Run the actual TF capture
   fprintf(stdout, "Beginning playback, press CTRL-C to exit.\n");

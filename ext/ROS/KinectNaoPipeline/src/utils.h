@@ -16,15 +16,16 @@ using std::string;
 #define LOOP_RATE 30
 
 // Kinect on ROS can blow
-static string suffix = "_1";
+static string suffix = "";
 
 // How many joint angles we're recording, the output
 // is in the format of X,Y,Z for each joint specified in Joints
-static const int NumJoints = 6;
-static string JointRef = "openni_depth_frame";
+static const int NumJoints = 7;
+static string JointRef = "camera_skeleton_frame";
 static string Joints[] = {
   "right_hand", "right_elbow", "right_shoulder",
-  "left_hand", "left_elbow", "left_shoulder"
+  "left_hand", "left_elbow", "left_shoulder",
+  "neck"
 };
 
 namespace ROSUtils {

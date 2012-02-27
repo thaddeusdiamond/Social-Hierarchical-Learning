@@ -24,12 +24,18 @@ int main(int argc, char* argv[]) {
   tf::TransformListener listener;
 
   // Prompt user for filename
-  fprintf(stdout, "Please enter the name of the file to write to: ");
-  char c, filename[4096];
-  int i = 0;
-  while ((c = getchar()) != '\n')
-    filename[i++] = c;
-  filename[i] = '\0';
+  char* filename;
+  if (argc >= 2) {
+    filename = argv[1];
+  } else {
+    fprintf(stdout, "Please enter the name of the file to write to: ");
+    char c;
+    filename = new char[4096];
+    int i = 0;
+    while ((c = getchar()) != '\n')
+      filename[i++] = c;
+    filename[i] = '\0';
+  }
 
   // Try to open that file
   FILE* file_handle;
@@ -37,8 +43,10 @@ int main(int argc, char* argv[]) {
     die(EXIT_FAILURE, "Could not open specified file.\n");
 
   // Wait on the user to start the capture
-  fprintf(stdout, "OPENED.  Press any button to begin capturing...");
-  getchar();
+  if (argc < 3 || strcmp(argv[2], "--nonblocking")) {
+    fprintf(stdout, "OPENED.  Press any button to begin capturing...");
+    getchar();
+  }
 
   // Run the actual TF capture
   fprintf(stdout, "Beginning Kinect capture, press CTRL-C to exit.\n");

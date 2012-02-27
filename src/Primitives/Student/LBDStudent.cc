@@ -21,6 +21,8 @@
 #include "Exploration/GreedyExplorer.h"
 
 namespace Primitives {
+
+using google::protobuf::int64;
 using std::string;
 using Utils::Log;
 
@@ -123,7 +125,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
     State s(state_vector);
     char buf[1024];
     snprintf(buf, sizeof(buf), "Loaded state vector of size %ld",
-             state_vector.size());
+             static_cast<int64>(state_vector.size()));
     Log(log_stream, DEBUG, buf);
     State *new_state = qt->GetState(s, false);
     if (!new_state) {
@@ -131,7 +133,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
     }
 
     snprintf(buf, sizeof(buf), "...New state vector of size %ld",
-             state_vector.size());
+             static_cast<int64>(state_vector.size()));
     Log(log_stream, DEBUG, buf);
     Log(log_stream, DEBUG, new_state->to_string().c_str());
 
@@ -157,7 +159,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
       }
 
       snprintf(buf, sizeof(buf), "State has %ld connections.",
-               root->get_reward().size());
+               static_cast<int64>(root->get_reward().size()));
       Log(log_stream, DEBUG, buf);
       seen_states.pop_front();
     }
@@ -189,7 +191,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
   char buf[1024];
   snprintf(buf, sizeof(buf), "Finished loading %d frames into LBD Student "
     "for %s. It now has %ld states", (frame_num-1), skill_name.c_str(),
-    qt->get_states().size());
+    static_cast<int64>(qt->get_states().size()));
   Log(log_stream, DEBUG, buf);
 
 
