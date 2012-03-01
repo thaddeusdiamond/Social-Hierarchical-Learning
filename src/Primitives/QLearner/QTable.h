@@ -178,6 +178,76 @@ class QTable {
       goal_states_.push_back(state);
   }
 
+
+  /**
+   * Add the state pointed at by state to the list of goal states of this table
+   *
+   * @param state Pointer to internally kept goal state
+   * @param from_training Is this a goal state from training data
+   *                      or was it just within a threshold of a real
+   *                      goal state?
+   */
+  void AddInitiateState(State *state) {
+    if (IsInitiateState(*state)) return;
+    initiate_states_.push_back(state);
+  }
+
+  /**
+   * Checks if the state provided is a known initiate state
+   *
+   * @param state Any state object
+   * @return true if found in list, false if not a starting state
+   */
+  bool IsInitiateState(State const &state) {
+    std::vector<State *>::const_iterator iter;
+    for (iter = initiate_states_.begin();
+         iter != initiate_states_.end(); ++iter) {
+      if (state.Equals(*iter)) return true;
+    }
+
+    for (iter = initiate_states_.begin();
+         iter != initiate_states_.end();
+         ++iter) {
+      if (state.Equals(*iter)) return true;
+    }
+
+    return false;
+  }
+  
+  vector<State *> get_initiate_states() { return initiate_states_; }
+  
+  /**
+   * Returns the nearest state in candidates to 'state'
+   * 
+   * @param state Needle to search for
+   * @param candidates possible states to find closest to
+   * @return State pointer to closest found state
+   **/
+  State *GetNearestState(State const &state, vector<State*> const &candidates) {
+      vector<State*>::const_iterator iter;
+      double best_dist;
+      State *best_guess = NULL;
+      
+      for (iter = candidates.begin(); iter != candidates.end(); ++iter) {
+        State *cand_state = (*iter);
+        vector<double> dists = state.GetSquaredDistances(cand_state);
+        
+        double dist = 0.; 
+        vector<double>::iterator dist_iter;
+        for (dist_iter = dists.begin(); dist_iter != dists.end(); 
+             ++dist_iter) {
+          dist += *dist_iter;
+        }
+        
+        if (best_guess == NULL || dist < best_dist) {
+          best_guess = cand_state;
+          best_dist = dist;
+        }
+      }
+      
+      return best_guess;
+  }
+
   /**
    * Checks if the state provided is a known goal state
    *
@@ -241,13 +311,26 @@ class QTable {
     return true;
   }
 
-
  private:
   /**
    * Huge array of all states seen thus far
    **/
   std::vector<State *> states_;
+  
+  /**
+   * States that can signal the beginning of this skill
+   **/
+  std::vector<State *> initiate_states_;
+
+  /**
+   * States that can signal the completion of this skill
+   **/
   std::vector<State *> goal_states_;
+
+  /**
+   * States that can signal the completion of this skill
+   * as given by training data.
+   **/
   std::vector<State *> trained_goal_states_;
 
   // Squared thresholds for a point to be "nearby" some other point

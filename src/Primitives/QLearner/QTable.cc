@@ -147,6 +147,8 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
   }
 }
 
+
+
 /**
  * @todo
  * Use a bloom filter to find whether or not the QTable contains the needle.

@@ -27,6 +27,8 @@ using std::string;
 using Utils::Log;
 
 QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
+  const double PERCENT_START_STATES = 1.0;
+  
   double MAX_REWARD = 100.;
   const int BUF_SIZE = 4096;
   unsigned int FRAME_BUFFER = 5;
@@ -166,11 +168,19 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
     ++frame_num;
   }
 
+  int state_index = 0;
   while (seen_states.size() > 1) {
       State *root = seen_states[0];
       unsigned int s_iter;
       double weight;
       unsigned int connect_count;
+      
+      if (static_cast<double>(state_index) 
+          < PERCENT_START_STATES * static_cast<double>(seen_states.size())) {
+        qt->AddInitiateState(root);
+      }
+      
+      
       for (s_iter = 1, connect_count = 1;
            s_iter < seen_states.size() && connect_count <= FRAME_BUFFER;
            ++s_iter, ++connect_count) {

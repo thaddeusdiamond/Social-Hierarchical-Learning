@@ -174,6 +174,25 @@ class QLearner {
     state_history_.push(sht);
   }
 
+  
+  /**
+   * Returns a vector of states resembling an optimal traversal
+   * through the QTable for executing the action, 
+   * resulting in a fixed action pattern. 
+   * 
+   * For actions that respond to stimuli actively,
+   * you want to do the traversal step by step, 
+   * instead of getting full playback in advance.
+   * 
+   * @param current_state Current system state, used to find the nearest
+   *                      initiation state to start from.
+   * 
+   * @return Vector of states that must be traversed to execute the fixed
+   *         action pattern
+   **/
+  virtual vector<State *> GetNearestFixedExecutionPath(
+                                              State *current_state) = 0;
+
   /**
    * Checks if the state provided is near a goal state
    *

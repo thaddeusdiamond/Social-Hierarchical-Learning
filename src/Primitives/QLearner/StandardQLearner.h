@@ -115,6 +115,9 @@ class StandardQLearner : public QLearner {
    * @return true on successful application, false on error
    **/
   virtual bool AssignCredit(double signal);
+  
+  
+  virtual vector<State *> GetNearestFixedExecutionPath(State *current_state);  
 
  private:
   StandardQLearner() {}

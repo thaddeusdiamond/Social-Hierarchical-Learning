@@ -119,7 +119,7 @@ bool StandardQLearner::GetNearbyStates(
     int i;
     for (i = 0, sensor_iter = sensors_.begin(); sensor_iter != sensors_.end();
          ++sensor_iter, ++i) {
-      // @TODO Make sure that not squaring distance here is correct
+
       double dist = cmp_state->get_state_vector()[i]
                     - cur_state.get_state_vector()[i];
       dist = (dist < 0) ? -dist : dist;
@@ -135,6 +135,43 @@ bool StandardQLearner::GetNearbyStates(
 
   return (nearby_states.size() > 0);
 }
+
+
+
+vector<State *> StandardQLearner::GetNearestFixedExecutionPath(
+                                                  State *current_state) {
+  vector<State *> exec_path;
+  State *initiation_state = this->q_table_.GetNearestState(*current_state,
+                                          this->q_table_.get_initiate_states());
+  
+  // No initiation state was found, can't start the action.
+  if (initiation_state == NULL) return exec_path;
+  
+  exec_path.push_back(initiation_state);
+  State *prev_state = initiation_state;
+  while (true) {
+    State *next_state = NULL;
+    double transition_reward = 0.;
+    this->GetNextState(prev_state, &next_state, transition_reward);
+    
+    if (next_state == NULL) {
+      exec_path.clear();
+      break;
+    }
+    
+    // Add 'next states' until we hit something near a goal state
+    // if we hit a goal state, add it and break the loop
+    
+    exec_path.push_back(next_state);
+    
+    if (this->q_table_.IsGoalState(*next_state)) break;
+    
+    prev_state = next_state;    
+  }
+  
+  return exec_path;
+}
+
 
 bool StandardQLearner::GetNextState(State *cur_state,
                                     State **next_state,
