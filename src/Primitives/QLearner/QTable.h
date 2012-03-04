@@ -213,12 +213,12 @@ class QTable {
 
     return false;
   }
-  
+
   vector<State *> get_initiate_states() { return initiate_states_; }
-  
+
   /**
    * Returns the nearest state in candidates to 'state'
-   * 
+   *
    * @param state Needle to search for
    * @param candidates possible states to find closest to
    * @return State pointer to closest found state
@@ -227,24 +227,24 @@ class QTable {
       vector<State*>::const_iterator iter;
       double best_dist;
       State *best_guess = NULL;
-      
+
       for (iter = candidates.begin(); iter != candidates.end(); ++iter) {
         State *cand_state = (*iter);
         vector<double> dists = state.GetSquaredDistances(cand_state);
-        
-        double dist = 0.; 
+
+        double dist = 0.;
         vector<double>::iterator dist_iter;
-        for (dist_iter = dists.begin(); dist_iter != dists.end(); 
+        for (dist_iter = dists.begin(); dist_iter != dists.end();
              ++dist_iter) {
           dist += *dist_iter;
         }
-        
+
         if (best_guess == NULL || dist < best_dist) {
           best_guess = cand_state;
           best_dist = dist;
         }
       }
-      
+
       return best_guess;
   }
 
@@ -316,7 +316,7 @@ class QTable {
    * Huge array of all states seen thus far
    **/
   std::vector<State *> states_;
-  
+
   /**
    * States that can signal the beginning of this skill
    **/

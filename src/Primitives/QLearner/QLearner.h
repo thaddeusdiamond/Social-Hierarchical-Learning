@@ -174,7 +174,6 @@ class QLearner {
     state_history_.push(sht);
   }
 
-  
   /**
    * Returns a vector of states resembling an optimal traversal
    * through the QTable for executing the action, 

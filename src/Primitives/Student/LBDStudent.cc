@@ -26,12 +26,14 @@ using google::protobuf::int64;
 using std::string;
 using Utils::Log;
 
+
 QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
-  const double PERCENT_START_STATES = 1.0;
-  
+  const double PERCENT_START_STATES = .05;
+  double NOISE_RATE = 0.0;
+
   double MAX_REWARD = 100.;
   const int BUF_SIZE = 4096;
-  unsigned int FRAME_BUFFER = 5;
+  unsigned int FRAME_BUFFER = 1;
   char line_buf[BUF_SIZE];
   // char *saveptr_min_incr, *saveptr_nearby_thresh;
   char *saveptr_state_val;
@@ -111,10 +113,12 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
     while (tokenizer != NULL) {
       double sensor_val = atof(tokenizer);
 
-      // Uncomment below if noising the input data
-      // double rand_factor = double(rand() % 2) / 100. + .99;
-      // sensor_val *= rand_factor;
-
+      if (NOISE_RATE >= 0.01) {
+        double rand_factor = double(rand() % (static_cast<int>(NOISE_RATE*100))) 
+                             / 100. + (1.-NOISE_RATE);
+        sensor_val *= rand_factor;
+      }
+      
       state_vector.push_back(sensor_val);
       snprintf(dbuf, sizeof(dbuf), "%g, ", sensor_val);
       state_str += dbuf;
@@ -141,64 +145,42 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
 
     seen_states.push_back(new_state);
 
-    if (seen_states.size() > FRAME_BUFFER) {
-      // Start making connections from state at index 0
-      State *root = seen_states[0];
-      unsigned int s_iter;
-      double weight;
-      unsigned int connect_count;
-      for (s_iter = 1, connect_count = 1;
-           s_iter < seen_states.size() && connect_count <= FRAME_BUFFER;
-           ++s_iter, ++connect_count) {
-        State *connect_state = seen_states[s_iter];
-
-        if (!connect_state)
-          Log(log_stream, ERROR, "Connecting to un-added state!");
-
-        weight = MAX_REWARD / (static_cast<double>(connect_count));
-        if (root != connect_state)
-          root->set_reward(connect_state, "base", weight);
-      }
-
-      snprintf(buf, sizeof(buf), "State has %ld connections.",
-               static_cast<int64>(root->get_reward().size()));
-      Log(log_stream, DEBUG, buf);
-      seen_states.pop_front();
-    }
     ++frame_num;
   }
 
   int state_index = 0;
   while (seen_states.size() > 1) {
-      State *root = seen_states[0];
-      unsigned int s_iter;
-      double weight;
-      unsigned int connect_count;
-      
-      if (static_cast<double>(state_index) 
-          < PERCENT_START_STATES * static_cast<double>(seen_states.size())) {
-        qt->AddInitiateState(root);
-      }
-      
-      
-      for (s_iter = 1, connect_count = 1;
-           s_iter < seen_states.size() && connect_count <= FRAME_BUFFER;
-           ++s_iter, ++connect_count) {
-        State *connect_state = seen_states[s_iter];
+    State *root = seen_states[0];
+    unsigned int s_iter;
+    double weight;
+    unsigned int connect_count;
 
-        if (!connect_state)
-          Log(log_stream, ERROR, "Connecting to un-added state!");
+    if (state_index == 0 || static_cast<double>(state_index)
+        < PERCENT_START_STATES * static_cast<double>(seen_states.size())) {
+      qt->AddInitiateState(root);
+    }
 
-        weight = MAX_REWARD / (static_cast<double>(connect_count));
-        if (root != connect_state)
-          root->set_reward(connect_state, "base", weight);
-      }
-      seen_states.pop_front();
+
+    for (s_iter = 1, connect_count = 1;
+         s_iter < seen_states.size() && connect_count <= FRAME_BUFFER;
+         ++s_iter, ++connect_count) {
+      State *connect_state = seen_states[s_iter];
+
+      if (!connect_state)
+        Log(log_stream, ERROR, "Connecting to un-added state!");
+
+      weight = MAX_REWARD / (static_cast<double>(connect_count));
+      if (root != connect_state)
+       root->set_reward(connect_state, "base", weight);
+    }
+    
+    seen_states.pop_front();
+    ++state_index;
   }
 
   training_file.close();
 
-  char buf[1024];
+  char buf[4096];
   snprintf(buf, sizeof(buf), "Finished loading %d frames into LBD Student "
     "for %s. It now has %ld states", (frame_num-1), skill_name.c_str(),
     static_cast<int64>(qt->get_states().size()));
@@ -209,7 +191,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
     // Should always hit this condition.. otherwise I screwed up above
     snprintf(buf, sizeof(buf), "Added Goal State: %s",
              seen_states[0]->to_string().c_str());
-    Log(stderr, ERROR, buf);
+    Log(stderr, SUCCESS, buf);
     qt->AddGoalState(seen_states[0], true);
   } else {
     Log(stderr, ERROR, "No goal states on this primitive...?");

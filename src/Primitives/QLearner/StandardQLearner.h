@@ -75,20 +75,20 @@ class StandardQLearner : public QLearner {
    * Populates nearby_states with a list of neighboring state descriptors
    * and the reward values currently associated with them.
    *
-   * @param     cur_state        Vector of state descriptors 
+   * @param     cur_state        Vector of state descriptors
    * @param     nearby_states    Empty vector of state descriptors to be
    *                             populated with const pointers from within this
    *                             object by the time the function returns
-   *                            
+   *
    * @return True on success, false on lookup error.
    */
   virtual bool GetNearbyStates(State const& cur_state,
                        vector<State const *>& nearby_states);
 
   /**
-   * Populates the QTable with states describing all neighboring states of 
+   * Populates the QTable with states describing all neighboring states of
    * parameter 'state' if they don't already exist.
-   * 
+   *
    * @param state State in the QTable to use as origin
    * @return True on success, false on failure
    */
@@ -99,7 +99,7 @@ class StandardQLearner : public QLearner {
    *
    * @param     cur_state       State descriptor
    * @param     next_state      Overwritten with pointer to next State object
-   * 
+   *
    * @return True on success, false on lookup error
    */
   virtual bool GetNextState(State *cur_state,
@@ -115,9 +115,9 @@ class StandardQLearner : public QLearner {
    * @return true on successful application, false on error
    **/
   virtual bool AssignCredit(double signal);
-  
-  
-  virtual vector<State *> GetNearestFixedExecutionPath(State *current_state);  
+
+
+  virtual vector<State *> GetNearestFixedExecutionPath(State *current_state);
 
  private:
   StandardQLearner() {}

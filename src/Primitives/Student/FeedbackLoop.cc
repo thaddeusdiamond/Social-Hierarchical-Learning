@@ -24,19 +24,16 @@ void PlaybackAndGetFeedback(char *gesture_file, char *new_file) {
 	
 	// Create feedback sensor so you can poll for feedback
 	sensor = new FeedbackSensor(20000);
-	sensor->Poll();
 
-        ofstream file;
-        file.open(new_file);
+  ofstream file;
+  file.open(new_file);
 	
 	// Internalize feedback 
 	if (sensor->GetValues()[0] == 0) {		// "GOOD"
 		// Write a line to new_file indicating it's okay
-                file << "OK";
-                ofstream.close();
-	}
-
-	else if (sensor->GetValues()[0] == 1 || sensor->GetValues()[0] == 2) { // "BAD" or "PANIC"
+    file << "OK";
+    ofstream.close();
+	} else if (sensor->GetValues()[0] == 1 || sensor->GetValues()[0] == 2) { // "BAD" or "PANIC"
 		// Nao asks for demonstration
 	
 		// Capture demonstration

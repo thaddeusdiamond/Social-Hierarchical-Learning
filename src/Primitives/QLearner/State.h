@@ -217,11 +217,12 @@ class State {
   virtual std::string to_string() {
     char buf[4096];
     unsigned int state_count = state_vector_.size();
-    for (unsigned int i = 0; i < state_count; ++i)
+    for (unsigned int i = 0; i < state_count; ++i) {
       if (i)
         snprintf(buf, sizeof(buf), "%s, %g", buf, state_vector_[i]);
       else
         snprintf(buf, sizeof(buf), "%g", state_vector_[i]);
+    }
     return std::string(buf);
   }
 

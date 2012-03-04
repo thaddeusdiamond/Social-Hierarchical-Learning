@@ -4,7 +4,9 @@ TESTS   := $(TESTS)   $(LOWERC_ROOT)RecognizerTest
 
 # relative to $(TOP), i.e. $(LOWERC_DIR)/*.cc
 $(UPPERC_ROOT)_RECOGNIZER_SRCS := 
-$(UPPERC_ROOT)_RECOGNIZER_EXECUTABLES := $(LOWERC_ROOT)/Recognizer/aaai12.cc
+$(UPPERC_ROOT)_RECOGNIZER_EXECUTABLES := $(LOWERC_ROOT)/Recognizer/aaai12.cc \
+					 $(LOWERC_ROOT)/Recognizer/iros12.cc
+
 
 # Set makefile template specific vars
 UPPERC_DIR := $(UPPERC_ROOT)_RECOGNIZER
