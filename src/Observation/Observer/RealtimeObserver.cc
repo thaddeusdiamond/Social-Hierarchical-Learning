@@ -122,7 +122,7 @@ bool RealtimeObserver::Observe(Task* task) {
       #endif
       
       for (int i = 0; i < sensor->get_num_values(); ++i) {
-        // double rand_factor = static_cast<double>(rand() % 2) / 100. + 0.9;
+        // double rand_factor = static_cast<double>(rand() % 10) / 1000. + 0.995;
         double rand_factor = 1.;
         unified_frame.push_back(values[i] * rand_factor);
       }

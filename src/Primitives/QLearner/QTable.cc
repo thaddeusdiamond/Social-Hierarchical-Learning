@@ -91,10 +91,10 @@ State *QTable::GetState(State const &needle, bool add_estimated_state) {
       for (idx = 0;
           idx < nearby_state_dists.size() && idx < squared_dists.size();
           ++idx) {
-        weight += .6 - (squared_dists[idx] / nearby_state_dists[idx]);
+        weight += 1. - (squared_dists[idx] / nearby_state_dists[idx]);
       }
       weight /= squared_dists.size();
-
+      
       // Add the same incoming reward transitions as the found state, reward
       // value weighted by the distance of the found state from the needle state
       // --Only transfer the 'base' layer--

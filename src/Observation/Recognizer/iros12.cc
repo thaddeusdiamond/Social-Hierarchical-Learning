@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <alproxies/altexttospeechproxy.h>
 #include "Primitives/Student/LBDStudent.h"
 #include "Primitives/Student/FeedbackSensor.h"
 #include "Observation/Playback/PlaybackSensor.h"
@@ -38,7 +39,7 @@ static string primitive_list[] = {
 static unsigned int primitives_count = 7;
 const int NUM_SENSORS = 6;
 
-const int REPETITIONS_PER_SKILL = 2;
+const int REPETITIONS_PER_SKILL = 1;
 
 const double XY_MIN = 0.01;
 const double Z_MIN = 10.;
@@ -49,15 +50,21 @@ bool OutputStatePath(vector<State *> path, string filename) {
   std::ofstream outfile(filename.c_str());
   if (!outfile.is_open()) return false;
   
+  cout << "writing file:" << endl;
   for (unsigned int i = 0; i < path.size(); ++i) {
     State *s = path[i];
     char buf[4096];
     std::vector<double> const &state_vector = s->get_state_vector();
+    snprintf(buf, sizeof(buf), "%f", state_vector[0]);
     for (unsigned int j = 0; j < state_vector.size(); ++j) {
-      snprintf(buf,sizeof(buf),"%s, %g", buf, state_vector[j]);
+      char temp[64];
+      snprintf(temp,sizeof(temp), ", %f", state_vector[j]);
+      strcat(buf,temp);
     }
-    snprintf(buf,sizeof(buf),"%s\n", buf);
-    outfile.write(buf,sizeof(buf));
+    strcat(buf, "\n");
+    cout << buf;
+    outfile << buf;
+    // outfile.write(buf,sizeof(buf));
   }
   
   return true;
@@ -225,11 +232,18 @@ int main(int argc, char* argv[]) {
     // write playback path through MDP space to file
     vector<State *> playback_path = chosen_skill->GetNearestFixedExecutionPath(
                                       NULL);
-                                      
+    
+    char buf[1024];
+    snprintf(buf, sizeof(buf), "Found playback path for %s with %ld states",
+                                chosen_skill->get_name().c_str(),
+                                playback_path.size());
+    cout << buf << endl;
     ++playback;
     cout << " Next Iter " << endl;
-    continue; 
+
     bool request_demo = false;
+
+
     if (playback_path.size() == 0) {
       // Couldn't get a good path for some reason
       char buf[1024];
@@ -238,17 +252,36 @@ int main(int argc, char* argv[]) {
       Log(stderr, ERROR, buf);
 
       // TODO: Say "I can't figure out how to do xxxx. Please show me."
+      snprintf(buf, sizeof(buf), "I don't know how to do %s. Please show me",
+               chosen_skill->get_name().c_str());
+      //AL::ALTextToSpeechProxy tts("nao.local", 9559);
+      //tts.say(buf);
+      
       request_demo = true;
     } else {
+      char buf[1024];
+      //AL::ALTextToSpeechProxy tts("nao.local", 9559);
+
       // save state path to file
       OutputStatePath(playback_path, "playbackpath.csv");
 
+      snprintf(buf, sizeof(buf), "I think this is how to do %s.",
+               chosen_skill->get_name().c_str());
+      //tts.say(buf);
+ 
       // call playback executable with file
 
       // ask for feedback
+      snprintf(buf, sizeof(buf), "Did I do %s properly?",
+               chosen_skill->get_name().c_str());
+      //tts.say(buf);
 
       // take keyboard feedback
-      int feedback_type = 0;
+      char feedback = 'y';
+      while (feedback != 'n' && feedback != 'y')
+        std::cin >> feedback;
+      int feedback_type = (feedback == 'y') ? 
+                          FeedbackSensor::GOOD : FeedbackSensor::BAD;
       if (feedback_type == FeedbackSensor::BAD)
         request_demo = true;
     }

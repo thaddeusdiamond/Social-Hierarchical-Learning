@@ -29,11 +29,11 @@ using Utils::Log;
 
 QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
   const double PERCENT_START_STATES = .05;
-  double NOISE_RATE = 0.0;
+  double NOISE_RATE = 0.005;
 
   double MAX_REWARD = 100.;
   const int BUF_SIZE = 4096;
-  unsigned int FRAME_BUFFER = 1;
+  unsigned int FRAME_BUFFER = 3;
   char line_buf[BUF_SIZE];
   // char *saveptr_min_incr, *saveptr_nearby_thresh;
   char *saveptr_state_val;
@@ -113,10 +113,13 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
     while (tokenizer != NULL) {
       double sensor_val = atof(tokenizer);
 
-      if (NOISE_RATE >= 0.01) {
-        double rand_factor = double(rand() % (static_cast<int>(NOISE_RATE*100))) 
-                             / 100. + (1.-NOISE_RATE);
-        sensor_val *= rand_factor;
+      if (NOISE_RATE >= 10) { //0.001) {
+        double rand_factor = double(rand() % 
+                             (static_cast<int>(NOISE_RATE*1000)))
+                             / 1000. - (NOISE_RATE / 2.);
+                        
+  
+        sensor_val *= 1.+rand_factor;
       }
       
       state_vector.push_back(sensor_val);
