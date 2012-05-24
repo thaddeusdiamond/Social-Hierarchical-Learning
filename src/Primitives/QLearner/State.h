@@ -32,12 +32,13 @@ class State {
    * @param state_descriptor    Description of state being represented
    **/
   explicit State(const std::vector<double> &state_descriptor)
-    : state_vector_(state_descriptor) {}
+    : state_vector_(state_descriptor), out_transitions_sample_count_(0) {}
 
   /**
    * Copy constructor. Disregards all state transitions from s.
    **/
-  explicit State(State const &s) : state_vector_(s.get_state_vector()) {}
+  explicit State(State const &s) : state_vector_(s.get_state_vector()),
+      out_transitions_sample_count_(0) {}
 
   /**
    * Shouldn't have to free anything here
@@ -141,6 +142,110 @@ class State {
   virtual std::vector<double> get_state_vector() const {
     return state_vector_;
   };
+  
+  
+  
+  /**
+   * Returns a serialized action string that has the highest probability of
+   * reaching the target state. If no known action is found, an empty string
+   * is returned
+   * 
+   * @param target_state QTable-Internal pointer to target State
+   * @return Serialized action, or empty string if no suitable actions found.
+   * 
+   **/
+  virtual std::string getAction(State *target_state) {
+    using std::pair;
+    using std::string;
+    using std::map;
+    using std::vector;
+    
+    map<string, vector<pair<State *, int> > >::iterator action_iter;
+    double best_probability = 0.;
+    string best_action = "";
+    
+    // Iterate over all known action transitions from this state
+    for (action_iter = this->out_transitions_.begin();
+         action_iter != this->out_transitions_.end();
+         ++action_iter) {
+        vector<pair<State *, int> > &destinations = action_iter->second;
+        vector<pair<State *, int> >::iterator iter;      
+        
+        // Count how many transition examples we have from a given action
+        double total_entries = 0.;
+        double action_prb = 0.; // Probability of going to target_state with
+                                // this action
+                                
+        // Iterate over all states previously reached with this action
+        for (iter = destinations.begin(); iter != destinations.end(); ++iter) {
+          total_entries += (*iter).second;
+          if ((*iter).first == target_state) {
+            double prb = double((*iter).second);
+            action_prb = prb;
+          }
+        }
+        
+        action_prb /= total_entries; // Normalize the probability
+        
+        // Keep track of the best possible action to reach the desired state
+        if (action_prb > best_probability) {
+          best_probability = action_prb;
+          best_action = action_iter->first;
+        }
+    }
+    
+    return best_action;
+  }
+
+  /**
+   * Associates an transition count with a target state/action pair, which
+   * can be used to determine transition probabilities for an action.
+   * 
+   * @param target State pointer to state **internal** to the skill's QTable
+   * @param action Serialized action to be associated with the transition
+   **/
+  virtual bool connectState(State *target, std::string action) {
+    using std::pair;
+    using std::string;
+    using std::map;
+    using std::vector;
+    
+    map<string, vector<pair<State *, int> > >::iterator
+        iter;
+
+    // See if this action has already been transitioned from in this state
+    iter = this->out_transitions_.find(action);
+
+    // If action hasn't been done yet, add it to the action/transition map
+    if (iter == this->out_transitions_.end()) {
+      vector<pair<State *, int> > transition_probabilities;
+      pair<State *, int> transition (target, 1);
+      transition_probabilities.push_back(transition);
+      this->out_transitions_[action] = transition_probabilities;
+    } else {
+      // Have done this action before, so just add the new transition info
+      vector<pair<State *, int> > &transition_probabilities = iter->second;
+      vector<pair<State *, int> >::iterator state_iter;
+      
+      bool found_state = false;
+      for (state_iter = transition_probabilities.begin();
+           state_iter != transition_probabilities.end();
+           ++state_iter) {
+        if (state_iter->first == target) {
+          ++(state_iter->second);
+          found_state = true;
+          break;
+        }
+      }
+      
+      // If we've never transitioned to this state with this action, add it
+      if (!found_state) {
+        pair<State *, int> transition (target, 1);
+        transition_probabilities.push_back(transition);
+      }
+    }
+    return true;
+  };
 
   /**
    * Sets a reward with key 'layer' to value 'val' on this state
@@ -235,6 +340,12 @@ class State {
   std::vector<double> state_vector_;
   std::map<State*, std::map<std::string, double> > reward_;
   std::vector<State*> incoming_states_;
+  
+  // Maps action IDs (strings) to a list of states/probabilities
+  std::map<std::string, std::vector<std::pair<State *, int> > > 
+      out_transitions_;
+  unsigned int out_transitions_sample_count_;
+  
   char state_hash_[160];  // @TODO: When state_vector_ is populated,
                           // store hash here to allow quick comparisons
 };

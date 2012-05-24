@@ -69,14 +69,6 @@ class QLearner {
    **/
   virtual bool Init(std::vector<Sensor *> const &sensors) = 0;
 
-  /**
-   * Copies the state data provided to it and records it in the QTable
-   *
-   * @param     state           State description with reward
-   *
-   * @return    True on successful modification of QTable, false on failure.
-   **/
-  virtual bool Learn(State const& state) = 0;
 
   /**
    * Populates nearby_states with a list of neighboring state descriptors

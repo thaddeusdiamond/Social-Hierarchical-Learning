@@ -56,43 +56,6 @@ bool StandardQLearner::Init(std::vector<Sensor *> const &sensors) {
   return true;
 }
 
-bool StandardQLearner::Learn(State const& state) {
-  // @TODO: This should start the primitives recording process
-  return true;
-}
-
-bool StandardQLearner::AddNearbyEmptyStates(State const &state) {
-  std::vector<double> base_descriptor = state.get_state_vector();
-  std::vector<Sensor *>::const_iterator sensor_iter;
-  int i = 0;
-  for (i = 0, sensor_iter = sensors_.begin(); sensor_iter != sensors_.end();
-       ++i, ++sensor_iter) {
-    double min_increment = (*sensor_iter)->get_min_increment();
-    std::vector<double> incr_descriptor = base_descriptor;
-    std::vector<double> decr_descriptor = base_descriptor;
-
-    incr_descriptor[i] += min_increment;
-    decr_descriptor[i] -= min_increment;
-
-    State increment_state(incr_descriptor);
-    State decrement_state(decr_descriptor);
-
-    if (this->q_table_.HasState(increment_state)) {
-      if (!this->q_table_.GetState(increment_state, false)) {
-        this->q_table_.AddState(increment_state);
-      }
-    }
-
-    if (this->q_table_.HasState(decrement_state)) {
-      if (!this->q_table_.GetState(decrement_state, false)) {
-        this->q_table_.AddState(decrement_state);
-      }
-    }
-  }
-
-  return true;
-}
-
 /**
  * @todo Requires rewrite to not duplicate functionality introduced in QTable
  *       class. This function is meant mostly for adding possible states into
@@ -103,8 +66,6 @@ bool StandardQLearner::GetNearbyStates(
   State const& cur_state, std::vector<State const *>& nearby_states) {
   // Retrieve all states within search_distances of the cur_state that are
   // in the qtable.
-
-  this->AddNearbyEmptyStates(cur_state);
 
   std::vector<State *> all_states = this->q_table_.get_states();
 

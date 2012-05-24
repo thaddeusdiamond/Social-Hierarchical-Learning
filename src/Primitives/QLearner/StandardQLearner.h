@@ -63,15 +63,6 @@ class StandardQLearner : public QLearner {
   virtual bool Init(std::vector<Sensor *> const &sensors);
 
   /**
-   * Copies the state data provided to it and records it in the QTable
-   *
-   * @param     state           State description with reward
-   *
-   * @return    True on successful modification of QTable, false on failure.
-   */
-  virtual bool Learn(State const& state);
-
-  /**
    * Populates nearby_states with a list of neighboring state descriptors
    * and the reward values currently associated with them.
    *
@@ -85,14 +76,6 @@ class StandardQLearner : public QLearner {
   virtual bool GetNearbyStates(State const& cur_state,
                        vector<State const *>& nearby_states);
 
-  /**
-   * Populates the QTable with states describing all neighboring states of
-   * parameter 'state' if they don't already exist.
-   *
-   * @param state State in the QTable to use as origin
-   * @return True on success, false on failure
-   */
-  virtual bool AddNearbyEmptyStates(State const &state);
 
   /**
    * Returns the chosen next step by the QLearner.
@@ -116,7 +99,11 @@ class StandardQLearner : public QLearner {
    **/
   virtual bool AssignCredit(double signal);
 
-
+  /**
+   * Gets a fixed-action-path execution of a skill.
+   * @param current_state Pointer to an initiation state (or NULL to select
+   *                      the first known initiation state in the skill)
+   */
   virtual vector<State *> GetNearestFixedExecutionPath(State *current_state);
 
  private:
