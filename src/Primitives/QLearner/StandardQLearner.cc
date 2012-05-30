@@ -103,6 +103,7 @@ vector<State *> StandardQLearner::GetNearestFixedExecutionPath(
   vector<State *> exec_path;
   State *initiation_state = NULL;
 
+  //Look for initiation states, break out if none are found
   if (this->q_table_.get_initiate_states().size() == 0) return exec_path;
 
   if (current_state == NULL) 
@@ -129,7 +130,6 @@ vector<State *> StandardQLearner::GetNearestFixedExecutionPath(
 
     // Add 'next states' until we hit something near a goal state
     // if we hit a goal state, add it and break the loop
-
     exec_path.push_back(next_state);
 
     if (this->q_table_.IsGoalState(*next_state)) break;

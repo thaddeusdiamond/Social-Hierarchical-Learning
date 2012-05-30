@@ -83,7 +83,6 @@ class Sensor {
    **/
   virtual bool Poll() = 0;
 
- protected:
   /** @todo I think these should really be removed since Sensor defines
    *        an interface, though we can leave it to show some of the things
    *        that might belong in a Sensor object **/

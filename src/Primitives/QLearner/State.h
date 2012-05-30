@@ -17,6 +17,7 @@
 #include <cmath>
 #include <string>
 #include "Common/Utils.h"
+#include "Primitives/QLearner/Action.h"
 
 namespace Primitives {
 using std::vector;
@@ -154,7 +155,7 @@ class State {
    * @return Serialized action, or empty string if no suitable actions found.
    * 
    **/
-  virtual std::string getAction(State *target_state) {
+  virtual std::string getActionForTransition(State *target_state) {
     using std::pair;
     using std::string;
     using std::map;

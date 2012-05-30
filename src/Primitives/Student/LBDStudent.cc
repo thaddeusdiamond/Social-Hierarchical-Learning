@@ -29,9 +29,10 @@ using Utils::Log;
 
 QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
   const double PERCENT_START_STATES = .05;
-  double NOISE_RATE = 0.005;
+  double NOISE_RATE = 0.005; /* Noise data 0.05% */
 
   double MAX_REWARD = 100.;
+
   const int BUF_SIZE = 4096;
   unsigned int FRAME_BUFFER = 3;
   char line_buf[BUF_SIZE];
@@ -100,9 +101,9 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
   // Create array of "loaded states"
   // At each iteration through, add to array of loaded states
   // Once array size is 5 or greater, create state transitions for
-  // state at index 0 to each subsequent state with reward 1/n
+  // state at index 0 to each subsequent state with reward MAX_REWARD/n
   // where n is the distance between the states in the array
-  // pop index 0 off of array
+  // finally, pop index 0 off of array
   while (!training_file.eof()) {
     training_file.getline(line_buf, BUF_SIZE);
     tokenizer = strtok_r(line_buf, ", ", &saveptr_state_val);
@@ -113,7 +114,8 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
     while (tokenizer != NULL) {
       double sensor_val = atof(tokenizer);
 
-      if (NOISE_RATE >= 10) { //0.001) {
+      // Noise incoming data if parameter is set
+      if (NOISE_RATE >= .001) { 
         double rand_factor = double(rand() % 
                              (static_cast<int>(NOISE_RATE*1000)))
                              / 1000. - (NOISE_RATE / 2.);
@@ -151,6 +153,12 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
     ++frame_num;
   }
 
+  /*
+   * Define initiation set according to PERCENT_START_STATES
+   * Connect states together, out to FRAME_BUFFER proceeding states.
+   *    - These connections are weighted as 1/n * MAX_REWARD, where
+   *      n is the distance from the trained connection.
+   */
   int state_index = 0;
   while (seen_states.size() > 1) {
     State *root = seen_states[0];
@@ -173,8 +181,10 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
         Log(log_stream, ERROR, "Connecting to un-added state!");
 
       weight = MAX_REWARD / (static_cast<double>(connect_count));
-      if (root != connect_state)
+      if (root != connect_state) {
        root->set_reward(connect_state, "base", weight);
+       root->connectState(connect_state, Primitives::Action::INTERPOLATE);
+      }
     }
     
     seen_states.pop_front();
@@ -191,7 +201,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
 
 
   if (seen_states.size() == 1) {
-    // Should always hit this condition.. otherwise I screwed up above
+    // Should always hit this condition.. something went wrong above
     snprintf(buf, sizeof(buf), "Added Goal State: %s",
              seen_states[0]->to_string().c_str());
     Log(stderr, SUCCESS, buf);
