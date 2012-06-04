@@ -19,6 +19,7 @@ STORAGE   := ../db
 GTEST     := $(EXTDIR)/googletest
 PROTOB    := $(EXTDIR)/protobuf
 NAOSDK    := /home/brad/nao-sdk/naoqi-sdk-1.12-linux32
+HASHLIB   := /usr/include/hashlib++
 
 # Doxygen specific directives
 DOCOUT    := ../doc/html
@@ -45,9 +46,10 @@ V = @
 CXX       := g++
 CXXFLAGS  := -g -I$(PROTOB)/src -I$(GTEST)/include -Wall -Werror
 CXXFLAGS  += -I$(TOP) -I$(OBJDIR) -I$(PRIMDIR) -I$(OBSVDIR)
-CXXFLAGS  += -I$(NAOSDK)/include
+CXXFLAGS  += -I$(NAOSDK)/include -I$(HASHLIB)
 MDFLAGS   := -MD
-LDFLAGS   := -lrt -lpthread -lgtest -L$(GTEST)/lib/.libs -lprotobuf -L$(PROTOB)/src/.libs
+LDFLAGS   := -lrt -lpthread -lgtest -L$(GTEST)/lib/.libs -lprotobuf 
+LDFLAGS   += -L$(PROTOB)/src/.libs -lhl++
 LDLIBPATH := LD_LIBRARY_PATH=$(GTEST)/lib/.libs:$(PROTOB)/src/.libs:$(NAOSDK)/lib
 
 # Lists that the */Makefile.inc makefile fragments will add to

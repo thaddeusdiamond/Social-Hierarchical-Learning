@@ -16,6 +16,7 @@
 #include <map>
 #include <cmath>
 #include <string>
+#include <hashlibpp.h>
 #include "Common/Utils.h"
 #include "Primitives/QLearner/Action.h"
 
@@ -33,13 +34,17 @@ class State {
    * @param state_descriptor    Description of state being represented
    **/
   explicit State(const std::vector<double> &state_descriptor)
-    : state_vector_(state_descriptor), out_transitions_sample_count_(0) {}
+    : state_vector_(state_descriptor), out_transitions_sample_count_(0) { 
+    generateHash();
+  }
 
   /**
    * Copy constructor. Disregards all state transitions from s.
    **/
   explicit State(State const &s) : state_vector_(s.get_state_vector()),
-      out_transitions_sample_count_(0) {}
+      out_transitions_sample_count_(0) {
+    generateHash();        
+  }
 
   /**
    * Shouldn't have to free anything here
@@ -65,22 +70,114 @@ class State {
       }
     }
 
-    /* Only check this if stateHash
-    std::vector<double>::const_iterator iter;
-    std::vector<double>::const_iterator needle_iter;
-    for (iter = state_vector_.begin(),
-         needle_iter = state->get_state_vector().begin();
-         iter != state_vector_.end(),
-         needle_iter != state->get_state_vector().end();
-         ++iter, ++needle_iter) {
-      if (fabs((*iter) - (*needle_iter)) > 0.00001) {
-        return false;
-      }
-    }
-    */
-
     return true;
   }
+
+  /**
+   * Serializes the state so that it can be saved to disk.
+   *
+   * 
+   * State Serialization Format:
+   * 
+   * Line 1: CSV State Vector (doubles)
+   * 
+   * BEGIN {BLOCK}
+   * 
+   * END {BLOCK}
+   * 
+   * Block "rewards"
+   * Line 1: "Target " + MD5 Target Hash
+   * Line 2: Layer Name
+   * Line 3: Reward Value
+   * Line 4: Layer Name
+   * Line 5: Reward Value
+   * 
+   * Block "incoming"
+   * Line 1: Incoming state hash
+   * 
+  std::vector<double> state_vector_;
+  std::map<State*, std::map<std::string, double> > reward_;
+  std::vector<State*> incoming_states_;
+  
+  // Maps action IDs (strings) to a list of states/probabilities
+  std::map<std::string, std::vector<std::pair<State *, int> > > 
+      out_transitions_;
+  unsigned int out_transitions_sample_count_;
+
+   */
+  virtual std::string serialize() {     
+    using std::pair;
+    using std::vector;
+    using std::string;
+    const unsigned int BUFFER_SIZE = 4096;
+    char state_vector[BUFFER_SIZE];
+    char reward_transitions[BUFFER_SIZE];
+    char incoming_states[BUFFER_SIZE];
+    char action_transitions[BUFFER_SIZE];
+    
+    string serialized_state;
+     
+    for (unsigned int i = 0; i < state_vector_.size(); ++i)
+      snprintf(state_vector, BUFFER_SIZE, "%s,%g",state_vector, state_vector_[i]);
+    snprintf(state_vector, BUFFER_SIZE, "%s\n",state_vector);
+    
+    map<State*, map<string, double> >::iterator reward_iter;
+    for (reward_iter = reward_.begin(); reward_iter != reward_.end();
+         ++reward_iter) {
+      State *to_state = reward_iter->first;
+      snprintf(reward_transitions, BUFFER_SIZE, "%sTarget %s\n", 
+               reward_transitions, to_state->get_state_hash().c_str());
+    
+      map<string, double>::iterator layer_iter;
+      for (layer_iter = reward_iter->second.begin(); 
+           layer_iter != reward_iter->second.end();
+           ++layer_iter) {
+         string label = layer_iter->first;
+         double val = layer_iter->second;
+         snprintf(reward_transitions, BUFFER_SIZE, "%s%s\n%g\n",
+                  reward_transitions, label.c_str(), val);
+      }
+    }
+
+    vector<State*>::iterator  incoming_iter;
+    for (incoming_iter = incoming_states_.begin();
+         incoming_iter != incoming_states_.end();
+         incoming_iter++) {
+      snprintf(incoming_states, BUFFER_SIZE, "%s%s\n", incoming_states, 
+               (*incoming_iter)->get_state_hash().c_str());
+    }
+    
+    map<string, vector<pair<State *, int> > >::iterator action_iter;
+    
+    for (action_iter = out_transitions_.begin();
+         action_iter != out_transitions_.end();
+         ++action_iter) {
+      snprintf(action_transitions, BUFFER_SIZE, "%sAction %s\n",
+               action_transitions, action_iter->first.c_str());
+      vector<pair<State *, int> >::iterator target_iter;
+      for (target_iter = action_iter->second.begin();
+           target_iter != action_iter->second.end();
+           ++target_iter) {
+        snprintf(action_transitions, BUFFER_SIZE, "%s%s\n%d\n", action_transitions,
+                 target_iter->first->get_state_hash().c_str(),
+                 target_iter->second);
+      }
+    }
+    
+    serialized_state.append(state_vector);
+    serialized_state.append("BEGIN rewards\n");
+    serialized_state.append(reward_transitions);
+    serialized_state.append("END rewards\n");
+    serialized_state.append("BEGIN incoming\n");
+    serialized_state.append(incoming_states);
+    serialized_state.append("END incoming\n");
+    serialized_state.append("BEGIN actions\n");
+    serialized_state.append(action_transitions);
+    serialized_state.append("END actions\n");
+    
+    return serialized_state;
+  }
+
 
   /**
    * Finds the euclidean squared distance between two states
@@ -332,11 +429,27 @@ class State {
     return std::string(buf);
   }
 
+  std::string get_state_hash() { return state_hash_; }
+
  private:
-  /**
-   * Copy constructor
-   **/
   explicit State() {}
+  
+  /**
+   * Populates the state_hash_ with an MD5 hash of the state vector values
+   */
+  void generateHash() {
+    hashwrapper *hash_gen = new md5wrapper();
+    char buf[4096];
+
+    if (state_vector_.size() == 0) return;
+
+    snprintf(buf, 4096, "%g", state_vector_[0]);
+    for (unsigned int i = 1; i < state_vector_.size(); ++i)
+     snprintf(buf, 4096, "%s,%g",buf, state_vector_[i]);
+    
+    state_hash_ = hash_gen->getHashFromString(std::string(buf));
+  }
+  
 
   std::vector<double> state_vector_;
   std::map<State*, std::map<std::string, double> > reward_;
@@ -347,8 +460,8 @@ class State {
       out_transitions_;
   unsigned int out_transitions_sample_count_;
   
-  char state_hash_[160];  // @TODO: When state_vector_ is populated,
-                          // store hash here to allow quick comparisons
+  std::string state_hash_; // MD5 Hash of State Vector
+
 };
 
 }  // namespace Primitives

@@ -15,6 +15,8 @@
 #include <string>
 #include <vector>
 #include <stack>
+#include <fstream>
+#include <iostream>
 #include "QLearner/State.h"
 #include "QLearner/StateHistoryTuple.h"
 #include "Exploration/ExplorationType.h"
@@ -56,7 +58,19 @@ class QLearner {
    *
    * @return    True on success, false on failure
    **/
-  virtual bool Save(string const& filename) = 0;
+  virtual bool Save(string const& filename) {
+    std::ofstream skill_file;
+    
+    skill_file.open(filename.c_str(), std::ios::out);
+    if (!skill_file.is_open()) return false;
+    
+    skill_file << name_ << "\n";
+    skill_file << trials_ << " " << anticipated_duration_ << "\n";
+    skill_file << q_table_.serialize();
+    
+    skill_file.close();
+    return true;
+  }
 
   /**
    * Clears table, initializes everything in the object to pristine and

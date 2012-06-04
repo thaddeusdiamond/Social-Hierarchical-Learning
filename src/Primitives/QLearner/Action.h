@@ -33,6 +33,12 @@ namespace Primitives {
     // "interpolate motor positions"
     static const std::string NO_ACTION;
     static const std::string INTERPOLATE;
+    
+    
+   private:
+    std::string prefix;
+    std::string content;
+    std::string suffix;
   };
 }
 

@@ -129,6 +129,16 @@ class QTable {
    **/
   State *GetState(State const &needle, bool add_estimated_state);
 
+
+  /**
+   * Checks if the QTable has a state described by needle, and if so returns
+   * the internally stored version.
+   *
+   * @param needle_hash Hash of State to find within the QTable
+   * @return NULL if needle not found, else: state pointer to internal version
+   **/
+  State *GetState(std::string needle_hash);
+
   /**
    * Checks if the QTable has a state described by needle via Bloom Filter.
    * Faster than GetState, but capable of false positives. Never false negative.
@@ -310,6 +320,12 @@ class QTable {
 
     return true;
   }
+
+
+  /**
+   * Serializes the QTable so it can be saved to file
+   **/
+  std::string serialize();
 
  private:
   /**
