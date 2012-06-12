@@ -13,9 +13,11 @@
 
 #include <stdio.h>
 #include <vector>
+#include <stack>
 #include <map>
 #include <cmath>
 #include <string>
+#include <cstdlib>
 #include <hashlibpp.h>
 #include "Common/Utils.h"
 #include "Primitives/QLearner/Action.h"
@@ -57,21 +59,7 @@ class State {
    * @param state State to compare to
    * @return true if state vectors are equal, false if not
    **/
-  virtual bool Equals(State *state) const {
-    if (state->get_state_vector().size() != state_vector_.size())
-      return false;
-
-
-    vector<double> const &cmp_vector = state->get_state_vector();
-    int vector_size = state_vector_.size();
-    for (int i = 0; i < vector_size; ++i) {
-      if (fabs((state_vector_[i]) - (cmp_vector[i])) > 0.00001) {
-        return false;
-      }
-    }
-
-    return true;
-  }
+  virtual bool Equals(State *state) const;
 
   /**
    * Serializes the state so that it can be saved to disk.
@@ -105,79 +93,10 @@ class State {
   unsigned int out_transitions_sample_count_;
 
    */
-  virtual std::string serialize() {     
-    using std::pair;
-    using std::vector;
-    using std::string;
-    const unsigned int BUFFER_SIZE = 4096;
-    char state_vector[BUFFER_SIZE];
-    char reward_transitions[BUFFER_SIZE];
-    char incoming_states[BUFFER_SIZE];
-    char action_transitions[BUFFER_SIZE];
-    
-    string serialized_state;
-     
-    for (unsigned int i = 0; i < state_vector_.size(); ++i)
-      snprintf(state_vector, BUFFER_SIZE, "%s,%g",state_vector, state_vector_[i]);
-    snprintf(state_vector, BUFFER_SIZE, "%s\n",state_vector);
-    
-    map<State*, map<string, double> >::iterator reward_iter;
-    for (reward_iter = reward_.begin(); reward_iter != reward_.end();
-         ++reward_iter) {
-      State *to_state = reward_iter->first;
-      snprintf(reward_transitions, BUFFER_SIZE, "%sTarget %s\n", 
-               reward_transitions, to_state->get_state_hash().c_str());
-    
-      map<string, double>::iterator layer_iter;
-      for (layer_iter = reward_iter->second.begin(); 
-           layer_iter != reward_iter->second.end();
-           ++layer_iter) {
-         string label = layer_iter->first;
-         double val = layer_iter->second;
-         snprintf(reward_transitions, BUFFER_SIZE, "%s%s\n%g\n",
-                  reward_transitions, label.c_str(), val);
-      }
-    }
-
-    vector<State*>::iterator  incoming_iter;
-    for (incoming_iter = incoming_states_.begin();
-         incoming_iter != incoming_states_.end();
-         incoming_iter++) {
-      snprintf(incoming_states, BUFFER_SIZE, "%s%s\n", incoming_states, 
-               (*incoming_iter)->get_state_hash().c_str());
-    }
-    
-    map<string, vector<pair<State *, int> > >::iterator action_iter;
-    
-    for (action_iter = out_transitions_.begin();
-         action_iter != out_transitions_.end();
-         ++action_iter) {
-      snprintf(action_transitions, BUFFER_SIZE, "%sAction %s\n",
-               action_transitions, action_iter->first.c_str());
-      vector<pair<State *, int> >::iterator target_iter;
-      for (target_iter = action_iter->second.begin();
-           target_iter != action_iter->second.end();
-           ++target_iter) {
-        snprintf(action_transitions, BUFFER_SIZE, "%s%s\n%d\n", action_transitions,
-                 target_iter->first->get_state_hash().c_str(),
-                 target_iter->second);
-      }
-    }
-    
-    serialized_state.append(state_vector);
-    serialized_state.append("BEGIN rewards\n");
-    serialized_state.append(reward_transitions);
-    serialized_state.append("END rewards\n");
-    serialized_state.append("BEGIN incoming\n");
-    serialized_state.append(incoming_states);
-    serialized_state.append("END incoming\n");
-    serialized_state.append("BEGIN actions\n");
-    serialized_state.append(action_transitions);
-    serialized_state.append("END actions\n");
-    
-    return serialized_state;
-  }
-
+  virtual std::string serialize();
+ 
+  virtual bool unserialize(std::vector<std::string> const &contents,
+                           std::map<std::string, State*> &hash_map);
 
   /**
    * Finds the euclidean squared distance between two states
@@ -185,51 +104,14 @@ class State {
    * @return Euclidean distance between states
    */
   virtual std::vector<double> GetSquaredDistances(State const * const state)
-    const {
-    std::vector<double> distances;
-    if (!state) return distances;
-
-    if (state->get_state_vector().size() != state_vector_.size())
-      return distances;
-
-    vector<double> const &cmp_vector = state->get_state_vector();
-
-    double distance = 0.;
-    unsigned int idx;
-    for (idx = 0; idx < state_vector_.size(); ++idx) {
-      distance = (state_vector_[idx] - cmp_vector[idx])
-      * (state_vector_[idx] - cmp_vector[idx]);
-      distances.push_back(distance);
-    }
-
-    return distances;
-  }
-
+    const;
   /**
    * Retrieves the reward (transition function) on this state object
    * for a particular State
    * @return Summed reward value
    */
   virtual double GetRewardValue(State *target, bool all_layers = true,
-                                std::string layer = "") {
-    if (reward_.find(target) == reward_.end()) return 0.;
-    std::map<std::string, double> &reward_layers = reward_[target];
-    std::map<std::string, double>::const_iterator iter;
-
-    double total = 0.;
-    if (all_layers) {
-      for (iter = reward_layers.begin(); iter != reward_layers.end();
-          ++iter) {
-        total += (*iter).second;
-      }
-    } else {
-      iter = reward_layers.find(layer);
-      if (iter != reward_layers.end())
-        total = (*iter).second;
-    }
-
-      return total;
-  }
+                                std::string layer = "");
 
 
   /**
@@ -252,48 +134,7 @@ class State {
    * @return Serialized action, or empty string if no suitable actions found.
    * 
    **/
-  virtual std::string getActionForTransition(State *target_state) {
-    using std::pair;
-    using std::string;
-    using std::map;
-    using std::vector;
-    
-    map<string, vector<pair<State *, int> > >::iterator action_iter;
-    double best_probability = 0.;
-    string best_action = "";
-    
-    // Iterate over all known action transitions from this state
-    for (action_iter = this->out_transitions_.begin();
-         action_iter != this->out_transitions_.end();
-         ++action_iter) {
-        vector<pair<State *, int> > &destinations = action_iter->second;
-        vector<pair<State *, int> >::iterator iter;      
-        
-        // Count how many transition examples we have from a given action
-        double total_entries = 0.;
-        double action_prb = 0.; // Probability of going to target_state with
-                                // this action
-                                
-        // Iterate over all states previously reached with this action
-        for (iter = destinations.begin(); iter != destinations.end(); ++iter) {
-          total_entries += (*iter).second;
-          if ((*iter).first == target_state) {
-            double prb = double((*iter).second);
-            action_prb = prb;
-          }
-        }
-        
-        action_prb /= total_entries; // Normalize the probability
-        
-        // Keep track of the best possible action to reach the desired state
-        if (action_prb > best_probability) {
-          best_probability = action_prb;
-          best_action = action_iter->first;
-        }
-    }
-    
-    return best_action;
-  }
+  virtual std::string GetActionForTransition(State *target_state);
 
   /**
    * Associates an transition count with a target state/action pair, which
@@ -302,107 +143,16 @@ class State {
    * @param target State pointer to state **internal** to the skill's QTable
    * @param action Serialized action to be associated with the transition
    **/
-  virtual bool connectState(State *target, std::string action) {
-    using std::pair;
-    using std::string;
-    using std::map;
-    using std::vector;
-    
-    map<string, vector<pair<State *, int> > >::iterator
-        iter;
-
-    // See if this action has already been transitioned from in this state
-    iter = this->out_transitions_.find(action);
-
-    // If action hasn't been done yet, add it to the action/transition map
-    if (iter == this->out_transitions_.end()) {
-      vector<pair<State *, int> > transition_probabilities;
-      pair<State *, int> transition (target, 1);
-      transition_probabilities.push_back(transition);
-      this->out_transitions_[action] = transition_probabilities;
-    } else {
-      // Have done this action before, so just add the new transition info
-      vector<pair<State *, int> > &transition_probabilities = iter->second;
-      vector<pair<State *, int> >::iterator state_iter;
-      
-      bool found_state = false;
-      for (state_iter = transition_probabilities.begin();
-           state_iter != transition_probabilities.end();
-           ++state_iter) {
-        if (state_iter->first == target) {
-          ++(state_iter->second);
-          found_state = true;
-          break;
-        }
-      }
-      
-      // If we've never transitioned to this state with this action, add it
-      if (!found_state) {
-        pair<State *, int> transition (target, 1);
-        transition_probabilities.push_back(transition);
-      }
-    }
-    return true;
-  };
-
+  virtual bool ConnectState(State *target, std::string action);
+  virtual bool ConnectState(State *target, std::string action,
+                            int default_frequency);
   /**
    * Sets a reward with key 'layer' to value 'val' on this state
    *
    * @param layer Keyword associated with value
    * @param val Reward value to assign
    **/
-  virtual void set_reward(State *target, std::string layer, double val) {
-    if (target == NULL) return;
-    std::vector<State *> &inc_states = target->get_incoming_states();
-
-    // If setting the reward layer to something
-    if (val != 0) {
-      std::map<State*, std::map<std::string, double> >::iterator
-        layer_map = (reward_.find(target));
-
-      // If there is no existing link to target, make one
-      if (layer_map == reward_.end()) {
-        reward_[target] = std::map<std::string, double>();
-      }
-      (reward_[target])[layer] = val;
-
-
-      vector<State *>::iterator inc_iter;
-      bool found = false;
-      for (inc_iter = inc_states.begin(); inc_iter != inc_states.end();
-           ++inc_iter) {
-        if (*inc_iter == this) {
-          found = true;
-          break;
-        }
-      }
-
-      if (!found)
-        inc_states.push_back(this);
-    } else {
-      if (reward_.find(target) == reward_.end()) return;
-
-      // Clearing the reward layer away
-      std::map<std::string, double>::iterator iter;
-      iter = (reward_[target]).find(layer);
-      if (iter != reward_[target].end())
-        (reward_[target]).erase(iter);
-
-      if (reward_[target].size() == 0) {
-        vector<State *>::iterator inc_iter;
-        bool found = false;
-        for (inc_iter = inc_states.begin(); inc_iter != inc_states.end();
-             ++inc_iter) {
-          if (*inc_iter == this) {
-            found = true;
-            break;
-          }
-        }
-        if (found)
-          inc_states.erase(inc_iter);
-      }
-    }
-  }
+  virtual void set_reward(State *target, std::string layer, double val);
 
 
   /**
@@ -429,7 +179,7 @@ class State {
     return std::string(buf);
   }
 
-  std::string get_state_hash() { return state_hash_; }
+  std::string get_state_hash() const { return state_hash_; }
 
  private:
   explicit State() {}

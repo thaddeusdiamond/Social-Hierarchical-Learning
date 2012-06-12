@@ -3,7 +3,8 @@ OBJDIRS := $(OBJDIRS) $(LOWERC_ROOT)/QLearner
 TESTS   := $(TESTS)   $(LOWERC_ROOT)QLearnerTest
 
 # relative to $(TOP), i.e. $(LOWERC_DIR)/ *.cc
-$(UPPERC_ROOT)_QLEARNER_SRCS := $(LOWERC_ROOT)/QLearner/QTable.cc \
+$(UPPERC_ROOT)_QLEARNER_SRCS := $(LOWERC_ROOT)/QLearner/State.cc \
+                                $(LOWERC_ROOT)/QLearner/QTable.cc \
                                 $(LOWERC_ROOT)/QLearner/Action.cc \
                                 $(LOWERC_ROOT)/QLearner/StandardQLearner.cc
 $(UPPERC_ROOT)_QLEARNER_EXECUTABLES :=

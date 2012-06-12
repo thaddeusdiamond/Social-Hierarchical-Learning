@@ -37,7 +37,7 @@ bool StandardQLearner::Load(string const& filename) {
 }
 
 bool StandardQLearner::Save(string const& filename) {
-  return true;
+  return QLearner::Save(filename);
 }
 
 bool StandardQLearner::Init(std::vector<Sensor *> const &sensors) {

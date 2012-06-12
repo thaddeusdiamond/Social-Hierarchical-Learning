@@ -133,6 +133,10 @@ int main(int argc, char* argv[]) {
     cout << endl;
   }
 
+  if (student.GetSkill(primitive_list[0])->Save("test_save.txt"))
+    cout << "Save Successful!" << endl;
+  else
+    cout << "Save failed." << endl;
 
   delete test_sensor;
   return 0;

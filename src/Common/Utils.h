@@ -352,6 +352,30 @@ namespace Utils {
       return NULL;
     return ParseFromFile(file, true);
   }
+  
+  
+  
+  inline void split_string(std::vector<std::string> & return_strings, 
+             const std::string & input_str,
+             const std::string & delimiter) {
+    using std::string;
+    size_t  start = 0, end = 0;
+
+    while (end != string::npos)
+    {
+      end = input_str.find( delimiter, start);
+
+      // If at end, use length=maxLength.  Else use length=end-start.
+      return_strings.push_back( input_str.substr( start,
+                     (end == string::npos) ? string::npos : end - start));
+
+      // If at end, use start=maxSize.  Else use start=end+delimiter.
+      start = (( end > (string::npos - delimiter.size()))
+                ?  string::npos  :  end + delimiter.size());
+    }
+  }
+  
+  
 };
 
 

@@ -196,9 +196,7 @@ std::string QTable::serialize() {
   for (state_iter = states_.begin();
        state_iter != states_.end();
        ++state_iter) {
-    serialized_states.append("BEGIN state\n");
     serialized_states.append((*state_iter)->serialize());
-    serialized_states.append("END state\n");
   }
 
   vector<State *>::iterator initiate_iter;
@@ -239,21 +237,163 @@ std::string QTable::serialize() {
   }
   nearby_thresholds.append("\n");
        
+  serialized_table.append("BEGIN qtable\n");
+  serialized_table.append("BEGIN internal_states\n");
   serialized_table.append(serialized_states);
-  serialized_table.append("BEGIN initiate_states");
+  serialized_table.append("END internal_states\n");
+  serialized_table.append("BEGIN initiate_states\n");
   serialized_table.append(initiate_state_hashes);
-  serialized_table.append("END initiate_states");
-  serialized_table.append("BEGIN goal_states");
+  serialized_table.append("END initiate_states\n");
+  serialized_table.append("BEGIN goal_states\n");
   serialized_table.append(goal_state_hashes);
-  serialized_table.append("END goal_states");
-  serialized_table.append("BEGIN trained_goal_states");
+  serialized_table.append("END goal_states\n");
+  serialized_table.append("BEGIN trained_goal_states\n");
   serialized_table.append(trained_goal_state_hashes);
-  serialized_table.append("END trained_goal_states");
-  serialized_table.append("BEGIN nearby_thresholds");
+  serialized_table.append("END trained_goal_states\n");
+  serialized_table.append("BEGIN nearby_thresholds\n");
   serialized_table.append(nearby_thresholds);
-  serialized_table.append("END nearby_thresholds");
+  serialized_table.append("END nearby_thresholds\n");
+  serialized_table.append("END qtable\n");
   
   return serialized_table;
+}
+
+
+bool QTable::unserialize(std::vector<std::string> const &contents) {
+  using std::string;
+  using std::vector;
+  using std::stack;
+  
+  stack<string> blocks;
+  vector<string>::const_iterator iter;
+  map<string, State*> hash_map;
+  
+  // First Pass: Load all the unconnected, individual states that were recorded
+  bool loaded_vector = false;
+  for (iter = contents.begin(); iter != contents.end(); ++iter) {
+    if (iter->substr(0,6).compare("BEGIN ") == 0) {
+      blocks.push(iter->substr(6));
+      if (iter->substr(6).compare("state") == 0)
+        loaded_vector = false;
+      continue;
+    } else if (iter->substr(0,4).compare("END ") == 0) {
+      if (blocks.top().compare(iter->substr(4)) == 0) {
+        blocks.pop();
+      } else {
+        char buf[1024];
+        snprintf(buf, 1024, "Mismatched END block: %s", blocks.top().c_str());
+        Utils::Log(stdout, ERROR, buf);
+        blocks.pop();
+      }
+      continue;
+    }
+
+    // First line inside BEGIN state: load as state vector
+    if (!loaded_vector && blocks.top().compare("state") == 0) {
+      vector<string> state_vector_values;
+      vector<double> state_vector;
+      Utils::split_string(state_vector_values, *iter, ", ");
+      vector<string>::iterator state_vector_iter;
+      for (state_vector_iter = state_vector_values.begin();
+           state_vector_iter != state_vector_values.end();
+           ++state_vector_iter) {
+        double val = atof((*state_vector_iter).c_str());
+        state_vector.push_back(val);
+      }
+      State s(state_vector);
+      State *internal_state = this->AddState(s);
+
+      hash_map[internal_state->get_state_hash()] = internal_state;
+      
+      loaded_vector = true;
+    }
+    //Don't do anything for all the other data contained in the state (yet)
+  }
+  
+  
+  // @todo Need to put most of this segment into State.cc, and just pass the
+  //       State itself the relevant block (BEGIN state --> END state) and have
+  //       it handle its own parsing.
+  // @todo Need to load initiate_states, goal_states, trained_goal_states
+  
+  // Second Pass: Load all of the details for each state, now that there is a
+  //              mapping from hash => state in the Q-Table
+  blocks.empty();
+  loaded_vector = false; // Has the active_state's state vector been loaded?
+  State *active_state = NULL; // Internal state currently being worked on
+  string last_action; // Last Action descriptor string seen when loading within
+                      // the "actions" block
+  vector<string> state_contents;
+  bool recording = false; // When true, put lines in the state_contents vector
+  for (iter = contents.begin(); iter != contents.end(); ++iter) {
+
+    if (iter->substr(0,6).compare("BEGIN ") == 0) {
+      blocks.push(iter->substr(6));
+      if (iter->substr(6).compare("state") == 0) {
+        state_contents.clear();
+        recording = true;
+        state_contents.push_back(*iter);
+        active_state = NULL;
+        loaded_vector = false;
+      }
+      continue;
+    } else if (iter->substr(0,4).compare("END ") == 0) {
+      if (blocks.top().compare(iter->substr(4)) == 0) {
+        blocks.pop();
+        
+        // If closing out the 'actions' block, reset the last_action string
+        if (iter->substr(4).compare("actions") == 0) {
+          last_action = "";
+        }
+        
+        state_contents.push_back(*iter);
+        recording = false;
+        if (iter->substr(4).compare("state") == 0) {
+          bool success = active_state->unserialize(state_contents, hash_map);
+          if (!success) {
+            Log(stdout, ERROR, "Error unserializing State string!");
+            return false;
+          }
+        }
+      } else {
+        char buf[1024];
+        snprintf(buf, 1024, "Mismatched END block: %s", blocks.top().c_str());
+        Utils::Log(stdout, ERROR, buf);
+        blocks.pop();
+      }
+      continue;
+    }
+   
+    if (recording) state_contents.push_back(*iter);
+    
+    if (blocks.empty()) continue;
+    
+    if (blocks.top().compare("state") == 0) {
+      // If we just got inside a state block, load the state vector and set the
+      // active_state so we know what we're loading/working with
+      if (!loaded_vector) {
+        vector<string> state_vector_values;
+        vector<double> state_vector;
+        Utils::split_string(state_vector_values, *iter, ", ");
+        vector<string>::iterator state_vector_iter;
+        for (state_vector_iter = state_vector_values.begin();
+             state_vector_iter != state_vector_values.end();
+             ++state_vector_iter) {
+          double val = atof((*state_vector_iter).c_str());
+          state_vector.push_back(val);
+        }          
+        State s(state_vector);
+        active_state = hash_map[s.get_state_hash()];
+        if (!active_state) {
+          Log(stdout, ERROR, "Error loading qtable: State missing in hashmap");
+          return false;
+        }
+        loaded_vector = true;
+      }
+    }
+  }
+  
+  return true;
 }
 
 

@@ -48,10 +48,47 @@ class QLearner {
    *
    * @return    True on success, false on failure.
    **/
-  virtual bool Load(string const& filename) = 0;
+  virtual bool Load(string const& filename)  {
+    using std::string;
+    std::ifstream skill_file;
+    string skill_name;
+    char buf[4096];
+    string buf_str;
+    
+    skill_file.open(filename.c_str(), std::ios::in);
+    if (!skill_file.is_open()) return false;
+    
+    // Retrieve skill name
+    skill_file.getline(buf, 4096);
+    skill_name = buf;
+    memset(buf,0,4096);
+    
+    // Retrieve skill details: # trails and anticipated duration
+    skill_file.getline(buf, 4096);
+    buf_str = buf;
+    memset(buf,0,4096);
+    vector<string> tokens;
+    Utils::split_string(tokens, buf_str, " ,");
+    trials_ = atoi(tokens[0].c_str());
+    anticipated_duration_ = atof(tokens[1].c_str());
+
+    vector<string> q_table_strings;
+    while (!skill_file.eof()) {
+      skill_file.getline(buf, 4096);
+      q_table_strings.push_back(string(buf));
+    }
+
+    q_table_.unserialize(q_table_strings);
+    
+    return true;
+  }
 
   /**
    * Saves the entire contents of the QTable to the target file
+   * Format:
+   * First Line: Skill name
+   * Second Line: #_trials anticipated_duration
+   * Subsequent Lines: serialized Q-Table
    *
    * @param     filename        Destination file. Created if doesn't exist,
    *                            overwritten if it does.

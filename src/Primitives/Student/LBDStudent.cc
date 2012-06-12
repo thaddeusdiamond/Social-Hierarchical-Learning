@@ -183,7 +183,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
       weight = MAX_REWARD / (static_cast<double>(connect_count));
       if (root != connect_state) {
        root->set_reward(connect_state, "base", weight);
-       root->connectState(connect_state, Primitives::Action::INTERPOLATE);
+       root->ConnectState(connect_state, Primitives::Action::INTERPOLATE);
       }
     }
     

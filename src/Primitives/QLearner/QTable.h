@@ -327,6 +327,11 @@ class QTable {
    **/
   std::string serialize();
 
+  /**
+   * Restores the QTable from a file
+   **/
+  bool unserialize(std::vector<std::string> const &contents);
+
  private:
   /**
    * Huge array of all states seen thus far
