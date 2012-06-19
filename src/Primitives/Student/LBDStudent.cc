@@ -49,6 +49,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
   QLearner *skill = this->GetSkill(skill_name);
   if (skill == NULL) {
     skill = reinterpret_cast<QLearner *>(new StandardQLearner(skill_name));
+    this->AddSkill(skill);
   }
 
   GreedyExplorer *exploration_function = new GreedyExplorer();

@@ -190,13 +190,17 @@ class State {
   void generateHash() {
     hashwrapper *hash_gen = new md5wrapper();
     char buf[4096];
-
+    std::string buf_str;
     if (state_vector_.size() == 0) return;
-
-    snprintf(buf, 4096, "%g", state_vector_[0]);
-    for (unsigned int i = 1; i < state_vector_.size(); ++i)
-     snprintf(buf, 4096, "%s,%g",buf, state_vector_[i]);
     
+    snprintf(buf, 4096, "%g", state_vector_[0]);
+    buf_str = std::string(buf);
+    for (unsigned int i = 1; i < state_vector_.size(); ++i) {
+     memset(buf, 4096, 0);
+     snprintf(buf, 4096, "%g", state_vector_[i]);
+     buf_str.append(buf);
+    }
+    //state_hash_ = buf_str;
     state_hash_ = hash_gen->getHashFromString(std::string(buf));
   }
   

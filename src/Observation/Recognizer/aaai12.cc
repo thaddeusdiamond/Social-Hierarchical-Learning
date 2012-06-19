@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include "Primitives/Student/LBDStudent.h"
+#include "Primitives/QLearner/StandardQLearner.h"
 #include "Observation/Playback/PlaybackSensor.h"
 #include "Observation/Observer/RealtimeObserver.h"
 #include "Common/Utils.h"
@@ -23,6 +24,7 @@ using std::map;
 
 using Primitives::LBDStudent;
 using Primitives::QLearner;
+using Primitives::StandardQLearner;
 using Observation::RealtimeObserver;
 using Observation::PlaybackSensor;
 using Utils::Log;
@@ -137,6 +139,9 @@ int main(int argc, char* argv[]) {
     cout << "Save Successful!" << endl;
   else
     cout << "Save failed." << endl;
+
+  StandardQLearner *test_load = new StandardQLearner("Test");
+  test_load->Load("test_save.txt");
 
   delete test_sensor;
   return 0;

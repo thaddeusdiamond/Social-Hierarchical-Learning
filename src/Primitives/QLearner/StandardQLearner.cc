@@ -33,7 +33,7 @@ StandardQLearner::StandardQLearner(std::string name, QTable qt) {
 }
 
 bool StandardQLearner::Load(string const& filename) {
-  return true;
+  return QLearner::Load(filename);
 }
 
 bool StandardQLearner::Save(string const& filename) {
