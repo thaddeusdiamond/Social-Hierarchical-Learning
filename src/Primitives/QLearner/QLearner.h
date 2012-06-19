@@ -61,12 +61,12 @@ class QLearner {
     // Retrieve skill name
     skill_file.getline(buf, 4096);
     name_ = buf;
-    memset(buf,0,4096);
+    memset(buf, 0, 4096);
     
     // Retrieve skill details: # trails and anticipated duration
     skill_file.getline(buf, 4096);
     buf_str = buf;
-    memset(buf,0,4096);
+    memset(buf, 0, 4096);
     vector<string> tokens;
     Utils::split_string(tokens, buf_str, " ");
     trials_ = atoi(tokens[0].c_str());

@@ -103,7 +103,7 @@ vector<State *> StandardQLearner::GetNearestFixedExecutionPath(
   vector<State *> exec_path;
   State *initiation_state = NULL;
 
-  //Look for initiation states, break out if none are found
+  // Look for initiation states, break out if none are found
   if (this->q_table_.get_initiate_states().size() == 0) return exec_path;
 
   if (current_state == NULL) 

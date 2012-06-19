@@ -117,7 +117,7 @@ QLearner* LBDStudent::LearnSkillFromFile(string filename, string skill_name) {
 
       // Noise incoming data if parameter is set
       if (NOISE_RATE >= .001) { 
-        double rand_factor = double(rand() % 
+        double rand_factor = static_cast<double>(rand() % 
                              (static_cast<int>(NOISE_RATE*1000)))
                              / 1000. - (NOISE_RATE / 2.);
                         

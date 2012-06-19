@@ -22,10 +22,10 @@ bool State::unserialize(std::vector<std::string> const &contents,
   using std::vector;
 
   stack<string> blocks;
-  bool loaded_vector = false; // Has the active_state's state vector been loaded?
-  State *active_state = NULL; // Internal state currently being worked on
-  string last_action; // Last Action descriptor string seen when loading within
-                      // the "actions" block
+  bool loaded_vector = false;  // Has the active_state's state_vector loaded?
+  State *active_state = NULL;  // Internal state currently being worked on
+  string last_action;  // Last Action descriptor string seen when loading within
+                       // the "actions" block
   vector<string>::const_iterator iter;
 /*
   Log(stdout, DEBUG, "Decoding State:\n");
@@ -36,8 +36,7 @@ bool State::unserialize(std::vector<std::string> const &contents,
 */
   
   for (iter = contents.begin(); iter != contents.end(); ++iter) {
-
-    if (iter->substr(0,6).compare("BEGIN ") == 0) {
+    if (iter->substr(0, 6).compare("BEGIN ") == 0) {
       blocks.push(iter->substr(6));
       if (iter->substr(6).compare("state") == 0) {
         active_state = NULL;
@@ -45,7 +44,7 @@ bool State::unserialize(std::vector<std::string> const &contents,
       }
 
       continue;
-    } else if (iter->substr(0,4).compare("END ") == 0) {
+    } else if (iter->substr(0, 4).compare("END ") == 0) {
       if (blocks.top().compare(iter->substr(4)) == 0) {
         blocks.pop();
         
@@ -55,7 +54,8 @@ bool State::unserialize(std::vector<std::string> const &contents,
         }
       } else {
         char buf[1024];
-        snprintf(buf, 1024, "State::Unserialize Mismatched END block: %s != %s",
+        snprintf(buf, sizeof(buf), 
+                "State::Unserialize Mismatched END block: %s != %s",
                  blocks.top().c_str(), iter->substr(4).c_str());
         Utils::Log(stdout, ERROR, buf);
         blocks.pop();
@@ -89,7 +89,7 @@ bool State::unserialize(std::vector<std::string> const &contents,
       }
     } else if (blocks.top().compare("rewards") == 0) {
       // Load all the reward layers and transitions into the active_state
-      if (iter->substr(0,6).compare("Target") == 0) {
+      if (iter->substr(0, 6).compare("Target") == 0) {
         // Loading a transition consists of three lines: 
         // Target <hash> (string)
         // Layer <Layer Name> (string)
@@ -106,9 +106,9 @@ bool State::unserialize(std::vector<std::string> const &contents,
           if (iter == contents.end()) {
             Log(stdout, ERROR, "Incomplete Transition-rewards Target group");
             return false;
-          } else if (iter->substr(0,5).compare("Layer") == 0) {
+          } else if (iter->substr(0, 5).compare("Layer") == 0) {
             layer = iter->substr(6);
-          } else if (iter->substr(0,6).compare("Reward") == 0) {
+          } else if (iter->substr(0, 6).compare("Reward") == 0) {
             reward = iter->substr(7);
             reward_val = atof(reward.c_str());
           }
@@ -119,23 +119,27 @@ bool State::unserialize(std::vector<std::string> const &contents,
           Log(stdout, ERROR, "Error loading state from qtable: "
               "Target missing in hashmap");
           char buf[1024];
-          snprintf(buf, 1024, "Hashmap Size: %ld, missing hash '%s'",
+          snprintf(buf, sizeof(buf), "Hashmap Size: %ld, missing hash '%s'",
                    hash_map.size(), target.c_str());
           Log(stdout, ERROR, buf);
           
-          map<string,State*>::iterator iter;
-          for (iter = hash_map.begin();iter!=hash_map.end();++iter) {
-            snprintf(buf, 1024, "Hash: '%s'",
+          map<string, State*>::iterator iter;
+          for (iter = hash_map.begin(); iter != hash_map.end(); ++iter) {
+            snprintf(buf, sizeof(buf), "Hash: '%s'",
                      iter->first.c_str());
             Log(stdout, ERROR, buf);
           }
           
           State *test = (hash_map.find(target)->second);
           if (test) {
-            snprintf(buf, 1024, "Found a state with hash %s.",test->get_state_hash().c_str());
+            snprintf(buf, sizeof(buf), "Found a state with hash %s.",
+                     test->get_state_hash().c_str());
             Log(stdout, ERROR, buf);
-          } else
-            Log(stdout, ERROR, "No state found in hash_map matching that hash.");
+          } else {
+            Log(stdout, ERROR, 
+                "No state found in hash_map matching that hash.");
+          }
+
           return false;
         }
         active_state->set_reward(target_state, layer, reward_val);
@@ -144,7 +148,7 @@ bool State::unserialize(std::vector<std::string> const &contents,
       // Don't need to really do anything here... this can be used as more of a 
       // sanity check to ensure everything loaded properly
     } else if (blocks.top().compare("actions") == 0) {
-      if (iter->substr(0,6).compare("Action") == 0) {
+      if (iter->substr(0, 6).compare("Action") == 0) {
         last_action = iter->substr(7);
       } else if (last_action.length() > 0 && active_state) {
         State *target_state = NULL;
@@ -153,17 +157,17 @@ bool State::unserialize(std::vector<std::string> const &contents,
           if (iter == contents.end()) {
             Log(stdout, ERROR, "Incomplete Action transition Target group");
             return false;
-          } else if (iter->substr(0,5).compare("Target") == 0) {
+          } else if (iter->substr(0, 5).compare("Target") == 0) {
             target_state = (hash_map[iter->substr(7)]);
             if (!target_state) {
               Log(stdout, ERROR, "Error loading state actions: Target missing"
                                  " in hashmap");
               return false;
             }
-          } else if (iter->substr(0,6).compare("Frequency") == 0) {
+          } else if (iter->substr(0, 6).compare("Frequency") == 0) {
             frequency = atoi(iter->substr(10).c_str());
           }
-          if (i == 0) // Get a pair of Action Target/Frequency lines
+          if (i == 0)  // Get a pair of Action Target/Frequency lines
             ++iter;
         }
         active_state->ConnectState(target_state, last_action, frequency);
@@ -202,12 +206,11 @@ std::string State::serialize() {
   string reward_transitions;
   string incoming_states;
   string action_transitions;
-  
   string serialized_state;
-   
-  memset(buf,0,BUFFER_SIZE);
+  
+  memset(buf, 0, BUFFER_SIZE);
   for (unsigned int i = 0; i < state_vector_.size(); ++i) {
-    snprintf(buf,BUFFER_SIZE,"%g",state_vector_[i]);
+    snprintf(buf, BUFFER_SIZE, "%g", state_vector_[i]);
     state_vector.append(buf);
     if (i+1 < state_vector_.size()) state_vector.append(",");
   }
@@ -341,19 +344,19 @@ std::string State::GetActionForTransition(State *target_state) {
       
       // Count how many transition examples we have from a given action
       double total_entries = 0.;
-      double action_prb = 0.; // Probability of going to target_state with
-                              // this action
+      double action_prb = 0.;  // Probability of going to target_state with
+                               // this action
                               
       // Iterate over all states previously reached with this action
       for (iter = destinations.begin(); iter != destinations.end(); ++iter) {
         total_entries += (*iter).second;
         if ((*iter).first == target_state) {
-          double prb = double((*iter).second);
+          double prb = static_cast<double>((*iter).second);
           action_prb = prb;
         }
       }
       
-      action_prb /= total_entries; // Normalize the probability
+      action_prb /= total_entries;  // Normalize the probability
       
       // Keep track of the best possible action to reach the desired state
       if (action_prb > best_probability) {
@@ -386,7 +389,7 @@ bool State::ConnectState(State *target, std::string action,
   // If action hasn't been done yet, add it to the action/transition map
   if (iter == this->out_transitions_.end()) {
     vector<pair<State *, int> > transition_probabilities;
-    pair<State *, int> transition (target, default_frequency);
+    pair<State *, int> transition(target, default_frequency);
     transition_probabilities.push_back(transition);
     this->out_transitions_[action] = transition_probabilities;
   } else {
@@ -407,7 +410,7 @@ bool State::ConnectState(State *target, std::string action,
     
     // If we've never transitioned to this state with this action, add it
     if (!found_state) {
-      pair<State *, int> transition (target, default_frequency);
+      pair<State *, int> transition(target, default_frequency);
       transition_probabilities.push_back(transition);
     }
   }
@@ -466,5 +469,4 @@ void State::set_reward(State *target, std::string layer, double val) {
     }
   }
 }
-
-}
+}  // namespace primitives

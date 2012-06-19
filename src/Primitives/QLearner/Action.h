@@ -42,4 +42,4 @@ namespace Primitives {
   };
 }
 
-#endif // _SHL_PRIMITIVES_QLEARNER_ACTION_H_
+#endif  // _SHL_PRIMITIVES_QLEARNER_ACTION_H_

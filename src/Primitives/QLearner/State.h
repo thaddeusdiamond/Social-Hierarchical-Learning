@@ -12,13 +12,14 @@
 #define _SHL_PRIMITIVES_QLEARNER_STATE_H_
 
 #include <stdio.h>
+#include <hashlibpp.h>
+#include <cstdlib>
+#include <utility>
 #include <vector>
 #include <stack>
 #include <map>
 #include <cmath>
 #include <string>
-#include <cstdlib>
-#include <hashlibpp.h>
 #include "Common/Utils.h"
 #include "Primitives/QLearner/Action.h"
 
@@ -94,7 +95,7 @@ class State {
 
    */
   virtual std::string serialize();
- 
+  
   virtual bool unserialize(std::vector<std::string> const &contents,
                            std::map<std::string, State*> &hash_map);
 
@@ -193,14 +194,14 @@ class State {
     std::string buf_str;
     if (state_vector_.size() == 0) return;
     
-    snprintf(buf, 4096, "%g", state_vector_[0]);
+    snprintf(buf, sizeof(buf), "%g", state_vector_[0]);
     buf_str = std::string(buf);
     for (unsigned int i = 1; i < state_vector_.size(); ++i) {
-     memset(buf, 4096, 0);
-     snprintf(buf, 4096, "%g", state_vector_[i]);
+     memset(buf, 0, sizeof(buf));
+     snprintf(buf, sizeof(buf), "%g", state_vector_[i]);
      buf_str.append(buf);
     }
-    //state_hash_ = buf_str;
+
     state_hash_ = hash_gen->getHashFromString(std::string(buf));
   }
   
@@ -214,8 +215,7 @@ class State {
       out_transitions_;
   unsigned int out_transitions_sample_count_;
   
-  std::string state_hash_; // MD5 Hash of State Vector
-
+  std::string state_hash_;  // MD5 Hash of State Vector
 };
 
 }  // namespace Primitives

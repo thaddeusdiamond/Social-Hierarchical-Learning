@@ -9,6 +9,7 @@
  * This is an implementation of the QTable Storage Class
  */
 
+#include <stack>
 #include <map>
 #include "QLearner/QTable.h"
 #include "QLearner/State.h"
@@ -223,13 +224,12 @@ std::string QTable::serialize() {
     trained_goal_state_hashes.append("\n");
   }
   
- vector<double>::iterator threshold_iter;
+  vector<double>::iterator threshold_iter;
   for (threshold_iter = nearby_thresholds_.begin();
        threshold_iter != nearby_thresholds_.end();
        ++threshold_iter) {
-         
     char buf[128];
-    snprintf(buf, 128, "%g", (*threshold_iter));
+    snprintf(buf, sizeof(buf), "%g", (*threshold_iter));
     
     nearby_thresholds.append(buf);
     if ((threshold_iter+1) != nearby_thresholds_.end())
@@ -272,17 +272,18 @@ bool QTable::unserialize(std::vector<std::string> const &contents) {
   //             of their connections (for hash-map lookup later)
   bool loaded_vector = false;
   for (iter = contents.begin(); iter != contents.end(); ++iter) {
-    if (iter->substr(0,6).compare("BEGIN ") == 0) {
+    if (iter->substr(0, 6).compare("BEGIN ") == 0) {
       blocks.push(iter->substr(6));
       if (iter->substr(6).compare("state") == 0)
         loaded_vector = false;
       continue;
-    } else if (iter->substr(0,4).compare("END ") == 0) {
+    } else if (iter->substr(0, 4).compare("END ") == 0) {
       if (blocks.top().compare(iter->substr(4)) == 0) {
         blocks.pop();
       } else {
         char buf[1024];
-        snprintf(buf, 1024, "QTable::Unserialize 1: Mismatched END block: %s",
+        snprintf(buf, sizeof(buf), 
+                 "QTable::Unserialize 1: Mismatched END block: %s",
                  blocks.top().c_str());
         Utils::Log(stdout, ERROR, buf);
         blocks.pop();
@@ -315,7 +316,7 @@ bool QTable::unserialize(std::vector<std::string> const &contents) {
       hash_map[s.get_state_hash()] = internal_state;     
       loaded_vector = true;
     }
-    //Don't do anything for all the other data contained in the state (yet)
+    // Don't do anything for all the other data contained in the state (yet)
   }
   
   /*
@@ -330,15 +331,15 @@ bool QTable::unserialize(std::vector<std::string> const &contents) {
   // Second Pass: Load all of the details for each state, now that there is a
   //              mapping from hash => state in the Q-Table
   blocks.empty();
-  loaded_vector = false; // Has the active_state's state vector been loaded?
-  State *active_state = NULL; // Internal state currently being worked on
-  string last_action; // Last Action descriptor string seen when loading within
-                      // the "actions" block
+  loaded_vector = false;  // Has the active_state's state vector been loaded?
+  State *active_state = NULL;  // Internal state currently being worked on
+  string last_action;  // Last Action descriptor string seen when loading within
+                       // the "actions" block
   vector<string> state_contents;
-  bool recording = false; // When true, put lines in the state_contents vector
+  bool recording = false;  // When true, put lines in the state_contents vector
   
   for (iter = contents.begin(); iter != contents.end(); ++iter) {
-    if (iter->substr(0,6).compare("BEGIN ") == 0) {
+    if (iter->substr(0, 6).compare("BEGIN ") == 0) {
       blocks.push(iter->substr(6));
       if (iter->substr(6).compare("state") == 0) {
         state_contents.clear();
@@ -348,7 +349,7 @@ bool QTable::unserialize(std::vector<std::string> const &contents) {
       }
       if (recording) state_contents.push_back(*iter);
       continue;
-    } else if (iter->substr(0,4).compare("END ") == 0) {
+    } else if (iter->substr(0, 4).compare("END ") == 0) {
       if (blocks.top().compare(iter->substr(4)) == 0) {
         blocks.pop();
         
@@ -368,16 +369,16 @@ bool QTable::unserialize(std::vector<std::string> const &contents) {
         }
       } else {
         char buf[1024];
-        snprintf(buf, 1024, "QTable::Unserialize 2: Mismatched END block: %s",
+        snprintf(buf, sizeof(buf), 
+                 "QTable::Unserialize 2: Mismatched END block: %s",
                  blocks.top().c_str());
         Utils::Log(stdout, ERROR, buf);
         blocks.pop();
       }
       continue;
     }
-   
-    if (recording) state_contents.push_back(*iter);
     
+    if (recording) state_contents.push_back(*iter);   
     if (blocks.empty()) continue;
     
     if (blocks.top().compare("state") == 0) {
@@ -399,15 +400,17 @@ bool QTable::unserialize(std::vector<std::string> const &contents) {
           hash_map.find(s.get_state_hash());
         if (found_state == hash_map.end()) {
           char buf[4096];
-          snprintf(buf, 4096, "Could not find state with hash %s in hash_map\n",
+          snprintf(buf, sizeof(buf), 
+                   "Could not find state with hash %s in hash_map\n",
                    s.get_state_hash().c_str());
           Log(stdout, ERROR, buf);
         }  
         active_state = (found_state->second);
         if (!active_state) {
           char buf[1024];
-          Log(stdout, ERROR, "Error loading qtable (2): State missing in hashmap");
-          snprintf(buf, 1024, "Missing hash: '%s'\nHashmap size: %ld", 
+          Log(stdout, ERROR, 
+              "Error loading qtable (2): State missing in hashmap");
+          snprintf(buf, sizeof(buf), "Missing hash: '%s'\nHashmap size: %ld", 
                    s.get_state_hash().c_str(), hash_map.size());
           Log(stdout, ERROR, buf);
           return false;

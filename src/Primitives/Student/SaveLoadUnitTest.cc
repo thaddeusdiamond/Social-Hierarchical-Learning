@@ -43,13 +43,9 @@ class SaveLoadTest : public testing::Test {
     skill_->Save("temp.shl");
     loaded_skill_->Load("temp.shl");    
   }
-  
-  virtual void SetUp() {
-
-  }
 
   virtual ~SaveLoadTest() {
-    delete student_; // Also deletes skill_
+    delete student_;  // Also deletes skill_
     delete loaded_skill_;
     remove("test.shl");
   }
@@ -64,7 +60,7 @@ class SaveLoadTest : public testing::Test {
  **/
 TEST_F(SaveLoadTest, SanityCheck) {
   int fail = (student_->GetSkill("TestSkill") == NULL) ? 0 : 1;
-  ASSERT_NE(fail,0);
+  ASSERT_NE(fail, 0);
   ASSERT_TRUE(loaded_skill_->Load("temp.shl"));
 }
 

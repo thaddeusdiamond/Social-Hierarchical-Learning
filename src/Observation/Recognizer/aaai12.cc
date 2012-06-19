@@ -135,14 +135,6 @@ int main(int argc, char* argv[]) {
     cout << endl;
   }
 
-  if (student.GetSkill(primitive_list[0])->Save("test_save.txt"))
-    cout << "Save Successful!" << endl;
-  else
-    cout << "Save failed." << endl;
-
-  StandardQLearner *test_load = new StandardQLearner("Test");
-  test_load->Load("test_save.txt");
-
   delete test_sensor;
   return 0;
 }
