@@ -33,6 +33,7 @@ PROTOCEXE := $(PROTOB)/src/.libs/protoc
 TOP       := .
 PRIMDIR   := ./Primitives
 OBSVDIR   := ./Observation
+MGRDIR	  := ./Manager
 
 # '$(V)' controls whether the lab makefiles print verbose commands (the
 # actual shell commands run by Make), as well as the "overview" commands
@@ -46,7 +47,7 @@ V = @
 CXX       := g++
 CXXFLAGS  := -g -I$(PROTOB)/src -I$(GTEST)/include -Wall -Werror
 CXXFLAGS  += -I$(TOP) -I$(OBJDIR) -I$(PRIMDIR) -I$(OBSVDIR)
-CXXFLAGS  += -I$(NAOSDK)/include -I$(HASHLIB)
+CXXFLAGS  += -I$(MGRDIR) -I$(NAOSDK)/include -I$(HASHLIB)
 MDFLAGS   := -MD
 LDFLAGS   := -lrt -lpthread -lgtest -L$(GTEST)/lib/.libs -lprotobuf 
 LDFLAGS   += -L$(PROTOB)/src/.libs -lhl++
@@ -75,6 +76,7 @@ include Backend/Makefile.inc
 include Primitives/Makefile.inc
 include Observation/Makefile.inc
 include Performance/Makefile.inc
+include Manager/Makefile.inc
 
 Test: $(TESTS)
 

@@ -1,0 +1,2 @@
+LOWERC_ROOT := Manager
+UPPERC_ROOT := MANAGER

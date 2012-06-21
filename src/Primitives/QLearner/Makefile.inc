@@ -6,6 +6,7 @@ TESTS   := $(TESTS)   $(LOWERC_ROOT)QLearnerTest
 $(UPPERC_ROOT)_QLEARNER_SRCS := $(LOWERC_ROOT)/QLearner/State.cc \
                                 $(LOWERC_ROOT)/QLearner/QTable.cc \
                                 $(LOWERC_ROOT)/QLearner/Action.cc \
+                                $(LOWERC_ROOT)/QLearner/Condition.cc \
                                 $(LOWERC_ROOT)/QLearner/StandardQLearner.cc
 $(UPPERC_ROOT)_QLEARNER_EXECUTABLES :=
 

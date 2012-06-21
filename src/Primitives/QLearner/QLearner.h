@@ -317,6 +317,14 @@ class QLearner {
   virtual void set_anticipated_duration(int anticipated_duration) {
     anticipated_duration_ = anticipated_duration;
   }
+  
+  virtual std::vector<std::string> &get_preconditions() { 
+    return preconditions_; 
+  }
+
+  virtual std::vector<std::string> &get_postconditions() { 
+    return postconditions_; 
+  }
 
  protected:
   std::stack<StateHistoryTuple> state_history_;
@@ -328,6 +336,8 @@ class QLearner {
   CreditAssignmentType *credit_assignment_type_;
   ExplorationType *exploration_type_;
   std::vector<Sensor *> sensors_;
+  std::vector<std::string> preconditions_;
+  std::vector<std::string> postconditions_;
 };
 
 }  // namespace Primitives
