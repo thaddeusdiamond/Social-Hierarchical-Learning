@@ -153,6 +153,9 @@ class Student {
   }
 
 
+  virtual bool IsStateAcceptable(State *) {
+    return true;
+  }
 
  protected:
   std::vector<Sensor*> sensors_;

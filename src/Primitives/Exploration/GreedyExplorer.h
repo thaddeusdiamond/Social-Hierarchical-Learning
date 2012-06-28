@@ -5,7 +5,7 @@
  *
  * @section DESCRIPTION
  *
- * This is an interface for a Q-Learning Exploration Function Implementation
+ * Greedy Explorer: Takes the highest possible reward value at each timestep.
  **/
 
 #ifndef _SHL_PRIMITIVES_EXPLORATION_GREEDYEXPLORER_H_

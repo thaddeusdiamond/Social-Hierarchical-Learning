@@ -35,14 +35,19 @@ class Condition {
     * specified in a comment above it.
   */ 
   static const std::string NO_CONDITION;
+
+  // Values: x, y, z, tolerance
   static const std::string OBJECT_NEAR;
+
+  // Values: x, y, z, tolerance
   static const std::string NO_OBJECT_NEAR;
   
+  // Values: x, y, z, tolerance
+  static const std::string OBJECT_DIST_FROM_GRIPPER;
   
  private:
-  std::string prefix;
-  std::string content;
-  std::string suffix;
+  std::string type;
+  std::string values;
 };
 }  // namespace Primitives
 

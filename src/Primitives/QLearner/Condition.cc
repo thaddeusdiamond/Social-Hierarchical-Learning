@@ -15,3 +15,5 @@
 const std::string Primitives::Condition::NO_CONDITION = "NO_CONDITION";
 const std::string Primitives::Condition::OBJECT_NEAR = "OBJECT_NEAR";
 const std::string Primitives::Condition::NO_OBJECT_NEAR = "NO_OBJECT_NEAR";
+const std::string Primitives::Condition::OBJECT_DIST_FROM_GRIPPER =
+  "OBJECT_DIST_FROM_GRIPPER";

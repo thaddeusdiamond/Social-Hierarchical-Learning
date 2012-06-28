@@ -304,6 +304,22 @@ std::vector<double> State::GetSquaredDistances(State const * const state)
   return distances;
 }
 
+
+double State::GetEuclideanDistance(State const * const state) const {
+  std::vector<double> squared_dists = this->GetSquaredDistances(state);
+  
+  double real_dist = 0.;
+  
+  std::vector<double>::iterator iter;
+  for (iter = squared_dists.begin(); iter != squared_dists.end(); ++iter) {
+    real_dist += *iter;
+  }
+  
+  real_dist = sqrt(real_dist);
+  return real_dist;
+}
+
+
 double State::GetRewardValue(State *target, bool all_layers,
                               std::string layer) {
   if (reward_.find(target) == reward_.end()) return 0.;

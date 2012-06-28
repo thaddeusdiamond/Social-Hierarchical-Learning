@@ -3,7 +3,8 @@ OBJDIRS := $(OBJDIRS) $(LOWERC_ROOT)/Exploration
 TESTS   := $(TESTS)   $(LOWERC_ROOT)ExplorationTest
 
 # relative to $(TOP), i.e. $(LOWERC_DIR)/ *.cC
-$(UPPERC_ROOT)_EXPLORATION_SRCS := $(LOWERC_ROOT)/Exploration/GreedyExplorer.cc
+$(UPPERC_ROOT)_EXPLORATION_SRCS := $(LOWERC_ROOT)/Exploration/GreedyExplorer.cc \
+				   $(LOWERC_ROOT)/Exploration/AStarExplorer.cc
 $(UPPERC_ROOT)_EXPLORATION_EXECUTABLES :=
 
 # Set makefile template specific vars

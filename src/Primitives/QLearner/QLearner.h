@@ -23,18 +23,30 @@
 #include "Credit/CreditAssignmentType.h"
 #include "QLearner/QTable.h"
 #include "QLearner/Object.h"
+#include "QLearner/Condition.h"
 #include "Common/Utils.h"
 
 
-namespace Primitives {
+namespace Primitives
+{
 
 using std::string;
 using std::vector;
 using Utils::Log;
 class ExplorationType;
 
-class QLearner {
-  public:
+class QLearner
+{
+public:
+  /**
+   * Initialize pre/post-condition check functions
+   **/
+  QLearner() {
+    StateSatisfiesPreConditions = &QLearner::always_false;
+    StateSatisfiesPostConditions = &QLearner::always_false;
+  }
+
+
   /**
    * Destructor for QLearner must free all memory it received from I/O and
    * had buffered
@@ -54,15 +66,15 @@ class QLearner {
     string skill_name;
     char buf[4096];
     string buf_str;
-    
+
     skill_file.open(filename.c_str(), std::ios::in);
     if (!skill_file.is_open()) return false;
-    
+
     // Retrieve skill name
     skill_file.getline(buf, 4096);
     name_ = buf;
     memset(buf, 0, 4096);
-    
+
     // Retrieve skill details: # trails and anticipated duration
     skill_file.getline(buf, 4096);
     buf_str = buf;
@@ -79,7 +91,7 @@ class QLearner {
     }
 
     q_table_.unserialize(q_table_strings);
-    
+
     return true;
   }
 
@@ -97,14 +109,14 @@ class QLearner {
    **/
   virtual bool Save(string const& filename) {
     std::ofstream skill_file;
-    
+
     skill_file.open(filename.c_str(), std::ios::out);
     if (!skill_file.is_open()) return false;
-    
+
     skill_file << name_ << "\n";
     skill_file << trials_ << " " << anticipated_duration_ << "\n";
     skill_file << q_table_.serialize();
-    
+
     skill_file.close();
     return true;
   }
@@ -219,21 +231,21 @@ class QLearner {
 
   /**
    * Returns a vector of states resembling an optimal traversal
-   * through the QTable for executing the action, 
-   * resulting in a fixed action pattern. 
-   * 
+   * through the QTable for executing the action,
+   * resulting in a fixed action pattern.
+   *
    * For actions that respond to stimuli actively,
-   * you want to do the traversal step by step, 
+   * you want to do the traversal step by step,
    * instead of getting full playback in advance.
-   * 
+   *
    * @param current_state Current system state, used to find the nearest
    *                      initiation state to start from.
-   * 
+   *
    * @return Vector of states that must be traversed to execute the fixed
    *         action pattern
    **/
   virtual vector<State *> GetNearestFixedExecutionPath(
-                                              State *current_state) = 0;
+    State *current_state) = 0;
 
   /**
    * Checks if the state provided is near a goal state
@@ -256,7 +268,7 @@ class QLearner {
 
     // Iterate through all candidate goal states...
     for (state_iter = goal_states.begin(); state_iter != goal_states.end();
-      ++state_iter) {
+         ++state_iter) {
       bool state_fail = false;
       std::vector<double> dists = state.GetSquaredDistances(*state_iter);
 
@@ -291,6 +303,20 @@ class QLearner {
   }
 
   /**
+   *  Checks to see if the state given is a goal state. If postconditions are
+   *  set for this QLearner, then it checks to see if the given state satisfies
+   *  them. If no postconditions are set, then it checks to see if it is near
+   *  a trained goal state
+   **/
+  virtual bool IsGoalState(State *state) {
+    if (postconditions_.size() > 0) {
+      return false;
+    } else {
+      return this->q_table_.IsGoalState(*state);
+    }
+  }
+
+  /**
    * Returns a stack of recently visited states
    *
    * @return Stack of StateHistoryTuple
@@ -305,28 +331,61 @@ class QLearner {
     return NULL;
   }
 
-  virtual QTable *get_q_table() { return &q_table_; }
+  virtual QTable *get_q_table() {
+    return &q_table_;
+  }
 
-  virtual std::string get_name() { return name_; }
-  virtual void set_name(std::string name) { name_ = name; }
+  virtual std::string get_name() {
+    return name_;
+  }
+  virtual void set_name(std::string name) {
+    name_ = name;
+  }
 
-  virtual int get_trials() { return trials_; }
-  virtual void set_trials(int trials) { trials_ = trials; }
+  virtual int get_trials() {
+    return trials_;
+  }
+  virtual void set_trials(int trials) {
+    trials_ = trials;
+  }
 
-  virtual double get_anticipated_duration() { return anticipated_duration_; }
+  virtual double get_anticipated_duration() {
+    return anticipated_duration_;
+  }
   virtual void set_anticipated_duration(int anticipated_duration) {
     anticipated_duration_ = anticipated_duration;
   }
-  
-  virtual std::vector<std::string> &get_preconditions() { 
-    return preconditions_; 
+
+  virtual std::vector<Condition> &get_preconditions() {
+    return preconditions_;
   }
 
-  virtual std::vector<std::string> &get_postconditions() { 
-    return postconditions_; 
+  virtual std::vector<Condition> &get_postconditions() {
+    return postconditions_;
   }
 
- protected:
+  virtual void set_precondition_check_function(bool (*func)(State *, QLearner &)) {
+    StateSatisfiesPreConditions = (*func);
+  }
+
+  virtual void set_postcondition_check_function(bool (*func)(State *, QLearner &)) {
+    StateSatisfiesPostConditions = (*func);
+  }
+
+  virtual bool PostConditionsSatisfied(State *s) {
+    return StateSatisfiesPostConditions(s,*this);
+  }
+
+  virtual bool PreConditionsSatisfied(State *s) {
+    return StateSatisfiesPreConditions(s,*this);
+  }
+
+  // Initial value for pre/post-condition check function pointers
+  static bool always_false(State *, QLearner &) {
+    return false;
+  }
+
+protected:
   std::stack<StateHistoryTuple> state_history_;
   QTable q_table_;
   int trials_;
@@ -336,8 +395,10 @@ class QLearner {
   CreditAssignmentType *credit_assignment_type_;
   ExplorationType *exploration_type_;
   std::vector<Sensor *> sensors_;
-  std::vector<std::string> preconditions_;
-  std::vector<std::string> postconditions_;
+  std::vector<Condition> preconditions_;
+  std::vector<Condition> postconditions_;
+  bool (*StateSatisfiesPreConditions)(State *, QLearner &);
+  bool (*StateSatisfiesPostConditions)(State *, QLearner &);
 };
 
 }  // namespace Primitives

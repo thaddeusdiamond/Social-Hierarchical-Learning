@@ -106,6 +106,15 @@ class State {
    */
   virtual std::vector<double> GetSquaredDistances(State const * const state)
     const;
+
+  /**
+   * Finds the euclidean distance between two states
+   * @param state State to measure distance to
+   * @return Euclidean distance between states
+   */
+  virtual double GetEuclideanDistance(State const * const state)
+    const;
+
   /**
    * Retrieves the reward (transition function) on this state object
    * for a particular State
