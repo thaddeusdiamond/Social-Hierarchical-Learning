@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <list>
 #include "Student/Student.h"
 #include "Exploration/ExplorationType.h"
 #include "Student/Sensor.h"
@@ -28,25 +29,36 @@ class AStarExplorer : public ExplorationType {
     : owner_student_(s), 
       active_skill_(skill),
       max_search_time_(max_search_time) {}
-  ~AStarExplorer() {}
+  ~AStarExplorer() { ClearPaths(); }
   
   
   bool PopulatePaths(State *cur_state);
-
+  std::list<State *> * FindPath(State * cur_state,
+                                               State * goal_state);
   
   bool GetNextState(State *cur_state,
                     State ** next_state,
                     double *reward);
 
  private:
+  std::list<State *> ReconstructPath(
+                                     std::map<State *, State *> came_from,
+                                     State *cur_state);
   int ChoosePath();
   void UpdateStateActionGraph();
+  void ClearPaths() {
+    std::vector<std::list<State *> *>::iterator iter;
+    for (iter = paths_.begin(); iter != paths_.end(); ++iter) {
+      std::list<State *> * path = *iter;
+      delete path;
+    }
+  }
   double Heuristic(State *cur_state);
 
   Student *owner_student_;  
   QLearner *active_skill_;
   double max_search_time_;
-  std::vector<std::vector<std::pair<State *, double> > > paths_;
+  std::vector<std::list<State *> * > paths_;
   State *expected_state_;
   QTable *q_table_;
 };

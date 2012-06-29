@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+#include <list>
 #include <map>
 #include "Exploration/AStarExplorer.h"
 #include "Exploration/ExplorationType.h"
@@ -21,12 +22,59 @@ double AStarExplorer::Heuristic(State *cur_state) {
   return 0.0;
 }
   
-  
+
+
+std::list<State *> AStarExplorer::ReconstructPath(
+                                  std::map<State *, State *> came_from,
+                                  State *cur_state) {
+  std::list<State *> path;
+  if (came_from.find(cur_state) != came_from.end()) {
+    path = this->ReconstructPath(came_from, came_from[cur_state]);
+  }
+  path.push_back(cur_state);
+  return path;
+}
+
 /**
  * Finds paths from the current state to the goal states specified for the
  * currently loaded skill.
  */
 bool AStarExplorer::PopulatePaths(State *cur_state) {
+  this->ClearPaths();
+  
+  // Go through all of the trained and discovered goal states known,
+  // add paths for each one to the paths_ vector
+  std::vector<State *>::iterator iter;
+  std::vector<State *> &goal_states = q_table_->get_goal_states();
+  for (iter = goal_states.begin(); iter != goal_states.end(); ++iter) {
+    State *goal = *iter;
+    std::list<State *> * path = FindPath(cur_state, goal);
+    if (path != NULL)
+      paths_.push_back(path);    
+  }
+
+  goal_states = q_table_->get_trained_goal_states();
+  for (iter = goal_states.begin(); iter != goal_states.end(); ++iter) {
+    State *goal = *iter;
+    std::list<State *> * path = FindPath(cur_state, goal);
+    if (path != NULL)
+      paths_.push_back(path);    
+  }
+
+  
+  // If there are postconditions
+  // Run with a NULL goal_state to explore until any goal states are found.
+  if (active_skill_->get_postconditions().size() > 0) {
+    std::list<State *> * path = FindPath(cur_state, NULL);
+    if (path != NULL)
+      paths_.push_back(path);        
+  }
+  
+  return (paths_.size() > 0);
+}
+
+std::list<State *> * AStarExplorer::FindPath(
+                                      State *cur_state, State *goal_state) {
   
   // Map from State hash to State pointer
   std::map<std::string, State*> closed_set;
@@ -62,35 +110,54 @@ bool AStarExplorer::PopulatePaths(State *cur_state) {
     }
     
     // Error condition
-    if (lowest_score_state == NULL) return false;
+    if (lowest_score_state == NULL) {
+      Log(stdout, ERROR, "AStarExplorer::FindPath - Empty open_set.");
+      return NULL; 
+    }
+
+    State *cur_state = lowest_score_state;
+
   
     // Check to see if it's a goal state
-    if (active_skill_->IsGoalState(lowest_score_state)) {
+    bool is_goal_state = false;
+    if (goal_state == NULL)
+      is_goal_state = active_skill_->IsGoalState(lowest_score_state);
+    else
+      is_goal_state = goal_state->Equals(lowest_score_state);
+      
+    if (is_goal_state) {
       //TODO: Reconstruct path and store in paths_
-      return true;
+      std::list<State *> found_path = this->ReconstructPath(came_from, 
+                                                            cur_state);
+      std::list<State *> * path = new std::list<State *>(found_path);
+      return path;
     }
+        
+    // Remove current state from the open set, add to closed set
+    open_set.erase(open_set.find(cur_state->get_state_hash()));
+    closed_set[cur_state->get_state_hash()] = cur_state;
     
-    open_set.erase(open_set.find(lowest_score_state->get_state_hash()));
-    closed_set[lowest_score_state->get_state_hash()] = lowest_score_state;
     
+    // Look at all neighboring states, add them to the open set if we haven't
+    // seen them before
     std::vector<State *> neighbors;
     std::vector<State *>::iterator n_iter;
     for (n_iter = neighbors.begin(); n_iter != neighbors.end(); ++n_iter) {
       State *neighbor = *n_iter;
       
-      // If already considered, try the next one
+      // If already evaluated, try the next one
       if (closed_set.find(neighbor->get_state_hash()) != closed_set.end())
         continue;
       
       
       double temp_heuristic_score = 
-              best_state_scores[lowest_score_state]
-              + lowest_score_state->GetEuclideanDistance(neighbor);
+              best_state_scores[cur_state]
+              + cur_state->GetEuclideanDistance(neighbor);
       
       if (open_set.find(neighbor->get_state_hash()) == open_set.end()
           || temp_heuristic_score < best_state_scores[neighbor]) {
         open_set[neighbor->get_state_hash()] = neighbor;
-        came_from[neighbor] = lowest_score_state;
+        came_from[neighbor] = cur_state;
         best_state_scores[neighbor] = temp_heuristic_score;
         state_scores[neighbor] = temp_heuristic_score + Heuristic(neighbor);
       }
@@ -98,7 +165,7 @@ bool AStarExplorer::PopulatePaths(State *cur_state) {
   }
   
   
-  return false;
+  return NULL;
 }
 
 /**
