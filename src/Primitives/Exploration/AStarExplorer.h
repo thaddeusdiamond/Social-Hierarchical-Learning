@@ -53,7 +53,7 @@ class AStarExplorer : public ExplorationType {
       delete path;
     }
   }
-  double Heuristic(State *cur_state);
+  double Heuristic(State *cur_state, State *goal_state);
 
   Student *owner_student_;  
   QLearner *active_skill_;

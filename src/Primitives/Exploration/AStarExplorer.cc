@@ -18,8 +18,8 @@ namespace Primitives {
 /**
  * Defines a heuristic function to be used when finding goal states
  **/
-double AStarExplorer::Heuristic(State *cur_state) {
-  return 0.0;
+double AStarExplorer::Heuristic(State *cur_state, State *goal_state) {
+  return cur_state->GetEuclideanDistance(goal_state);
 }
   
 
@@ -93,7 +93,8 @@ std::list<State *> * AStarExplorer::FindPath(
   // Initialize with start state (cur_state)
   open_set[cur_state->get_state_hash()] = cur_state;
   best_state_scores[cur_state] = 0.;
-  state_scores[cur_state] = best_state_scores[cur_state] + Heuristic(cur_state);
+  state_scores[cur_state] = best_state_scores[cur_state] 
+                            + Heuristic(cur_state, goal_state);
   
   while (open_set.size() > 0) {
     
@@ -126,7 +127,7 @@ std::list<State *> * AStarExplorer::FindPath(
       is_goal_state = goal_state->Equals(lowest_score_state);
       
     if (is_goal_state) {
-      //TODO: Reconstruct path and store in paths_
+      //Reconstruct path and return it
       std::list<State *> found_path = this->ReconstructPath(came_from, 
                                                             cur_state);
       std::list<State *> * path = new std::list<State *>(found_path);
@@ -140,7 +141,7 @@ std::list<State *> * AStarExplorer::FindPath(
     
     // Look at all neighboring states, add them to the open set if we haven't
     // seen them before
-    std::vector<State *> neighbors;
+    std::vector<State *> neighbors = q_table_->GetNearbyStates(*cur_state);
     std::vector<State *>::iterator n_iter;
     for (n_iter = neighbors.begin(); n_iter != neighbors.end(); ++n_iter) {
       State *neighbor = *n_iter;
@@ -159,7 +160,8 @@ std::list<State *> * AStarExplorer::FindPath(
         open_set[neighbor->get_state_hash()] = neighbor;
         came_from[neighbor] = cur_state;
         best_state_scores[neighbor] = temp_heuristic_score;
-        state_scores[neighbor] = temp_heuristic_score + Heuristic(neighbor);
+        state_scores[neighbor] = temp_heuristic_score 
+                                 + Heuristic(neighbor, goal_state);
       }
     }
   }
